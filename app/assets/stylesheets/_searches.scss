@@ -1,0 +1,16 @@
+// Place all the styles related to the searches controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.movies-container{
+  font-family: helvetica;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-rows: auto;
+}
+
+.movie{
+  float: left;
+  margin-bottom: 25px;
+}

@@ -1,0 +1,23 @@
+.commentWrapper{
+  font-family: helvetica;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-auto-rows: auto;
+
+}
+
+.commentRight{
+  width: 99%;
+  float: right;
+}
+
+
+.commentLeft{
+  width: 97%;
+}
+.commentForm{
+  position: fixed;
+  width: 42.3%;
+  margin: 0 auto;
+
+}

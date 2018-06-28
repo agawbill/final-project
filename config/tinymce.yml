@@ -1,0 +1,11 @@
+theme_advanced_toolbar_location: top
+theme_advanced_toolbar_align: left
+theme_advanced_statusbar_location: bottom
+toolbar: [
+        "styleselect | bold italic underline | image | link | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | insertdatetime | fontselect | restoredraft | removeformat | fontsizeselect | template codesample | code"
+]
+plugins:
+  - table
+  - fullscreen
+  - image
+  - link

@@ -1,0 +1,65 @@
+<div class="commentWrapper">
+<div class="commentLeft">
+
+    <h1>Blog<span class="symbol">#</span>post</h1>
+    <p>
+      <div class="boxWrapper">
+          <div class="postTitleWrapper">
+    <span class="blogTitle"><%=@blog.title%></span><br>
+    <span class="postedBy">Posted By: <a href="/users/<%=@blog.admin_id%>/" class="link"><%=User.find(@blog.admin_id).email%></a></span>
+    <span class="blogDateTime">
+     <span class="postedBy">on</span> <%=@blog.created_at.strftime(
+    '%a, %b %Y'
+    )%> <span class="postedBy">at</span> <%=@blog.created_at.strftime(
+    '%I:%M %p'
+    )%></span></div>
+
+    <p><%=@blogs.content.html_safe%></p>
+</div>
+  <p><h1>Blog<span class="symbol">#</span>comments</h1></p>
+  <%@blogs.comments.reverse.each do |c|%>
+  <div class="boxWrapper">
+    <div class="postTitleWrapper">
+  <span class="blogTitle"><%=c.title%></span><br>
+  <span class="postedBy">Posted By: <a href="/users/<%=c.user.id%>/" class="link"><%=c.user.email%></a></span>
+  <span class="blogDateTime">
+   <span class="postedBy">on</span> <%=c.created_at.strftime(
+  '%a, %b %Y'
+  )%> <span class="postedBy">at</span> <%=c.created_at.strftime(
+  '%I:%M %p'
+  )%></span></div>
+
+
+  <p><%=c.content%></p>
+  <%if current_user%>
+  <%if current_user.id == c.user_id%>
+  <a href="/comments/<%=c.id%>/edit" class="link">Edit</a> |  <%= link_to 'Delete', { controller: :comments, action: :destroy, id: c.id },
+   method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
+  <% end  %>
+  <% end  %>
+  </div>
+  <p>
+  <% end  %>
+
+</div>
+
+
+<div clas="commentRight">
+
+
+
+
+  <div class="commentForm">
+      <h1>Post<span class="symbol">#</span>comment</h1>
+      <p>
+<%if current_user%>
+<%= form_for @comment do |f|%>
+<%= f.text_area :title, :placeholder=>"Title", :class=>"textTitleAreaC" %><br>
+<%= f.text_area :content, :placeholder=>"Content", :class=>"textBodyAreaC" %><br>
+<%= hidden_field_tag :blog_id, @blog.id %>
+<%= f.submit "Create a new Comment" %></p>
+<% end  %>
+<%end%>
+</div>
+  </div>
+</div>

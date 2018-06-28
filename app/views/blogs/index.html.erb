@@ -1,0 +1,41 @@
+<div class="blogWrapper">
+  <div class="blogLeft">
+    <h1>Blog<span class="symbol">#</span>posts</h1>
+    <p>
+
+    <%@blogs.reverse.each do |b|%>
+
+    <div class="boxWrapper">
+
+      <div class="postTitleWrapper">
+    <span class="blogTitle"><%=b.title%><br></span>
+    <span class="postedBy">Posted By: <a href="/admin/<%=b.admin_id%>" class="link"><%=b.admin.email%></a></span><span class="blogDateTime">
+     <span class="postedBy">on</span> <%=b.created_at.strftime(
+'%a, %b %Y'
+  )%> <span class="postedBy">at</span> <%=b.created_at.strftime(
+'%I:%M %p'
+)%> ET</span></div>
+    <p> <%= b.content.html_safe %></p>
+    <a href="/blogs/<%=b.id%>" class="link2">Comments (<%=b.comments.count%>) </a>
+  </div></p>
+    <%end%>
+
+</p>
+  </div>
+  <div class="blogRight">
+    <h1>Blog<span class="symbol">#</span>users</h1>
+    <p>
+      <div class="boxWrapper">
+        <%@users.each_with_index do |u, index|%>
+        <p><span class="userList"><span class="symbol"><%=index+1%>:</span> <a href="/admins/<%=u.id%>/" class="link"><%=u.email%></a></span></p>
+        <%end%>
+  </div>
+    </p>
+    <h1>Social<span class="symbol">#</span>media</h1>
+    <p>
+      <div class="boxWrapper">
+    <a class="twitter-timeline" data-width="700" data-height="600" href="https://twitter.com/gawthegovernor/lists/james?ref_src=twsrc%5Etfw">A Twitter List by gawthegovernor</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </div>
+    </p>
+  </div>
+</div>

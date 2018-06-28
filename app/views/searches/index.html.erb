@@ -1,0 +1,32 @@
+<%=form_tag(searches_path, method: "get") do%>
+<%=text_field_tag(:q)%>
+<%=submit_tag("Search")%>
+<%end%>
+
+<div class="movies-container">
+  <% @results.each.with_index do |m, index|%>
+  <div class="movie">
+  <center><%=index+1%>: <%=m.original_title%></center><br>
+  <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+  <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+</div>
+
+
+<%end%>
+</div>
+
+
+
+<script>
+var movieButton=document.getElementById('movieButton')
+
+
+
+
+document.addEventListener('click', function(){
+  if(event.target.id=="movieButton"){
+  console.log(event.target.value);
+}
+})
+
+</script>

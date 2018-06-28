@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ProjectBlogger</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+<div class="wrapper">
+
+    <div class="navbar">
+      <div class="navContainer"><nav>
+      <span class="pagetitle"><%=image_tag "orange-tv.png", :class => "facebook"%> movies<span class="s">&</span>shit</span>
+      <span class="navlinks">
+        <a href="/" class="link">Home</a> |
+        <%if !current_user && !current_admin%>
+          <a href="/users/sign_in"  class="link">Sign In</a> |
+          <a href="/users/sign_up"  class="link">Sign Up</a>
+          </span>
+            <%end%>
+      <%if user_signed_in?%>
+        <%=link_to "Sign Out", destroy_user_session_path, method: :delete, :class => "link"%></span>
+        <span class="user1">user:</span><span class="userName"> <%=current_user.email%></span>
+      <%end%>
+
+      <%if admin_signed_in?%>
+        <%=link_to "Sign Out", destroy_user_session_path, method: :delete, :class => "link"%> |
+        <a href="/blogs/new" class="link"  class="link">Create Blog</a> |
+        <a href="/admins/<%=current_admin.id%>"  class="link">My Blogs</a></span>
+        <span class="user1">user:</span><span class="userName"> <%=current_admin.email%></span>
+      <%end%>
+    </nav>
+</div>
+
+    </div>
+
+<div class="content">
+
+<%= yield %>
+
+</div>
+
+
+
+<div class="footer">
+  <%=image_tag "footer/facebook.jpg", :class => "facebook"%>
+  <%=image_tag "footer/twitter.png", :class => "social"%>
+  <%=image_tag "footer/instagram.jpg", :class => "social"%>
+
+</div>
+
+</div>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<h1>User<span class="symbol">#</span>posts</h1>
+
+<%@user.blogs.reverse.each do |b| %>
+<p>
+<span class="blogTitle"><%=b.title%></span><br>
+<span class="postedBy">Posted By: <a href="/users/<%=b.admin.id%>/" class="link"><%=b.admin.email%></a></span>
+<span class="blogDateTime">
+ <span class="postedBy">on</span> <%=b.created_at.strftime(
+'%a, %b %Y'
+)%> <span class="postedBy">at</span> <%=b.created_at.strftime(
+'%I:%M %p'
+)%></span>
+<p><%=b.content.html_safe%></p>
+
+
+
+
+<%if current_admin%>
+<%if current_admin.id == b.admin_id%>
+ <a href="/blogs/<%=b.id%>/edit" class="link">Edit</a> | <%= link_to 'Delete', { controller: :blogs, action: :destroy, id: b.id },
+  method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
+
+
+ <%end%>
+ <%end%>
+<hr>
+<%end%>

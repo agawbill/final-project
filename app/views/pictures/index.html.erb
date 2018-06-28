@@ -1,0 +1,29 @@
+<h1>Blog<span class="symbol">#</span>pictures</h1>
+<p id="notice"><%= notice %></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Image</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pictures.each do |picture| %>
+      <tr>
+        <td><%= picture.name %></td>
+        <td><%= picture.description %></td>
+        <td><%= picture.image %></td>
+        <td><%= link_to 'Show', picture, class: "link" %></td>
+        <td><%= link_to 'Edit', edit_picture_path(picture), class: "link" %></td>
+        <td><%= link_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Picture', new_picture_path, class: "link" %>

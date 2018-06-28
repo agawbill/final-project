@@ -1,0 +1,12 @@
+<h1>Edit<span class="symbol">#</span>blog</h1>
+
+
+<h3 class="otherHeader">Edit your blog: </h3>
+
+<%= form_for @blog do |f| %>
+<%= f.text_area :title, :placeholder=>"Title", :class=>"textTitleArea" %><div class="textBodyArea">
+<%= tinymce %>
+<%= f.text_area :content,:class => "tinymce", :rows => 26, :cols => 50 %><br>
+<%= f.submit "Edit blog" %>
+</div>
+<% end  %>
