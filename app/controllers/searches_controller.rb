@@ -4,9 +4,17 @@ class SearchesController < ApplicationController
   # base_uri 'api.themoviedb.org/3/movie/550?api_key=720b022cdc841c69c719e5c1b854fd67'
 
   def index
-    if params[:q].present?
-     @movies=Tmdb::Search.movie(params[:q])
-     @results=@movies.results
+    @genreList=Tmdb::Genre.movie_list
+    if params[:q].present? && params[:genres].present?
+      @movies=Tmdb::Search.movie(params[:q])
+      @results=@movies.results.find_all { |favor| favor.genre_ids.include? params[:genres].to_i }
+    elsif params[:q].present?
+      @movies=Tmdb::Search.movie(params[:q])
+      @results=@movies.results
+
+    # elsif params[:r].present?
+    #  @actors=Tmdb::Search.person(params[:r])
+    #  @results=@actors.results
    else
      @movies=[]
      @results=[]

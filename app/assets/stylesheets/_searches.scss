@@ -9,8 +9,42 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-auto-rows: auto;
 }
+.actors-container{
+  font-family: helvetica;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-rows: auto;
+}
+.category-container{
+  font-family: helvetica;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-rows: auto;
+}
 
 .movie{
   float: left;
   margin-bottom: 25px;
+}
+
+#searchMovie{
+  display: block;
+}
+
+#searchActor{
+  display: none;
+}
+
+#searchCategory{
+  display: none;
+}
+
+.actors-container{
+  display: none;
+}
+
+#genreSelector{
+  
 }
