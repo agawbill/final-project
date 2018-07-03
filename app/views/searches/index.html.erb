@@ -173,7 +173,18 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
 
 <p><div id="moviesContainer">
 
+
 <%if params[:q].present? || params[:l].present? || params[:d].present?%>
+<%if @entries > 20%>
+<%for i in (0...@pages)%>
+<a href="javascript:addParam('page=<%=i+1%>');">Page<%=i+1%></a>
+<%end%>
+<%end%>
+
+<p>Total pages: <%=@pages%>
+Total results: <%=@entries%>
+Results after filter: <%=@count%>
+</p>
   <% @results.each.with_index do |m, index|%>
   <div class="movie">
     <center><%=index+1%>: <%=m.original_title%></center><br>
@@ -182,6 +193,17 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
   </div>
   <%end%>
   <%elsif params[:genresP].present? || params[:ratingP].present?%>
+
+  <%if @entries > 20%>
+  <%for i in (0...@pages)%>
+  <a href="javascript:addParam('page=<%=i+1%>');">Page<%=i+1%></a>
+  <%end%>
+  <%end%>
+
+  <p>Total pages: <%=@pages%>
+  Total results: <%=@entries%>
+  Results after filter: <%=@count%>
+  </p>
 
   <% @results.each.with_index do |m, index|%>
   <div class="movie">
@@ -192,6 +214,17 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
   <%end%>
   <%elsif params[:genresT].present? || params[:ratingT].present?%>
 
+  <%if @entries > 20%>
+  <%for i in (0...@pages)%>
+  <a href="javascript:addParam('page=<%=i+1%>');">Page<%=i+1%></a>
+  <%end%>
+  <%end%>
+
+  <p>Total pages: <%=@pages%>
+  Total results: <%=@entries%>
+  Results after filter: <%=@count%>
+  </p>
+
   <% @results.each.with_index do |m, index|%>
   <div class="movie">
     <center><%=index+1%>: <%=m.original_title%></center><br>
@@ -200,6 +233,17 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
   </div>
   <%end%>
   <%elsif params[:genresL].present? || params[:ratingL].present?%>
+
+  <%if @entries > 20%>
+  <%for i in (0...@pages)%>
+  <a href="javascript:addParam('page=<%=i+1%>');">Page<%=i+1%></a>
+  <%end%>
+  <%end%>
+
+  <p>Total pages: <%=@pages%>
+  Total results: <%=@entries%>
+  Results after filter: <%=@count%>
+  </p>
 
   <% @results.each.with_index do |m, index|%>
   <div class="movie">
@@ -210,6 +254,17 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
   <%end%>
   <%elsif params[:genresU].present? || params[:ratingU].present?%>
 
+  <%if @entries > 20%>
+  <%for i in (0...@pages)%>
+  <a href="javascript:addParam('page=<%=i+1%>');">Page<%=i+1%></a>
+  <%end%>
+  <%end%>
+
+  <p>Total pages: <%=@pages%>
+  Total results: <%=@entries%>
+  Results after filter: <%=@count%>
+  </p>
+
   <% @results.each.with_index do |m, index|%>
   <div class="movie">
     <center><%=index+1%>: <%=m.original_title%></center><br>
@@ -218,6 +273,18 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
   </div>
   <%end%>
   <%elsif params[:r].present?%>
+
+  <%if @entries > 20%>
+  <%for i in (0...@pages)%>
+  <a href="javascript:addParam('page=<%=i+1%>');">Page<%=i+1%></a>
+  <%end%>
+  <%end%>
+
+  <p>Total pages: <%=@pages%>
+  Total results: <%=@entries%>
+  Results after filter: <%=@count%>
+  </p>
+
   <% @results.each.with_index do |m, index|%>
   <div class="movie">
     <center><%=index+1%>: <%=m.name%></center><br>
@@ -257,6 +324,11 @@ var option9= document.getElementById('option9')
 var searchMovie= document.getElementById('searchMovie')
 var UpdateMovieSearch= document.getElementById('UpdateMovieSearch')
 var selector=[genreSelector1]
+
+
+function addParam(v) {
+      window.location.search += '&' + v;
+  }
 
 // display search options
 
