@@ -1,6 +1,6 @@
 
-Search by: <span id="option1" class="link">Movie name</span> | <span id="option2" class="link">Actor</span> | <span class="link" id="option3">Genre</span> | <span class="link" id="option4">Director</span><br>
-Display: <span class="link" id="option5">Popular movies</span> | <span class="link" id="option7">Top rated</span> | <span class="link" id="option8">Latest</span>
+<p>Search by: <span id="option1" class="link">Movie name</span> | <span id="option2" class="link">Actor</span> | <span class="link" id="option3">Genre</span> | <span class="link" id="option4">Director</span></p>
+<p>Discover: <span id="option5" class="link">Popular movies</span> | <span class="link" id="option6">Top rated</span> | <span class="link" id="option7">Now playing</span> | <span class="link" id="option8">Upcoming</span></p>
 
 
 <div id="genreChecks">Sort movies by genre:<p>
@@ -49,7 +49,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
       <div id="movieRatings">Sort movies by rating:<p>
 
         Greater than or equal to: <select id="ratingDrop">
-          <option></option>
+          <option value='0'></option>
           <option value='1'>1</option>
           <option value='2'>2</option>
           <option value="3">3</option>
@@ -65,7 +65,10 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
       </p>
 
 
-
+<p>
+  <div id="showAll"> Show all?: <input type="checkbox" id="show" name="feature" value="0" />
+  </div>
+</p>
 
 
 
@@ -77,7 +80,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
   <%=form_tag(searches_path, method: "get", :id=>"UpdateMovieSearch") do%>
   Search by Movie: <%=text_field_tag(:q)%>
 
-  Search by Genre: <%=text_field_tag(:genres)%>
+  <%=hidden_field_tag(:genres)%>
   <%= hidden_field_tag :ratingQ %>
   <%=submit_tag("Update Movie Search")%>
   <%end%>
@@ -101,6 +104,37 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
   <%end%>
 </div>
 
+<div id="searchPopular">
+  <%=form_tag(searches_path, method: "get") do |f|%>
+  <%=hidden_field_tag(:genresP)%>
+  <%=hidden_field_tag(:ratingP)%>
+  <%=submit_tag("Update Popluar Movies")%>
+  <%end%>
+</div>
+
+<div id="searchTop">
+  <%=form_tag(searches_path, method: "get") do |f|%>
+  <%=hidden_field_tag(:genresT)%>
+  <%=hidden_field_tag(:ratingT)%>
+  <%=submit_tag("Update Top Movies")%>
+  <%end%>
+</div>
+
+<div id="searchLatest">
+  <%=form_tag(searches_path, method: "get") do |f|%>
+  <%=hidden_field_tag(:genresL)%>
+  <%=hidden_field_tag(:ratingL)%>
+  <%=submit_tag("Update Latest Movies")%>
+  <%end%>
+</div>
+<div id="searchUpcoming">
+  <%=form_tag(searches_path, method: "get") do |f|%>
+  <%=hidden_field_tag(:genresU)%>
+  <%=hidden_field_tag(:ratingU)%>
+  <%=submit_tag("Update Upcoming Movies")%>
+  <%end%>
+</div>
+
 
 
 
@@ -108,7 +142,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
 
   <%=form_tag(searches_path, method: "get") do%>
   Select genre: <select id="genreDrop">
-    <option></option>
+    <option>No preference</option>
     <option value='28'>Action</option>
     <option value='12'>Adventure</option>
     <option value="16">Animation</option>
@@ -137,7 +171,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
 </div>
 
 
-<div id="moviesContainer">
+<p><div id="moviesContainer">
 
 <%if params[:q].present? || params[:l].present? || params[:d].present?%>
   <% @results.each.with_index do |m, index|%>
@@ -147,7 +181,43 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
   </div>
   <%end%>
-  <%else%>
+  <%elsif params[:genresP].present? || params[:ratingP].present?%>
+
+  <% @results.each.with_index do |m, index|%>
+  <div class="movie">
+    <center><%=index+1%>: <%=m.original_title%></center><br>
+    <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+    <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+  </div>
+  <%end%>
+  <%elsif params[:genresT].present? || params[:ratingT].present?%>
+
+  <% @results.each.with_index do |m, index|%>
+  <div class="movie">
+    <center><%=index+1%>: <%=m.original_title%></center><br>
+    <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+    <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+  </div>
+  <%end%>
+  <%elsif params[:genresL].present? || params[:ratingL].present?%>
+
+  <% @results.each.with_index do |m, index|%>
+  <div class="movie">
+    <center><%=index+1%>: <%=m.original_title%></center><br>
+    <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+    <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+  </div>
+  <%end%>
+  <%elsif params[:genresU].present? || params[:ratingU].present?%>
+
+  <% @results.each.with_index do |m, index|%>
+  <div class="movie">
+    <center><%=index+1%>: <%=m.original_title%></center><br>
+    <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+    <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+  </div>
+  <%end%>
+  <%elsif params[:r].present?%>
   <% @results.each.with_index do |m, index|%>
   <div class="movie">
     <center><%=index+1%>: <%=m.name%></center><br>
@@ -156,7 +226,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
   </div>
   <%end%>
   <%end%>
-</div>
+</div></p>
 
 
 
@@ -168,6 +238,10 @@ var movieButton=document.getElementById('movieButton')
 var movie=document.getElementsByClassName('movie')[0]
 var genres1=[]
 var genres2=[]
+var genres3=[]
+var genres4=[]
+var genres5=[]
+var genres6=[]
 var genres= document.getElementById('genres')
 var genreDrop= document.getElementById('genreDrop')
 var ratingDrop= document.getElementById('ratingDrop')
@@ -196,6 +270,7 @@ var selector=[genreSelector1]
 
 option1.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
+  clearAll()
   searchMovie.style.display="block"
   genreChecks.style.display="block"
   movieRatings.style.display="block"
@@ -203,6 +278,12 @@ option1.addEventListener('click', function(){
   genreLinks.style.display="none"
   // directorsContainer.style.display="none"
   searchDirector.style.display="none"
+  searchPopular.style.display="none"
+  moviesContainer.style.display="grid"
+  showAll.style.display="none"
+  searchTop.style.display="none"
+  searchLatest.style.display="none"
+  searchUpcoming.style.display="none"
 })
 
 
@@ -212,6 +293,7 @@ option1.addEventListener('click', function(){
 
 option2.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
+  clearAll()
   searchMovie.style.display="none"
   genreChecks.style.display="none"
   searchActor.style.display="block"
@@ -219,11 +301,18 @@ option2.addEventListener('click', function(){
   movieRatings.style.display="none"
   // directorsContainer.style.display="none"
   searchDirector.style.display="none"
+  searchPopular.style.display="none"
+  moviesContainer.style.display="grid"
+  showAll.style.display="none"
+  searchTop.style.display="none"
+  searchLatest.style.display="none"
+  searchUpcoming.style.display="none"
 })
 // Search by genre
 
 option3.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
+  clearAll()
   searchMovie.style.display="none"
   genreChecks.style.display="none"
   searchActor.style.display="none"
@@ -231,18 +320,108 @@ option3.addEventListener('click', function(){
   movieRatings.style.display="block"
   // directorsContainer.style.display="none"
   searchDirector.style.display="none"
+  searchPopular.style.display="none"
+  moviesContainer.style.display="grid"
+  showAll.style.display="none"
+  searchTop.style.display="none"
+  searchLatest.style.display="none"
+  searchUpcoming.style.display="none"
 })
 
 // Search by Director
 
 option4.addEventListener('click', function(){
-  window.history.replaceState({}, document.title, "/" + "searches");
+  // window.history.replaceState({}, document.title, "/" + "searches");
+  clearAll()
   searchMovie.style.display="none"
   genreChecks.style.display="block"
   searchActor.style.display="none"
   genreLinks.style.display="none"
   movieRatings.style.display="block"
   searchDirector.style.display="block"
+  searchPopular.style.display="none"
+  moviesContainer.style.display="grid"
+  showAll.style.display="none"
+  searchTop.style.display="none"
+  searchLatest.style.display="none"
+  searchUpcoming.style.display="none"
+  // directorsContainer.style.display="none"
+})
+
+// Discover popular movies
+
+option5.addEventListener('click', function(){
+  // window.history.replaceState({}, document.title, "/" + "searches");
+  clearAll()
+  searchMovie.style.display="none"
+  genreChecks.style.display="block"
+  searchActor.style.display="none"
+  genreLinks.style.display="none"
+  movieRatings.style.display="block"
+  searchPopular.style.display="block"
+  searchDirector.style.display="none"
+  moviesContainer.style.display="grid"
+  showAll.style.display="block"
+  searchTop.style.display="none"
+  searchLatest.style.display="none"
+  searchUpcoming.style.display="none"
+  // directorsContainer.style.display="none"
+})
+// Discover top movies
+
+option6.addEventListener('click', function(){
+  // window.history.replaceState({}, document.title, "/" + "searches");
+  clearAll()
+  searchMovie.style.display="none"
+  genreChecks.style.display="block"
+  searchActor.style.display="none"
+  genreLinks.style.display="none"
+  movieRatings.style.display="block"
+  searchPopular.style.display="none"
+  searchDirector.style.display="none"
+  moviesContainer.style.display="grid"
+  showAll.style.display="block"
+  searchTop.style.display="block"
+  searchLatest.style.display="none"
+  searchUpcoming.style.display="none"
+  // directorsContainer.style.display="none"
+})
+// Discover latest movies
+
+option7.addEventListener('click', function(){
+  // window.history.replaceState({}, document.title, "/" + "searches");
+  clearAll()
+  searchMovie.style.display="none"
+  genreChecks.style.display="block"
+  searchActor.style.display="none"
+  genreLinks.style.display="none"
+  movieRatings.style.display="block"
+  searchPopular.style.display="none"
+  searchDirector.style.display="none"
+  moviesContainer.style.display="grid"
+  showAll.style.display="block"
+  searchTop.style.display="none"
+  searchLatest.style.display="block"
+  searchUpcoming.style.display="none"
+  // directorsContainer.style.display="none"
+})
+// Discover upcoming movies
+
+option8.addEventListener('click', function(){
+  // window.history.replaceState({}, document.title, "/" + "searches");
+  clearAll()
+  searchMovie.style.display="none"
+  genreChecks.style.display="block"
+  searchActor.style.display="none"
+  genreLinks.style.display="none"
+  movieRatings.style.display="block"
+  searchPopular.style.display="none"
+  searchDirector.style.display="none"
+  moviesContainer.style.display="grid"
+  showAll.style.display="block"
+  searchTop.style.display="none"
+  searchLatest.style.display="none"
+  searchUpcoming.style.display="block"
   // directorsContainer.style.display="none"
 })
 
@@ -259,6 +438,10 @@ ratingDrop.addEventListener('input', function(){
   rating.value= ratingDrop.value
   ratingQ.value= ratingDrop.value
   ratingD.value= ratingDrop.value
+  ratingP.value= ratingDrop.value
+  ratingT.value= ratingDrop.value
+  ratingL.value= ratingDrop.value
+  ratingU.value= ratingDrop.value
 
 });
 
@@ -273,27 +456,116 @@ document.addEventListener('click', function(){
 
 })
 
+// show all discover movies
+
+function clearAll(){
+  ratingP.value=show.value
+  ratingT.value=show.value
+  ratingU.value=show.value
+  ratingL.value=show.value
+  genres3=[]
+  genres4=[]
+  genres5=[]
+  genres6=[]
+  ratingDrop.selectedIndex = 0
+  genreSelector0.checked = false;
+  genreSelector1.checked = false;
+  genreSelector2.checked = false;
+  genreSelector3.checked = false;
+  genreSelector4.checked = false;
+  genreSelector5.checked = false;
+  genreSelector6.checked = false;
+  genreSelector7.checked = false;
+  genreSelector8.checked = false;
+  genreSelector9.checked = false;
+  genreSelector10.checked = false;
+  genreSelector11.checked = false;
+  genreSelector12.checked = false;
+  genreSelector13.checked = false;
+  genreSelector14.checked = false;
+  genreSelector15.checked = false;
+  genreSelector16.checked = false;
+  genreSelector17.checked = false;
+  genreSelector18.checked = false;
+
+}
+
+
+show.addEventListener('change', function(){
+  if(show.checked){
+    ratingP.value=show.value
+    ratingT.value=show.value
+    ratingU.value=show.value
+    ratingL.value=show.value
+    genres3=[]
+    genres4=[]
+    genres5=[]
+    genres6=[]
+    ratingDrop.selectedIndex = 0
+    genreSelector0.checked = false;
+    genreSelector1.checked = false;
+    genreSelector2.checked = false;
+    genreSelector3.checked = false;
+    genreSelector4.checked = false;
+    genreSelector5.checked = false;
+    genreSelector6.checked = false;
+    genreSelector7.checked = false;
+    genreSelector8.checked = false;
+    genreSelector9.checked = false;
+    genreSelector10.checked = false;
+    genreSelector11.checked = false;
+    genreSelector12.checked = false;
+    genreSelector13.checked = false;
+    genreSelector14.checked = false;
+    genreSelector15.checked = false;
+    genreSelector16.checked = false;
+    genreSelector17.checked = false;
+    genreSelector18.checked = false;
+
+  }
+
+})
 
 
 
 
 
-// // sort by genre starts here for movies
-//
+// sort by genre starts here for movies
+
 genreSelector0.addEventListener('change', function(){
   if(genreSelector0.checked){
     genres1.push(event.target.value)
     genres2.push(event.target.value)
+    genres3.push(event.target.value)
+    genres4.push(event.target.value)
+    genres5.push(event.target.value)
+    genres6.push(event.target.value)
     genres.value=genres1
     genresD.value=genres2
+    genresP.value=genres3
+    genresT.value=genres4
+    genresL.value=genres5
+    genresU.value=genres6
   }
     else{
       var a=genres1.indexOf(event.target.value)
       var b=genres2.indexOf(event.target.value)
+      var c=genres3.indexOf(event.target.value)
+      var d=genres4.indexOf(event.target.value)
+      var e=genres5.indexOf(event.target.value)
+      var f=genres6.indexOf(event.target.value)
       genres1.splice(a, 1)
       genres.value=genres1
       genres2.splice(b, 1)
       genresD.value=genres2
+      genres3.splice(c, 1)
+      genresP.value=genres3
+      genres4.splice(d, 1)
+      genresT.value=genres4
+      genres5.splice(e, 1)
+      genresL.value=genres5
+      genres6.splice(f, 1)
+      genresU.value=genres6
     }
 
 })
@@ -301,291 +573,651 @@ genreSelector1.addEventListener('change', function(){
   if(genreSelector1.checked){
     genres1.push(event.target.value)
     genres2.push(event.target.value)
+    genres3.push(event.target.value)
+    genres4.push(event.target.value)
+    genres5.push(event.target.value)
+    genres6.push(event.target.value)
     genres.value=genres1
     genresD.value=genres2
+    genresP.value=genres3
+    genresT.value=genres4
+    genresL.value=genres5
+    genresU.value=genres6
   }
     else{
       var a=genres1.indexOf(event.target.value)
       var b=genres2.indexOf(event.target.value)
+      var c=genres3.indexOf(event.target.value)
+      var d=genres4.indexOf(event.target.value)
+      var e=genres5.indexOf(event.target.value)
+      var f=genres6.indexOf(event.target.value)
       genres1.splice(a, 1)
       genres.value=genres1
       genres2.splice(b, 1)
       genresD.value=genres2
+      genres3.splice(c, 1)
+      genresP.value=genres3
+      genres4.splice(d, 1)
+      genresT.value=genres4
+      genres5.splice(e, 1)
+      genresL.value=genres5
+      genres6.splice(f, 1)
+      genresU.value=genres6
     }
 })
 
 genreSelector2.addEventListener('change', function(){
-if(genreSelector2.checked){
-  genres1.push(event.target.value)
-  genres2.push(event.target.value)
-  genres.value=genres1
-  genresD.value=genres2
-}
-  else{
-    var a=genres1.indexOf(event.target.value)
-    var b=genres2.indexOf(event.target.value)
-    genres1.splice(a, 1)
+  if(genreSelector2.checked){
+    genres1.push(event.target.value)
+    genres2.push(event.target.value)
+    genres3.push(event.target.value)
+    genres4.push(event.target.value)
+    genres5.push(event.target.value)
+    genres6.push(event.target.value)
     genres.value=genres1
-    genres2.splice(b, 1)
     genresD.value=genres2
+    genresP.value=genres3
+    genresT.value=genres4
+    genresL.value=genres5
+    genresU.value=genres6
   }
+    else{
+      var a=genres1.indexOf(event.target.value)
+      var b=genres2.indexOf(event.target.value)
+      var c=genres3.indexOf(event.target.value)
+      var d=genres4.indexOf(event.target.value)
+      var e=genres5.indexOf(event.target.value)
+      var f=genres6.indexOf(event.target.value)
+      genres1.splice(a, 1)
+      genres.value=genres1
+      genres2.splice(b, 1)
+      genresD.value=genres2
+      genres3.splice(c, 1)
+      genresP.value=genres3
+      genres4.splice(d, 1)
+      genresT.value=genres4
+      genres5.splice(e, 1)
+      genresL.value=genres5
+      genres6.splice(f, 1)
+      genresU.value=genres6
+    }
 })
 
 genreSelector3.addEventListener('change', function(){
-if(genreSelector3.checked){
-  genres1.push(event.target.value)
-  genres2.push(event.target.value)
-  genres.value=genres1
-  genresD.value=genres2
-}
-  else{
-    var a=genres1.indexOf(event.target.value)
-    var b=genres2.indexOf(event.target.value)
-    genres1.splice(a, 1)
+  if(genreSelector3.checked){
+    genres1.push(event.target.value)
+    genres2.push(event.target.value)
+    genres3.push(event.target.value)
+    genres4.push(event.target.value)
+    genres5.push(event.target.value)
+    genres6.push(event.target.value)
     genres.value=genres1
-    genres2.splice(b, 1)
     genresD.value=genres2
+    genresP.value=genres3
+    genresT.value=genres4
+    genresL.value=genres5
+    genresU.value=genres6
   }
+    else{
+      var a=genres1.indexOf(event.target.value)
+      var b=genres2.indexOf(event.target.value)
+      var c=genres3.indexOf(event.target.value)
+      var d=genres4.indexOf(event.target.value)
+      var e=genres5.indexOf(event.target.value)
+      var f=genres6.indexOf(event.target.value)
+      genres1.splice(a, 1)
+      genres.value=genres1
+      genres2.splice(b, 1)
+      genresD.value=genres2
+      genres3.splice(c, 1)
+      genresP.value=genres3
+      genres4.splice(d, 1)
+      genresT.value=genres4
+      genres5.splice(e, 1)
+      genresL.value=genres5
+      genres6.splice(f, 1)
+      genresU.value=genres6
+    }
 })
 genreSelector4.addEventListener('change', function(){
-if(genreSelector4.checked){
-  genres1.push(event.target.value)
-  genres2.push(event.target.value)
-  genres.value=genres1
-  genresD.value=genres2
-}
-  else{
-    var a=genres1.indexOf(event.target.value)
-    var b=genres2.indexOf(event.target.value)
-    genres1.splice(a, 1)
+  if(genreSelector4.checked){
+    genres1.push(event.target.value)
+    genres2.push(event.target.value)
+    genres3.push(event.target.value)
+    genres4.push(event.target.value)
+    genres5.push(event.target.value)
+    genres6.push(event.target.value)
     genres.value=genres1
-    genres2.splice(b, 1)
     genresD.value=genres2
+    genresP.value=genres3
+    genresT.value=genres4
+    genresL.value=genres5
+    genresU.value=genres6
   }
+    else{
+      var a=genres1.indexOf(event.target.value)
+      var b=genres2.indexOf(event.target.value)
+      var c=genres3.indexOf(event.target.value)
+      var d=genres4.indexOf(event.target.value)
+      var e=genres5.indexOf(event.target.value)
+      var f=genres6.indexOf(event.target.value)
+      genres1.splice(a, 1)
+      genres.value=genres1
+      genres2.splice(b, 1)
+      genresD.value=genres2
+      genres3.splice(c, 1)
+      genresP.value=genres3
+      genres4.splice(d, 1)
+      genresT.value=genres4
+      genres5.splice(e, 1)
+      genresL.value=genres5
+      genres6.splice(f, 1)
+      genresU.value=genres6
+    }
 })
 genreSelector5.addEventListener('change', function(){
-if(genreSelector5.checked){
-  genres1.push(event.target.value)
-  genres2.push(event.target.value)
-  genres.value=genres1
-  genresD.value=genres2
-}
-  else{
-    var a=genres1.indexOf(event.target.value)
-    var b=genres2.indexOf(event.target.value)
-    genres1.splice(a, 1)
+  if(genreSelector5.checked){
+    genres1.push(event.target.value)
+    genres2.push(event.target.value)
+    genres3.push(event.target.value)
+    genres4.push(event.target.value)
+    genres5.push(event.target.value)
+    genres6.push(event.target.value)
     genres.value=genres1
-    genres2.splice(b, 1)
     genresD.value=genres2
+    genresP.value=genres3
+    genresT.value=genres4
+    genresL.value=genres5
+    genresU.value=genres6
   }
+    else{
+      var a=genres1.indexOf(event.target.value)
+      var b=genres2.indexOf(event.target.value)
+      var c=genres3.indexOf(event.target.value)
+      var d=genres4.indexOf(event.target.value)
+      var e=genres5.indexOf(event.target.value)
+      var f=genres6.indexOf(event.target.value)
+      genres1.splice(a, 1)
+      genres.value=genres1
+      genres2.splice(b, 1)
+      genresD.value=genres2
+      genres3.splice(c, 1)
+      genresP.value=genres3
+      genres4.splice(d, 1)
+      genresT.value=genres4
+      genres5.splice(e, 1)
+      genresL.value=genres5
+      genres6.splice(f, 1)
+      genresU.value=genres6
+    }
 })
 genreSelector6.addEventListener('change', function(){
-if(genreSelector6.checked){
-  genres1.push(event.target.value)
-  genres2.push(event.target.value)
-  genres.value=genres1
-  genresD.value=genres2
-}
-  else{
-    var a=genres1.indexOf(event.target.value)
-    var b=genres2.indexOf(event.target.value)
-    genres1.splice(a, 1)
+  if(genreSelector6.checked){
+    genres1.push(event.target.value)
+    genres2.push(event.target.value)
+    genres3.push(event.target.value)
+    genres4.push(event.target.value)
+    genres5.push(event.target.value)
+    genres6.push(event.target.value)
     genres.value=genres1
-    genres2.splice(b, 1)
     genresD.value=genres2
+    genresP.value=genres3
+    genresT.value=genres4
+    genresL.value=genres5
+    genresU.value=genres6
   }
+    else{
+      var a=genres1.indexOf(event.target.value)
+      var b=genres2.indexOf(event.target.value)
+      var c=genres3.indexOf(event.target.value)
+      var d=genres4.indexOf(event.target.value)
+      var e=genres5.indexOf(event.target.value)
+      var f=genres6.indexOf(event.target.value)
+      genres1.splice(a, 1)
+      genres.value=genres1
+      genres2.splice(b, 1)
+      genresD.value=genres2
+      genres3.splice(c, 1)
+      genresP.value=genres3
+      genres4.splice(d, 1)
+      genresT.value=genres4
+      genres5.splice(e, 1)
+      genresL.value=genres5
+      genres6.splice(f, 1)
+      genresU.value=genres6
+    }
 })
 genreSelector7.addEventListener('change', function(){
-if(genreSelector7.checked){
-  genres1.push(event.target.value)
-  genres2.push(event.target.value)
-  genres.value=genres1
-  genresD.value=genres2
-}
-  else{
-    var a=genres1.indexOf(event.target.value)
-    var b=genres2.indexOf(event.target.value)
-    genres1.splice(a, 1)
+  if(genreSelector7.checked){
+    genres1.push(event.target.value)
+    genres2.push(event.target.value)
+    genres3.push(event.target.value)
+    genres4.push(event.target.value)
+    genres5.push(event.target.value)
+    genres6.push(event.target.value)
     genres.value=genres1
-    genres2.splice(b, 1)
     genresD.value=genres2
+    genresP.value=genres3
+    genresT.value=genres4
+    genresL.value=genres5
+    genresU.value=genres6
   }
+    else{
+      var a=genres1.indexOf(event.target.value)
+      var b=genres2.indexOf(event.target.value)
+      var c=genres3.indexOf(event.target.value)
+      var d=genres4.indexOf(event.target.value)
+      var e=genres5.indexOf(event.target.value)
+      var f=genres6.indexOf(event.target.value)
+      genres1.splice(a, 1)
+      genres.value=genres1
+      genres2.splice(b, 1)
+      genresD.value=genres2
+      genres3.splice(c, 1)
+      genresP.value=genres3
+      genres4.splice(d, 1)
+      genresT.value=genres4
+      genres5.splice(e, 1)
+      genresL.value=genres5
+      genres6.splice(f, 1)
+      genresU.value=genres6
+    }
 })
 genreSelector8.addEventListener('change', function(){
-if(genreSelector8.checked){
-  genres1.push(event.target.value)
-  genres2.push(event.target.value)
-  genres.value=genres1
-  genresD.value=genres2
-}
-  else{
-    var a=genres1.indexOf(event.target.value)
-    var b=genres2.indexOf(event.target.value)
-    genres1.splice(a, 1)
+  if(genreSelector8.checked){
+    genres1.push(event.target.value)
+    genres2.push(event.target.value)
+    genres3.push(event.target.value)
+    genres4.push(event.target.value)
+    genres5.push(event.target.value)
+    genres6.push(event.target.value)
     genres.value=genres1
-    genres2.splice(b, 1)
     genresD.value=genres2
+    genresP.value=genres3
+    genresT.value=genres4
+    genresL.value=genres5
+    genresU.value=genres6
   }
+    else{
+      var a=genres1.indexOf(event.target.value)
+      var b=genres2.indexOf(event.target.value)
+      var c=genres3.indexOf(event.target.value)
+      var d=genres4.indexOf(event.target.value)
+      var e=genres5.indexOf(event.target.value)
+      var f=genres6.indexOf(event.target.value)
+      genres1.splice(a, 1)
+      genres.value=genres1
+      genres2.splice(b, 1)
+      genresD.value=genres2
+      genres3.splice(c, 1)
+      genresP.value=genres3
+      genres4.splice(d, 1)
+      genresT.value=genres4
+      genres5.splice(e, 1)
+      genresL.value=genres5
+      genres6.splice(f, 1)
+      genresU.value=genres6
+    }
 })
 genreSelector9.addEventListener('change', function(){
-if(genreSelector9.checked){
-  genres1.push(event.target.value)
-  genres2.push(event.target.value)
-  genres.value=genres1
-  genresD.value=genres2
-}
-  else{
-    var a=genres1.indexOf(event.target.value)
-    var b=genres2.indexOf(event.target.value)
-    genres1.splice(a, 1)
+  if(genreSelector9.checked){
+    genres1.push(event.target.value)
+    genres2.push(event.target.value)
+    genres3.push(event.target.value)
+    genres4.push(event.target.value)
+    genres5.push(event.target.value)
+    genres6.push(event.target.value)
     genres.value=genres1
-    genres2.splice(b, 1)
     genresD.value=genres2
+    genresP.value=genres3
+    genresT.value=genres4
+    genresL.value=genres5
+    genresU.value=genres6
   }
+    else{
+      var a=genres1.indexOf(event.target.value)
+      var b=genres2.indexOf(event.target.value)
+      var c=genres3.indexOf(event.target.value)
+      var d=genres4.indexOf(event.target.value)
+      var e=genres5.indexOf(event.target.value)
+      var f=genres6.indexOf(event.target.value)
+      genres1.splice(a, 1)
+      genres.value=genres1
+      genres2.splice(b, 1)
+      genresD.value=genres2
+      genres3.splice(c, 1)
+      genresP.value=genres3
+      genres4.splice(d, 1)
+      genresT.value=genres4
+      genres5.splice(e, 1)
+      genresL.value=genres5
+      genres6.splice(f, 1)
+      genresU.value=genres6
+    }
 })
 genreSelector10.addEventListener('change', function(){
-if(genreSelector10.checked){
-  genres1.push(event.target.value)
-  genres2.push(event.target.value)
-  genres.value=genres1
-  genresD.value=genres2
-}
-  else{
-    var a=genres1.indexOf(event.target.value)
-    var b=genres2.indexOf(event.target.value)
-    genres1.splice(a, 1)
+  if(genreSelector10.checked){
+    genres1.push(event.target.value)
+    genres2.push(event.target.value)
+    genres3.push(event.target.value)
+    genres4.push(event.target.value)
+    genres5.push(event.target.value)
+    genres6.push(event.target.value)
     genres.value=genres1
-    genres2.splice(b, 1)
     genresD.value=genres2
+    genresP.value=genres3
+    genresT.value=genres4
+    genresL.value=genres5
+    genresU.value=genres6
   }
+    else{
+      var a=genres1.indexOf(event.target.value)
+      var b=genres2.indexOf(event.target.value)
+      var c=genres3.indexOf(event.target.value)
+      var d=genres4.indexOf(event.target.value)
+      var e=genres5.indexOf(event.target.value)
+      var f=genres6.indexOf(event.target.value)
+      genres1.splice(a, 1)
+      genres.value=genres1
+      genres2.splice(b, 1)
+      genresD.value=genres2
+      genres3.splice(c, 1)
+      genresP.value=genres3
+      genres4.splice(d, 1)
+      genresT.value=genres4
+      genres5.splice(e, 1)
+      genresL.value=genres5
+      genres6.splice(f, 1)
+      genresU.value=genres6
+    }
 })
 genreSelector11.addEventListener('change', function(){
-if(genreSelector11.checked){
-  genres1.push(event.target.value)
-  genres2.push(event.target.value)
-  genres.value=genres1
-  genresD.value=genres2
-}
-  else{
-    var a=genres1.indexOf(event.target.value)
-    var b=genres2.indexOf(event.target.value)
-    genres1.splice(a, 1)
+  if(genreSelector11.checked){
+    genres1.push(event.target.value)
+    genres2.push(event.target.value)
+    genres3.push(event.target.value)
+    genres4.push(event.target.value)
+    genres5.push(event.target.value)
+    genres6.push(event.target.value)
     genres.value=genres1
-    genres2.splice(b, 1)
     genresD.value=genres2
+    genresP.value=genres3
+    genresT.value=genres4
+    genresL.value=genres5
+    genresU.value=genres6
   }
+    else{
+      var a=genres1.indexOf(event.target.value)
+      var b=genres2.indexOf(event.target.value)
+      var c=genres3.indexOf(event.target.value)
+      var d=genres4.indexOf(event.target.value)
+      var e=genres5.indexOf(event.target.value)
+      var f=genres6.indexOf(event.target.value)
+      genres1.splice(a, 1)
+      genres.value=genres1
+      genres2.splice(b, 1)
+      genresD.value=genres2
+      genres3.splice(c, 1)
+      genresP.value=genres3
+      genres4.splice(d, 1)
+      genresT.value=genres4
+      genres5.splice(e, 1)
+      genresL.value=genres5
+      genres6.splice(f, 1)
+      genresU.value=genres6
+    }
 })
 genreSelector12.addEventListener('change', function(){
-if(genreSelector12.checked){
-  genres1.push(event.target.value)
-  genres2.push(event.target.value)
-  genres.value=genres1
-  genresD.value=genres2
-}
-  else{
-    var a=genres1.indexOf(event.target.value)
-    var b=genres2.indexOf(event.target.value)
-    genres1.splice(a, 1)
+  if(genreSelector12.checked){
+    genres1.push(event.target.value)
+    genres2.push(event.target.value)
+    genres3.push(event.target.value)
+    genres4.push(event.target.value)
+    genres5.push(event.target.value)
+    genres6.push(event.target.value)
     genres.value=genres1
-    genres2.splice(b, 1)
     genresD.value=genres2
+    genresP.value=genres3
+    genresT.value=genres4
+    genresL.value=genres5
+    genresU.value=genres6
   }
+    else{
+      var a=genres1.indexOf(event.target.value)
+      var b=genres2.indexOf(event.target.value)
+      var c=genres3.indexOf(event.target.value)
+      var d=genres4.indexOf(event.target.value)
+      var e=genres5.indexOf(event.target.value)
+      var f=genres6.indexOf(event.target.value)
+      genres1.splice(a, 1)
+      genres.value=genres1
+      genres2.splice(b, 1)
+      genresD.value=genres2
+      genres3.splice(c, 1)
+      genresP.value=genres3
+      genres4.splice(d, 1)
+      genresT.value=genres4
+      genres5.splice(e, 1)
+      genresL.value=genres5
+      genres6.splice(f, 1)
+      genresU.value=genres6
+    }
 })
 genreSelector13.addEventListener('change', function(){
-if(genreSelector13.checked){
-  genres1.push(event.target.value)
-  genres2.push(event.target.value)
-  genres.value=genres1
-  genresD.value=genres2
-}
-  else{
-    var a=genres1.indexOf(event.target.value)
-    var b=genres2.indexOf(event.target.value)
-    genres1.splice(a, 1)
+  if(genreSelector13.checked){
+    genres1.push(event.target.value)
+    genres2.push(event.target.value)
+    genres3.push(event.target.value)
+    genres4.push(event.target.value)
+    genres5.push(event.target.value)
+    genres6.push(event.target.value)
     genres.value=genres1
-    genres2.splice(b, 1)
     genresD.value=genres2
+    genresP.value=genres3
+    genresT.value=genres4
+    genresL.value=genres5
+    genresU.value=genres6
   }
+    else{
+      var a=genres1.indexOf(event.target.value)
+      var b=genres2.indexOf(event.target.value)
+      var c=genres3.indexOf(event.target.value)
+      var d=genres4.indexOf(event.target.value)
+      var e=genres5.indexOf(event.target.value)
+      var f=genres6.indexOf(event.target.value)
+      genres1.splice(a, 1)
+      genres.value=genres1
+      genres2.splice(b, 1)
+      genresD.value=genres2
+      genres3.splice(c, 1)
+      genresP.value=genres3
+      genres4.splice(d, 1)
+      genresT.value=genres4
+      genres5.splice(e, 1)
+      genresL.value=genres5
+      genres6.splice(f, 1)
+      genresU.value=genres6
+    }
 })
 genreSelector14.addEventListener('change', function(){
-if(genreSelector14.checked){
-  genres1.push(event.target.value)
-  genres2.push(event.target.value)
-  genres.value=genres1
-  genresD.value=genres2
-}
-  else{
-    var a=genres1.indexOf(event.target.value)
-    var b=genres2.indexOf(event.target.value)
-    genres1.splice(a, 1)
+  if(genreSelector14.checked){
+    genres1.push(event.target.value)
+    genres2.push(event.target.value)
+    genres3.push(event.target.value)
+    genres4.push(event.target.value)
+    genres5.push(event.target.value)
+    genres6.push(event.target.value)
     genres.value=genres1
-    genres2.splice(b, 1)
     genresD.value=genres2
+    genresP.value=genres3
+    genresT.value=genres4
+    genresL.value=genres5
+    genresU.value=genres6
   }
+    else{
+      var a=genres1.indexOf(event.target.value)
+      var b=genres2.indexOf(event.target.value)
+      var c=genres3.indexOf(event.target.value)
+      var d=genres4.indexOf(event.target.value)
+      var e=genres5.indexOf(event.target.value)
+      var f=genres6.indexOf(event.target.value)
+      genres1.splice(a, 1)
+      genres.value=genres1
+      genres2.splice(b, 1)
+      genresD.value=genres2
+      genres3.splice(c, 1)
+      genresP.value=genres3
+      genres4.splice(d, 1)
+      genresT.value=genres4
+      genres5.splice(e, 1)
+      genresL.value=genres5
+      genres6.splice(f, 1)
+      genresU.value=genres6
+    }
 })
 genreSelector15.addEventListener('change', function(){
-if(genreSelector15.checked){
-  genres1.push(event.target.value)
-  genres2.push(event.target.value)
-  genres.value=genres1
-  genresD.value=genres2
-}
-  else{
-    var a=genres1.indexOf(event.target.value)
-    var b=genres2.indexOf(event.target.value)
-    genres1.splice(a, 1)
+  if(genreSelector15.checked){
+    genres1.push(event.target.value)
+    genres2.push(event.target.value)
+    genres3.push(event.target.value)
+    genres4.push(event.target.value)
+    genres5.push(event.target.value)
+    genres6.push(event.target.value)
     genres.value=genres1
-    genres2.splice(b, 1)
     genresD.value=genres2
+    genresP.value=genres3
+    genresT.value=genres4
+    genresL.value=genres5
+    genresU.value=genres6
   }
+    else{
+      var a=genres1.indexOf(event.target.value)
+      var b=genres2.indexOf(event.target.value)
+      var c=genres3.indexOf(event.target.value)
+      var d=genres4.indexOf(event.target.value)
+      var e=genres5.indexOf(event.target.value)
+      var f=genres6.indexOf(event.target.value)
+      genres1.splice(a, 1)
+      genres.value=genres1
+      genres2.splice(b, 1)
+      genresD.value=genres2
+      genres3.splice(c, 1)
+      genresP.value=genres3
+      genres4.splice(d, 1)
+      genresT.value=genres4
+      genres5.splice(e, 1)
+      genresL.value=genres5
+      genres6.splice(f, 1)
+      genresU.value=genres6
+    }
 })
 genreSelector16.addEventListener('change', function(){
-if(genreSelector16.checked){
-  genres1.push(event.target.value)
-  genres2.push(event.target.value)
-  genres.value=genres1
-  genresD.value=genres2
-}
-  else{
-    var a=genres1.indexOf(event.target.value)
-    var b=genres2.indexOf(event.target.value)
-    genres1.splice(a, 1)
+  if(genreSelector16.checked){
+    genres1.push(event.target.value)
+    genres2.push(event.target.value)
+    genres3.push(event.target.value)
+    genres4.push(event.target.value)
+    genres5.push(event.target.value)
+    genres6.push(event.target.value)
     genres.value=genres1
-    genres2.splice(b, 1)
     genresD.value=genres2
+    genresP.value=genres3
+    genresT.value=genres4
+    genresL.value=genres5
+    genresU.value=genres6
   }
+    else{
+      var a=genres1.indexOf(event.target.value)
+      var b=genres2.indexOf(event.target.value)
+      var c=genres3.indexOf(event.target.value)
+      var d=genres4.indexOf(event.target.value)
+      var e=genres5.indexOf(event.target.value)
+      var f=genres6.indexOf(event.target.value)
+      genres1.splice(a, 1)
+      genres.value=genres1
+      genres2.splice(b, 1)
+      genresD.value=genres2
+      genres3.splice(c, 1)
+      genresP.value=genres3
+      genres4.splice(d, 1)
+      genresT.value=genres4
+      genres5.splice(e, 1)
+      genresL.value=genres5
+      genres6.splice(f, 1)
+      genresU.value=genres6
+    }
 })
 genreSelector17.addEventListener('change', function(){
-if(genreSelector17.checked){
-  genres1.push(event.target.value)
-  genres2.push(event.target.value)
-  genres.value=genres1
-  genresD.value=genres2
-}
-  else{
-    var a=genres1.indexOf(event.target.value)
-    var b=genres2.indexOf(event.target.value)
-    genres1.splice(a, 1)
+  if(genreSelector17.checked){
+    genres1.push(event.target.value)
+    genres2.push(event.target.value)
+    genres3.push(event.target.value)
+    genres4.push(event.target.value)
+    genres5.push(event.target.value)
+    genres6.push(event.target.value)
     genres.value=genres1
-    genres2.splice(b, 1)
     genresD.value=genres2
+    genresP.value=genres3
+    genresT.value=genres4
+    genresL.value=genres5
+    genresU.value=genres6
   }
+    else{
+      var a=genres1.indexOf(event.target.value)
+      var b=genres2.indexOf(event.target.value)
+      var c=genres3.indexOf(event.target.value)
+      var d=genres4.indexOf(event.target.value)
+      var e=genres5.indexOf(event.target.value)
+      var f=genres6.indexOf(event.target.value)
+      genres1.splice(a, 1)
+      genres.value=genres1
+      genres2.splice(b, 1)
+      genresD.value=genres2
+      genres3.splice(c, 1)
+      genresP.value=genres3
+      genres4.splice(d, 1)
+      genresT.value=genres4
+      genres5.splice(e, 1)
+      genresL.value=genres5
+      genres6.splice(f, 1)
+      genresU.value=genres6
+    }
 })
 genreSelector18.addEventListener('change', function(){
-if(genreSelector18.checked){
-  genres1.push(event.target.value)
-  genres2.push(event.target.value)
-  genres.value=genres1
-  genresD.value=genres2
-}
-  else{
-    var a=genres1.indexOf(event.target.value)
-    var b=genres2.indexOf(event.target.value)
-    genres1.splice(a, 1)
+  if(genreSelector18.checked){
+    genres1.push(event.target.value)
+    genres2.push(event.target.value)
+    genres3.push(event.target.value)
+    genres4.push(event.target.value)
+    genres5.push(event.target.value)
+    genres6.push(event.target.value)
     genres.value=genres1
-    genres2.splice(b, 1)
     genresD.value=genres2
+    genresP.value=genres3
+    genresT.value=genres4
+    genresL.value=genres5
+    genresU.value=genres6
   }
+    else{
+      var a=genres1.indexOf(event.target.value)
+      var b=genres2.indexOf(event.target.value)
+      var c=genres3.indexOf(event.target.value)
+      var d=genres4.indexOf(event.target.value)
+      var e=genres5.indexOf(event.target.value)
+      var f=genres6.indexOf(event.target.value)
+      genres1.splice(a, 1)
+      genres.value=genres1
+      genres2.splice(b, 1)
+      genresD.value=genres2
+      genres3.splice(c, 1)
+      genresP.value=genres3
+      genres4.splice(d, 1)
+      genresT.value=genres4
+      genres5.splice(e, 1)
+      genresL.value=genres5
+      genres6.splice(f, 1)
+      genresU.value=genres6
+    }
 })
 
 
