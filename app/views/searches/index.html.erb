@@ -1,5 +1,12 @@
-Sort movies by genre:<p>
 
+Search by: <span id="option1" class="link">Movie name</span> | <span id="option2" class="link">Actor</span> | <span class="link" id="option3">Genre</span> | <span class="link" id="option4">Director</span><br>
+Display: <span class="link" id="option5">Popular movies</span> | <span class="link" id="option7">Top rated</span> | <span class="link" id="option8">Latest</span>
+
+
+<div id="genreChecks">Sort movies by genre:<p>
+
+Action:  <input type="checkbox" id="genreSelector0" name="feature"
+        value="28" placeholder="Adventure" />
 Adventure:  <input type="checkbox" id="genreSelector1" name="feature"
         value="12" placeholder="Adventure" />
 Animation: <input type="checkbox" id="genreSelector2" name="feature"
@@ -36,87 +43,226 @@ War: <input type="checkbox" id="genreSelector17" name="feature"
         value="10752" />
 Western: <input type="checkbox" id="genreSelector18" name="feature"
         value="37" />
-</p>
-  <!-- <select id="genreSelector">
-  <option value='12'>Adventure</option>
-  <option value="16">Animation</option>
-  <option value="35">Comedy</option>
-  <option value="80">Crime</option>
-  <option value="99">Documentary</option>
-  <option value="18">Drama</option>
-  <option value="10751">Family</option>
-  <option value="14">Fantasy</option>
-  <option value="36">History</option>
-  <option value="27">Horry</option>
-  <option value="10402">Music</option>
-  <option value="9648">Mystery</option>
-  <option value="9648">Romance</option>
-  <option value="878">Scifi</option>
-  <option value="10770">TV Movie</option>
-  <option value="53">Thriller</option>
-  <option value="10752">War</option>
-  <option value="37">Western</option>
-</select> -->
+      </p>
+      </div>
+
+      <div id="movieRatings">Sort movies by rating:<p>
+
+        Greater than or equal to: <select id="ratingDrop">
+          <option></option>
+          <option value='1'>1</option>
+          <option value='2'>2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      </div>
+      </p>
+
+
+
+
+
+
 
 
 <div id="searchMovie">
-  <%=form_tag(searches_path, method: "get") do |f|%>
+
+
+  <%=form_tag(searches_path, method: "get", :id=>"UpdateMovieSearch") do%>
   Search by Movie: <%=text_field_tag(:q)%>
+
   Search by Genre: <%=text_field_tag(:genres)%>
-  <%=submit_tag("Update Search")%>
+  <%= hidden_field_tag :ratingQ %>
+  <%=submit_tag("Update Movie Search")%>
   <%end%>
+
+
 </div>
+
 
 <div id="searchActor">
   <%=form_tag(searches_path, method: "get") do |f|%>
   Search by Actor: <%=text_field_tag(:r)%>
-  <%=submit_tag("Search")%>
+  <%=submit_tag("Update Actor Search")%>
   <%end%>
 </div>
-
-<div id="searchCategory">
+<div id="searchDirector">
   <%=form_tag(searches_path, method: "get") do |f|%>
-  <%=text_field_tag(:s)%>
-  <%=submit_tag("Search")%>
+  Search by Director: <%=text_field_tag(:d)%>
+  <%=hidden_field_tag(:genresD)%>
+  <%=hidden_field_tag(:ratingD)%>
+  <%=submit_tag("Update Director Search")%>
   <%end%>
 </div>
 
 
 
-<div class="movies-container">
+
+<div id="genreLinks">
+
+  <%=form_tag(searches_path, method: "get") do%>
+  Select genre: <select id="genreDrop">
+    <option></option>
+    <option value='28'>Action</option>
+    <option value='12'>Adventure</option>
+    <option value="16">Animation</option>
+    <option value="35">Comedy</option>
+    <option value="80">Crime</option>
+    <option value="99">Documentary</option>
+    <option value="18">Drama</option>
+    <option value="10751">Family</option>
+    <option value="14">Fantasy</option>
+    <option value="36">History</option>
+    <option value="27">Horror</option>
+    <option value="10402">Music</option>
+    <option value="9648">Mystery</option>
+    <option value="9648">Romance</option>
+    <option value="878">Scifi</option>
+    <option value="10770">TV Movie</option>
+    <option value="53">Thriller</option>
+    <option value="10752">War</option>
+    <option value="37">Western</option>
+  </select>
+  <%= hidden_field_tag :l %>
+  <%= hidden_field_tag :rating %>
+  <%=submit_tag("Update Search")%>
+  <%end%>
+
+</div>
+
+
+<div id="moviesContainer">
+
+<%if params[:q].present? || params[:l].present? || params[:d].present?%>
   <% @results.each.with_index do |m, index|%>
   <div class="movie">
-  <center><%=index+1%>: <%=m.original_title%></center><br>
-  <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
-  <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
-
-</div>
-
-<%end%>
-
-
-</div>
-
-<div class="actors-container">
+    <center><%=index+1%>: <%=m.original_title%></center><br>
+    <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+    <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+  </div>
+  <%end%>
+  <%else%>
   <% @results.each.with_index do |m, index|%>
   <div class="movie">
-  <center><%=index+1%>: <%=m.name%></center><br>
-  <img src="https://image.tmdb.org/t/p/w500/<%=m.profile_path%>"><br>
-  <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+    <center><%=index+1%>: <%=m.name%></center><br>
+    <img src="https://image.tmdb.org/t/p/w500/<%=m.profile_path%>"><br>
+    <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+  </div>
+  <%end%>
+  <%end%>
 </div>
 
-<%end%>
-</div>
+
+
 
 <!-- checkbox selector perhaps... push to an array ... JOINED by conditional statement-->
 
 <script>
 var movieButton=document.getElementById('movieButton')
 var movie=document.getElementsByClassName('movie')[0]
-var genreSelector1=document.getElementById('genreSelector1')
-var genreSelector2=document.getElementById('genreSelector2')
 var genres1=[]
+var genres2=[]
 var genres= document.getElementById('genres')
+var genreDrop= document.getElementById('genreDrop')
+var ratingDrop= document.getElementById('ratingDrop')
+var option1= document.getElementById('option1')
+var option2= document.getElementById('option2')
+var option3= document.getElementById('option3')
+var option4= document.getElementById('option4')
+var option5= document.getElementById('option5')
+var option6= document.getElementById('option6')
+var option7= document.getElementById('option7')
+var option8= document.getElementById('option8')
+var option9= document.getElementById('option9')
+var searchMovie= document.getElementById('searchMovie')
+var UpdateMovieSearch= document.getElementById('UpdateMovieSearch')
+var selector=[genreSelector1]
+
+// display search options
+
+// search by movie
+
+
+
+
+
+
+
+option1.addEventListener('click', function(){
+  // window.history.replaceState({}, document.title, "/" + "searches");
+  searchMovie.style.display="block"
+  genreChecks.style.display="block"
+  movieRatings.style.display="block"
+  searchActor.style.display="none"
+  genreLinks.style.display="none"
+  // directorsContainer.style.display="none"
+  searchDirector.style.display="none"
+})
+
+
+
+
+// search by actor
+
+option2.addEventListener('click', function(){
+  // window.history.replaceState({}, document.title, "/" + "searches");
+  searchMovie.style.display="none"
+  genreChecks.style.display="none"
+  searchActor.style.display="block"
+  genreLinks.style.display="none"
+  movieRatings.style.display="none"
+  // directorsContainer.style.display="none"
+  searchDirector.style.display="none"
+})
+// Search by genre
+
+option3.addEventListener('click', function(){
+  // window.history.replaceState({}, document.title, "/" + "searches");
+  searchMovie.style.display="none"
+  genreChecks.style.display="none"
+  searchActor.style.display="none"
+  genreLinks.style.display="block"
+  movieRatings.style.display="block"
+  // directorsContainer.style.display="none"
+  searchDirector.style.display="none"
+})
+
+// Search by Director
+
+option4.addEventListener('click', function(){
+  window.history.replaceState({}, document.title, "/" + "searches");
+  searchMovie.style.display="none"
+  genreChecks.style.display="block"
+  searchActor.style.display="none"
+  genreLinks.style.display="none"
+  movieRatings.style.display="block"
+  searchDirector.style.display="block"
+  // directorsContainer.style.display="none"
+})
+
+
+
+// drop down selector for genre and rating
+
+genreDrop.addEventListener('input', function(){
+  l.value= genreDrop.value
+
+});
+
+ratingDrop.addEventListener('input', function(){
+  rating.value= ratingDrop.value
+  ratingQ.value= ratingDrop.value
+  ratingD.value= ratingDrop.value
+
+});
+
+
 
 
 
@@ -127,207 +273,318 @@ document.addEventListener('click', function(){
 
 })
 
-// sort by genre starts here
 
-genreSelector1.addEventListener('change', function(){
-  if(genreSelector1.checked){
+
+
+
+
+// // sort by genre starts here for movies
+//
+genreSelector0.addEventListener('change', function(){
+  if(genreSelector0.checked){
     genres1.push(event.target.value)
+    genres2.push(event.target.value)
     genres.value=genres1
+    genresD.value=genres2
   }
     else{
       var a=genres1.indexOf(event.target.value)
+      var b=genres2.indexOf(event.target.value)
       genres1.splice(a, 1)
       genres.value=genres1
+      genres2.splice(b, 1)
+      genresD.value=genres2
     }
 
-
+})
+genreSelector1.addEventListener('change', function(){
+  if(genreSelector1.checked){
+    genres1.push(event.target.value)
+    genres2.push(event.target.value)
+    genres.value=genres1
+    genresD.value=genres2
+  }
+    else{
+      var a=genres1.indexOf(event.target.value)
+      var b=genres2.indexOf(event.target.value)
+      genres1.splice(a, 1)
+      genres.value=genres1
+      genres2.splice(b, 1)
+      genresD.value=genres2
+    }
 })
 
 genreSelector2.addEventListener('change', function(){
 if(genreSelector2.checked){
   genres1.push(event.target.value)
+  genres2.push(event.target.value)
   genres.value=genres1
+  genresD.value=genres2
 }
   else{
     var a=genres1.indexOf(event.target.value)
+    var b=genres2.indexOf(event.target.value)
     genres1.splice(a, 1)
     genres.value=genres1
+    genres2.splice(b, 1)
+    genresD.value=genres2
   }
 })
+
 genreSelector3.addEventListener('change', function(){
 if(genreSelector3.checked){
   genres1.push(event.target.value)
+  genres2.push(event.target.value)
   genres.value=genres1
+  genresD.value=genres2
 }
   else{
     var a=genres1.indexOf(event.target.value)
+    var b=genres2.indexOf(event.target.value)
     genres1.splice(a, 1)
     genres.value=genres1
+    genres2.splice(b, 1)
+    genresD.value=genres2
   }
 })
 genreSelector4.addEventListener('change', function(){
 if(genreSelector4.checked){
   genres1.push(event.target.value)
+  genres2.push(event.target.value)
   genres.value=genres1
+  genresD.value=genres2
 }
   else{
     var a=genres1.indexOf(event.target.value)
+    var b=genres2.indexOf(event.target.value)
     genres1.splice(a, 1)
     genres.value=genres1
+    genres2.splice(b, 1)
+    genresD.value=genres2
   }
 })
 genreSelector5.addEventListener('change', function(){
 if(genreSelector5.checked){
   genres1.push(event.target.value)
+  genres2.push(event.target.value)
   genres.value=genres1
+  genresD.value=genres2
 }
   else{
     var a=genres1.indexOf(event.target.value)
+    var b=genres2.indexOf(event.target.value)
     genres1.splice(a, 1)
     genres.value=genres1
+    genres2.splice(b, 1)
+    genresD.value=genres2
   }
 })
 genreSelector6.addEventListener('change', function(){
 if(genreSelector6.checked){
   genres1.push(event.target.value)
+  genres2.push(event.target.value)
   genres.value=genres1
+  genresD.value=genres2
 }
   else{
     var a=genres1.indexOf(event.target.value)
+    var b=genres2.indexOf(event.target.value)
     genres1.splice(a, 1)
     genres.value=genres1
+    genres2.splice(b, 1)
+    genresD.value=genres2
   }
 })
 genreSelector7.addEventListener('change', function(){
 if(genreSelector7.checked){
   genres1.push(event.target.value)
+  genres2.push(event.target.value)
   genres.value=genres1
+  genresD.value=genres2
 }
   else{
     var a=genres1.indexOf(event.target.value)
+    var b=genres2.indexOf(event.target.value)
     genres1.splice(a, 1)
     genres.value=genres1
+    genres2.splice(b, 1)
+    genresD.value=genres2
   }
 })
 genreSelector8.addEventListener('change', function(){
 if(genreSelector8.checked){
   genres1.push(event.target.value)
+  genres2.push(event.target.value)
   genres.value=genres1
+  genresD.value=genres2
 }
   else{
     var a=genres1.indexOf(event.target.value)
+    var b=genres2.indexOf(event.target.value)
     genres1.splice(a, 1)
     genres.value=genres1
+    genres2.splice(b, 1)
+    genresD.value=genres2
   }
 })
 genreSelector9.addEventListener('change', function(){
 if(genreSelector9.checked){
   genres1.push(event.target.value)
+  genres2.push(event.target.value)
   genres.value=genres1
+  genresD.value=genres2
 }
   else{
     var a=genres1.indexOf(event.target.value)
+    var b=genres2.indexOf(event.target.value)
     genres1.splice(a, 1)
     genres.value=genres1
+    genres2.splice(b, 1)
+    genresD.value=genres2
   }
 })
 genreSelector10.addEventListener('change', function(){
 if(genreSelector10.checked){
   genres1.push(event.target.value)
+  genres2.push(event.target.value)
   genres.value=genres1
+  genresD.value=genres2
 }
   else{
     var a=genres1.indexOf(event.target.value)
+    var b=genres2.indexOf(event.target.value)
     genres1.splice(a, 1)
     genres.value=genres1
+    genres2.splice(b, 1)
+    genresD.value=genres2
   }
 })
 genreSelector11.addEventListener('change', function(){
 if(genreSelector11.checked){
   genres1.push(event.target.value)
+  genres2.push(event.target.value)
   genres.value=genres1
+  genresD.value=genres2
 }
   else{
     var a=genres1.indexOf(event.target.value)
+    var b=genres2.indexOf(event.target.value)
     genres1.splice(a, 1)
     genres.value=genres1
+    genres2.splice(b, 1)
+    genresD.value=genres2
   }
 })
 genreSelector12.addEventListener('change', function(){
 if(genreSelector12.checked){
   genres1.push(event.target.value)
+  genres2.push(event.target.value)
   genres.value=genres1
+  genresD.value=genres2
 }
   else{
     var a=genres1.indexOf(event.target.value)
+    var b=genres2.indexOf(event.target.value)
     genres1.splice(a, 1)
     genres.value=genres1
+    genres2.splice(b, 1)
+    genresD.value=genres2
   }
 })
 genreSelector13.addEventListener('change', function(){
 if(genreSelector13.checked){
   genres1.push(event.target.value)
+  genres2.push(event.target.value)
   genres.value=genres1
+  genresD.value=genres2
 }
   else{
     var a=genres1.indexOf(event.target.value)
+    var b=genres2.indexOf(event.target.value)
     genres1.splice(a, 1)
     genres.value=genres1
+    genres2.splice(b, 1)
+    genresD.value=genres2
   }
 })
 genreSelector14.addEventListener('change', function(){
 if(genreSelector14.checked){
   genres1.push(event.target.value)
+  genres2.push(event.target.value)
   genres.value=genres1
+  genresD.value=genres2
 }
   else{
     var a=genres1.indexOf(event.target.value)
+    var b=genres2.indexOf(event.target.value)
     genres1.splice(a, 1)
     genres.value=genres1
+    genres2.splice(b, 1)
+    genresD.value=genres2
   }
 })
 genreSelector15.addEventListener('change', function(){
 if(genreSelector15.checked){
   genres1.push(event.target.value)
+  genres2.push(event.target.value)
   genres.value=genres1
+  genresD.value=genres2
 }
   else{
     var a=genres1.indexOf(event.target.value)
+    var b=genres2.indexOf(event.target.value)
     genres1.splice(a, 1)
     genres.value=genres1
+    genres2.splice(b, 1)
+    genresD.value=genres2
   }
 })
 genreSelector16.addEventListener('change', function(){
 if(genreSelector16.checked){
   genres1.push(event.target.value)
+  genres2.push(event.target.value)
   genres.value=genres1
+  genresD.value=genres2
 }
   else{
     var a=genres1.indexOf(event.target.value)
+    var b=genres2.indexOf(event.target.value)
     genres1.splice(a, 1)
     genres.value=genres1
+    genres2.splice(b, 1)
+    genresD.value=genres2
   }
 })
 genreSelector17.addEventListener('change', function(){
 if(genreSelector17.checked){
   genres1.push(event.target.value)
+  genres2.push(event.target.value)
   genres.value=genres1
+  genresD.value=genres2
 }
   else{
     var a=genres1.indexOf(event.target.value)
+    var b=genres2.indexOf(event.target.value)
     genres1.splice(a, 1)
     genres.value=genres1
+    genres2.splice(b, 1)
+    genresD.value=genres2
   }
 })
 genreSelector18.addEventListener('change', function(){
 if(genreSelector18.checked){
   genres1.push(event.target.value)
+  genres2.push(event.target.value)
   genres.value=genres1
+  genresD.value=genres2
 }
   else{
     var a=genres1.indexOf(event.target.value)
+    var b=genres2.indexOf(event.target.value)
     genres1.splice(a, 1)
     genres.value=genres1
+    genres2.splice(b, 1)
+    genresD.value=genres2
   }
 })
 

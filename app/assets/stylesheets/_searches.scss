@@ -1,28 +1,29 @@
 // Place all the styles related to the searches controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#directorsContainer{
+  font-family: helvetica;
+  display: none;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-rows: auto;
+}
+#moviesContainer{
+  font-family: helvetica;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-rows: auto;
+}
+#actorsContainer{
+  font-family: helvetica;
+  display: none;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-rows: auto;
+}
 
-.movies-container{
-  font-family: helvetica;
-  display: grid;
-  width: 100%;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-auto-rows: auto;
-}
-.actors-container{
-  font-family: helvetica;
-  display: grid;
-  width: 100%;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-auto-rows: auto;
-}
-.category-container{
-  font-family: helvetica;
-  display: grid;
-  width: 100%;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-auto-rows: auto;
-}
+
 
 .movie{
   float: left;
@@ -30,10 +31,13 @@
 }
 
 #searchMovie{
-  display: block;
+  display: none;
 }
 
 #searchActor{
+  display: none;
+}
+#searchDirector{
   display: none;
 }
 
@@ -41,10 +45,63 @@
   display: none;
 }
 
-.actors-container{
+
+
+
+#genreChecks{
   display: none;
+
 }
 
-#genreSelector{
-  
+#genreLinks{
+display: none;
+}
+
+#genreDrop{
+
+}
+#ratingDrop{
+
+
+}
+#movieRatings{
+  display: none;
+
+}
+
+
+
+.link{
+  text-decoration: none;
+  color: #919191;
+}
+
+.link:hover{
+  text-decoration: underline #cb00ff;
+
+}
+
+#option1{
+
+}
+#option2{
+
+}
+#option3{
+
+}
+#option4{
+
+}
+#option5{
+
+}
+#option6{
+
+}
+#option7{
+
+}
+#option8{
+
 }
