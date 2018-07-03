@@ -1,7 +1,9 @@
 class SearchesController < ApplicationController
 
 
+
   def index
+
     if params[:d].present? && params[:genresD].present? && params[:ratingD].present?
       @movies=Tmdb::Search.movie(params[:d])
       solid=@movies.results.find_all{|favor| favor.genre_ids.include? params[:genresD].to_i }
@@ -71,8 +73,10 @@ class SearchesController < ApplicationController
       @movies=Tmdb::Search.person(params[:d])
       @results=@movies.results[0].known_for
     elsif params[:q].present?
-      @movies=Tmdb::Search.movie(params[:q])
+      @movies=Tmdb::Search.movie(params[:q], page: params[:page])
       @results=@movies.results
+      @pages=@movies.total_pages
+      @entries=@movies.total_results
     elsif params[:r].present?
      @actors=Tmdb::Search.person(params[:r])
      @results=@actors.results

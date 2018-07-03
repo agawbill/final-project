@@ -173,7 +173,15 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
 
 <p><div id="moviesContainer">
 
+
 <%if params[:q].present? || params[:l].present? || params[:d].present?%>
+
+<%for i in (0...@pages)%>
+<a href="javascript:addParam('page=<%=i+1%>');">Page<%=i+1%></a>
+<%end%>
+
+<p><%=@pages%>
+<%=@entries%></p>
   <% @results.each.with_index do |m, index|%>
   <div class="movie">
     <center><%=index+1%>: <%=m.original_title%></center><br>
@@ -257,6 +265,11 @@ var option9= document.getElementById('option9')
 var searchMovie= document.getElementById('searchMovie')
 var UpdateMovieSearch= document.getElementById('UpdateMovieSearch')
 var selector=[genreSelector1]
+
+
+function addParam(v) {
+      window.location.search += '&' + v;
+  }
 
 // display search options
 
