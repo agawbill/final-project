@@ -170,6 +170,9 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
 
 </div>
 
+<div id="createList">
+  Testing
+</div>
 
 <p><div id="moviesContainer">
 
@@ -443,6 +446,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
 <script>
 var movieButton=document.getElementById('movieButton')
 var movie=document.getElementsByClassName('movie')[0]
+var movieList=[]
 var genres1=[]
 var genres2=[]
 var genres3=[]
@@ -463,20 +467,62 @@ var option8= document.getElementById('option8')
 var option9= document.getElementById('option9')
 var searchMovie= document.getElementById('searchMovie')
 var UpdateMovieSearch= document.getElementById('UpdateMovieSearch')
-var selector=[genreSelector1]
+var createList= document.getElementById('createList')
+var genreSelector=[genreSelector0, genreSelector1, genreSelector2, genreSelector3, genreSelector4, genreSelector5, genreSelector6, genreSelector7, genreSelector7, genreSelector8, genreSelector9, genreSelector10, genreSelector11, genreSelector12, genreSelector13, genreSelector14, genreSelector15, genreSelector16, genreSelector7, genreSelector17, genreSelector18]
+var createListChildren=createList.children
+
+
+// generates list when Add to List button is clicked... functionality for delete, moveUp on list and moveDown
+
+function create(){
+  var list=document.createElement("li")
+  list.innerHTML=movieList[movieList.length-1]+ "<span class='deleteMovie' value="+movieList[movieList.length-1]+"> Delete?</span> <span class='moveUp'>+</span> <span class='moveDown'>-</span>"
+  list.value=movieList[movieList.length-1]
+  createList.appendChild(list)
+
+  var deleteMovie=document.getElementsByClassName('deleteMovie')
+  var moveUp=document.getElementsByClassName('moveUp')
+  var moveDown=document.getElementsByClassName('moveDown')
+
+  for(i=0; i<createListChildren.length; i++){
+    deleteMovie[i].addEventListener('click', function(event){
+      clickExit(event.path[1]);
+      })
+    }
+
+
+
+      function clickExit(clicked) {
+
+        var j= movieList.indexOf(event.path[1].value.toString())
+        console.log(event.path[2].children[event.path[2].children.length-1]);
+
+        if(j!= -1){
+          movieList.splice(j,1)
+        }
+        clicked.remove()
+
+      }
+    }
+
+
+
+
+
+
+
+
+
+// adds page param when you click on a page link
 
 
 function addParam(v) {
       window.location.search += '&' + v;
   }
 
-// display search options
+
 
 // search by movie
-
-
-
-
 
 
 
@@ -617,6 +663,7 @@ option7.addEventListener('click', function(){
   searchUpcoming.style.display="none"
   // directorsContainer.style.display="none"
 })
+
 // Discover upcoming movies
 
 option8.addEventListener('click', function(){
@@ -665,6 +712,8 @@ ratingDrop.addEventListener('input', function(){
 document.addEventListener('click', function(){
   if(event.target.id=="movieButton"){
   console.log(event.target.value);
+  movieList.push(event.target.value);
+  create()
 }
 
 })
@@ -755,734 +804,45 @@ show.addEventListener('change', function(){
 
 
 
-
-
-// sort by genre starts here for movies
-
-genreSelector0.addEventListener('change', function(){
-  if(genreSelector0.checked){
-    genres1.push(event.target.value)
-    genres2.push(event.target.value)
-    genres3.push(event.target.value)
-    genres4.push(event.target.value)
-    genres5.push(event.target.value)
-    genres6.push(event.target.value)
-    genres.value=genres1
-    genresD.value=genres2
-    genresP.value=genres3
-    genresT.value=genres4
-    genresL.value=genres5
-    genresU.value=genres6
-    show.checked = false;
+for(i=0;i<genreSelector.length;i++){
+    genreSelector[i].addEventListener("click", function(event){
+      if(genreSelector0.checked || genreSelector1.checked || genreSelector2.checked || genreSelector3.checked || genreSelector4.checked || genreSelector5.checked || genreSelector6.checked || genreSelector7.checked || genreSelector8.checked || genreSelector9.checked || genreSelector10.checked || genreSelector11.checked || genreSelector12.checked || genreSelector13.checked || genreSelector14.checked || genreSelector15.checked || genreSelector16.checked || genreSelector17.checked || genreSelector18.checked){
+        genres1.push(event.target.value)
+        genres2.push(event.target.value)
+        genres3.push(event.target.value)
+        genres4.push(event.target.value)
+        genres5.push(event.target.value)
+        genres6.push(event.target.value)
+        genres.value=genres1
+        genresD.value=genres2
+        genresP.value=genres3
+        genresT.value=genres4
+        genresL.value=genres5
+        genresU.value=genres6
+        show.checked = false;
+      }
+        else{
+          var a=genres1.indexOf(event.target.value)
+          var b=genres2.indexOf(event.target.value)
+          var c=genres3.indexOf(event.target.value)
+          var d=genres4.indexOf(event.target.value)
+          var e=genres5.indexOf(event.target.value)
+          var f=genres6.indexOf(event.target.value)
+          genres1.splice(a, 1)
+          genres.value=genres1
+          genres2.splice(b, 1)
+          genresD.value=genres2
+          genres3.splice(c, 1)
+          genresP.value=genres3
+          genres4.splice(d, 1)
+          genresT.value=genres4
+          genres5.splice(e, 1)
+          genresL.value=genres5
+          genres6.splice(f, 1)
+          genresU.value=genres6
+        }
+    })
   }
-    else{
-      var a=genres1.indexOf(event.target.value)
-      var b=genres2.indexOf(event.target.value)
-      var c=genres3.indexOf(event.target.value)
-      var d=genres4.indexOf(event.target.value)
-      var e=genres5.indexOf(event.target.value)
-      var f=genres6.indexOf(event.target.value)
-      genres1.splice(a, 1)
-      genres.value=genres1
-      genres2.splice(b, 1)
-      genresD.value=genres2
-      genres3.splice(c, 1)
-      genresP.value=genres3
-      genres4.splice(d, 1)
-      genresT.value=genres4
-      genres5.splice(e, 1)
-      genresL.value=genres5
-      genres6.splice(f, 1)
-      genresU.value=genres6
-    }
-
-})
-genreSelector1.addEventListener('change', function(){
-  if(genreSelector1.checked){
-    genres1.push(event.target.value)
-    genres2.push(event.target.value)
-    genres3.push(event.target.value)
-    genres4.push(event.target.value)
-    genres5.push(event.target.value)
-    genres6.push(event.target.value)
-    genres.value=genres1
-    genresD.value=genres2
-    genresP.value=genres3
-    genresT.value=genres4
-    genresL.value=genres5
-    genresU.value=genres6
-    show.checked = false;
-
-  }
-    else{
-      var a=genres1.indexOf(event.target.value)
-      var b=genres2.indexOf(event.target.value)
-      var c=genres3.indexOf(event.target.value)
-      var d=genres4.indexOf(event.target.value)
-      var e=genres5.indexOf(event.target.value)
-      var f=genres6.indexOf(event.target.value)
-      genres1.splice(a, 1)
-      genres.value=genres1
-      genres2.splice(b, 1)
-      genresD.value=genres2
-      genres3.splice(c, 1)
-      genresP.value=genres3
-      genres4.splice(d, 1)
-      genresT.value=genres4
-      genres5.splice(e, 1)
-      genresL.value=genres5
-      genres6.splice(f, 1)
-      genresU.value=genres6
-    }
-})
-
-genreSelector2.addEventListener('change', function(){
-  if(genreSelector2.checked){
-    genres1.push(event.target.value)
-    genres2.push(event.target.value)
-    genres3.push(event.target.value)
-    genres4.push(event.target.value)
-    genres5.push(event.target.value)
-    genres6.push(event.target.value)
-    genres.value=genres1
-    genresD.value=genres2
-    genresP.value=genres3
-    genresT.value=genres4
-    genresL.value=genres5
-    genresU.value=genres6
-    show.checked = false;
-
-  }
-    else{
-      var a=genres1.indexOf(event.target.value)
-      var b=genres2.indexOf(event.target.value)
-      var c=genres3.indexOf(event.target.value)
-      var d=genres4.indexOf(event.target.value)
-      var e=genres5.indexOf(event.target.value)
-      var f=genres6.indexOf(event.target.value)
-      genres1.splice(a, 1)
-      genres.value=genres1
-      genres2.splice(b, 1)
-      genresD.value=genres2
-      genres3.splice(c, 1)
-      genresP.value=genres3
-      genres4.splice(d, 1)
-      genresT.value=genres4
-      genres5.splice(e, 1)
-      genresL.value=genres5
-      genres6.splice(f, 1)
-      genresU.value=genres6
-    }
-})
-
-genreSelector3.addEventListener('change', function(){
-  if(genreSelector3.checked){
-    genres1.push(event.target.value)
-    genres2.push(event.target.value)
-    genres3.push(event.target.value)
-    genres4.push(event.target.value)
-    genres5.push(event.target.value)
-    genres6.push(event.target.value)
-    genres.value=genres1
-    genresD.value=genres2
-    genresP.value=genres3
-    genresT.value=genres4
-    genresL.value=genres5
-    genresU.value=genres6
-    show.checked = false;
-
-  }
-    else{
-      var a=genres1.indexOf(event.target.value)
-      var b=genres2.indexOf(event.target.value)
-      var c=genres3.indexOf(event.target.value)
-      var d=genres4.indexOf(event.target.value)
-      var e=genres5.indexOf(event.target.value)
-      var f=genres6.indexOf(event.target.value)
-      genres1.splice(a, 1)
-      genres.value=genres1
-      genres2.splice(b, 1)
-      genresD.value=genres2
-      genres3.splice(c, 1)
-      genresP.value=genres3
-      genres4.splice(d, 1)
-      genresT.value=genres4
-      genres5.splice(e, 1)
-      genresL.value=genres5
-      genres6.splice(f, 1)
-      genresU.value=genres6
-    }
-})
-genreSelector4.addEventListener('change', function(){
-  if(genreSelector4.checked){
-    genres1.push(event.target.value)
-    genres2.push(event.target.value)
-    genres3.push(event.target.value)
-    genres4.push(event.target.value)
-    genres5.push(event.target.value)
-    genres6.push(event.target.value)
-    genres.value=genres1
-    genresD.value=genres2
-    genresP.value=genres3
-    genresT.value=genres4
-    genresL.value=genres5
-    genresU.value=genres6
-    show.checked = false;
-
-  }
-    else{
-      var a=genres1.indexOf(event.target.value)
-      var b=genres2.indexOf(event.target.value)
-      var c=genres3.indexOf(event.target.value)
-      var d=genres4.indexOf(event.target.value)
-      var e=genres5.indexOf(event.target.value)
-      var f=genres6.indexOf(event.target.value)
-      genres1.splice(a, 1)
-      genres.value=genres1
-      genres2.splice(b, 1)
-      genresD.value=genres2
-      genres3.splice(c, 1)
-      genresP.value=genres3
-      genres4.splice(d, 1)
-      genresT.value=genres4
-      genres5.splice(e, 1)
-      genresL.value=genres5
-      genres6.splice(f, 1)
-      genresU.value=genres6
-    }
-})
-genreSelector5.addEventListener('change', function(){
-  if(genreSelector5.checked){
-    genres1.push(event.target.value)
-    genres2.push(event.target.value)
-    genres3.push(event.target.value)
-    genres4.push(event.target.value)
-    genres5.push(event.target.value)
-    genres6.push(event.target.value)
-    genres.value=genres1
-    genresD.value=genres2
-    genresP.value=genres3
-    genresT.value=genres4
-    genresL.value=genres5
-    genresU.value=genres6
-    show.checked = false;
-
-  }
-    else{
-      var a=genres1.indexOf(event.target.value)
-      var b=genres2.indexOf(event.target.value)
-      var c=genres3.indexOf(event.target.value)
-      var d=genres4.indexOf(event.target.value)
-      var e=genres5.indexOf(event.target.value)
-      var f=genres6.indexOf(event.target.value)
-      genres1.splice(a, 1)
-      genres.value=genres1
-      genres2.splice(b, 1)
-      genresD.value=genres2
-      genres3.splice(c, 1)
-      genresP.value=genres3
-      genres4.splice(d, 1)
-      genresT.value=genres4
-      genres5.splice(e, 1)
-      genresL.value=genres5
-      genres6.splice(f, 1)
-      genresU.value=genres6
-    }
-})
-genreSelector6.addEventListener('change', function(){
-  if(genreSelector6.checked){
-    genres1.push(event.target.value)
-    genres2.push(event.target.value)
-    genres3.push(event.target.value)
-    genres4.push(event.target.value)
-    genres5.push(event.target.value)
-    genres6.push(event.target.value)
-    genres.value=genres1
-    genresD.value=genres2
-    genresP.value=genres3
-    genresT.value=genres4
-    genresL.value=genres5
-    genresU.value=genres6
-    show.checked = false;
-
-  }
-    else{
-      var a=genres1.indexOf(event.target.value)
-      var b=genres2.indexOf(event.target.value)
-      var c=genres3.indexOf(event.target.value)
-      var d=genres4.indexOf(event.target.value)
-      var e=genres5.indexOf(event.target.value)
-      var f=genres6.indexOf(event.target.value)
-      genres1.splice(a, 1)
-      genres.value=genres1
-      genres2.splice(b, 1)
-      genresD.value=genres2
-      genres3.splice(c, 1)
-      genresP.value=genres3
-      genres4.splice(d, 1)
-      genresT.value=genres4
-      genres5.splice(e, 1)
-      genresL.value=genres5
-      genres6.splice(f, 1)
-      genresU.value=genres6
-    }
-})
-genreSelector7.addEventListener('change', function(){
-  if(genreSelector7.checked){
-    genres1.push(event.target.value)
-    genres2.push(event.target.value)
-    genres3.push(event.target.value)
-    genres4.push(event.target.value)
-    genres5.push(event.target.value)
-    genres6.push(event.target.value)
-    genres.value=genres1
-    genresD.value=genres2
-    genresP.value=genres3
-    genresT.value=genres4
-    genresL.value=genres5
-    genresU.value=genres6
-    show.checked = false;
-
-  }
-    else{
-      var a=genres1.indexOf(event.target.value)
-      var b=genres2.indexOf(event.target.value)
-      var c=genres3.indexOf(event.target.value)
-      var d=genres4.indexOf(event.target.value)
-      var e=genres5.indexOf(event.target.value)
-      var f=genres6.indexOf(event.target.value)
-      genres1.splice(a, 1)
-      genres.value=genres1
-      genres2.splice(b, 1)
-      genresD.value=genres2
-      genres3.splice(c, 1)
-      genresP.value=genres3
-      genres4.splice(d, 1)
-      genresT.value=genres4
-      genres5.splice(e, 1)
-      genresL.value=genres5
-      genres6.splice(f, 1)
-      genresU.value=genres6
-    }
-})
-genreSelector8.addEventListener('change', function(){
-  if(genreSelector8.checked){
-    genres1.push(event.target.value)
-    genres2.push(event.target.value)
-    genres3.push(event.target.value)
-    genres4.push(event.target.value)
-    genres5.push(event.target.value)
-    genres6.push(event.target.value)
-    genres.value=genres1
-    genresD.value=genres2
-    genresP.value=genres3
-    genresT.value=genres4
-    genresL.value=genres5
-    genresU.value=genres6
-    show.checked = false;
-
-  }
-    else{
-      var a=genres1.indexOf(event.target.value)
-      var b=genres2.indexOf(event.target.value)
-      var c=genres3.indexOf(event.target.value)
-      var d=genres4.indexOf(event.target.value)
-      var e=genres5.indexOf(event.target.value)
-      var f=genres6.indexOf(event.target.value)
-      genres1.splice(a, 1)
-      genres.value=genres1
-      genres2.splice(b, 1)
-      genresD.value=genres2
-      genres3.splice(c, 1)
-      genresP.value=genres3
-      genres4.splice(d, 1)
-      genresT.value=genres4
-      genres5.splice(e, 1)
-      genresL.value=genres5
-      genres6.splice(f, 1)
-      genresU.value=genres6
-    }
-})
-genreSelector9.addEventListener('change', function(){
-  if(genreSelector9.checked){
-    genres1.push(event.target.value)
-    genres2.push(event.target.value)
-    genres3.push(event.target.value)
-    genres4.push(event.target.value)
-    genres5.push(event.target.value)
-    genres6.push(event.target.value)
-    genres.value=genres1
-    genresD.value=genres2
-    genresP.value=genres3
-    genresT.value=genres4
-    genresL.value=genres5
-    genresU.value=genres6
-    show.checked = false;
-
-  }
-    else{
-      var a=genres1.indexOf(event.target.value)
-      var b=genres2.indexOf(event.target.value)
-      var c=genres3.indexOf(event.target.value)
-      var d=genres4.indexOf(event.target.value)
-      var e=genres5.indexOf(event.target.value)
-      var f=genres6.indexOf(event.target.value)
-      genres1.splice(a, 1)
-      genres.value=genres1
-      genres2.splice(b, 1)
-      genresD.value=genres2
-      genres3.splice(c, 1)
-      genresP.value=genres3
-      genres4.splice(d, 1)
-      genresT.value=genres4
-      genres5.splice(e, 1)
-      genresL.value=genres5
-      genres6.splice(f, 1)
-      genresU.value=genres6
-    }
-})
-genreSelector10.addEventListener('change', function(){
-  if(genreSelector10.checked){
-    genres1.push(event.target.value)
-    genres2.push(event.target.value)
-    genres3.push(event.target.value)
-    genres4.push(event.target.value)
-    genres5.push(event.target.value)
-    genres6.push(event.target.value)
-    genres.value=genres1
-    genresD.value=genres2
-    genresP.value=genres3
-    genresT.value=genres4
-    genresL.value=genres5
-    genresU.value=genres6
-    show.checked = false;
-
-  }
-    else{
-      var a=genres1.indexOf(event.target.value)
-      var b=genres2.indexOf(event.target.value)
-      var c=genres3.indexOf(event.target.value)
-      var d=genres4.indexOf(event.target.value)
-      var e=genres5.indexOf(event.target.value)
-      var f=genres6.indexOf(event.target.value)
-      genres1.splice(a, 1)
-      genres.value=genres1
-      genres2.splice(b, 1)
-      genresD.value=genres2
-      genres3.splice(c, 1)
-      genresP.value=genres3
-      genres4.splice(d, 1)
-      genresT.value=genres4
-      genres5.splice(e, 1)
-      genresL.value=genres5
-      genres6.splice(f, 1)
-      genresU.value=genres6
-    }
-})
-genreSelector11.addEventListener('change', function(){
-  if(genreSelector11.checked){
-    genres1.push(event.target.value)
-    genres2.push(event.target.value)
-    genres3.push(event.target.value)
-    genres4.push(event.target.value)
-    genres5.push(event.target.value)
-    genres6.push(event.target.value)
-    genres.value=genres1
-    genresD.value=genres2
-    genresP.value=genres3
-    genresT.value=genres4
-    genresL.value=genres5
-    genresU.value=genres6
-    show.checked = false;
-
-  }
-    else{
-      var a=genres1.indexOf(event.target.value)
-      var b=genres2.indexOf(event.target.value)
-      var c=genres3.indexOf(event.target.value)
-      var d=genres4.indexOf(event.target.value)
-      var e=genres5.indexOf(event.target.value)
-      var f=genres6.indexOf(event.target.value)
-      genres1.splice(a, 1)
-      genres.value=genres1
-      genres2.splice(b, 1)
-      genresD.value=genres2
-      genres3.splice(c, 1)
-      genresP.value=genres3
-      genres4.splice(d, 1)
-      genresT.value=genres4
-      genres5.splice(e, 1)
-      genresL.value=genres5
-      genres6.splice(f, 1)
-      genresU.value=genres6
-    }
-})
-genreSelector12.addEventListener('change', function(){
-  if(genreSelector12.checked){
-    genres1.push(event.target.value)
-    genres2.push(event.target.value)
-    genres3.push(event.target.value)
-    genres4.push(event.target.value)
-    genres5.push(event.target.value)
-    genres6.push(event.target.value)
-    genres.value=genres1
-    genresD.value=genres2
-    genresP.value=genres3
-    genresT.value=genres4
-    genresL.value=genres5
-    genresU.value=genres6
-    show.checked = false;
-
-  }
-    else{
-      var a=genres1.indexOf(event.target.value)
-      var b=genres2.indexOf(event.target.value)
-      var c=genres3.indexOf(event.target.value)
-      var d=genres4.indexOf(event.target.value)
-      var e=genres5.indexOf(event.target.value)
-      var f=genres6.indexOf(event.target.value)
-      genres1.splice(a, 1)
-      genres.value=genres1
-      genres2.splice(b, 1)
-      genresD.value=genres2
-      genres3.splice(c, 1)
-      genresP.value=genres3
-      genres4.splice(d, 1)
-      genresT.value=genres4
-      genres5.splice(e, 1)
-      genresL.value=genres5
-      genres6.splice(f, 1)
-      genresU.value=genres6
-    }
-})
-genreSelector13.addEventListener('change', function(){
-  if(genreSelector13.checked){
-    genres1.push(event.target.value)
-    genres2.push(event.target.value)
-    genres3.push(event.target.value)
-    genres4.push(event.target.value)
-    genres5.push(event.target.value)
-    genres6.push(event.target.value)
-    genres.value=genres1
-    genresD.value=genres2
-    genresP.value=genres3
-    genresT.value=genres4
-    genresL.value=genres5
-    genresU.value=genres6
-    show.checked = false;
-
-  }
-    else{
-      var a=genres1.indexOf(event.target.value)
-      var b=genres2.indexOf(event.target.value)
-      var c=genres3.indexOf(event.target.value)
-      var d=genres4.indexOf(event.target.value)
-      var e=genres5.indexOf(event.target.value)
-      var f=genres6.indexOf(event.target.value)
-      genres1.splice(a, 1)
-      genres.value=genres1
-      genres2.splice(b, 1)
-      genresD.value=genres2
-      genres3.splice(c, 1)
-      genresP.value=genres3
-      genres4.splice(d, 1)
-      genresT.value=genres4
-      genres5.splice(e, 1)
-      genresL.value=genres5
-      genres6.splice(f, 1)
-      genresU.value=genres6
-    }
-})
-genreSelector14.addEventListener('change', function(){
-  if(genreSelector14.checked){
-    genres1.push(event.target.value)
-    genres2.push(event.target.value)
-    genres3.push(event.target.value)
-    genres4.push(event.target.value)
-    genres5.push(event.target.value)
-    genres6.push(event.target.value)
-    genres.value=genres1
-    genresD.value=genres2
-    genresP.value=genres3
-    genresT.value=genres4
-    genresL.value=genres5
-    genresU.value=genres6
-    show.checked = false;
-
-  }
-    else{
-      var a=genres1.indexOf(event.target.value)
-      var b=genres2.indexOf(event.target.value)
-      var c=genres3.indexOf(event.target.value)
-      var d=genres4.indexOf(event.target.value)
-      var e=genres5.indexOf(event.target.value)
-      var f=genres6.indexOf(event.target.value)
-      genres1.splice(a, 1)
-      genres.value=genres1
-      genres2.splice(b, 1)
-      genresD.value=genres2
-      genres3.splice(c, 1)
-      genresP.value=genres3
-      genres4.splice(d, 1)
-      genresT.value=genres4
-      genres5.splice(e, 1)
-      genresL.value=genres5
-      genres6.splice(f, 1)
-      genresU.value=genres6
-    }
-})
-genreSelector15.addEventListener('change', function(){
-  if(genreSelector15.checked){
-    genres1.push(event.target.value)
-    genres2.push(event.target.value)
-    genres3.push(event.target.value)
-    genres4.push(event.target.value)
-    genres5.push(event.target.value)
-    genres6.push(event.target.value)
-    genres.value=genres1
-    genresD.value=genres2
-    genresP.value=genres3
-    genresT.value=genres4
-    genresL.value=genres5
-    genresU.value=genres6
-    show.checked = false;
-
-  }
-    else{
-      var a=genres1.indexOf(event.target.value)
-      var b=genres2.indexOf(event.target.value)
-      var c=genres3.indexOf(event.target.value)
-      var d=genres4.indexOf(event.target.value)
-      var e=genres5.indexOf(event.target.value)
-      var f=genres6.indexOf(event.target.value)
-      genres1.splice(a, 1)
-      genres.value=genres1
-      genres2.splice(b, 1)
-      genresD.value=genres2
-      genres3.splice(c, 1)
-      genresP.value=genres3
-      genres4.splice(d, 1)
-      genresT.value=genres4
-      genres5.splice(e, 1)
-      genresL.value=genres5
-      genres6.splice(f, 1)
-      genresU.value=genres6
-    }
-})
-genreSelector16.addEventListener('change', function(){
-  if(genreSelector16.checked){
-    genres1.push(event.target.value)
-    genres2.push(event.target.value)
-    genres3.push(event.target.value)
-    genres4.push(event.target.value)
-    genres5.push(event.target.value)
-    genres6.push(event.target.value)
-    genres.value=genres1
-    genresD.value=genres2
-    genresP.value=genres3
-    genresT.value=genres4
-    genresL.value=genres5
-    genresU.value=genres6
-    show.checked = false;
-
-  }
-    else{
-      var a=genres1.indexOf(event.target.value)
-      var b=genres2.indexOf(event.target.value)
-      var c=genres3.indexOf(event.target.value)
-      var d=genres4.indexOf(event.target.value)
-      var e=genres5.indexOf(event.target.value)
-      var f=genres6.indexOf(event.target.value)
-      genres1.splice(a, 1)
-      genres.value=genres1
-      genres2.splice(b, 1)
-      genresD.value=genres2
-      genres3.splice(c, 1)
-      genresP.value=genres3
-      genres4.splice(d, 1)
-      genresT.value=genres4
-      genres5.splice(e, 1)
-      genresL.value=genres5
-      genres6.splice(f, 1)
-      genresU.value=genres6
-    }
-})
-genreSelector17.addEventListener('change', function(){
-  if(genreSelector17.checked){
-    genres1.push(event.target.value)
-    genres2.push(event.target.value)
-    genres3.push(event.target.value)
-    genres4.push(event.target.value)
-    genres5.push(event.target.value)
-    genres6.push(event.target.value)
-    genres.value=genres1
-    genresD.value=genres2
-    genresP.value=genres3
-    genresT.value=genres4
-    genresL.value=genres5
-    genresU.value=genres6
-    show.checked = false;
-
-  }
-    else{
-      var a=genres1.indexOf(event.target.value)
-      var b=genres2.indexOf(event.target.value)
-      var c=genres3.indexOf(event.target.value)
-      var d=genres4.indexOf(event.target.value)
-      var e=genres5.indexOf(event.target.value)
-      var f=genres6.indexOf(event.target.value)
-      genres1.splice(a, 1)
-      genres.value=genres1
-      genres2.splice(b, 1)
-      genresD.value=genres2
-      genres3.splice(c, 1)
-      genresP.value=genres3
-      genres4.splice(d, 1)
-      genresT.value=genres4
-      genres5.splice(e, 1)
-      genresL.value=genres5
-      genres6.splice(f, 1)
-      genresU.value=genres6
-    }
-})
-genreSelector18.addEventListener('change', function(){
-  if(genreSelector18.checked){
-    genres1.push(event.target.value)
-    genres2.push(event.target.value)
-    genres3.push(event.target.value)
-    genres4.push(event.target.value)
-    genres5.push(event.target.value)
-    genres6.push(event.target.value)
-    genres.value=genres1
-    genresD.value=genres2
-    genresP.value=genres3
-    genresT.value=genres4
-    genresL.value=genres5
-    genresU.value=genres6
-    show.checked = false;
-
-  }
-    else{
-      var a=genres1.indexOf(event.target.value)
-      var b=genres2.indexOf(event.target.value)
-      var c=genres3.indexOf(event.target.value)
-      var d=genres4.indexOf(event.target.value)
-      var e=genres5.indexOf(event.target.value)
-      var f=genres6.indexOf(event.target.value)
-      genres1.splice(a, 1)
-      genres.value=genres1
-      genres2.splice(b, 1)
-      genresD.value=genres2
-      genres3.splice(c, 1)
-      genresP.value=genres3
-      genres4.splice(d, 1)
-      genresT.value=genres4
-      genres5.splice(e, 1)
-      genresL.value=genres5
-      genres6.splice(f, 1)
-      genresU.value=genres6
-    }
-})
 
 
 </script>

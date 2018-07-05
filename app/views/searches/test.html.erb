@@ -174,10 +174,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
 <p><div id="moviesContainer">
 
   <%if params[:q].present? && params[:genres].present? && params[:ratingQ].present?%>
-  <%if @pages>20%>
-  <%@pages=20%>
-  <%end%>
-  <%for i in (0...@pages)%>
+  <%for i in (0...20)%>
   <%@movies1=Tmdb::Search.movie(params[:q], page: i+1)%>
   <%solid1=@movies1.results.find_all{|favor| favor.genre_ids.include? params[:genres].to_i }%>
   <%@results1=solid1.find_all{|favor| favor.vote_average >= params[:ratingQ].to_i }%>
@@ -190,10 +187,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:genresP].present? && params[:ratingP].present?%>
-  <%if @pages>20%>
-  <%@pages=20%>
-  <%end%>
-  <%for i in (0...@pages)%>
+  <%for i in (0...20)%>
   <%@movies1=Tmdb::Movie.popular(page: i+1).results%>
   <%solid1=@movies1.find_all{|favor| favor.genre_ids.include? params[:genresP].to_i }%>
   <%@results1=solid1.find_all{|favor| favor.vote_average >= params[:ratingP].to_i }%>
@@ -206,10 +200,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:genresT].present? && params[:ratingT].present?%>
-  <%if @pages>20%>
-  <%@pages=20%>
-  <%end%>
-  <%for i in (0...@pages)%>
+  <%for i in (0...20)%>
   <%@movies1=Tmdb::Movie.top_rated(page: i+1).results%>
   <%solid1=@movies1.find_all{|favor| favor.genre_ids.include? params[:genresT].to_i }%>
   <%@results1=solid1.find_all{|favor| favor.vote_average >= params[:ratingT].to_i }%>
@@ -222,10 +213,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:genresU].present? && params[:ratingU].present?%>
-  <%if @pages>20%>
-  <%@pages=20%>
-  <%end%>
-  <%for i in (0...@pages)%>
+  <%for i in (0...20)%>
   <%@movies1=Tmdb::Movie.upcoming(page: i+1).results%>
   <%solid1=@movies1.find_all{|favor| favor.genre_ids.include? params[:genresU].to_i }%>
   <%@results1=solid1.find_all{|favor| favor.vote_average >= params[:ratingU].to_i }%>
@@ -238,10 +226,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:genresL].present? && params[:ratingL].present?%>
-  <%if @pages>20%>
-  <%@pages=20%>
-  <%end%>
-  <%for i in (0...@pages)%>
+  <%for i in (0...20)%>
   <%@movies1=Tmdb::Movie.upcoming(page: i+1).results%>
   <%solid1=@movies1.find_all{|favor| favor.genre_ids.include? params[:genresL].to_i }%>
   <%@results1=solid1.find_all{|favor| favor.vote_average >= params[:ratingL].to_i }%>
@@ -254,10 +239,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:q].present? && params[:genres].present?%>
-  <%if @pages>20%>
-  <%@pages=20%>
-  <%end%>
-  <%for i in (0...@pages)%>
+  <%for i in (0...20)%>
   <%@movies1=Tmdb::Search.movie(params[:q], page: i+1).results%>
   <%@results1=@movies1.find_all{|favor| favor.genre_ids.include? params[:genres].to_i }%>
     <% @results1.each.with_index do |m, index|%>
@@ -269,10 +251,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:q].present? && params[:ratingQ].present?%>
-  <%if @pages>20%>
-  <%@pages=20%>
-  <%end%>
-  <%for i in (0...@pages)%>
+  <%for i in (0...20)%>
   <%@movies1=Tmdb::Search.movie(params[:q], page: i+1).results%>
   <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:ratingQ].to_i }%>
     <% @results1.each.with_index do |m, index|%>
@@ -284,10 +263,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:l].present? && params[:rating].present?%>
-  <%if @pages>20%>
-  <%@pages=20%>
-  <%end%>
-  <%for i in (0...@pages)%>
+  <%for i in (0...20)%>
   <%@movies1=Tmdb::Genre.movies(params[:l], page: i+1).results%>
   <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:rating].to_i }%>
     <% @results1.each.with_index do |m, index|%>
@@ -315,10 +291,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
   </div>
   <%end%>
   <%elsif params[:ratingP].present?%>
-  <%if @pages>20%>
-  <%@pages=20%>
-  <%end%>
-  <%for i in (0...@pages)%>
+  <%for i in (0...20)%>
   <%@movies1=Tmdb::Movie.popular(page: i+1).results%>
   <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:ratingQ].to_i }%>
     <% @results1.each.with_index do |m, index|%>
@@ -330,10 +303,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:ratingU].present?%>
-  <%if @pages>20%>
-  <%@pages=20%>
-  <%end%>
-  <%for i in (0...@pages)%>
+  <%for i in (0...20)%>
   <%@movies1=Tmdb::Movie.upcoming(page: i+1).results%>
   <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:ratingU].to_i }%>
     <% @results1.each.with_index do |m, index|%>
@@ -345,10 +315,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:ratingL].present?%>
-  <%if @pages>20%>
-  <%@pages=20%>
-  <%end%>
-  <%for i in (0...@pages)%>
+  <%for i in (0...20)%>
   <%@movies1=Tmdb::Movie.now_playing(page: i+1).results%>
   <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:ratingL].to_i }%>
     <% @results1.each.with_index do |m, index|%>
@@ -360,10 +327,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:ratingT].present?%>
-  <%if @pages>20%>
-  <%@pages=20%>
-  <%end%>
-  <%for i in (0...@pages)%>
+  <%for i in (0...20)%>
   <%@movies1=Tmdb::Movie.now_playing(page: i+1).results%>
   <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:ratingT].to_i }%>
     <% @results1.each.with_index do |m, index|%>
@@ -375,31 +339,26 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:d].present?%>
-
-  <% @results.each.with_index do |m, index|%>
-  <div class="movie">
-    <center><%=index+1%>: <%=m.original_title%></center><br>
-    <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
-    <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
-  </div>
-  <%end%>
-  <%for i in (0...50)%>
-  <a href="javascript:addParam('page=<%=i+1%>');">Page <%=i+1%></a>
-  <%end%>
-  <%elsif params[:q].present?%>
-
-  <% @results.each.with_index do |m, index|%>
-  <div class="movie">
-    <center><%=index+1%>: <%=m.original_title%></center><br>
-    <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
-    <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
-  </div>
-  <%end%>
-  <%if @pages>20%>
-  <%@pages=20%>
-  <%end%>
   <%for i in (0...@pages)%>
   <a href="javascript:addParam('page=<%=i+1%>');">Page <%=i+1%></a>
+  <%end%>
+  <% @results.each.with_index do |m, index|%>
+  <div class="movie">
+    <center><%=index+1%>: <%=m.original_title%></center><br>
+    <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+    <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+  </div>
+  <%end%>
+  <%elsif params[:q].present?%>
+  <%for i in (0...@pages)%>
+  <a href="javascript:addParam('page=<%=i+1%>');">Page <%=i+1%></a>
+  <%end%>
+  <% @results.each.with_index do |m, index|%>
+  <div class="movie">
+    <center><%=index+1%>: <%=m.original_title%></center><br>
+    <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+    <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+  </div>
   <%end%>
   <%elsif params[:r].present?%>
 
@@ -410,10 +369,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
   </div>
   <%end%>
-  <%if @pages>20%>
-  <%@pages=20%>
-  <%end%>
-  <%for i in (0...@pages)%>
+  <%for i in (0...50)%>
   <a href="javascript:addParam('page=<%=i+1%>');">Page <%=i+1%></a>
   <%end%>
   <%elsif params[:l].present?%>
@@ -425,10 +381,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
   </div>
   <%end%>
-  <%if @pages>20%>
-  <%@pages=20%>
-  <%end%>
-  <%for i in (0...@pages)%>
+  <%for i in (0...50)%>
   <a href="javascript:addParam('page=<%=i+1%>');">Page <%=i+1%></a>
   <%end%>
 
@@ -654,7 +607,6 @@ ratingDrop.addEventListener('input', function(){
   ratingT.value= ratingDrop.value
   ratingL.value= ratingDrop.value
   ratingU.value= ratingDrop.value
-  show.checked = false;
 
 });
 
@@ -672,7 +624,6 @@ document.addEventListener('click', function(){
 // show all discover movies
 
 function clearAll(){
-  show.checked = false;
   ratingP.value=show.value
   ratingT.value=show.value
   ratingU.value=show.value
@@ -681,12 +632,6 @@ function clearAll(){
   genres4=[]
   genres5=[]
   genres6=[]
-  genres.value=[]
-  genresD.value=[]
-  genresP.value=[]
-  genresT.value=[]
-  genresL.value=[]
-  genresU.value=[]
   ratingDrop.selectedIndex = 0
   genreSelector0.checked = false;
   genreSelector1.checked = false;
@@ -717,6 +662,10 @@ show.addEventListener('change', function(){
     ratingT.value=show.value
     ratingU.value=show.value
     ratingL.value=show.value
+    genres3=[]
+    genres4=[]
+    genres5=[]
+    genres6=[]
     ratingDrop.selectedIndex = 0
     genreSelector0.checked = false;
     genreSelector1.checked = false;
@@ -737,19 +686,8 @@ show.addEventListener('change', function(){
     genreSelector16.checked = false;
     genreSelector17.checked = false;
     genreSelector18.checked = false;
-    genres3=[]
-    genres4=[]
-    genres5=[]
-    genres6=[]
-    genres.value=[]
-    genresD.value=[]
-    genresP.value=[]
-    genresT.value=[]
-    genresL.value=[]
-    genresU.value=[]
+
   }
-
-
 
 })
 
@@ -773,7 +711,6 @@ genreSelector0.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
-    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -811,8 +748,6 @@ genreSelector1.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
-    show.checked = false;
-
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -850,8 +785,6 @@ genreSelector2.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
-    show.checked = false;
-
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -889,8 +822,6 @@ genreSelector3.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
-    show.checked = false;
-
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -927,8 +858,6 @@ genreSelector4.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
-    show.checked = false;
-
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -965,8 +894,6 @@ genreSelector5.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
-    show.checked = false;
-
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1003,8 +930,6 @@ genreSelector6.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
-    show.checked = false;
-
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1041,8 +966,6 @@ genreSelector7.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
-    show.checked = false;
-
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1079,8 +1002,6 @@ genreSelector8.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
-    show.checked = false;
-
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1117,8 +1038,6 @@ genreSelector9.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
-    show.checked = false;
-
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1155,8 +1074,6 @@ genreSelector10.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
-    show.checked = false;
-
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1193,8 +1110,6 @@ genreSelector11.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
-    show.checked = false;
-
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1231,8 +1146,6 @@ genreSelector12.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
-    show.checked = false;
-
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1269,8 +1182,6 @@ genreSelector13.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
-    show.checked = false;
-
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1307,8 +1218,6 @@ genreSelector14.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
-    show.checked = false;
-
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1345,8 +1254,6 @@ genreSelector15.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
-    show.checked = false;
-
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1383,8 +1290,6 @@ genreSelector16.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
-    show.checked = false;
-
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1421,8 +1326,6 @@ genreSelector17.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
-    show.checked = false;
-
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1459,8 +1362,6 @@ genreSelector18.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
-    show.checked = false;
-
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1486,3 +1387,732 @@ genreSelector18.addEventListener('change', function(){
 
 
 </script>
+
+
+
+// sort by genre starts here for movies
+
+// genreSelector0.addEventListener('change', function(){
+//   if(genreSelector0.checked){
+//     genres1.push(event.target.value)
+//     genres2.push(event.target.value)
+//     genres3.push(event.target.value)
+//     genres4.push(event.target.value)
+//     genres5.push(event.target.value)
+//     genres6.push(event.target.value)
+//     genres.value=genres1
+//     genresD.value=genres2
+//     genresP.value=genres3
+//     genresT.value=genres4
+//     genresL.value=genres5
+//     genresU.value=genres6
+//     show.checked = false;
+//   }
+//     else{
+//       var a=genres1.indexOf(event.target.value)
+//       var b=genres2.indexOf(event.target.value)
+//       var c=genres3.indexOf(event.target.value)
+//       var d=genres4.indexOf(event.target.value)
+//       var e=genres5.indexOf(event.target.value)
+//       var f=genres6.indexOf(event.target.value)
+//       genres1.splice(a, 1)
+//       genres.value=genres1
+//       genres2.splice(b, 1)
+//       genresD.value=genres2
+//       genres3.splice(c, 1)
+//       genresP.value=genres3
+//       genres4.splice(d, 1)
+//       genresT.value=genres4
+//       genres5.splice(e, 1)
+//       genresL.value=genres5
+//       genres6.splice(f, 1)
+//       genresU.value=genres6
+//     }
+//
+// })
+// genreSelector1.addEventListener('change', function(){
+//   if(genreSelector1.checked){
+//     genres1.push(event.target.value)
+//     genres2.push(event.target.value)
+//     genres3.push(event.target.value)
+//     genres4.push(event.target.value)
+//     genres5.push(event.target.value)
+//     genres6.push(event.target.value)
+//     genres.value=genres1
+//     genresD.value=genres2
+//     genresP.value=genres3
+//     genresT.value=genres4
+//     genresL.value=genres5
+//     genresU.value=genres6
+//     show.checked = false;
+//
+//   }
+//     else{
+//       var a=genres1.indexOf(event.target.value)
+//       var b=genres2.indexOf(event.target.value)
+//       var c=genres3.indexOf(event.target.value)
+//       var d=genres4.indexOf(event.target.value)
+//       var e=genres5.indexOf(event.target.value)
+//       var f=genres6.indexOf(event.target.value)
+//       genres1.splice(a, 1)
+//       genres.value=genres1
+//       genres2.splice(b, 1)
+//       genresD.value=genres2
+//       genres3.splice(c, 1)
+//       genresP.value=genres3
+//       genres4.splice(d, 1)
+//       genresT.value=genres4
+//       genres5.splice(e, 1)
+//       genresL.value=genres5
+//       genres6.splice(f, 1)
+//       genresU.value=genres6
+//     }
+// })
+//
+// genreSelector2.addEventListener('change', function(){
+//   if(genreSelector2.checked){
+//     genres1.push(event.target.value)
+//     genres2.push(event.target.value)
+//     genres3.push(event.target.value)
+//     genres4.push(event.target.value)
+//     genres5.push(event.target.value)
+//     genres6.push(event.target.value)
+//     genres.value=genres1
+//     genresD.value=genres2
+//     genresP.value=genres3
+//     genresT.value=genres4
+//     genresL.value=genres5
+//     genresU.value=genres6
+//     show.checked = false;
+//
+//   }
+//     else{
+//       var a=genres1.indexOf(event.target.value)
+//       var b=genres2.indexOf(event.target.value)
+//       var c=genres3.indexOf(event.target.value)
+//       var d=genres4.indexOf(event.target.value)
+//       var e=genres5.indexOf(event.target.value)
+//       var f=genres6.indexOf(event.target.value)
+//       genres1.splice(a, 1)
+//       genres.value=genres1
+//       genres2.splice(b, 1)
+//       genresD.value=genres2
+//       genres3.splice(c, 1)
+//       genresP.value=genres3
+//       genres4.splice(d, 1)
+//       genresT.value=genres4
+//       genres5.splice(e, 1)
+//       genresL.value=genres5
+//       genres6.splice(f, 1)
+//       genresU.value=genres6
+//     }
+// })
+//
+// genreSelector3.addEventListener('change', function(){
+//   if(genreSelector3.checked){
+//     genres1.push(event.target.value)
+//     genres2.push(event.target.value)
+//     genres3.push(event.target.value)
+//     genres4.push(event.target.value)
+//     genres5.push(event.target.value)
+//     genres6.push(event.target.value)
+//     genres.value=genres1
+//     genresD.value=genres2
+//     genresP.value=genres3
+//     genresT.value=genres4
+//     genresL.value=genres5
+//     genresU.value=genres6
+//     show.checked = false;
+//
+//   }
+//     else{
+//       var a=genres1.indexOf(event.target.value)
+//       var b=genres2.indexOf(event.target.value)
+//       var c=genres3.indexOf(event.target.value)
+//       var d=genres4.indexOf(event.target.value)
+//       var e=genres5.indexOf(event.target.value)
+//       var f=genres6.indexOf(event.target.value)
+//       genres1.splice(a, 1)
+//       genres.value=genres1
+//       genres2.splice(b, 1)
+//       genresD.value=genres2
+//       genres3.splice(c, 1)
+//       genresP.value=genres3
+//       genres4.splice(d, 1)
+//       genresT.value=genres4
+//       genres5.splice(e, 1)
+//       genresL.value=genres5
+//       genres6.splice(f, 1)
+//       genresU.value=genres6
+//     }
+// })
+// genreSelector4.addEventListener('change', function(){
+//   if(genreSelector4.checked){
+//     genres1.push(event.target.value)
+//     genres2.push(event.target.value)
+//     genres3.push(event.target.value)
+//     genres4.push(event.target.value)
+//     genres5.push(event.target.value)
+//     genres6.push(event.target.value)
+//     genres.value=genres1
+//     genresD.value=genres2
+//     genresP.value=genres3
+//     genresT.value=genres4
+//     genresL.value=genres5
+//     genresU.value=genres6
+//     show.checked = false;
+//
+//   }
+//     else{
+//       var a=genres1.indexOf(event.target.value)
+//       var b=genres2.indexOf(event.target.value)
+//       var c=genres3.indexOf(event.target.value)
+//       var d=genres4.indexOf(event.target.value)
+//       var e=genres5.indexOf(event.target.value)
+//       var f=genres6.indexOf(event.target.value)
+//       genres1.splice(a, 1)
+//       genres.value=genres1
+//       genres2.splice(b, 1)
+//       genresD.value=genres2
+//       genres3.splice(c, 1)
+//       genresP.value=genres3
+//       genres4.splice(d, 1)
+//       genresT.value=genres4
+//       genres5.splice(e, 1)
+//       genresL.value=genres5
+//       genres6.splice(f, 1)
+//       genresU.value=genres6
+//     }
+// })
+// genreSelector5.addEventListener('change', function(){
+//   if(genreSelector5.checked){
+//     genres1.push(event.target.value)
+//     genres2.push(event.target.value)
+//     genres3.push(event.target.value)
+//     genres4.push(event.target.value)
+//     genres5.push(event.target.value)
+//     genres6.push(event.target.value)
+//     genres.value=genres1
+//     genresD.value=genres2
+//     genresP.value=genres3
+//     genresT.value=genres4
+//     genresL.value=genres5
+//     genresU.value=genres6
+//     show.checked = false;
+//
+//   }
+//     else{
+//       var a=genres1.indexOf(event.target.value)
+//       var b=genres2.indexOf(event.target.value)
+//       var c=genres3.indexOf(event.target.value)
+//       var d=genres4.indexOf(event.target.value)
+//       var e=genres5.indexOf(event.target.value)
+//       var f=genres6.indexOf(event.target.value)
+//       genres1.splice(a, 1)
+//       genres.value=genres1
+//       genres2.splice(b, 1)
+//       genresD.value=genres2
+//       genres3.splice(c, 1)
+//       genresP.value=genres3
+//       genres4.splice(d, 1)
+//       genresT.value=genres4
+//       genres5.splice(e, 1)
+//       genresL.value=genres5
+//       genres6.splice(f, 1)
+//       genresU.value=genres6
+//     }
+// })
+// genreSelector6.addEventListener('change', function(){
+//   if(genreSelector6.checked){
+//     genres1.push(event.target.value)
+//     genres2.push(event.target.value)
+//     genres3.push(event.target.value)
+//     genres4.push(event.target.value)
+//     genres5.push(event.target.value)
+//     genres6.push(event.target.value)
+//     genres.value=genres1
+//     genresD.value=genres2
+//     genresP.value=genres3
+//     genresT.value=genres4
+//     genresL.value=genres5
+//     genresU.value=genres6
+//     show.checked = false;
+//
+//   }
+//     else{
+//       var a=genres1.indexOf(event.target.value)
+//       var b=genres2.indexOf(event.target.value)
+//       var c=genres3.indexOf(event.target.value)
+//       var d=genres4.indexOf(event.target.value)
+//       var e=genres5.indexOf(event.target.value)
+//       var f=genres6.indexOf(event.target.value)
+//       genres1.splice(a, 1)
+//       genres.value=genres1
+//       genres2.splice(b, 1)
+//       genresD.value=genres2
+//       genres3.splice(c, 1)
+//       genresP.value=genres3
+//       genres4.splice(d, 1)
+//       genresT.value=genres4
+//       genres5.splice(e, 1)
+//       genresL.value=genres5
+//       genres6.splice(f, 1)
+//       genresU.value=genres6
+//     }
+// })
+// genreSelector7.addEventListener('change', function(){
+//   if(genreSelector7.checked){
+//     genres1.push(event.target.value)
+//     genres2.push(event.target.value)
+//     genres3.push(event.target.value)
+//     genres4.push(event.target.value)
+//     genres5.push(event.target.value)
+//     genres6.push(event.target.value)
+//     genres.value=genres1
+//     genresD.value=genres2
+//     genresP.value=genres3
+//     genresT.value=genres4
+//     genresL.value=genres5
+//     genresU.value=genres6
+//     show.checked = false;
+//
+//   }
+//     else{
+//       var a=genres1.indexOf(event.target.value)
+//       var b=genres2.indexOf(event.target.value)
+//       var c=genres3.indexOf(event.target.value)
+//       var d=genres4.indexOf(event.target.value)
+//       var e=genres5.indexOf(event.target.value)
+//       var f=genres6.indexOf(event.target.value)
+//       genres1.splice(a, 1)
+//       genres.value=genres1
+//       genres2.splice(b, 1)
+//       genresD.value=genres2
+//       genres3.splice(c, 1)
+//       genresP.value=genres3
+//       genres4.splice(d, 1)
+//       genresT.value=genres4
+//       genres5.splice(e, 1)
+//       genresL.value=genres5
+//       genres6.splice(f, 1)
+//       genresU.value=genres6
+//     }
+// })
+// genreSelector8.addEventListener('change', function(){
+//   if(genreSelector8.checked){
+//     genres1.push(event.target.value)
+//     genres2.push(event.target.value)
+//     genres3.push(event.target.value)
+//     genres4.push(event.target.value)
+//     genres5.push(event.target.value)
+//     genres6.push(event.target.value)
+//     genres.value=genres1
+//     genresD.value=genres2
+//     genresP.value=genres3
+//     genresT.value=genres4
+//     genresL.value=genres5
+//     genresU.value=genres6
+//     show.checked = false;
+//
+//   }
+//     else{
+//       var a=genres1.indexOf(event.target.value)
+//       var b=genres2.indexOf(event.target.value)
+//       var c=genres3.indexOf(event.target.value)
+//       var d=genres4.indexOf(event.target.value)
+//       var e=genres5.indexOf(event.target.value)
+//       var f=genres6.indexOf(event.target.value)
+//       genres1.splice(a, 1)
+//       genres.value=genres1
+//       genres2.splice(b, 1)
+//       genresD.value=genres2
+//       genres3.splice(c, 1)
+//       genresP.value=genres3
+//       genres4.splice(d, 1)
+//       genresT.value=genres4
+//       genres5.splice(e, 1)
+//       genresL.value=genres5
+//       genres6.splice(f, 1)
+//       genresU.value=genres6
+//     }
+// })
+// genreSelector9.addEventListener('change', function(){
+//   if(genreSelector9.checked){
+//     genres1.push(event.target.value)
+//     genres2.push(event.target.value)
+//     genres3.push(event.target.value)
+//     genres4.push(event.target.value)
+//     genres5.push(event.target.value)
+//     genres6.push(event.target.value)
+//     genres.value=genres1
+//     genresD.value=genres2
+//     genresP.value=genres3
+//     genresT.value=genres4
+//     genresL.value=genres5
+//     genresU.value=genres6
+//     show.checked = false;
+//
+//   }
+//     else{
+//       var a=genres1.indexOf(event.target.value)
+//       var b=genres2.indexOf(event.target.value)
+//       var c=genres3.indexOf(event.target.value)
+//       var d=genres4.indexOf(event.target.value)
+//       var e=genres5.indexOf(event.target.value)
+//       var f=genres6.indexOf(event.target.value)
+//       genres1.splice(a, 1)
+//       genres.value=genres1
+//       genres2.splice(b, 1)
+//       genresD.value=genres2
+//       genres3.splice(c, 1)
+//       genresP.value=genres3
+//       genres4.splice(d, 1)
+//       genresT.value=genres4
+//       genres5.splice(e, 1)
+//       genresL.value=genres5
+//       genres6.splice(f, 1)
+//       genresU.value=genres6
+//     }
+// })
+// genreSelector10.addEventListener('change', function(){
+//   if(genreSelector10.checked){
+//     genres1.push(event.target.value)
+//     genres2.push(event.target.value)
+//     genres3.push(event.target.value)
+//     genres4.push(event.target.value)
+//     genres5.push(event.target.value)
+//     genres6.push(event.target.value)
+//     genres.value=genres1
+//     genresD.value=genres2
+//     genresP.value=genres3
+//     genresT.value=genres4
+//     genresL.value=genres5
+//     genresU.value=genres6
+//     show.checked = false;
+//
+//   }
+//     else{
+//       var a=genres1.indexOf(event.target.value)
+//       var b=genres2.indexOf(event.target.value)
+//       var c=genres3.indexOf(event.target.value)
+//       var d=genres4.indexOf(event.target.value)
+//       var e=genres5.indexOf(event.target.value)
+//       var f=genres6.indexOf(event.target.value)
+//       genres1.splice(a, 1)
+//       genres.value=genres1
+//       genres2.splice(b, 1)
+//       genresD.value=genres2
+//       genres3.splice(c, 1)
+//       genresP.value=genres3
+//       genres4.splice(d, 1)
+//       genresT.value=genres4
+//       genres5.splice(e, 1)
+//       genresL.value=genres5
+//       genres6.splice(f, 1)
+//       genresU.value=genres6
+//     }
+// })
+// genreSelector11.addEventListener('change', function(){
+//   if(genreSelector11.checked){
+//     genres1.push(event.target.value)
+//     genres2.push(event.target.value)
+//     genres3.push(event.target.value)
+//     genres4.push(event.target.value)
+//     genres5.push(event.target.value)
+//     genres6.push(event.target.value)
+//     genres.value=genres1
+//     genresD.value=genres2
+//     genresP.value=genres3
+//     genresT.value=genres4
+//     genresL.value=genres5
+//     genresU.value=genres6
+//     show.checked = false;
+//
+//   }
+//     else{
+//       var a=genres1.indexOf(event.target.value)
+//       var b=genres2.indexOf(event.target.value)
+//       var c=genres3.indexOf(event.target.value)
+//       var d=genres4.indexOf(event.target.value)
+//       var e=genres5.indexOf(event.target.value)
+//       var f=genres6.indexOf(event.target.value)
+//       genres1.splice(a, 1)
+//       genres.value=genres1
+//       genres2.splice(b, 1)
+//       genresD.value=genres2
+//       genres3.splice(c, 1)
+//       genresP.value=genres3
+//       genres4.splice(d, 1)
+//       genresT.value=genres4
+//       genres5.splice(e, 1)
+//       genresL.value=genres5
+//       genres6.splice(f, 1)
+//       genresU.value=genres6
+//     }
+// })
+// genreSelector12.addEventListener('change', function(){
+//   if(genreSelector12.checked){
+//     genres1.push(event.target.value)
+//     genres2.push(event.target.value)
+//     genres3.push(event.target.value)
+//     genres4.push(event.target.value)
+//     genres5.push(event.target.value)
+//     genres6.push(event.target.value)
+//     genres.value=genres1
+//     genresD.value=genres2
+//     genresP.value=genres3
+//     genresT.value=genres4
+//     genresL.value=genres5
+//     genresU.value=genres6
+//     show.checked = false;
+//
+//   }
+//     else{
+//       var a=genres1.indexOf(event.target.value)
+//       var b=genres2.indexOf(event.target.value)
+//       var c=genres3.indexOf(event.target.value)
+//       var d=genres4.indexOf(event.target.value)
+//       var e=genres5.indexOf(event.target.value)
+//       var f=genres6.indexOf(event.target.value)
+//       genres1.splice(a, 1)
+//       genres.value=genres1
+//       genres2.splice(b, 1)
+//       genresD.value=genres2
+//       genres3.splice(c, 1)
+//       genresP.value=genres3
+//       genres4.splice(d, 1)
+//       genresT.value=genres4
+//       genres5.splice(e, 1)
+//       genresL.value=genres5
+//       genres6.splice(f, 1)
+//       genresU.value=genres6
+//     }
+// })
+// genreSelector13.addEventListener('change', function(){
+//   if(genreSelector13.checked){
+//     genres1.push(event.target.value)
+//     genres2.push(event.target.value)
+//     genres3.push(event.target.value)
+//     genres4.push(event.target.value)
+//     genres5.push(event.target.value)
+//     genres6.push(event.target.value)
+//     genres.value=genres1
+//     genresD.value=genres2
+//     genresP.value=genres3
+//     genresT.value=genres4
+//     genresL.value=genres5
+//     genresU.value=genres6
+//     show.checked = false;
+//
+//   }
+//     else{
+//       var a=genres1.indexOf(event.target.value)
+//       var b=genres2.indexOf(event.target.value)
+//       var c=genres3.indexOf(event.target.value)
+//       var d=genres4.indexOf(event.target.value)
+//       var e=genres5.indexOf(event.target.value)
+//       var f=genres6.indexOf(event.target.value)
+//       genres1.splice(a, 1)
+//       genres.value=genres1
+//       genres2.splice(b, 1)
+//       genresD.value=genres2
+//       genres3.splice(c, 1)
+//       genresP.value=genres3
+//       genres4.splice(d, 1)
+//       genresT.value=genres4
+//       genres5.splice(e, 1)
+//       genresL.value=genres5
+//       genres6.splice(f, 1)
+//       genresU.value=genres6
+//     }
+// })
+// genreSelector14.addEventListener('change', function(){
+//   if(genreSelector14.checked){
+//     genres1.push(event.target.value)
+//     genres2.push(event.target.value)
+//     genres3.push(event.target.value)
+//     genres4.push(event.target.value)
+//     genres5.push(event.target.value)
+//     genres6.push(event.target.value)
+//     genres.value=genres1
+//     genresD.value=genres2
+//     genresP.value=genres3
+//     genresT.value=genres4
+//     genresL.value=genres5
+//     genresU.value=genres6
+//     show.checked = false;
+//
+//   }
+//     else{
+//       var a=genres1.indexOf(event.target.value)
+//       var b=genres2.indexOf(event.target.value)
+//       var c=genres3.indexOf(event.target.value)
+//       var d=genres4.indexOf(event.target.value)
+//       var e=genres5.indexOf(event.target.value)
+//       var f=genres6.indexOf(event.target.value)
+//       genres1.splice(a, 1)
+//       genres.value=genres1
+//       genres2.splice(b, 1)
+//       genresD.value=genres2
+//       genres3.splice(c, 1)
+//       genresP.value=genres3
+//       genres4.splice(d, 1)
+//       genresT.value=genres4
+//       genres5.splice(e, 1)
+//       genresL.value=genres5
+//       genres6.splice(f, 1)
+//       genresU.value=genres6
+//     }
+// })
+// genreSelector15.addEventListener('change', function(){
+//   if(genreSelector15.checked){
+//     genres1.push(event.target.value)
+//     genres2.push(event.target.value)
+//     genres3.push(event.target.value)
+//     genres4.push(event.target.value)
+//     genres5.push(event.target.value)
+//     genres6.push(event.target.value)
+//     genres.value=genres1
+//     genresD.value=genres2
+//     genresP.value=genres3
+//     genresT.value=genres4
+//     genresL.value=genres5
+//     genresU.value=genres6
+//     show.checked = false;
+//
+//   }
+//     else{
+//       var a=genres1.indexOf(event.target.value)
+//       var b=genres2.indexOf(event.target.value)
+//       var c=genres3.indexOf(event.target.value)
+//       var d=genres4.indexOf(event.target.value)
+//       var e=genres5.indexOf(event.target.value)
+//       var f=genres6.indexOf(event.target.value)
+//       genres1.splice(a, 1)
+//       genres.value=genres1
+//       genres2.splice(b, 1)
+//       genresD.value=genres2
+//       genres3.splice(c, 1)
+//       genresP.value=genres3
+//       genres4.splice(d, 1)
+//       genresT.value=genres4
+//       genres5.splice(e, 1)
+//       genresL.value=genres5
+//       genres6.splice(f, 1)
+//       genresU.value=genres6
+//     }
+// })
+// genreSelector16.addEventListener('change', function(){
+//   if(genreSelector16.checked){
+//     genres1.push(event.target.value)
+//     genres2.push(event.target.value)
+//     genres3.push(event.target.value)
+//     genres4.push(event.target.value)
+//     genres5.push(event.target.value)
+//     genres6.push(event.target.value)
+//     genres.value=genres1
+//     genresD.value=genres2
+//     genresP.value=genres3
+//     genresT.value=genres4
+//     genresL.value=genres5
+//     genresU.value=genres6
+//     show.checked = false;
+//
+//   }
+//     else{
+//       var a=genres1.indexOf(event.target.value)
+//       var b=genres2.indexOf(event.target.value)
+//       var c=genres3.indexOf(event.target.value)
+//       var d=genres4.indexOf(event.target.value)
+//       var e=genres5.indexOf(event.target.value)
+//       var f=genres6.indexOf(event.target.value)
+//       genres1.splice(a, 1)
+//       genres.value=genres1
+//       genres2.splice(b, 1)
+//       genresD.value=genres2
+//       genres3.splice(c, 1)
+//       genresP.value=genres3
+//       genres4.splice(d, 1)
+//       genresT.value=genres4
+//       genres5.splice(e, 1)
+//       genresL.value=genres5
+//       genres6.splice(f, 1)
+//       genresU.value=genres6
+//     }
+// })
+// genreSelector17.addEventListener('change', function(){
+//   if(genreSelector17.checked){
+//     genres1.push(event.target.value)
+//     genres2.push(event.target.value)
+//     genres3.push(event.target.value)
+//     genres4.push(event.target.value)
+//     genres5.push(event.target.value)
+//     genres6.push(event.target.value)
+//     genres.value=genres1
+//     genresD.value=genres2
+//     genresP.value=genres3
+//     genresT.value=genres4
+//     genresL.value=genres5
+//     genresU.value=genres6
+//     show.checked = false;
+//
+//   }
+//     else{
+//       var a=genres1.indexOf(event.target.value)
+//       var b=genres2.indexOf(event.target.value)
+//       var c=genres3.indexOf(event.target.value)
+//       var d=genres4.indexOf(event.target.value)
+//       var e=genres5.indexOf(event.target.value)
+//       var f=genres6.indexOf(event.target.value)
+//       genres1.splice(a, 1)
+//       genres.value=genres1
+//       genres2.splice(b, 1)
+//       genresD.value=genres2
+//       genres3.splice(c, 1)
+//       genresP.value=genres3
+//       genres4.splice(d, 1)
+//       genresT.value=genres4
+//       genres5.splice(e, 1)
+//       genresL.value=genres5
+//       genres6.splice(f, 1)
+//       genresU.value=genres6
+//     }
+// })
+// genreSelector18.addEventListener('change', function(){
+//   if(genreSelector18.checked){
+//     genres1.push(event.target.value)
+//     genres2.push(event.target.value)
+//     genres3.push(event.target.value)
+//     genres4.push(event.target.value)
+//     genres5.push(event.target.value)
+//     genres6.push(event.target.value)
+//     genres.value=genres1
+//     genresD.value=genres2
+//     genresP.value=genres3
+//     genresT.value=genres4
+//     genresL.value=genres5
+//     genresU.value=genres6
+//     show.checked = false;
+//
+//   }
+//     else{
+//       var a=genres1.indexOf(event.target.value)
+//       var b=genres2.indexOf(event.target.value)
+//       var c=genres3.indexOf(event.target.value)
+//       var d=genres4.indexOf(event.target.value)
+//       var e=genres5.indexOf(event.target.value)
+//       var f=genres6.indexOf(event.target.value)
+//       genres1.splice(a, 1)
+//       genres.value=genres1
+//       genres2.splice(b, 1)
+//       genresD.value=genres2
+//       genres3.splice(c, 1)
+//       genresP.value=genres3
+//       genres4.splice(d, 1)
+//       genresT.value=genres4
+//       genres5.splice(e, 1)
+//       genresL.value=genres5
+//       genres6.splice(f, 1)
+//       genresU.value=genres6
+//     }
+// })
