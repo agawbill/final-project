@@ -654,6 +654,7 @@ ratingDrop.addEventListener('input', function(){
   ratingT.value= ratingDrop.value
   ratingL.value= ratingDrop.value
   ratingU.value= ratingDrop.value
+  show.checked = false;
 
 });
 
@@ -671,6 +672,7 @@ document.addEventListener('click', function(){
 // show all discover movies
 
 function clearAll(){
+  show.checked = false;
   ratingP.value=show.value
   ratingT.value=show.value
   ratingU.value=show.value
@@ -679,6 +681,12 @@ function clearAll(){
   genres4=[]
   genres5=[]
   genres6=[]
+  genres.value=[]
+  genresD.value=[]
+  genresP.value=[]
+  genresT.value=[]
+  genresL.value=[]
+  genresU.value=[]
   ratingDrop.selectedIndex = 0
   genreSelector0.checked = false;
   genreSelector1.checked = false;
@@ -709,10 +717,6 @@ show.addEventListener('change', function(){
     ratingT.value=show.value
     ratingU.value=show.value
     ratingL.value=show.value
-    genres3=[]
-    genres4=[]
-    genres5=[]
-    genres6=[]
     ratingDrop.selectedIndex = 0
     genreSelector0.checked = false;
     genreSelector1.checked = false;
@@ -733,8 +737,19 @@ show.addEventListener('change', function(){
     genreSelector16.checked = false;
     genreSelector17.checked = false;
     genreSelector18.checked = false;
-
+    genres3=[]
+    genres4=[]
+    genres5=[]
+    genres6=[]
+    genres.value=[]
+    genresD.value=[]
+    genresP.value=[]
+    genresT.value=[]
+    genresL.value=[]
+    genresU.value=[]
   }
+
+
 
 })
 
@@ -758,6 +773,7 @@ genreSelector0.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -795,6 +811,8 @@ genreSelector1.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -832,6 +850,8 @@ genreSelector2.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -869,6 +889,8 @@ genreSelector3.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -905,6 +927,8 @@ genreSelector4.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -941,6 +965,8 @@ genreSelector5.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -977,6 +1003,8 @@ genreSelector6.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1013,6 +1041,8 @@ genreSelector7.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1049,6 +1079,8 @@ genreSelector8.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1085,6 +1117,8 @@ genreSelector9.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1121,6 +1155,8 @@ genreSelector10.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1157,6 +1193,8 @@ genreSelector11.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1193,6 +1231,8 @@ genreSelector12.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1229,6 +1269,8 @@ genreSelector13.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1265,6 +1307,8 @@ genreSelector14.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1301,6 +1345,8 @@ genreSelector15.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1337,6 +1383,8 @@ genreSelector16.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1373,6 +1421,8 @@ genreSelector17.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1409,6 +1459,8 @@ genreSelector18.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)

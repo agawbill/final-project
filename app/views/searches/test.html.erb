@@ -174,7 +174,10 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
 <p><div id="moviesContainer">
 
   <%if params[:q].present? && params[:genres].present? && params[:ratingQ].present?%>
-  <%for i in (0...20)%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
   <%@movies1=Tmdb::Search.movie(params[:q], page: i+1)%>
   <%solid1=@movies1.results.find_all{|favor| favor.genre_ids.include? params[:genres].to_i }%>
   <%@results1=solid1.find_all{|favor| favor.vote_average >= params[:ratingQ].to_i }%>
@@ -187,7 +190,10 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:genresP].present? && params[:ratingP].present?%>
-  <%for i in (0...20)%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
   <%@movies1=Tmdb::Movie.popular(page: i+1).results%>
   <%solid1=@movies1.find_all{|favor| favor.genre_ids.include? params[:genresP].to_i }%>
   <%@results1=solid1.find_all{|favor| favor.vote_average >= params[:ratingP].to_i }%>
@@ -200,7 +206,10 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:genresT].present? && params[:ratingT].present?%>
-  <%for i in (0...20)%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
   <%@movies1=Tmdb::Movie.top_rated(page: i+1).results%>
   <%solid1=@movies1.find_all{|favor| favor.genre_ids.include? params[:genresT].to_i }%>
   <%@results1=solid1.find_all{|favor| favor.vote_average >= params[:ratingT].to_i }%>
@@ -213,7 +222,10 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:genresU].present? && params[:ratingU].present?%>
-  <%for i in (0...20)%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
   <%@movies1=Tmdb::Movie.upcoming(page: i+1).results%>
   <%solid1=@movies1.find_all{|favor| favor.genre_ids.include? params[:genresU].to_i }%>
   <%@results1=solid1.find_all{|favor| favor.vote_average >= params[:ratingU].to_i }%>
@@ -226,7 +238,10 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:genresL].present? && params[:ratingL].present?%>
-  <%for i in (0...20)%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
   <%@movies1=Tmdb::Movie.upcoming(page: i+1).results%>
   <%solid1=@movies1.find_all{|favor| favor.genre_ids.include? params[:genresL].to_i }%>
   <%@results1=solid1.find_all{|favor| favor.vote_average >= params[:ratingL].to_i }%>
@@ -239,7 +254,10 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:q].present? && params[:genres].present?%>
-  <%for i in (0...20)%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
   <%@movies1=Tmdb::Search.movie(params[:q], page: i+1).results%>
   <%@results1=@movies1.find_all{|favor| favor.genre_ids.include? params[:genres].to_i }%>
     <% @results1.each.with_index do |m, index|%>
@@ -251,7 +269,10 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:q].present? && params[:ratingQ].present?%>
-  <%for i in (0...20)%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
   <%@movies1=Tmdb::Search.movie(params[:q], page: i+1).results%>
   <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:ratingQ].to_i }%>
     <% @results1.each.with_index do |m, index|%>
@@ -263,7 +284,10 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:l].present? && params[:rating].present?%>
-  <%for i in (0...20)%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
   <%@movies1=Tmdb::Genre.movies(params[:l], page: i+1).results%>
   <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:rating].to_i }%>
     <% @results1.each.with_index do |m, index|%>
@@ -291,7 +315,10 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
   </div>
   <%end%>
   <%elsif params[:ratingP].present?%>
-  <%for i in (0...20)%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
   <%@movies1=Tmdb::Movie.popular(page: i+1).results%>
   <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:ratingQ].to_i }%>
     <% @results1.each.with_index do |m, index|%>
@@ -303,7 +330,10 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:ratingU].present?%>
-  <%for i in (0...20)%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
   <%@movies1=Tmdb::Movie.upcoming(page: i+1).results%>
   <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:ratingU].to_i }%>
     <% @results1.each.with_index do |m, index|%>
@@ -315,7 +345,10 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:ratingL].present?%>
-  <%for i in (0...20)%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
   <%@movies1=Tmdb::Movie.now_playing(page: i+1).results%>
   <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:ratingL].to_i }%>
     <% @results1.each.with_index do |m, index|%>
@@ -327,7 +360,10 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:ratingT].present?%>
-  <%for i in (0...20)%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
   <%@movies1=Tmdb::Movie.now_playing(page: i+1).results%>
   <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:ratingT].to_i }%>
     <% @results1.each.with_index do |m, index|%>
@@ -339,26 +375,31 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <%end%>
     <%end%>
   <%elsif params[:d].present?%>
-  <%for i in (0...@pages)%>
-  <a href="javascript:addParam('page=<%=i+1%>');">Page <%=i+1%></a>
-  <%end%>
+
   <% @results.each.with_index do |m, index|%>
   <div class="movie">
     <center><%=index+1%>: <%=m.original_title%></center><br>
     <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
     <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
   </div>
+  <%end%>
+  <%for i in (0...50)%>
+  <a href="javascript:addParam('page=<%=i+1%>');">Page <%=i+1%></a>
   <%end%>
   <%elsif params[:q].present?%>
-  <%for i in (0...@pages)%>
-  <a href="javascript:addParam('page=<%=i+1%>');">Page <%=i+1%></a>
-  <%end%>
+
   <% @results.each.with_index do |m, index|%>
   <div class="movie">
     <center><%=index+1%>: <%=m.original_title%></center><br>
     <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
     <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
   </div>
+  <%end%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
+  <a href="javascript:addParam('page=<%=i+1%>');">Page <%=i+1%></a>
   <%end%>
   <%elsif params[:r].present?%>
 
@@ -369,7 +410,10 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
   </div>
   <%end%>
-  <%for i in (0...50)%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
   <a href="javascript:addParam('page=<%=i+1%>');">Page <%=i+1%></a>
   <%end%>
   <%elsif params[:l].present?%>
@@ -381,7 +425,10 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
     <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
   </div>
   <%end%>
-  <%for i in (0...50)%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
   <a href="javascript:addParam('page=<%=i+1%>');">Page <%=i+1%></a>
   <%end%>
 
@@ -607,6 +654,7 @@ ratingDrop.addEventListener('input', function(){
   ratingT.value= ratingDrop.value
   ratingL.value= ratingDrop.value
   ratingU.value= ratingDrop.value
+  show.checked = false;
 
 });
 
@@ -624,6 +672,7 @@ document.addEventListener('click', function(){
 // show all discover movies
 
 function clearAll(){
+  show.checked = false;
   ratingP.value=show.value
   ratingT.value=show.value
   ratingU.value=show.value
@@ -632,6 +681,12 @@ function clearAll(){
   genres4=[]
   genres5=[]
   genres6=[]
+  genres.value=[]
+  genresD.value=[]
+  genresP.value=[]
+  genresT.value=[]
+  genresL.value=[]
+  genresU.value=[]
   ratingDrop.selectedIndex = 0
   genreSelector0.checked = false;
   genreSelector1.checked = false;
@@ -662,10 +717,6 @@ show.addEventListener('change', function(){
     ratingT.value=show.value
     ratingU.value=show.value
     ratingL.value=show.value
-    genres3=[]
-    genres4=[]
-    genres5=[]
-    genres6=[]
     ratingDrop.selectedIndex = 0
     genreSelector0.checked = false;
     genreSelector1.checked = false;
@@ -686,8 +737,19 @@ show.addEventListener('change', function(){
     genreSelector16.checked = false;
     genreSelector17.checked = false;
     genreSelector18.checked = false;
-
+    genres3=[]
+    genres4=[]
+    genres5=[]
+    genres6=[]
+    genres.value=[]
+    genresD.value=[]
+    genresP.value=[]
+    genresT.value=[]
+    genresL.value=[]
+    genresU.value=[]
   }
+
+
 
 })
 
@@ -711,6 +773,7 @@ genreSelector0.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -748,6 +811,8 @@ genreSelector1.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -785,6 +850,8 @@ genreSelector2.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -822,6 +889,8 @@ genreSelector3.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -858,6 +927,8 @@ genreSelector4.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -894,6 +965,8 @@ genreSelector5.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -930,6 +1003,8 @@ genreSelector6.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -966,6 +1041,8 @@ genreSelector7.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1002,6 +1079,8 @@ genreSelector8.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1038,6 +1117,8 @@ genreSelector9.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1074,6 +1155,8 @@ genreSelector10.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1110,6 +1193,8 @@ genreSelector11.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1146,6 +1231,8 @@ genreSelector12.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1182,6 +1269,8 @@ genreSelector13.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1218,6 +1307,8 @@ genreSelector14.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1254,6 +1345,8 @@ genreSelector15.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1290,6 +1383,8 @@ genreSelector16.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1326,6 +1421,8 @@ genreSelector17.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1362,6 +1459,8 @@ genreSelector18.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
+
   }
     else{
       var a=genres1.indexOf(event.target.value)
