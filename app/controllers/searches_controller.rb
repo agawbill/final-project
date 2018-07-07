@@ -54,7 +54,7 @@ respond_to :html, :json, :xml, :js
     end
     elsif params[:genresT].present? && params[:ratingT].present?
       @movies=Tmdb::Movie.top_rated(page: params[:page]).results
-      @solid=@movies.find_all { |favor| favor.genre_ids.include? params[:genresT].to_i}
+      @solid=@movies.find_all { |favor| favor.genre_ids.include? params[:genresT].split.join('&&') }
       @results=@solid.find_all { |favor| favor.vote_average >= params[:ratingT].to_i }
       @pages=Tmdb::Movie.top_rated.total_pages
       @entries=Tmdb::Movie.top_rated.total_results
