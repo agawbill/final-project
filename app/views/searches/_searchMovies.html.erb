@@ -1,0 +1,260 @@
+<%=@results%>
+<%if params[:q].present? && params[:genres].present? && params[:ratingQ].present?%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
+  <%@movies1=Tmdb::Search.movie(params[:q], page: i+1)%>
+  <%solid1=@movies1.results.find_all{|favor| favor.genre_ids.include? params[:genres].to_i }%>
+  <%@results1=solid1.find_all{|favor| favor.vote_average >= params[:ratingQ].to_i }%>
+    <% @results1.each.with_index do |m, index|%>
+    <div class="movie">
+      <center><%=index+1%>: <%=m.original_title%></center><br>
+      <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+      <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+    </div>
+    <%end%>
+    <%end%>
+  <%elsif params[:genresP].present? && params[:ratingP].present?%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
+  <%@movies1=Tmdb::Movie.popular(page: i+1).results%>
+  <%solid1=@movies1.find_all{|favor| favor.genre_ids.include? params[:genresP].to_i }%>
+  <%@results1=solid1.find_all{|favor| favor.vote_average >= params[:ratingP].to_i }%>
+    <% @results1.each.with_index do |m, index|%>
+    <div class="movie">
+      <center><%=index+1%>: <%=m.original_title%></center><br>
+      <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+      <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+    </div>
+    <%end%>
+    <%end%>
+  <%elsif params[:genresT].present? && params[:ratingT].present?%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
+  <%@movies1=Tmdb::Movie.top_rated(page: i+1).results%>
+  <%solid1=@movies1.find_all{|favor| favor.genre_ids.include? params[:genresT].to_i }%>
+  <%@results1=solid1.find_all{|favor| favor.vote_average >= params[:ratingT].to_i }%>
+    <% @results1.each.with_index do |m, index|%>
+    <div class="movie">
+      <center><%=index+1%>: <%=m.original_title%></center><br>
+      <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+      <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+    </div>
+    <%end%>
+    <%end%>
+  <%elsif params[:genresU].present? && params[:ratingU].present?%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
+  <%@movies1=Tmdb::Movie.upcoming(page: i+1).results%>
+  <%solid1=@movies1.find_all{|favor| favor.genre_ids.include? params[:genresU].to_i }%>
+  <%@results1=solid1.find_all{|favor| favor.vote_average >= params[:ratingU].to_i }%>
+    <% @results1.each.with_index do |m, index|%>
+    <div class="movie">
+      <center><%=index+1%>: <%=m.original_title%></center><br>
+      <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+      <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+    </div>
+    <%end%>
+    <%end%>
+  <%elsif params[:genresL].present? && params[:ratingL].present?%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
+  <%@movies1=Tmdb::Movie.upcoming(page: i+1).results%>
+  <%solid1=@movies1.find_all{|favor| favor.genre_ids.include? params[:genresL].to_i }%>
+  <%@results1=solid1.find_all{|favor| favor.vote_average >= params[:ratingL].to_i }%>
+    <% @results1.each.with_index do |m, index|%>
+    <div class="movie">
+      <center><%=index+1%>: <%=m.original_title%></center><br>
+      <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+      <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+    </div>
+    <%end%>
+    <%end%>
+  <%elsif params[:q].present? && params[:genres].present?%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
+  <%@movies1=Tmdb::Search.movie(params[:q], page: i+1).results%>
+  <%@results1=@movies1.find_all{|favor| favor.genre_ids.include? params[:genres].to_i }%>
+    <% @results1.each.with_index do |m, index|%>
+    <div class="movie">
+      <center><%=index+1%>: <%=m.original_title%></center><br>
+      <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+      <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+    </div>
+    <%end%>
+    <%end%>
+  <%elsif params[:q].present? && params[:ratingQ].present?%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
+  <%@movies1=Tmdb::Search.movie(params[:q], page: i+1).results%>
+  <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:ratingQ].to_i }%>
+    <% @results1.each.with_index do |m, index|%>
+    <div class="movie">
+      <center><%=index+1%>: <%=m.original_title%></center><br>
+      <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+      <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+    </div>
+    <%end%>
+    <%end%>
+  <%elsif params[:l].present? && params[:rating].present?%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
+  <%@movies1=Tmdb::Genre.movies(params[:l], page: i+1).results%>
+  <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:rating].to_i }%>
+    <% @results1.each.with_index do |m, index|%>
+    <div class="movie">
+      <center><%=index+1%>: <%=m.original_title%></center><br>
+      <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+      <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+    </div>
+    <%end%>
+    <%end%>
+  <%elsif params[:d].present?%>
+  <% @results.each.with_index do |m, index|%>
+  <div class="movie">
+    <center><%=index+1%>: <%=m.original_title%></center><br>
+    <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+    <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+  </div>
+  <%end%>
+  <%elsif params[:genresP].present?%>
+  <% @results.each.with_index do |m, index|%>
+  <div class="movie">
+    <center><%=index+1%>: <%=m.original_title%></center><br>
+    <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+    <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+  </div>
+  <%end%>
+  <%elsif params[:ratingP].present?%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
+  <%@movies1=Tmdb::Movie.popular(page: i+1).results%>
+  <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:ratingQ].to_i }%>
+    <% @results1.each.with_index do |m, index|%>
+    <div class="movie">
+      <center><%=index+1%>: <%=m.original_title%></center><br>
+      <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+      <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+    </div>
+    <%end%>
+    <%end%>
+  <%elsif params[:ratingU].present?%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
+  <%@movies1=Tmdb::Movie.upcoming(page: i+1).results%>
+  <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:ratingU].to_i }%>
+    <% @results1.each.with_index do |m, index|%>
+    <div class="movie">
+      <center><%=index+1%>: <%=m.original_title%></center><br>
+      <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+      <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+    </div>
+    <%end%>
+    <%end%>
+  <%elsif params[:ratingL].present?%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
+  <%@movies1=Tmdb::Movie.now_playing(page: i+1).results%>
+  <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:ratingL].to_i }%>
+    <% @results1.each.with_index do |m, index|%>
+    <div class="movie">
+      <center><%=index+1%>: <%=m.original_title%></center><br>
+      <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+      <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+    </div>
+    <%end%>
+    <%end%>
+  <%elsif params[:ratingT].present?%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
+  <%@movies1=Tmdb::Movie.now_playing(page: i+1).results%>
+  <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:ratingT].to_i }%>
+    <% @results1.each.with_index do |m, index|%>
+    <div class="movie">
+      <center><%=index+1%>: <%=m.original_title%></center><br>
+      <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+      <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+    </div>
+    <%end%>
+    <%end%>
+  <%elsif params[:d].present?%>
+
+  <% @results.each.with_index do |m, index|%>
+  <div class="movie">
+    <center><%=index+1%>: <%=m.original_title%></center><br>
+    <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+    <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+  </div>
+  <%end%>
+  <%for i in (0...50)%>
+  <a href="javascript:addParam('page=<%=i+1%>');">Page <%=i+1%></a>
+  <%end%>
+  <%elsif params[:q].present?%>
+
+  <% @results.each.with_index do |m, index|%>
+  <div class="movie">
+    <center><%=index+1%>: <%=m.original_title%></center><br>
+    <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+    <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+  </div>
+  <%end%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
+  <a href="javascript:addParam('page=<%=i+1%>');">Page <%=i+1%></a>
+  <%end%>
+  <%elsif params[:r].present?%>
+  <% @results.each.with_index do |m, index|%>
+  <div class="movie">
+    <center><%=index+1%>: <%=m.name%></center><br>
+    <img src="https://image.tmdb.org/t/p/w500/<%=m.profile_path%>"><br>
+    <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+  </div>
+  <%end%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
+  <a href="javascript:addParam('page=<%=i+1%>');">Page <%=i+1%></a>
+  <%end%>
+  <%elsif params[:l].present?%>
+
+  <% @results.each.with_index do |m, index|%>
+  <div class="movie">
+    <center><%=index+1%>: <%=m.original_title%></center><br>
+    <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
+    <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
+  </div>
+  <%end%>
+  <%if @pages>20%>
+  <%@pages=20%>
+  <%end%>
+  <%for i in (0...@pages)%>
+  <a href="javascript:addParam('page=<%=i+1%>');">Page <%=i+1%></a>
+  <%end%>
+
+    <%end%>
