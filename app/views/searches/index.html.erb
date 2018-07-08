@@ -1,7 +1,10 @@
-
+<div class="blogWrapper">
+  <div class="blogLeft">
+    <h1>Blog<span class="symbol">#</span>posts</h1>
+<p>
 <p>Search by: <span id="option1" class="link">Movie name</span> | <span id="option2" class="link">Actor</span> | <span class="link" id="option3">Genre</span> | <span class="link" id="option4">Director</span></p>
 <p>Discover: <span id="option5" class="link">Popular movies</span> | <span class="link" id="option6">Top rated</span> | <span class="link" id="option7">Now playing</span> | <span class="link" id="option8">Upcoming</span></p>
-
+</p>
 
 <div id="genreChecks">Sort movies by genre:<p>
 
@@ -181,271 +184,9 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
 </div>
 
 <p><div id="searchMovies">
-
-  <%=render partial: "searches/searchMovies"%>
-<!--
-  <%if params[:q].present? && params[:genres].present? && params[:ratingQ].present?%>
-    <%if @pages>20%>
-    <%@pages=20%>
-    <%end%>
-    <%for i in (0...@pages)%>
-    <%@movies1=Tmdb::Search.movie(params[:q], page: i+1)%>
-    <%solid1=@movies1.results.find_all{|favor| favor.genre_ids.include? params[:genres].to_i }%>
-    <%@results1=solid1.find_all{|favor| favor.vote_average >= params[:ratingQ].to_i }%>
-      <% @results1.each.with_index do |m, index|%>
-      <div class="movie">
-        <center><%=index+1%>: <%=m.original_title%></center><br>
-        <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
-        <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
-      </div>
-      <%end%>
-      <%end%>
-    <%elsif params[:genresP].present? && params[:ratingP].present?%>
-    <%if @pages>20%>
-    <%@pages=20%>
-    <%end%>
-    <%for i in (0...@pages)%>
-    <%@movies1=Tmdb::Movie.popular(page: i+1).results%>
-    <%solid1=@movies1.find_all{|favor| favor.genre_ids.include? params[:genresP].to_i }%>
-    <%@results1=solid1.find_all{|favor| favor.vote_average >= params[:ratingP].to_i }%>
-      <% @results1.each.with_index do |m, index|%>
-      <div class="movie">
-        <center><%=index+1%>: <%=m.original_title%></center><br>
-        <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
-        <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
-      </div>
-      <%end%>
-      <%end%>
-    <%elsif params[:genresT].present? && params[:ratingT].present?%>
-    <%if @pages>20%>
-    <%@pages=20%>
-    <%end%>
-    <%for i in (0...@pages)%>
-    <%@movies1=Tmdb::Movie.top_rated(page: i+1).results%>
-    <%solid1=@movies1.find_all{|favor| favor.genre_ids.include? params[:genresT].to_i }%>
-    <%@results1=solid1.find_all{|favor| favor.vote_average >= params[:ratingT].to_i }%>
-      <% @results1.each.with_index do |m, index|%>
-      <div class="movie">
-        <center><%=index+1%>: <%=m.original_title%></center><br>
-        <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
-        <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
-      </div>
-      <%end%>
-      <%end%>
-    <%elsif params[:genresU].present? && params[:ratingU].present?%>
-    <%if @pages>20%>
-    <%@pages=20%>
-    <%end%>
-    <%for i in (0...@pages)%>
-    <%@movies1=Tmdb::Movie.upcoming(page: i+1).results%>
-    <%solid1=@movies1.find_all{|favor| favor.genre_ids.include? params[:genresU].to_i }%>
-    <%@results1=solid1.find_all{|favor| favor.vote_average >= params[:ratingU].to_i }%>
-      <% @results1.each.with_index do |m, index|%>
-      <div class="movie">
-        <center><%=index+1%>: <%=m.original_title%></center><br>
-        <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
-        <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
-      </div>
-      <%end%>
-      <%end%>
-    <%elsif params[:genresL].present? && params[:ratingL].present?%>
-    <%if @pages>20%>
-    <%@pages=20%>
-    <%end%>
-    <%for i in (0...@pages)%>
-    <%@movies1=Tmdb::Movie.upcoming(page: i+1).results%>
-    <%solid1=@movies1.find_all{|favor| favor.genre_ids.include? params[:genresL].to_i }%>
-    <%@results1=solid1.find_all{|favor| favor.vote_average >= params[:ratingL].to_i }%>
-      <% @results1.each.with_index do |m, index|%>
-      <div class="movie">
-        <center><%=index+1%>: <%=m.original_title%></center><br>
-        <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
-        <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
-      </div>
-      <%end%>
-      <%end%>
-    <%elsif params[:q].present? && params[:genres].present?%>
-    <%if @pages>20%>
-    <%@pages=20%>
-    <%end%>
-    <%for i in (0...@pages)%>
-    <%@movies1=Tmdb::Search.movie(params[:q], page: i+1).results%>
-    <%@results1=@movies1.find_all{|favor| favor.genre_ids.include? params[:genres].to_i }%>
-      <% @results1.each.with_index do |m, index|%>
-      <div class="movie">
-        <center><%=index+1%>: <%=m.original_title%></center><br>
-        <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
-        <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
-      </div>
-      <%end%>
-      <%end%>
-    <%elsif params[:q].present? && params[:ratingQ].present?%>
-    <%if @pages>20%>
-    <%@pages=20%>
-    <%end%>
-    <%for i in (0...@pages)%>
-    <%@movies1=Tmdb::Search.movie(params[:q], page: i+1).results%>
-    <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:ratingQ].to_i }%>
-      <% @results1.each.with_index do |m, index|%>
-      <div class="movie">
-        <center><%=index+1%>: <%=m.original_title%></center><br>
-        <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
-        <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
-      </div>
-      <%end%>
-      <%end%>
-    <%elsif params[:l].present? && params[:rating].present?%>
-    <%if @pages>20%>
-    <%@pages=20%>
-    <%end%>
-    <%for i in (0...@pages)%>
-    <%@movies1=Tmdb::Genre.movies(params[:l], page: i+1).results%>
-    <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:rating].to_i }%>
-      <% @results1.each.with_index do |m, index|%>
-      <div class="movie">
-        <center><%=index+1%>: <%=m.original_title%></center><br>
-        <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
-        <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
-      </div>
-      <%end%>
-      <%end%>
-    <%elsif params[:d].present?%>
-    <% @results.each.with_index do |m, index|%>
-    <div class="movie">
-      <center><%=index+1%>: <%=m.original_title%></center><br>
-      <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
-      <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
-    </div>
-    <%end%>
-    <%elsif params[:genresP].present?%>
-    <% @results.each.with_index do |m, index|%>
-    <div class="movie">
-      <center><%=index+1%>: <%=m.original_title%></center><br>
-      <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
-      <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
-    </div>
-    <%end%>
-    <%elsif params[:ratingP].present?%>
-    <%if @pages>20%>
-    <%@pages=20%>
-    <%end%>
-    <%for i in (0...@pages)%>
-    <%@movies1=Tmdb::Movie.popular(page: i+1).results%>
-    <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:ratingQ].to_i }%>
-      <% @results1.each.with_index do |m, index|%>
-      <div class="movie">
-        <center><%=index+1%>: <%=m.original_title%></center><br>
-        <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
-        <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
-      </div>
-      <%end%>
-      <%end%>
-    <%elsif params[:ratingU].present?%>
-    <%if @pages>20%>
-    <%@pages=20%>
-    <%end%>
-    <%for i in (0...@pages)%>
-    <%@movies1=Tmdb::Movie.upcoming(page: i+1).results%>
-    <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:ratingU].to_i }%>
-      <% @results1.each.with_index do |m, index|%>
-      <div class="movie">
-        <center><%=index+1%>: <%=m.original_title%></center><br>
-        <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
-        <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
-      </div>
-      <%end%>
-      <%end%>
-    <%elsif params[:ratingL].present?%>
-    <%if @pages>20%>
-    <%@pages=20%>
-    <%end%>
-    <%for i in (0...@pages)%>
-    <%@movies1=Tmdb::Movie.now_playing(page: i+1).results%>
-    <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:ratingL].to_i }%>
-      <% @results1.each.with_index do |m, index|%>
-      <div class="movie">
-        <center><%=index+1%>: <%=m.original_title%></center><br>
-        <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
-        <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
-      </div>
-      <%end%>
-      <%end%>
-    <%elsif params[:ratingT].present?%>
-    <%if @pages>20%>
-    <%@pages=20%>
-    <%end%>
-    <%for i in (0...@pages)%>
-    <%@movies1=Tmdb::Movie.now_playing(page: i+1).results%>
-    <%@results1=@movies1.find_all { |favor| favor.vote_average >= params[:ratingT].to_i }%>
-      <% @results1.each.with_index do |m, index|%>
-      <div class="movie">
-        <center><%=index+1%>: <%=m.original_title%></center><br>
-        <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
-        <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
-      </div>
-      <%end%>
-      <%end%>
-    <%elsif params[:d].present?%>
-
-    <% @results.each.with_index do |m, index|%>
-    <div class="movie">
-      <center><%=index+1%>: <%=m.original_title%></center><br>
-      <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
-      <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
-    </div>
-    <%end%>
-    <%for i in (0...50)%>
-    <a href="javascript:addParam('page=<%=i+1%>');">Page <%=i+1%></a>
-    <%end%>
-    <%elsif params[:q].present?%>
-
-    <% @results.each.with_index do |m, index|%>
-    <div class="movie">
-      <center><%=index+1%>: <%=m.original_title%></center><br>
-      <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
-      <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
-    </div>
-    <%end%>
-    <%if @pages>20%>
-    <%@pages=20%>
-    <%end%>
-    <%for i in (0...@pages)%>
-    <a href="javascript:addParam('page=<%=i+1%>');">Page <%=i+1%></a>
-    <%end%>
-    <%elsif params[:r].present?%>
-
-    <% @results.each.with_index do |m, index|%>
-    <div class="movie">
-      <center><%=index+1%>: <%=m.name%></center><br>
-      <img src="https://image.tmdb.org/t/p/w500/<%=m.profile_path%>"><br>
-      <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
-    </div>
-    <%end%>
-    <%if @pages>20%>
-    <%@pages=20%>
-    <%end%>
-    <%for i in (0...@pages)%>
-    <a href="javascript:addParam('page=<%=i+1%>');">Page <%=i+1%></a>
-    <%end%>
-    <%elsif params[:l].present?%>
-
-    <% @results.each.with_index do |m, index|%>
-    <div class="movie">
-      <center><%=index+1%>: <%=m.original_title%></center><br>
-      <img src="https://image.tmdb.org/t/p/w500/<%=m.poster_path%>"><br>
-      <center><button value="<%=m.id%>" id="movieButton">Add to list</button></center>
-    </div>
-    <%end%>
-    <%if @pages>20%>
-    <%@pages=20%>
-    <%end%>
-    <%for i in (0...@pages)%>
-    <a href="javascript:addParam('page=<%=i+1%>');">Page <%=i+1%></a>
-    <%end%>
-
-      <%end%> -->
 </div></p>
-
+</div>
+</div>
 
 
 
@@ -492,7 +233,7 @@ $(document).ready(function(){
 
 
 $('input[type=submit]').on('click',function(event){
-
+for(i=1;i<21;i++){
 $( "#searchMovies" ).empty();
 var form=$(this).parent('form');
 
@@ -500,24 +241,38 @@ event.preventDefault()
 $.ajax({
         type: "GET",
         url: "<%=searches_path%>",
-        data: form.serialize(),
+        data: form.serialize()+"&page="+i,
         dataType: "JSON",
         success: function(data){
-
+          var test=data
           var movies=data.results
 
           // console.log(movies[i]);
           for(i=0;i<movies.length;i++){
 
           $('#searchMovies').append(
-            "<div class='movie'><center>"+movies[i].table.original_title+"</center><br> <img src='https://image.tmdb.org/t/p/w500/"+movies[i].table.poster_path+"'><br> <center><button value='"+movies[i].table.id+"' id='movieButton'>Add to list</button></center></div>")
+            "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
+            +movies[i].table.original_title
+            +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
+            +movies[i].table.poster_path+"' id='movieImg'><span class='movieDetails'> Rating: </span><span class='movieInfo'>"
+            +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
+            +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
+            +movies[i].table.overview+"</br> <center><button value='"
+            +movies[i].table.id+"' id='movieButton'>Add to list</button></center></div><p style='clear: both;'> ")
           }
           console.log(data.results);
         }
 
     });
+  }
   })
 })
+
+
+
+
+
+
 
 // generates list when Add to List button is clicked... functionality for delete, moveUp on list and moveDown
 
@@ -552,32 +307,7 @@ function create(){
 
       }
   // moveUp button functionality
-  var moveAbove=document.getElementById('movieAbove')
 
-    list.addEventListener('click', function(){
-      if(list.style.fontWeight=="bold"){
-        list.style.fontWeight="normal"
-      }
-      else{
-        list.style.fontWeight="bold"
-      }
-
-      if(list.style.fontWeight=="bold"){
-        list.insertAdjacentHTML('afterend', list);
-      }
-    })
-
-
-
-          moveAbove.addEventListener('click', function(){
-            console.log("hello");
-            for(i=0;i<createListChildren.length;i++){
-              if(createListChildren[i].style.fontWeight=="bold"){
-                createListChildren[i].insertAdjacentHTML('afterend', '<p>Bye</p>');
-
-            }
-          }
-            })
 
 
 
@@ -668,6 +398,7 @@ option1.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  show.checked = false;
 })
 
 
@@ -691,6 +422,7 @@ option2.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  show.checked = false;
 })
 // Search by genre
 
@@ -710,6 +442,7 @@ option3.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  show.checked = false;
 })
 
 // Search by Director
@@ -729,6 +462,7 @@ option4.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  show.checked = false;
   // directorsContainer.style.display="none"
 })
 
@@ -749,6 +483,7 @@ option5.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  show.checked = false;
   // directorsContainer.style.display="none"
 })
 // Discover top movies
@@ -768,6 +503,7 @@ option6.addEventListener('click', function(){
   searchTop.style.display="block"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  show.checked = false;
   // directorsContainer.style.display="none"
 })
 // Discover latest movies
@@ -787,6 +523,7 @@ option7.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="block"
   searchUpcoming.style.display="none"
+  show.checked = false;
   // directorsContainer.style.display="none"
 })
 
@@ -807,6 +544,7 @@ option8.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="block"
+  show.checked = false;
   // directorsContainer.style.display="none"
 })
 
@@ -887,6 +625,8 @@ function clearAll(){
 }
 
 
+
+
 show.addEventListener('change', function(){
   if(show.checked){
     ratingP.value=show.value
@@ -945,6 +685,7 @@ genreSelector0.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -982,6 +723,7 @@ genreSelector1.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1019,6 +761,7 @@ genreSelector2.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1056,6 +799,7 @@ genreSelector3.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1092,6 +836,7 @@ genreSelector4.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1128,6 +873,7 @@ genreSelector5.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1164,6 +910,7 @@ genreSelector6.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1200,6 +947,7 @@ genreSelector7.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1236,6 +984,7 @@ genreSelector8.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1272,6 +1021,7 @@ genreSelector9.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1308,6 +1058,7 @@ genreSelector10.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1344,6 +1095,7 @@ genreSelector11.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1380,6 +1132,7 @@ genreSelector12.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1416,6 +1169,7 @@ genreSelector13.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1452,6 +1206,7 @@ genreSelector14.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1488,6 +1243,7 @@ genreSelector15.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1524,6 +1280,7 @@ genreSelector16.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1560,6 +1317,7 @@ genreSelector17.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
@@ -1596,6 +1354,7 @@ genreSelector18.addEventListener('change', function(){
     genresT.value=genres4
     genresL.value=genres5
     genresU.value=genres6
+    show.checked = false;
   }
     else{
       var a=genres1.indexOf(event.target.value)
