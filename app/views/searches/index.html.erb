@@ -1,55 +1,63 @@
 <div class="blogWrapper">
   <div class="blogLeft">
-    <h1>Blog<span class="symbol">#</span>posts</h1>
+    <h2 id="headerSearch">Search<span class="symbol">#</span>movies</h2>
 <p>
-<p>Search by: <span id="option1" class="link">Movie name</span> | <span id="option2" class="link">Actor</span> | <span class="link" id="option3">Genre</span> | <span class="link" id="option4">Director</span></p>
-<p>Discover: <span id="option5" class="link">Popular movies</span> | <span class="link" id="option6">Top rated</span> | <span class="link" id="option7">Now playing</span> | <span class="link" id="option8">Upcoming</span></p>
+  <div id="searchNav">
+<span class="movieTitle">Search:</span><p> <span id="option1" class="link">Movie name</span> | <span id="option2" class="link">Actor</span> | <span class="link" id="option3">Genre</span> | <span class="link" id="option4">Director</span></p>
+</div>
+<div id="searchNav">
+<span class="movieTitle">Discover:</span><p> <span id="option5" class="link">Popular movies</span> | <span class="link" id="option6">Top rated</span> | <span class="link" id="option7">Now playing</span> | <span class="link" id="option8">Upcoming</span></p>
+</div>
 </p>
 
-<div id="genreChecks">Sort movies by genre:<p>
+<div id="genreChecks">
+  <span class="movieTitle">Sort movies by genre:</span><p>
+  <div id="genreGrid">
 
-Action:  <input type="checkbox" id="genreSelector0" name="feature"
-        value="28" placeholder="Adventure" />
-Adventure:  <input type="checkbox" id="genreSelector1" name="feature"
-        value="12" placeholder="Adventure" />
-Animation: <input type="checkbox" id="genreSelector2" name="feature"
-        value="16" />
-Comedy: <input type="checkbox" id="genreSelector3" name="feature"
-        value="35" />
-Crime: <input type="checkbox" id="genreSelector4" name="feature"
-        value="80" />
-Documentary: <input type="checkbox" id="genreSelector5" name="feature"
-        value="99" />
-Drama: <input type="checkbox" id="genreSelector6" name="feature"
-        value="18" />
-Family: <input type="checkbox" id="genreSelector7" name="feature"
-        value="10751" />
-Fantasy: <input type="checkbox" id="genreSelector8" name="feature"
-        value="14" />
-History: <input type="checkbox" id="genreSelector9" name="feature"
-        value="36" />
-Horror: <input type="checkbox" id="genreSelector10" name="feature"
-        value="27" />
-Music: <input type="checkbox" id="genreSelector11" name="feature"
-        value="10402" />
-Mystery: <input type="checkbox" id="genreSelector12" name="feature"
-        value="9648" />
-Romance: <input type="checkbox" id="genreSelector13" name="feature"
-        value="10749" />
-SciFi: <input type="checkbox" id="genreSelector14" name="feature"
-        value="878" />
-TV Movie: <input type="checkbox" id="genreSelector15" name="feature"
-        value="10770" />
-Thriller: <input type="checkbox" id="genreSelector16" name="feature"
-        value="53" />
-War: <input type="checkbox" id="genreSelector17" name="feature"
-        value="10752" />
-Western: <input type="checkbox" id="genreSelector18" name="feature"
-        value="37" />
+<div>  <input type="checkbox" id="genreSelector0" name="feature"
+        value=28 placeholder="Adventure" /> Action</div>
+<div>  <input type="checkbox" id="genreSelector1" name="feature"
+        value=12 placeholder="Adventure" /> Adventure</div>
+<div> <input type="checkbox" id="genreSelector2" name="feature"
+        value=16 /> Animation</div>
+<div> <input type="checkbox" id="genreSelector3" name="feature"
+        value=35 /> Comedy</div>
+<div> <input type="checkbox" id="genreSelector4" name="feature"
+        value=80 /> Crime</div>
+<div> <input type="checkbox" id="genreSelector5" name="feature"
+        value=99 /> Documentary</div>
+<div> <input type="checkbox" id="genreSelector6" name="feature"
+        value=18 /> Drama</div>
+<div> <input type="checkbox" id="genreSelector7" name="feature"
+        value=10751 /> Family</div>
+<div> <input type="checkbox" id="genreSelector8" name="feature"
+        value=14 /> Fantasy</div>
+<div> <input type="checkbox" id="genreSelector9" name="feature"
+        value=36 /> History</div>
+<div> <input type="checkbox" id="genreSelector10" name="feature"
+        value=27 /> Horror</div>
+<div> <input type="checkbox" id="genreSelector11" name="feature"
+        value=10402 /> Music</div>
+<div> <input type="checkbox" id="genreSelector12" name="feature"
+        value=9648 /> Mystery</div>
+<div> <input type="checkbox" id="genreSelector13" name="feature"
+        value=10749 /> Romance</div>
+<div> <input type="checkbox" id="genreSelector14" name="feature"
+        value=878 /> SciFi</div>
+<div> <input type="checkbox" id="genreSelector15" name="feature"
+        value=10770 /> TV Movie</div>
+<div> <input type="checkbox" id="genreSelector16" name="feature"
+        value=53 /> Thriller</div>
+<div> <input type="checkbox" id="genreSelector17" name="feature"
+        value=10752 /> War</div>
+<div> <input type="checkbox" id="genreSelector18" name="feature"
+        value=37 /> Western</div>
+      </div>
       </p>
       </div>
 
-      <div id="movieRatings">Sort movies by rating:<p>
+      <div id="movieRatings">
+        <span class="movieTitle">Sort movies by rating:</span><p>
 
         Greater than or equal to: <select id="ratingDrop">
           <option value='0'></option>
@@ -68,10 +76,10 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
       </p>
 
 
-<p>
-  <div id="showAll"> Show all?: <input type="checkbox" id="show" name="feature" value="0" />
+
+  <div id="showAll"> <input type="checkbox" id="show" name="feature" value="0" /> Show all?
   </div>
-</p>
+
 
 
 
@@ -86,7 +94,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
   <%= hidden_field_tag(:ratingQ )%>
   <%=submit_tag("Update Movie Search")%>
   <%end%>
-
+  <p><h2 id="searchHeader">By<span class="symbol">#</span>name</h2>
 
 </div>
 
@@ -98,12 +106,15 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
   <%end%>
 </div>
 <div id="searchDirector">
+
   <%=form_tag(searches_path, method: "get") do |f|%>
   Search by Director: <%=text_field_tag(:d)%>
   <%=hidden_field_tag(:genresD)%>
   <%=hidden_field_tag(:ratingD)%>
   <%=submit_tag("Update Director Search")%>
   <%end%>
+  <p><h2 id="searchHeader">By<span class="symbol">#</span>director</h2>
+
 </div>
 
 <div id="searchPopular">
@@ -112,6 +123,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
   <%=hidden_field_tag(:ratingP)%>
   <%=submit_tag("Update Popluar Movies")%>
   <%end%>
+  <p><h2 id="searchHeader">Popular<span class="symbol">#</span>movies</h2>
 </div>
 
 
@@ -121,6 +133,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
   <%=hidden_field_tag(:ratingT)%>
   <%=submit_tag("Update Top Movies")%>
   <%end%>
+  <p><h2 id="searchHeader">Top<span class="symbol">#</span>movies</h2>
 </div>
 
 <div id="searchLatest">
@@ -128,6 +141,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
   <%=hidden_field_tag(:genresL)%>
   <%=hidden_field_tag(:ratingL)%>
   <%=submit_tag("Update Latest Movies")%>
+  <p><h2 id="searchHeader">Latest<span class="symbol">#</span>movies</h2>
   <%end%>
 </div>
 <div id="searchUpcoming">
@@ -136,6 +150,8 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
   <%=hidden_field_tag(:ratingU)%>
   <%=submit_tag("Update Upcoming Movies")%>
   <%end%>
+  <p><h2 id="searchHeader">Upcoming<span class="symbol">#</span>movies</h2>
+
 </div>
 
 
@@ -145,7 +161,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
 
   <%=form_tag(searches_path, method: "get") do%>
   Select genre: <select id="genreDrop">
-    <option>No preference</option>
+    <option>All</option>
     <option value='28'>Action</option>
     <option value='12'>Adventure</option>
     <option value="16">Animation</option>
@@ -169,28 +185,46 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
   <%= hidden_field_tag :l %>
   <%= hidden_field_tag :rating %>
   <%=submit_tag("Update Search")%>
+  <p><h2 id="searchHeader">By<span class="symbol">#</span>genre</h2></p>
+
   <%end%>
 
 </div>
 
-<div id="createList">
-  Testing
-</div>
-<div id="movieAbove">
-  Up
-</div>
-<div id="movieBelow">
-  Down
-</div>
-
-<p><div id="searchMovies">
-</div></p>
-</div>
-</div>
 
 
 
-<!-- checkbox selector perhaps... push to an array ... JOINED by conditional statement-->
+<div id="searchMovies">
+
+</div>
+</div>
+
+<div class="blogRight">
+  <h2 id="headerSearch">Create<span class="symbol">#</span>list</h2>
+  <p>
+    <div id="listHolder">
+
+
+    <%if current_user%>
+    <%= form_for @list do |f|%>
+    <%= f.text_area :name, :placeholder=>"Title", :class=>"textTitleAreaC" %><br>
+    <div id="createList">
+    </div></br>
+    <%= hidden_field_tag :movie_ids %><br>
+    <%= f.submit "Create a new List" %></p>
+    <% end  %>
+    <%end%>
+
+  </div></p>
+</div>
+</div>
+
+
+
+</div>
+
+
+
 
 <script>
 
@@ -222,12 +256,16 @@ var UpdateMovieSearch= document.getElementById('UpdateMovieSearch')
 var createList= document.getElementById('createList')
 var genreSelector=[genreSelector0, genreSelector1, genreSelector2, genreSelector3, genreSelector4, genreSelector5, genreSelector6, genreSelector7, genreSelector7, genreSelector8, genreSelector9, genreSelector10, genreSelector11, genreSelector12, genreSelector13, genreSelector14, genreSelector15, genreSelector16, genreSelector7, genreSelector17, genreSelector18]
 var createListChildren=createList.children
+var searchHeader=document.getElementById('searchHeader')
+var movie_ids=document.getElementById('movie_ids')
 
 // var xhr= new XMLHttpRequest();
 //
 // xhr.open("GET", url, false)
 //
 // xhr.send(null)
+
+
 
 $(document).ready(function(){
 
@@ -258,7 +296,8 @@ $.ajax({
             +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
             +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
             +movies[i].table.overview+"</br> <center><button value='"
-            +movies[i].table.id+"' id='movieButton'>Add to list</button></center></div><p style='clear: both;'> ")
+            +movies[i].table.id+"' id='movieButton', data-value='"
+            +movies[i].table.original_title+"'>Add to list</button></center></div><p style='clear: both;'> ")
           }
           console.log(data.results);
         }
@@ -278,7 +317,7 @@ $.ajax({
 
 function create(){
   var list=document.createElement("li")
-  list.innerHTML=movieName[movieName.length-1]+"<span class='deleteMovie' value="+movieList[movieList.length-1]+"> Delete?</span> <input class='moveElement' value="+movieList[movieList.length-1]+">&uarr;</input> <span class='moveElement'>&darr;</span>"
+  list.innerHTML=movieName[movieName.length-1]+"<span class='deleteMovie' value="+movieList[movieList.length-1]+"> Delete?</span> <input class='moveElement' type='hidden' value="+movieList[movieList.length-1]+">&uarr;</input> <span class='moveElement'>&darr;</span>"
   list.value=movieList[movieList.length-1]
   createList.appendChild(list)
 
@@ -304,6 +343,7 @@ function create(){
           movieList.splice(j,1)
         }
         clicked.remove()
+        movie_ids.value=movieList
 
       }
   // moveUp button functionality
@@ -318,7 +358,7 @@ function create(){
           //     createList.innerHTML="<li>"+movieList[i]+"</li> <span class='deleteMovie' value="+movieList[movieList.length-1]+"> Delete?</span> <span class='moveUp'>+</span> <span class='moveDown'>-</span>"
           //        }
 
-
+          movie_ids.value=movieList
 
       }
 

@@ -3,8 +3,8 @@ respond_to :html, :json, :xml, :js
 
 
   def index
+    @list=List.new
     if params[:d].present? && params[:genresD].present? && params[:ratingD].present?
-
       @movies=Tmdb::Search.movie(params[:d], page: params[:page])
       @solid=@movies.results.find_all{|favor| favor.genre_ids.include? params[:genresD].to_i }
       @results=@solid.find_all{|favor| favor.vote_average >= params[:ratingD].to_i }
@@ -17,7 +17,6 @@ respond_to :html, :json, :xml, :js
       format.json { render :json => {:movies => @movies, :solid => @solid, :results => @results }}
     end
     elsif params[:q].present? && params[:genres].present? && params[:ratingQ].present?
-
       @movies=Tmdb::Search.movie(params[:q], page: params[:page])
       @solid=@movies.results.find_all{|favor| favor.genre_ids.include? params[:genres].to_i }
       @results=@solid.find_all{|favor| favor.vote_average >= params[:ratingQ].to_i }
@@ -53,9 +52,9 @@ respond_to :html, :json, :xml, :js
       format.json { render :json => {:movies => @movies, :solid => @solid, :results => @results }}
     end
     elsif params[:genresT].present? && params[:ratingT].present?
-      @movies=Tmdb::Movie.top_rated(page: params[:page]).results
-      @solid=@movies.find_all { |favor| favor.genre_ids.include? params[:genresT].split.join('&&') }
-      @results=@solid.find_all { |favor| favor.vote_average >= params[:ratingT].to_i }
+      @movies=Tmdb::Movie.top_rated(page: params[:page], with_genres: params[:genresT]).results
+      # @solid=@movies.find_all { |favor| favor.genre_ids.include? [18, 35] }
+      @results=@movies.find_all { |favor| favor.vote_average >= params[:ratingT].to_i }
       @pages=Tmdb::Movie.top_rated.total_pages
       @entries=Tmdb::Movie.top_rated.total_results
       @count=@results.count

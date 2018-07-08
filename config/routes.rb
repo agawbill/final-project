@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   resources :blogs
   resources :comments
   resources :searches
-  get 'searches' => 'searches#searchMovies'
+  resources :lists
+  # get 'searches' => 'searches#searchMovies'
 
   # resources :searches
 

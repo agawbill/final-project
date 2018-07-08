@@ -1,6 +1,26 @@
 // Place all the styles related to the searches controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#headerSearch{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 8px;
+  padding: 5px;
+  color: white;
+  background-color: black;
+  display: inline-block;
+  font-size: 32px;
+}
+#searchHeader{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 8px;
+  padding: 5px;
+  color: white;
+  background-color: black;
+  display: inline-block;
+  font-size: 32px;
+}
+
 #directorsContainer{
   font-family: helvetica;
   display: none;
@@ -105,13 +125,19 @@
 
 
 #searchMovie{
+  padding: 12px;
+  font-size: 15px;
   display: none;
 }
 
 #searchActor{
+  padding: 12px;
+  font-size: 15px;
   display: none;
 }
 #searchDirector{
+  padding: 12px;
+  font-size: 15px;
   display: none;
 }
 
@@ -120,31 +146,74 @@
 }
 
 #searchPopular{
+  font-size: 15px;
+  padding: 12px;
   display: none;
 }
 
 #searchTop{
+  padding: 12px;
   display: none;
 }
 #searchLatest{
+  font-size: 15px;
+  padding: 12px;
   display: none;
 }
 #searchUpcoming{
+  font-size: 15px;
+  padding: 12px;
   display: none;
 }
 
 #showAll{
+  padding: 12px;
+  font-size: 15px;
   display: none;
 }
 
 
 
 #genreChecks{
+  font-size: 15px;
+  border: 1px solid #d0d0d0;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+
   display: none;
 
 }
+#searchNav{
+  font-size: 15px;
+  border: 1px solid #d0d0d0;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+
+  display: block;
+
+}
+
+#listHolder{
+  font-size: 15px;
+  border: 1px solid #d0d0d0;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+}
+#genreGrid{
+  display: grid;
+  width: 80%;
+  grid-template-columns: 1fr 1fr 1fr ;
+  grid-row-gap:1em;
+  height: 20%;
+  grid-column-gap: 1em;
+}
 
 #genreLinks{
+font-size: 15px;
+padding: 12px;
 display: none;
 }
 
@@ -156,6 +225,11 @@ display: none;
 
 }
 #movieRatings{
+  font-size: 15px;
+  border: 1px solid #d0d0d0;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 25px;
   display: none;
 
 }
