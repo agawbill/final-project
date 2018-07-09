@@ -88,11 +88,11 @@
 <div id="searchMovie">
 
 
-  <%=form_tag("/searches", method: "get", :id=>"UpdateMovieSearch") do%>
+  <%=form_tag("/searches", method: "get", :remote => "true") do%>
   Search by Movie: <%=text_field_tag(:q)%>
   <%= hidden_field_tag(:genres)%>
   <%= hidden_field_tag(:ratingQ )%>
-  <%=submit_tag("Update Movie Search")%>
+  <%=submit_tag("Update Movie Search",:class => "form_submit1")%>
   <%end%>
   <p><h2 id="searchHeader">By<span class="symbol">#</span>name</h2>
 
@@ -102,7 +102,7 @@
 <div id="searchActor">
   <%=form_tag("/searches", method: "get") do |f|%>
   Search by Actor: <%=text_field_tag(:r)%>
-  <%=submit_tag("Update Actor Search")%>
+  <%=submit_tag("Update Actor Search", :class => "form_submit2")%>
   <%end%>
 </div>
 <div id="searchDirector">
@@ -111,7 +111,7 @@
   Search by Director: <%=text_field_tag(:d)%>
   <%=hidden_field_tag(:genresD)%>
   <%=hidden_field_tag(:ratingD)%>
-  <%=submit_tag("Update Director Search")%>
+  <%=submit_tag("Update Director Search", :class => "form_submit3")%>
   <%end%>
   <p><h2 id="searchHeader">By<span class="symbol">#</span>director</h2>
 
@@ -121,7 +121,7 @@
   <%=form_tag(searches_path, method: "get") do |f|%>
   <%=hidden_field_tag(:genresP)%>
   <%=hidden_field_tag(:ratingP)%>
-  <%=submit_tag("Update Popluar Movies")%>
+  <%=submit_tag("Update Popluar Movies", :class => "form_submit4")%>
   <%end%>
   <p><h2 id="searchHeader">Popular<span class="symbol">#</span>movies</h2>
 </div>
@@ -131,7 +131,7 @@
   <%=form_tag(searches_path, method: "get") do |f|%>
   <%=hidden_field_tag(:genresT)%>
   <%=hidden_field_tag(:ratingT)%>
-  <%=submit_tag("Update Top Movies")%>
+  <%=submit_tag("Update Top Movies", :class => "form_submit5")%>
   <%end%>
   <p><h2 id="searchHeader">Top<span class="symbol">#</span>movies</h2>
 </div>
@@ -140,7 +140,7 @@
   <%=form_tag(searches_path, method: "get") do |f|%>
   <%=hidden_field_tag(:genresL)%>
   <%=hidden_field_tag(:ratingL)%>
-  <%=submit_tag("Update Latest Movies")%>
+  <%=submit_tag("Update Latest Movies", :class => "form_submit6")%>
   <p><h2 id="searchHeader">Latest<span class="symbol">#</span>movies</h2>
   <%end%>
 </div>
@@ -148,7 +148,7 @@
   <%=form_tag(searches_path, method: "get") do |f|%>
   <%=hidden_field_tag(:genresU)%>
   <%=hidden_field_tag(:ratingU)%>
-  <%=submit_tag("Update Upcoming Movies")%>
+  <%=submit_tag("Update Upcoming Movies", :class => "form_submit7")%>
   <%end%>
   <p><h2 id="searchHeader">Upcoming<span class="symbol">#</span>movies</h2>
 
@@ -184,7 +184,7 @@
   </select>
   <%= hidden_field_tag :l %>
   <%= hidden_field_tag :rating %>
-  <%=submit_tag("Update Search")%>
+  <%=submit_tag("Update Search", :class => "form_submit8")%>
   <p><h2 id="searchHeader">By<span class="symbol">#</span>genre</h2></p>
 
   <%end%>
@@ -210,7 +210,10 @@
     <%= f.text_area :name, :placeholder=>"Title", :class=>"textTitleAreaC" %><br>
     <div id="createList">
     </div></br>
+    <input type="checkbox" id="listToggle" name="feature"
+            value="true" placeholder="Adventure" />  Make Private?
     <%= hidden_field_tag :movie_ids %><br>
+    <%= hidden_field_tag :private %><br>
     <%= f.submit "Create a new List" %></p>
     <% end  %>
     <%end%>
@@ -258,6 +261,8 @@ var genreSelector=[genreSelector0, genreSelector1, genreSelector2, genreSelector
 var createListChildren=createList.children
 var searchHeader=document.getElementById('searchHeader')
 var movie_ids=document.getElementById('movie_ids')
+var listToggle=document.getElementById('listToggle')
+var private1=document.getElementById('private')
 
 // var xhr= new XMLHttpRequest();
 //
@@ -270,7 +275,8 @@ var movie_ids=document.getElementById('movie_ids')
 $(document).ready(function(){
 
 
-$('input[type=submit]').on('click',function(event){
+
+$('.form_submit1').on('click',function(event){
 for(i=1;i<21;i++){
 $( "#searchMovies" ).empty();
 var form=$(this).parent('form');
@@ -305,6 +311,258 @@ $.ajax({
     });
   }
   })
+
+$('.form_submit2').on('click',function(event){
+for(i=1;i<21;i++){
+$( "#searchMovies" ).empty();
+var form=$(this).parent('form');
+
+event.preventDefault()
+$.ajax({
+        type: "GET",
+        url: "<%=searches_path%>",
+        data: form.serialize()+"&page="+i,
+        dataType: "JSON",
+        success: function(data){
+          var test=data
+          var movies=data.results
+
+          // console.log(movies[i]);
+          for(i=0;i<movies.length;i++){
+
+          $('#searchMovies').append(
+            "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
+            +movies[i].table.original_title
+            +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
+            +movies[i].table.poster_path+"' id='movieImg'><span class='movieDetails'> Rating: </span><span class='movieInfo'>"
+            +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
+            +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
+            +movies[i].table.overview+"</br> <center><button value='"
+            +movies[i].table.id+"' id='movieButton', data-value='"
+            +movies[i].table.original_title+"'>Add to list</button></center></div><p style='clear: both;'> ")
+          }
+          console.log(data.results);
+        }
+
+    });
+  }
+  })
+$('.form_submit3').on('click',function(event){
+for(i=1;i<21;i++){
+$( "#searchMovies" ).empty();
+var form=$(this).parent('form');
+
+event.preventDefault()
+$.ajax({
+        type: "GET",
+        url: "<%=searches_path%>",
+        data: form.serialize()+"&page="+i,
+        dataType: "JSON",
+        success: function(data){
+          var test=data
+          var movies=data.results
+
+          // console.log(movies[i]);
+          for(i=0;i<movies.length;i++){
+
+          $('#searchMovies').append(
+            "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
+            +movies[i].table.original_title
+            +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
+            +movies[i].table.poster_path+"' id='movieImg'><span class='movieDetails'> Rating: </span><span class='movieInfo'>"
+            +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
+            +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
+            +movies[i].table.overview+"</br> <center><button value='"
+            +movies[i].table.id+"' id='movieButton', data-value='"
+            +movies[i].table.original_title+"'>Add to list</button></center></div><p style='clear: both;'> ")
+          }
+          console.log(data.results);
+        }
+
+    });
+  }
+  })
+$('.form_submit4').on('click',function(event){
+for(i=1;i<21;i++){
+$( "#searchMovies" ).empty();
+var form=$(this).parent('form');
+
+event.preventDefault()
+$.ajax({
+        type: "GET",
+        url: "<%=searches_path%>",
+        data: form.serialize()+"&page="+i,
+        dataType: "JSON",
+        success: function(data){
+          var test=data
+          var movies=data.results
+
+          // console.log(movies[i]);
+          for(i=0;i<movies.length;i++){
+
+          $('#searchMovies').append(
+            "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
+            +movies[i].table.original_title
+            +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
+            +movies[i].table.poster_path+"' id='movieImg'><span class='movieDetails'> Rating: </span><span class='movieInfo'>"
+            +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
+            +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
+            +movies[i].table.overview+"</br> <center><button value='"
+            +movies[i].table.id+"' id='movieButton', data-value='"
+            +movies[i].table.original_title+"'>Add to list</button></center></div><p style='clear: both;'> ")
+          }
+          console.log(data.results);
+        }
+
+    });
+  }
+  })
+$('.form_submit5').on('click',function(event){
+for(i=1;i<21;i++){
+$( "#searchMovies" ).empty();
+var form=$(this).parent('form');
+
+event.preventDefault()
+$.ajax({
+        type: "GET",
+        url: "<%=searches_path%>",
+        data: form.serialize()+"&page="+i,
+        dataType: "JSON",
+        success: function(data){
+          var test=data
+          var movies=data.results
+
+          // console.log(movies[i]);
+          for(i=0;i<movies.length;i++){
+
+          $('#searchMovies').append(
+            "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
+            +movies[i].table.original_title
+            +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
+            +movies[i].table.poster_path+"' id='movieImg'><span class='movieDetails'> Rating: </span><span class='movieInfo'>"
+            +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
+            +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
+            +movies[i].table.overview+"</br> <center><button value='"
+            +movies[i].table.id+"' id='movieButton', data-value='"
+            +movies[i].table.original_title+"'>Add to list</button></center></div><p style='clear: both;'> ")
+          }
+          console.log(data.results);
+        }
+
+    });
+  }
+  })
+$('.form_submit6').on('click',function(event){
+for(i=1;i<21;i++){
+$( "#searchMovies" ).empty();
+var form=$(this).parent('form');
+
+event.preventDefault()
+$.ajax({
+        type: "GET",
+        url: "<%=searches_path%>",
+        data: form.serialize()+"&page="+i,
+        dataType: "JSON",
+        success: function(data){
+          var test=data
+          var movies=data.results
+
+          // console.log(movies[i]);
+          for(i=0;i<movies.length;i++){
+
+          $('#searchMovies').append(
+            "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
+            +movies[i].table.original_title
+            +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
+            +movies[i].table.poster_path+"' id='movieImg'><span class='movieDetails'> Rating: </span><span class='movieInfo'>"
+            +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
+            +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
+            +movies[i].table.overview+"</br> <center><button value='"
+            +movies[i].table.id+"' id='movieButton', data-value='"
+            +movies[i].table.original_title+"'>Add to list</button></center></div><p style='clear: both;'> ")
+          }
+          console.log(data.results);
+        }
+
+    });
+  }
+  })
+$('.form_submit7').on('click',function(event){
+for(i=1;i<21;i++){
+$( "#searchMovies" ).empty();
+var form=$(this).parent('form');
+
+event.preventDefault()
+$.ajax({
+        type: "GET",
+        url: "<%=searches_path%>",
+        data: form.serialize()+"&page="+i,
+        dataType: "JSON",
+        success: function(data){
+          var test=data
+          var movies=data.results
+
+          // console.log(movies[i]);
+          for(i=0;i<movies.length;i++){
+
+          $('#searchMovies').append(
+            "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
+            +movies[i].table.original_title
+            +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
+            +movies[i].table.poster_path+"' id='movieImg'><span class='movieDetails'> Rating: </span><span class='movieInfo'>"
+            +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
+            +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
+            +movies[i].table.overview+"</br> <center><button value='"
+            +movies[i].table.id+"' id='movieButton', data-value='"
+            +movies[i].table.original_title+"'>Add to list</button></center></div><p style='clear: both;'> ")
+          }
+          console.log(data.results);
+        }
+
+    });
+  }
+  })
+
+
+$('.form_submit8').on('click',function(event){
+for(i=1;i<21;i++){
+$( "#searchMovies" ).empty();
+var form=$(this).parent('form');
+
+event.preventDefault()
+$.ajax({
+        type: "GET",
+        url: "<%=searches_path%>",
+        data: form.serialize()+"&page="+i,
+        dataType: "JSON",
+        success: function(data){
+          var test=data
+          var movies=data.results
+
+          // console.log(movies[i]);
+          for(i=0;i<movies.length;i++){
+
+          $('#searchMovies').append(
+            "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
+            +movies[i].table.original_title
+            +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
+            +movies[i].table.poster_path+"' id='movieImg'><span class='movieDetails'> Rating: </span><span class='movieInfo'>"
+            +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
+            +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
+            +movies[i].table.overview+"</br> <center><button value='"
+            +movies[i].table.id+"' id='movieButton', data-value='"
+            +movies[i].table.original_title+"'>Add to list</button></center></div><p style='clear: both;'> ")
+          }
+          console.log(data.results);
+        }
+
+    });
+  }
+  })
+
+
+
+
 })
 
 
@@ -402,7 +660,18 @@ function create(){
     // }
 
 
+// boolean check for list creation
 
+listToggle.addEventListener('change', function(){
+  if(listToggle.checked){
+    private1.value="true"
+  }
+  else{
+    private1.value="false"
+
+  }
+
+})
 
 
 

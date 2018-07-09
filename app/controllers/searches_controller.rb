@@ -5,8 +5,9 @@ respond_to :html, :json, :xml, :js
   def index
     @list=List.new
     if params[:d].present? && params[:genresD].present? && params[:ratingD].present?
+      array=params[:genresD].split(',').map(&:to_i)
       @movies=Tmdb::Search.movie(params[:d], page: params[:page])
-      @solid=@movies.results.find_all{|favor| favor.genre_ids.include? params[:genresD].to_i }
+      @solid=@movies.results.find_all{|favor| favor.genre_ids.include? array }
       @results=@solid.find_all{|favor| favor.vote_average >= params[:ratingD].to_i }
       @pages=@movies.total_pages
       @entries=@movies.total_results
@@ -17,7 +18,10 @@ respond_to :html, :json, :xml, :js
       format.json { render :json => {:movies => @movies, :solid => @solid, :results => @results }}
     end
     elsif params[:q].present? && params[:genres].present? && params[:ratingQ].present?
+
       @movies=Tmdb::Search.movie(params[:q], page: params[:page])
+      # array=params[:genres].split(',').map(&:to_i)
+      # for array.each do |i|
       @solid=@movies.results.find_all{|favor| favor.genre_ids.include? params[:genres].to_i }
       @results=@solid.find_all{|favor| favor.vote_average >= params[:ratingQ].to_i }
       @pages=@movies.total_pages

@@ -8,11 +8,14 @@ class ListsController < ApplicationController
 
   def create
     list=List.new(list_params)
+    array=params[:movie_ids].split(',').map(&:to_i)
+    list.movie_ids.push(array)
     list.user_id=current_user.id
     if list.save
-      redirect_to "/lists"
+      redirect_to "/searches"
     else
       redirect_to "/"
+  end
   end
 
   def show
