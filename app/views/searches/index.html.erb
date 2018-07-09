@@ -200,6 +200,7 @@
 </div>
 
 <div class="blogRight">
+  <div class="listForm">
   <h2 id="headerSearch">Create<span class="symbol">#</span>list</h2>
   <p>
     <div id="listHolder">
@@ -207,18 +208,23 @@
 
     <%if current_user%>
     <%= form_for @list do |f|%>
-    <%= f.text_area :name, :placeholder=>"Title", :class=>"textTitleAreaC" %><br>
-    <div id="createList">
-    </div></br>
+    <%= f.text_area :name, :placeholder=>"Title", :class=>"textTitleAreaL" %>
+    <p><div id="createList">
+    </div></p>
+    <%= f.text_area :description, :placeholder=>"Type description here", :class=>"textBodyAreaL" %></p>
     <input type="checkbox" id="listToggle" name="feature"
             value="true" placeholder="Adventure" />  Make Private?
-    <%= hidden_field_tag :movie_ids %><br>
-    <%= hidden_field_tag :private %><br>
-    <%= f.submit "Create a new List" %></p>
+    <%= hidden_field_tag :movie_ids %>
+    <%= hidden_field_tag :private %>
+    <p><%= f.submit "Create a new List" %></p>
     <% end  %>
+    <%else%>
+    Please Login to create a list (link to login here)
     <%end%>
 
-  </div></p>
+  </div>
+</div>
+</p>
 </div>
 </div>
 
@@ -291,8 +297,11 @@ $.ajax({
           var test=data
           var movies=data.results
 
+
           // console.log(movies[i]);
           for(i=0;i<movies.length;i++){
+            if(movies[i].table.poster_path != undefined){
+
 
           $('#searchMovies').append(
             "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
@@ -302,11 +311,12 @@ $.ajax({
             +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
             +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
             +movies[i].table.overview+"</br> <center><button value='"
-            +movies[i].table.id+"' id='movieButton', data-value='"
-            +movies[i].table.original_title+"'>Add to list</button></center></div><p style='clear: both;'> ")
+            +movies[i].table.id+"', id='movieButton', data-value='"
+            +movies[i].table.original_title+"'>+</button></center></div><p style='clear: both;'> ")
           }
           console.log(data.results);
         }
+      }
 
     });
   }
@@ -314,6 +324,7 @@ $.ajax({
 
 $('.form_submit2').on('click',function(event){
 for(i=1;i<21;i++){
+
 $( "#searchMovies" ).empty();
 var form=$(this).parent('form');
 
@@ -326,21 +337,29 @@ $.ajax({
         success: function(data){
           var test=data
           var movies=data.results
-
+          console.log(data.results);
           // console.log(movies[i]);
           for(i=0;i<movies.length;i++){
+            if(movies[i].table.known_for.length >2){
+              if(movies[i].table.known_for[0].table.original_title != undefined && movies[i].table.known_for[1].table.original_title != undefined  && movies[i].table.known_for[2].table.original_title != undefined ){
+                if(movies[i].table.profile_path != undefined){
+
 
           $('#searchMovies').append(
             "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
-            +movies[i].table.original_title
+            +movies[i].table.name
             +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
-            +movies[i].table.poster_path+"' id='movieImg'><span class='movieDetails'> Rating: </span><span class='movieInfo'>"
-            +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
-            +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
-            +movies[i].table.overview+"</br> <center><button value='"
+            +movies[i].table.profile_path+"' id='movieImg'><span class='movieDetails'> Popularity: </span><span class='movieInfo'>"
+            +movies[i].table.popularity+"</span><br><br><span class='movieDetails'> Known for: </span><p>1: "
+            +movies[i].table.known_for[0].table.original_title+"<br>2: "
+            +movies[i].table.known_for[1].table.original_title+"<br>3: "
+            +movies[i].table.known_for[2].table.original_title+ "</p><center><button value='"
             +movies[i].table.id+"' id='movieButton', data-value='"
-            +movies[i].table.original_title+"'>Add to list</button></center></div><p style='clear: both;'> ")
+            +movies[i].table.name+"'>+</button></center></div><p style='clear: both;'> ")
           }
+        }
+      }
+    }
           console.log(data.results);
         }
 
@@ -361,21 +380,31 @@ $.ajax({
         success: function(data){
           var test=data
           var movies=data.results
-
-          // console.log(movies[i]);
           for(i=0;i<movies.length;i++){
+            if(movies[i].table.profile_path != undefined){
+              if(movies[i].table.known_for.length >2){
+                if(movies[i].table.known_for[0].table.original_title != undefined && movies[i].table.known_for[1].table.original_title != undefined  && movies[i].table.known_for[2].table.original_title != undefined ){
+
+
+
+
 
           $('#searchMovies').append(
             "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
-            +movies[i].table.original_title
+            +movies[i].table.name
             +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
-            +movies[i].table.poster_path+"' id='movieImg'><span class='movieDetails'> Rating: </span><span class='movieInfo'>"
-            +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
-            +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
-            +movies[i].table.overview+"</br> <center><button value='"
-            +movies[i].table.id+"' id='movieButton', data-value='"
-            +movies[i].table.original_title+"'>Add to list</button></center></div><p style='clear: both;'> ")
+            +movies[i].table.profile_path+"' id='movieImg'><span class='movieDetails'> Popularity: </span><span class='movieInfo'>"
+            +movies[i].table.popularity+"</span><br><br><span class='movieDetails'> Known for: </span><p>1: "
+            +movies[i].table.known_for[0].table.original_title+"<br>2: "
+            +movies[i].table.known_for[1].table.original_title+"<br>3: "
+            +movies[i].table.known_for[2].table.original_title+ "</p><center><button value='"
+            +movies[i].table.id+"', id='movieButton', data-value='"
+            +movies[i].table.name+"'>+</button></center></div><p style='clear: both;'> ")
           }
+        }
+      }
+    }
+
           console.log(data.results);
         }
 
@@ -399,6 +428,7 @@ $.ajax({
 
           // console.log(movies[i]);
           for(i=0;i<movies.length;i++){
+            if(movies[i].table.poster_path != undefined){
 
           $('#searchMovies').append(
             "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
@@ -409,10 +439,11 @@ $.ajax({
             +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
             +movies[i].table.overview+"</br> <center><button value='"
             +movies[i].table.id+"' id='movieButton', data-value='"
-            +movies[i].table.original_title+"'>Add to list</button></center></div><p style='clear: both;'> ")
+            +movies[i].table.original_title+"'>+</button></center></div><p style='clear: both;'> ")
           }
           console.log(data.results);
         }
+      }
 
     });
   }
@@ -434,6 +465,7 @@ $.ajax({
 
           // console.log(movies[i]);
           for(i=0;i<movies.length;i++){
+            if(movies[i].table.poster_path != undefined){
 
           $('#searchMovies').append(
             "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
@@ -444,10 +476,11 @@ $.ajax({
             +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
             +movies[i].table.overview+"</br> <center><button value='"
             +movies[i].table.id+"' id='movieButton', data-value='"
-            +movies[i].table.original_title+"'>Add to list</button></center></div><p style='clear: both;'> ")
+            +movies[i].table.original_title+"'>+</button></center></div><p style='clear: both;'> ")
           }
           console.log(data.results);
         }
+      }
 
     });
   }
@@ -469,6 +502,7 @@ $.ajax({
 
           // console.log(movies[i]);
           for(i=0;i<movies.length;i++){
+            if(movies[i].table.poster_path != undefined){
 
           $('#searchMovies').append(
             "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
@@ -479,10 +513,11 @@ $.ajax({
             +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
             +movies[i].table.overview+"</br> <center><button value='"
             +movies[i].table.id+"' id='movieButton', data-value='"
-            +movies[i].table.original_title+"'>Add to list</button></center></div><p style='clear: both;'> ")
+            +movies[i].table.original_title+"'>+</button></center></div><p style='clear: both;'> ")
           }
           console.log(data.results);
         }
+      }
 
     });
   }
@@ -504,6 +539,7 @@ $.ajax({
 
           // console.log(movies[i]);
           for(i=0;i<movies.length;i++){
+            if(movies[i].table.poster_path != undefined){
 
           $('#searchMovies').append(
             "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
@@ -514,10 +550,11 @@ $.ajax({
             +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
             +movies[i].table.overview+"</br> <center><button value='"
             +movies[i].table.id+"' id='movieButton', data-value='"
-            +movies[i].table.original_title+"'>Add to list</button></center></div><p style='clear: both;'> ")
+            +movies[i].table.original_title+"'>+</button></center></div><p style='clear: both;'> ")
           }
           console.log(data.results);
         }
+      }
 
     });
   }
@@ -541,6 +578,7 @@ $.ajax({
 
           // console.log(movies[i]);
           for(i=0;i<movies.length;i++){
+            if(movies[i].table.poster_path != undefined){
 
           $('#searchMovies').append(
             "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
@@ -551,10 +589,11 @@ $.ajax({
             +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
             +movies[i].table.overview+"</br> <center><button value='"
             +movies[i].table.id+"' id='movieButton', data-value='"
-            +movies[i].table.original_title+"'>Add to list</button></center></div><p style='clear: both;'> ")
+            +movies[i].table.original_title+"'>+</button></center></div><p style='clear: both;'> ")
           }
           console.log(data.results);
         }
+      }
 
     });
   }
@@ -575,7 +614,7 @@ $.ajax({
 
 function create(){
   var list=document.createElement("li")
-  list.innerHTML=movieName[movieName.length-1]+"<span class='deleteMovie' value="+movieList[movieList.length-1]+"> Delete?</span> <input class='moveElement' type='hidden' value="+movieList[movieList.length-1]+">&uarr;</input> <span class='moveElement'>&darr;</span>"
+  list.innerHTML=movieName[movieName.length-1]+"<span class='deleteMovie' value="+movieList[movieList.length-1]+"> X</span> <input class='moveElement' type='hidden' value="+movieList[movieList.length-1]+">&uarr;</input> <span class='moveElement'>&darr;</span>"
   list.value=movieList[movieList.length-1]
   createList.appendChild(list)
 
@@ -664,10 +703,10 @@ function create(){
 
 listToggle.addEventListener('change', function(){
   if(listToggle.checked){
-    private1.value="true"
+    private1.value=true
   }
   else{
-    private1.value="false"
+    private1.value=false
 
   }
 
@@ -707,6 +746,18 @@ option1.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  genres1=[]
+  genres2=[]
+  genres3=[]
+  genres4=[]
+  genres5=[]
+  genres6=[]
+  genres.value=[]
+  genresD.value=[]
+  genresP.value=[]
+  genresT.value=[]
+  genresL.value=[]
+  genresU.value=[]
   show.checked = false;
 })
 
@@ -731,6 +782,18 @@ option2.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  genres1=[]
+  genres2=[]
+  genres3=[]
+  genres4=[]
+  genres5=[]
+  genres6=[]
+  genres.value=[]
+  genresD.value=[]
+  genresP.value=[]
+  genresT.value=[]
+  genresL.value=[]
+  genresU.value=[]
   show.checked = false;
 })
 // Search by genre
@@ -751,6 +814,18 @@ option3.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  genres1=[]
+  genres2=[]
+  genres3=[]
+  genres4=[]
+  genres5=[]
+  genres6=[]
+  genres.value=[]
+  genresD.value=[]
+  genresP.value=[]
+  genresT.value=[]
+  genresL.value=[]
+  genresU.value=[]
   show.checked = false;
 })
 
@@ -771,6 +846,18 @@ option4.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  genres1=[]
+  genres2=[]
+  genres3=[]
+  genres4=[]
+  genres5=[]
+  genres6=[]
+  genres.value=[]
+  genresD.value=[]
+  genresP.value=[]
+  genresT.value=[]
+  genresL.value=[]
+  genresU.value=[]
   show.checked = false;
   // directorsContainer.style.display="none"
 })
@@ -792,6 +879,18 @@ option5.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  genres1=[]
+  genres2=[]
+  genres3=[]
+  genres4=[]
+  genres5=[]
+  genres6=[]
+  genres.value=[]
+  genresD.value=[]
+  genresP.value=[]
+  genresT.value=[]
+  genresL.value=[]
+  genresU.value=[]
   show.checked = false;
   // directorsContainer.style.display="none"
 })
@@ -812,6 +911,18 @@ option6.addEventListener('click', function(){
   searchTop.style.display="block"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  genres1=[]
+  genres2=[]
+  genres3=[]
+  genres4=[]
+  genres5=[]
+  genres6=[]
+  genres.value=[]
+  genresD.value=[]
+  genresP.value=[]
+  genresT.value=[]
+  genresL.value=[]
+  genresU.value=[]
   show.checked = false;
   // directorsContainer.style.display="none"
 })
@@ -832,6 +943,18 @@ option7.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="block"
   searchUpcoming.style.display="none"
+  genres1=[]
+  genres2=[]
+  genres3=[]
+  genres4=[]
+  genres5=[]
+  genres6=[]
+  genres.value=[]
+  genresD.value=[]
+  genresP.value=[]
+  genresT.value=[]
+  genresL.value=[]
+  genresU.value=[]
   show.checked = false;
   // directorsContainer.style.display="none"
 })
@@ -853,6 +976,18 @@ option8.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="block"
+  genres1=[]
+  genres2=[]
+  genres3=[]
+  genres4=[]
+  genres5=[]
+  genres6=[]
+  genres.value=[]
+  genresD.value=[]
+  genresP.value=[]
+  genresT.value=[]
+  genresL.value=[]
+  genresU.value=[]
   show.checked = false;
   // directorsContainer.style.display="none"
 })

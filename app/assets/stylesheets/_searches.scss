@@ -68,9 +68,37 @@
 
 }
 #movieButton{
+  background: transparent;
+  border: 0;
+  color: #cb00ff;
+  font-size: 35px;
   position: absolute;
   top: 4.5%;
   right: 1%;
+
+}
+
+.deleteMovie{
+  font-size: 15px;
+  color: red;
+}
+
+
+
+.textTitleAreaL{
+  height: 20px;
+  border-radius: 8px;
+  width: 66.1%;
+  border:#919191 1px solid;
+  padding: 6px 35px 6px 6px;
+
+}
+.textBodyAreaL{
+  height: 60px;
+  border-radius: 8px;
+  width: 66.1%;
+  border:#919191 1px solid;
+  padding: 6px 35px 6px 6px;
 
 }
 
@@ -201,6 +229,7 @@
   padding: 12px;
   border-radius: 8px;
   margin-bottom: 25px;
+
 }
 #genreGrid{
   display: grid;
@@ -235,6 +264,12 @@ display: none;
 }
 
 
+.listForm{
+  position: fixed;
+  width: 25%;
+  margin: 0 auto;
+
+}
 
 .link{
   text-decoration: none;

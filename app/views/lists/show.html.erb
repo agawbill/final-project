@@ -1,0 +1,15 @@
+<h1>User<span class="symbol">#</span>posts</h1>
+<span class="blogTitle">
+
+
+<p><%=@list.name%></p>
+<%@list.movie_ids[0].each do |i| %>
+  <%=Tmdb::Movie.detail(i).original_title%><br>
+  <%=Tmdb::Movie.detail(i).vote_average%><br>
+  <%=Tmdb::Movie.detail(i).overview%>
+</span><br>
+
+<%end%>
+
+<script>
+</script>

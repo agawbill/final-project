@@ -1,15 +1,21 @@
 <h1>User<span class="symbol">#</span>posts</h1>
 <span class="blogTitle">
-<%@user.lists.each do |l|%>
+<%@user.lists.each_with_index do |l, index|%>
+<%if l.private == false%>
+These are true
+<p><%=index +1%>: <a href="/lists/<%=l.id%>"><%=l.name%></a></p>
 
-<p><%=l.name%></p>
-<%l.movie_ids[0].each do |i| %>
+<%else%>
 
+<!-- <%@user.lists.select{|x| x.private}.each_with_index do |l, index|%> -->
 
-  <%=Tmdb::Movie.detail(i).original_title%><br>
-  <%=Tmdb::Movie.detail(i).vote_average%><br>
-  <%=Tmdb::Movie.detail(i).overview%>
-</span><br>
+These are false
+
+<p><%=index +1%>: <a href="/lists/<%=l.id%>"><%=l.name%></a></p>
 
 <%end%>
 <%end%>
+<%end%>
+
+<script>
+</script>
