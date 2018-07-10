@@ -19,3 +19,4 @@
 //= require turbolinks
 //= require_tree .
 // = require tinymce
+// #= require social-share-button

@@ -1,15 +1,113 @@
-<h1>User<span class="symbol">#</span>posts</h1>
-<span class="blogTitle">
+
+<div class="userWrapper">
+  <div class="userLeft">
+
+    <h1>List<span class="symbol"> #</span> <%=@list.name%></h1>
+    <p><div class="movie">
+
+      <span class="movieTitle">Description:</span><br>
+      <%=@list.description%></p>
+      <span class='movieDetails'> Created by: </span><span class='movieInfo'>
+      <%=User.find(@list.user_id).email%></span>
+      <p><span class="movieDetails"><%=link_to like_list_path(@list), class: "link", method: :put do%></span>
+
+      &#128077; (<%= current_user.find_liked_items.size %>)
+      <%end%>
+
+      <span class="movieDetails"><%=link_to dislike_list_path(@list), class: "link", method: :put do%></span>
+      &#128078;	 (<%= current_user.find_disliked_items.size %>)
+      <%end%></p>
 
 
-<p><%=@list.name%></p>
-<%@list.movie_ids[0].each do |i| %>
-  <%=Tmdb::Movie.detail(i).original_title%><br>
-  <%=Tmdb::Movie.detail(i).vote_average%><br>
-  <%=Tmdb::Movie.detail(i).overview%>
-</span><br>
+
+    </div>
+
+    <%@list.movie_ids[0].each do |i| %>
+
+
+
+
+  <p><div class='movie'><div class='movieHeader'><span class='movieTitle'>
+  <%=Tmdb::Movie.detail(i).original_title%></span><br>
+  <i>"<%=Tmdb::Movie.detail(i).tagline%>"</i>
+
+  </div> <br><img src='https://image.tmdb.org/t/p/w500/<%=Tmdb::Movie.detail(i).poster_path%>' id='movieImg'>
+  <span class='movieDetails'> Webpage: </span><span class='movieInfo'>
+  <a href="<%=Tmdb::Movie.detail(i).homepage%>"><%=Tmdb::Movie.detail(i).homepage%></a></span><br>
+  <span class='movieDetails'> Rating: </span><span class='movieInfo'>
+  <%=Tmdb::Movie.detail(i).vote_average%></span><br>
+  <span class='movieDetails'> Popularity: </span><span class='movieInfo'>
+  <%=Tmdb::Movie.detail(i).popularity%></span><br><br>
+  <span class='movieDetails'>Overview: </span><p>
+  <%=Tmdb::Movie.detail(i).overview%></p></center>
+
+  <div class="similiarMovies"><p>
+    <%=form_tag("/lists", method: "get", :remote => "true") do%>
+  <%= hidden_field_tag :s, i%>
+  <%=submit_tag("Show similar movies", :class => "similiar_submit")%>
+  <%end%></p></div>
+
+</div>
+
+  <p style='clear: both;'>
+
 
 <%end%>
+</div>
+<div class="userRight">
 
+<h1>Share<span class="symbol">#</span>list</h1>
+  <p><div id="socialS">
+    <span class="movieTitle">Like it? Share it!</span><p>
+    <%= social_share_button_tag(@list.name, :url => "http://myapp.com/foo/bar") %>
+  </div></p>
+<h1>Similar<span class="symbol">#</span>movies</h1>
+  <div id="displayMovies">
+    Click "show similar movies" next to each movie title to get simiar film suggestions.
+  </div>
+
+
+<!-- Tmdb::Movie.similar(550) -->
+
+
+</div>
+</div>
 <script>
+
+
+$(document).ready(function(){
+
+  var displayMovies= document.getElementById('displayMovies')
+$('.similiar_submit').on('click',function(event){
+$( "#displayMovies" ).empty();
+var form=$(this).parent('form');
+
+
+$.ajax({
+      type: "GET",
+      url: "<%=list_path%>",
+      data: form.serialize(),
+      dataType: "JSON",
+
+      success: function(data){
+        var movies=data.results.table.results;
+        for(i=0;i<movies.length;i++){
+
+          $('#displayMovies').append(
+            "<p><div class='movie'><div class='movieHeader'><span class='movieTitle'>"
+            +movies[i].table.original_title
+            +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
+            +movies[i].table.poster_path+"' id='movieImg'><span class='movieDetails'> Rating: </span><span class='movieInfo'>"
+            +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
+            +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
+            +movies[i].table.overview+"</br> <center></center></div><p style='clear: both;'> ")
+          }
+          console.log(data.results.table.results);
+        }
+
+  });
+
+  });
+})
+
 </script>

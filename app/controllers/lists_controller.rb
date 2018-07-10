@@ -1,5 +1,9 @@
 class ListsController < ApplicationController
+  respond_to :html, :json, :xml, :js
+
+  before_action :set_list, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   def index
+
   end
 
   def new
@@ -26,15 +30,41 @@ class ListsController < ApplicationController
   def show
     @list=List.find(params[:id])
     @user =User.find(current_user.id)
+    if params[:s].present?
+    @movies=Tmdb::Movie.similar(params[:s])
+    @results=@movies
+    @pages=@movies.total_pages
+    @entries=@movies.total_results
+    @count=@results.count
+    respond_to do |format|
+    format.html # show.html.erb
+    format.js
+    format.json { render :json => {:movies => @movies, :results => @results }}
+  end
+  end
   end
 
   def update
+  end
+
+  # upvote_from user
+  # downvote_from user
+  def upvote
+    movie=params[:id]
+    @list.upvote_from current_user
+    redirect_to "/lists/#{movie}"
+  end
+
+  def downvote
   end
 
   def destroy
   end
 
   private
+  def set_list
+    @list=List.find(params[:id])
+  end
   def list_params
     params.require(:list).permit(:name, :movie_ids, :user_id, :description, :private)
   end

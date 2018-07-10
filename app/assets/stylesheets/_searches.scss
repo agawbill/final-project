@@ -73,8 +73,170 @@
   color: #cb00ff;
   font-size: 35px;
   position: absolute;
-  top: 4.5%;
+  top: 3.5%;
   right: 1%;
+
+}
+
+#byGenre{
+display: none;
+}
+#byName{
+display: none;
+}
+
+#byActor{
+display: none;
+}
+#byDirector{
+display: none;
+}
+#byPopular{
+display: none;
+}
+#byTop{
+display: none;
+}
+#byNowplaying{
+display: none;
+}
+#byUpcoming{
+display: none;
+}
+
+input[type="submit"]{
+  background: transparent;
+  transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  border-radius: 4px;
+  border:#919191 1px solid;
+
+}
+input[type="submit"]:hover{
+  background-color: #cb00ff !important;
+  background-color: #cb00ff !important;
+  border-radius: 4px !important;
+  border:#919191 1px solid !important;;
+
+}
+.form_submit1{
+  background: transparent;
+  transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  border-radius: 4px;
+  border:#919191 1px solid;
+
+}
+.form_submit1:hover{
+  background-color: #cb00ff !important;
+  background-color: #cb00ff !important;
+  border-radius: 4px !important;
+  border:#919191 1px solid !important;;
+
+}
+.form_submit2{
+  background: transparent;
+  transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  border-radius: 4px;
+  border:#919191 1px solid;
+
+}
+.form_submit2:hover{
+  background-color: #cb00ff !important;
+  background-color: #cb00ff !important;
+  border-radius: 4px !important;
+  border:#919191 1px solid !important;;
+
+}
+.form_submit3{
+  background: transparent;
+  transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  border-radius: 4px;
+  border:#919191 1px solid;
+
+}
+.form_submit3:hover{
+  background-color: #cb00ff !important;
+  background-color: #cb00ff !important;
+  border-radius: 4px !important;
+  border:#919191 1px solid !important;;
+
+}
+.form_submit4{
+  background: transparent;
+  transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  border-radius: 4px;
+  border:#919191 1px solid;
+
+}
+.form_submit4:hover{
+  background-color: #cb00ff !important;
+  background-color: #cb00ff !important;
+  border-radius: 4px !important;
+  border:#919191 1px solid !important;;
+
+}
+.form_submit5{
+  background: transparent;
+  transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  border-radius: 4px;
+  border:#919191 1px solid;
+
+}
+.form_submit5:hover{
+  background-color: #cb00ff !important;
+  background-color: #cb00ff !important;
+  border-radius: 4px !important;
+  border:#919191 1px solid !important;;
+
+}
+.form_submit7{
+  background: transparent;
+  transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  border-radius: 4px;
+  border:#919191 1px solid;
+
+}
+.form_submit7:hover{
+  background-color: #cb00ff !important;
+  background-color: #cb00ff !important;
+  border-radius: 4px !important;
+  border:#919191 1px solid !important;;
+
+}
+.form_submit8{
+  background: transparent;
+  transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  border-radius: 4px;
+  border:#919191 1px solid;
+
+}
+.form_submit8:hover{
+  background-color: #cb00ff !important;
+  background-color: #cb00ff !important;
+  border-radius: 4px !important;
+  border:#919191 1px solid !important;;
+
+}
+.form_submit6{
+  background: transparent;
+  transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  border-radius: 4px;
+  border:#919191 1px solid;
+
+}
+.form_submit6:hover{
+  background-color: #cb00ff !important;
+  background-color: #cb00ff !important;
+  border-radius: 4px !important;
+  border:#919191 1px solid !important;;
 
 }
 
@@ -83,13 +245,27 @@
   color: red;
 }
 
+input[type="checkbox"] {
+  background: transparent;
+}
 
+select{
+  border-radius: 6px;
+  background: transparent;
+}
 
+input[type=text] {
+  border: none;
+  width: 150px;
+  margin-right: 10px;
+  margin-left: 10px;
+  border-bottom:#919191 1px solid;
+  padding: 6px 35px 6px 6px;
+}
 .textTitleAreaL{
-  height: 20px;
-  border-radius: 8px;
+  border: none;
   width: 66.1%;
-  border:#919191 1px solid;
+  border-bottom:#919191 1px solid;
   padding: 6px 35px 6px 6px;
 
 }
@@ -260,7 +436,6 @@ display: none;
   border-radius: 8px;
   margin-bottom: 25px;
   display: none;
-
 }
 
 

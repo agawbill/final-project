@@ -104,6 +104,7 @@
   Search by Actor: <%=text_field_tag(:r)%>
   <%=submit_tag("Update Actor Search", :class => "form_submit2")%>
   <%end%>
+    <p><h2 id="searchHeader">By<span class="symbol">#</span>actor</h2>
 </div>
 <div id="searchDirector">
 
@@ -161,7 +162,7 @@
 
   <%=form_tag(searches_path, method: "get") do%>
   Select genre: <select id="genreDrop">
-    <option>All</option>
+    <option></option>
     <option value='28'>Action</option>
     <option value='12'>Adventure</option>
     <option value="16">Animation</option>
@@ -449,7 +450,7 @@ $.ajax({
   }
   })
 $('.form_submit5').on('click',function(event){
-for(i=1;i<21;i++){
+for(i=1;i<12;i++){
 $( "#searchMovies" ).empty();
 var form=$(this).parent('form');
 
@@ -486,7 +487,7 @@ $.ajax({
   }
   })
 $('.form_submit6').on('click',function(event){
-for(i=1;i<21;i++){
+for(i=1;i<12;i++){
 $( "#searchMovies" ).empty();
 var form=$(this).parent('form');
 
@@ -523,7 +524,7 @@ $.ajax({
   }
   })
 $('.form_submit7').on('click',function(event){
-for(i=1;i<21;i++){
+for(i=1;i<12;i++){
 $( "#searchMovies" ).empty();
 var form=$(this).parent('form');
 
@@ -541,6 +542,7 @@ $.ajax({
           for(i=0;i<movies.length;i++){
             if(movies[i].table.poster_path != undefined){
 
+
           $('#searchMovies').append(
             "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
             +movies[i].table.original_title
@@ -555,6 +557,7 @@ $.ajax({
           console.log(data.results);
         }
       }
+
 
     });
   }
@@ -562,7 +565,7 @@ $.ajax({
 
 
 $('.form_submit8').on('click',function(event){
-for(i=1;i<21;i++){
+for(i=1;i<12;i++){
 $( "#searchMovies" ).empty();
 var form=$(this).parent('form');
 
@@ -594,6 +597,7 @@ $.ajax({
           console.log(data.results);
         }
       }
+
 
     });
   }
@@ -614,7 +618,7 @@ $.ajax({
 
 function create(){
   var list=document.createElement("li")
-  list.innerHTML=movieName[movieName.length-1]+"<span class='deleteMovie' value="+movieList[movieList.length-1]+"> X</span> <input class='moveElement' type='hidden' value="+movieList[movieList.length-1]+">&uarr;</input> <span class='moveElement'>&darr;</span>"
+  list.innerHTML=movieName[movieName.length-1]+"<span class='deleteMovie' value="+movieList[movieList.length-1]+"> X</span> <input class='moveElements' type='hidden' value="+movieList[movieList.length-1]+"></input>&uarr; <span id='moveElement' value="+movieList[movieList.length-1]+" type='button'>&darr;</button>"
   list.value=movieList[movieList.length-1]
   createList.appendChild(list)
 
@@ -649,6 +653,9 @@ function create(){
 
 
 
+
+
+
           // function clickUp(click) {
           //   console.log('hello');
           //   for(i=0;i<movieList.length;i++){
@@ -658,10 +665,6 @@ function create(){
           movie_ids.value=movieList
 
       }
-
-
-
-
 
 
 
@@ -733,6 +736,32 @@ function addParam(v) {
 option1.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
   clearAll()
+  option1.style.fontWeight="bold"
+  option1.style.color="#cb00ff"
+
+  option2.style.fontWeight="normal"
+  option2.style.color="#919191"
+
+  option3.style.fontWeight="normal"
+  option3.style.color="#919191"
+
+  option4.style.fontWeight="normal"
+  option4.style.color="#919191"
+
+  option5.style.fontWeight="normal"
+  option5.style.color="#919191"
+
+  option6.style.fontWeight="normal"
+  option6.style.color="#919191"
+
+  option7.style.fontWeight="normal"
+  option7.style.color="#919191"
+
+  option8.style.fontWeight="normal"
+  option8.style.color="#919191"
+
+
+
   searchMovie.style.display="block"
   genreChecks.style.display="block"
   movieRatings.style.display="block"
@@ -767,8 +796,33 @@ option1.addEventListener('click', function(){
 // search by actor
 
 option2.addEventListener('click', function(){
-  // window.history.replaceState({}, document.title, "/" + "searches");
+
   clearAll()
+
+  option2.style.fontWeight="bold"
+  option2.style.color="#cb00ff"
+
+  option1.style.fontWeight="normal"
+  option1.style.color="#919191"
+
+  option3.style.fontWeight="normal"
+  option3.style.color="#919191"
+
+  option4.style.fontWeight="normal"
+  option4.style.color="#919191"
+
+  option5.style.fontWeight="normal"
+  option5.style.color="#919191"
+
+  option6.style.fontWeight="normal"
+  option6.style.color="#919191"
+
+  option7.style.fontWeight="normal"
+  option7.style.color="#919191"
+
+  option8.style.fontWeight="normal"
+  option8.style.color="#919191"
+
   searchMovie.style.display="none"
   genreChecks.style.display="none"
   searchActor.style.display="block"
@@ -801,6 +855,30 @@ option2.addEventListener('click', function(){
 option3.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
   clearAll()
+  option3.style.fontWeight="bold"
+  option3.style.color="#cb00ff"
+
+  option1.style.fontWeight="normal"
+  option1.style.color="#919191"
+
+  option2.style.fontWeight="normal"
+  option2.style.color="#919191"
+
+  option4.style.fontWeight="normal"
+  option4.style.color="#919191"
+
+  option5.style.fontWeight="normal"
+  option5.style.color="#919191"
+
+  option6.style.fontWeight="normal"
+  option6.style.color="#919191"
+
+  option7.style.fontWeight="normal"
+  option7.style.color="#919191"
+
+  option8.style.fontWeight="normal"
+  option8.style.color="#919191"
+
   searchMovie.style.display="none"
   genreChecks.style.display="none"
   searchActor.style.display="none"
@@ -834,11 +912,35 @@ option3.addEventListener('click', function(){
 option4.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
   clearAll()
+  option4.style.fontWeight="bold"
+  option4.style.color="#cb00ff"
+
+  option1.style.fontWeight="normal"
+  option1.style.color="#919191"
+
+  option3.style.fontWeight="normal"
+  option3.style.color="#919191"
+
+  option1.style.fontWeight="normal"
+  option1.style.color="#919191"
+
+  option5.style.fontWeight="normal"
+  option5.style.color="#919191"
+
+  option6.style.fontWeight="normal"
+  option6.style.color="#919191"
+
+  option7.style.fontWeight="normal"
+  option7.style.color="#919191"
+
+  option8.style.fontWeight="normal"
+  option8.style.color="#919191"
+
   searchMovie.style.display="none"
-  genreChecks.style.display="block"
+  genreChecks.style.display="none"
   searchActor.style.display="none"
   genreLinks.style.display="none"
-  movieRatings.style.display="block"
+  movieRatings.style.display="none"
   searchDirector.style.display="block"
   searchPopular.style.display="none"
   // moviesContainer.style.display="grid"
@@ -867,6 +969,30 @@ option4.addEventListener('click', function(){
 option5.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
   clearAll()
+  option5.style.fontWeight="bold"
+  option5.style.color="#cb00ff"
+
+  option1.style.fontWeight="normal"
+  option1.style.color="#919191"
+
+  option3.style.fontWeight="normal"
+  option3.style.color="#919191"
+
+  option4.style.fontWeight="normal"
+  option4.style.color="#919191"
+
+  option2.style.fontWeight="normal"
+  option2.style.color="#919191"
+
+  option6.style.fontWeight="normal"
+  option6.style.color="#919191"
+
+  option7.style.fontWeight="normal"
+  option7.style.color="#919191"
+
+  option8.style.fontWeight="normal"
+  option8.style.color="#919191"
+
   searchMovie.style.display="none"
   genreChecks.style.display="block"
   searchActor.style.display="none"
@@ -899,6 +1025,30 @@ option5.addEventListener('click', function(){
 option6.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
   clearAll()
+  option6.style.fontWeight="bold"
+  option6.style.color="#cb00ff"
+
+  option2.style.fontWeight="normal"
+  option2.style.color="#919191"
+
+  option3.style.fontWeight="normal"
+  option3.style.color="#919191"
+
+  option4.style.fontWeight="normal"
+  option4.style.color="#919191"
+
+  option5.style.fontWeight="normal"
+  option5.style.color="#919191"
+
+  option1.style.fontWeight="normal"
+  option1.style.color="#919191"
+
+  option7.style.fontWeight="normal"
+  option7.style.color="#919191"
+
+  option8.style.fontWeight="normal"
+  option8.style.color="#919191"
+
   searchMovie.style.display="none"
   genreChecks.style.display="block"
   searchActor.style.display="none"
@@ -931,6 +1081,30 @@ option6.addEventListener('click', function(){
 option7.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
   clearAll()
+  option7.style.fontWeight="bold"
+  option7.style.color="#cb00ff"
+
+  option2.style.fontWeight="normal"
+  option2.style.color="#919191"
+
+  option3.style.fontWeight="normal"
+  option3.style.color="#919191"
+
+  option4.style.fontWeight="normal"
+  option4.style.color="#919191"
+
+  option5.style.fontWeight="normal"
+  option5.style.color="#919191"
+
+  option6.style.fontWeight="normal"
+  option6.style.color="#919191"
+
+  option1.style.fontWeight="normal"
+  option1.style.color="#919191"
+
+  option8.style.fontWeight="normal"
+  option8.style.color="#919191"
+
   searchMovie.style.display="none"
   genreChecks.style.display="block"
   searchActor.style.display="none"
@@ -964,6 +1138,30 @@ option7.addEventListener('click', function(){
 option8.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
   clearAll()
+  option8.style.fontWeight="bold"
+  option8.style.color="#cb00ff"
+
+  option2.style.fontWeight="normal"
+  option2.style.color="#919191"
+
+  option3.style.fontWeight="normal"
+  option3.style.color="#919191"
+
+  option4.style.fontWeight="normal"
+  option4.style.color="#919191"
+
+  option5.style.fontWeight="normal"
+  option5.style.color="#919191"
+
+  option6.style.fontWeight="normal"
+  option6.style.color="#919191"
+
+  option7.style.fontWeight="normal"
+  option7.style.color="#919191"
+
+  option1.style.fontWeight="normal"
+  option1.style.color="#919191"
+
   searchMovie.style.display="none"
   genreChecks.style.display="block"
   searchActor.style.display="none"
@@ -1823,49 +2021,6 @@ genreSelector18.addEventListener('change', function(){
 })
 
 
-
-
-
-// for(i=0;i<genreSelector.length;i++){
-//     genreSelector[i].addEventListener("click", function(event){
-//       if(genreSelector0.checked || genreSelector1.checked || genreSelector2.checked || genreSelector3.checked || genreSelector4.checked || genreSelector5.checked || genreSelector6.checked || genreSelector7.checked || genreSelector8.checked || genreSelector9.checked || genreSelector10.checked || genreSelector11.checked || genreSelector12.checked || genreSelector13.checked || genreSelector14.checked || genreSelector15.checked || genreSelector16.checked || genreSelector17.checked || genreSelector18.checked){
-//         console.log(event.target.value);
-//         genres1.push(event.target.value)
-//         genres2.push(event.target.value)
-//         genres3.push(event.target.value)
-//         genres4.push(event.target.value)
-//         genres5.push(event.target.value)
-//         genres6.push(event.target.value)
-//         genres.value=genres1
-//         genresD.value=genres2
-//         genresP.value=genres3
-//         genresT.value=genres4
-//         genresL.value=genres5
-//         genresU.value=genres6
-//         show.checked = false;
-//       }
-//         else{
-//           var a=genres1.indexOf(event.target.value)
-//           var b=genres2.indexOf(event.target.value)
-//           var c=genres3.indexOf(event.target.value)
-//           var d=genres4.indexOf(event.target.value)
-//           var e=genres5.indexOf(event.target.value)
-//           var f=genres6.indexOf(event.target.value)
-//           genres1.splice(a, 1)
-//           genres.value=genres1
-//           genres2.splice(b, 1)
-//           genresD.value=genres2
-//           genres3.splice(c, 1)
-//           genresP.value=genres3
-//           genres4.splice(d, 1)
-//           genresT.value=genres4
-//           genres5.splice(e, 1)
-//           genresL.value=genres5
-//           genres6.splice(f, 1)
-//           genresU.value=genres6
-//         }
-//     })
-//   }
 
 
 </script>
