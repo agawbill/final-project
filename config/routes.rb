@@ -14,7 +14,13 @@ Rails.application.routes.draw do
   resources :blogs
   resources :comments
   resources :searches
-  get 'searches' => 'searches#searchMovies'
+  resources :lists do
+    member do
+      put "like" => "lists#upvote"
+      put "dislike" => "lists#downvote"
+    end
+  end
+  # get 'searches' => 'searches#searchMovies'
 
   # resources :searches
 

@@ -1,55 +1,63 @@
 <div class="blogWrapper">
   <div class="blogLeft">
-    <h1>Blog<span class="symbol">#</span>posts</h1>
+    <h2 id="headerSearch">Search<span class="symbol">#</span>movies</h2>
 <p>
-<p>Search by: <span id="option1" class="link">Movie name</span> | <span id="option2" class="link">Actor</span> | <span class="link" id="option3">Genre</span> | <span class="link" id="option4">Director</span></p>
-<p>Discover: <span id="option5" class="link">Popular movies</span> | <span class="link" id="option6">Top rated</span> | <span class="link" id="option7">Now playing</span> | <span class="link" id="option8">Upcoming</span></p>
+  <div id="searchNav">
+<span class="movieTitle">Search:</span><p> <span id="option1" class="link">Movie name</span> | <span id="option2" class="link">Actor</span> | <span class="link" id="option3">Genre</span> | <span class="link" id="option4">Director</span></p>
+</div>
+<div id="searchNav">
+<span class="movieTitle">Discover:</span><p> <span id="option5" class="link">Popular movies</span> | <span class="link" id="option6">Top rated</span> | <span class="link" id="option7">Now playing</span> | <span class="link" id="option8">Upcoming</span></p>
+</div>
 </p>
 
-<div id="genreChecks">Sort movies by genre:<p>
+<div id="genreChecks">
+  <span class="movieTitle">Sort movies by genre:</span><p>
+  <div id="genreGrid">
 
-Action:  <input type="checkbox" id="genreSelector0" name="feature"
-        value="28" placeholder="Adventure" />
-Adventure:  <input type="checkbox" id="genreSelector1" name="feature"
-        value="12" placeholder="Adventure" />
-Animation: <input type="checkbox" id="genreSelector2" name="feature"
-        value="16" />
-Comedy: <input type="checkbox" id="genreSelector3" name="feature"
-        value="35" />
-Crime: <input type="checkbox" id="genreSelector4" name="feature"
-        value="80" />
-Documentary: <input type="checkbox" id="genreSelector5" name="feature"
-        value="99" />
-Drama: <input type="checkbox" id="genreSelector6" name="feature"
-        value="18" />
-Family: <input type="checkbox" id="genreSelector7" name="feature"
-        value="10751" />
-Fantasy: <input type="checkbox" id="genreSelector8" name="feature"
-        value="14" />
-History: <input type="checkbox" id="genreSelector9" name="feature"
-        value="36" />
-Horror: <input type="checkbox" id="genreSelector10" name="feature"
-        value="27" />
-Music: <input type="checkbox" id="genreSelector11" name="feature"
-        value="10402" />
-Mystery: <input type="checkbox" id="genreSelector12" name="feature"
-        value="9648" />
-Romance: <input type="checkbox" id="genreSelector13" name="feature"
-        value="10749" />
-SciFi: <input type="checkbox" id="genreSelector14" name="feature"
-        value="878" />
-TV Movie: <input type="checkbox" id="genreSelector15" name="feature"
-        value="10770" />
-Thriller: <input type="checkbox" id="genreSelector16" name="feature"
-        value="53" />
-War: <input type="checkbox" id="genreSelector17" name="feature"
-        value="10752" />
-Western: <input type="checkbox" id="genreSelector18" name="feature"
-        value="37" />
+<div>  <input type="checkbox" id="genreSelector0" name="feature"
+        value=28 placeholder="Adventure" /> Action</div>
+<div>  <input type="checkbox" id="genreSelector1" name="feature"
+        value=12 placeholder="Adventure" /> Adventure</div>
+<div> <input type="checkbox" id="genreSelector2" name="feature"
+        value=16 /> Animation</div>
+<div> <input type="checkbox" id="genreSelector3" name="feature"
+        value=35 /> Comedy</div>
+<div> <input type="checkbox" id="genreSelector4" name="feature"
+        value=80 /> Crime</div>
+<div> <input type="checkbox" id="genreSelector5" name="feature"
+        value=99 /> Documentary</div>
+<div> <input type="checkbox" id="genreSelector6" name="feature"
+        value=18 /> Drama</div>
+<div> <input type="checkbox" id="genreSelector7" name="feature"
+        value=10751 /> Family</div>
+<div> <input type="checkbox" id="genreSelector8" name="feature"
+        value=14 /> Fantasy</div>
+<div> <input type="checkbox" id="genreSelector9" name="feature"
+        value=36 /> History</div>
+<div> <input type="checkbox" id="genreSelector10" name="feature"
+        value=27 /> Horror</div>
+<div> <input type="checkbox" id="genreSelector11" name="feature"
+        value=10402 /> Music</div>
+<div> <input type="checkbox" id="genreSelector12" name="feature"
+        value=9648 /> Mystery</div>
+<div> <input type="checkbox" id="genreSelector13" name="feature"
+        value=10749 /> Romance</div>
+<div> <input type="checkbox" id="genreSelector14" name="feature"
+        value=878 /> SciFi</div>
+<div> <input type="checkbox" id="genreSelector15" name="feature"
+        value=10770 /> TV Movie</div>
+<div> <input type="checkbox" id="genreSelector16" name="feature"
+        value=53 /> Thriller</div>
+<div> <input type="checkbox" id="genreSelector17" name="feature"
+        value=10752 /> War</div>
+<div> <input type="checkbox" id="genreSelector18" name="feature"
+        value=37 /> Western</div>
+      </div>
       </p>
       </div>
 
-      <div id="movieRatings">Sort movies by rating:<p>
+      <div id="movieRatings">
+        <span class="movieTitle">Sort movies by rating:</span><p>
 
         Greater than or equal to: <select id="ratingDrop">
           <option value='0'></option>
@@ -68,10 +76,10 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
       </p>
 
 
-<p>
-  <div id="showAll"> Show all?: <input type="checkbox" id="show" name="feature" value="0" />
+
+  <div id="showAll"> <input type="checkbox" id="show" name="feature" value="0" /> Show all?
   </div>
-</p>
+
 
 
 
@@ -80,13 +88,13 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
 <div id="searchMovie">
 
 
-  <%=form_tag("/searches", method: "get", :id=>"UpdateMovieSearch") do%>
+  <%=form_tag("/searches", method: "get", :remote => "true") do%>
   Search by Movie: <%=text_field_tag(:q)%>
   <%= hidden_field_tag(:genres)%>
   <%= hidden_field_tag(:ratingQ )%>
-  <%=submit_tag("Update Movie Search")%>
+  <%=submit_tag("Update Movie Search",:class => "form_submit1")%>
   <%end%>
-
+  <p><h2 id="searchHeader">By<span class="symbol">#</span>name</h2>
 
 </div>
 
@@ -94,24 +102,29 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
 <div id="searchActor">
   <%=form_tag("/searches", method: "get") do |f|%>
   Search by Actor: <%=text_field_tag(:r)%>
-  <%=submit_tag("Update Actor Search")%>
+  <%=submit_tag("Update Actor Search", :class => "form_submit2")%>
   <%end%>
+    <p><h2 id="searchHeader">By<span class="symbol">#</span>actor</h2>
 </div>
 <div id="searchDirector">
+
   <%=form_tag(searches_path, method: "get") do |f|%>
   Search by Director: <%=text_field_tag(:d)%>
   <%=hidden_field_tag(:genresD)%>
   <%=hidden_field_tag(:ratingD)%>
-  <%=submit_tag("Update Director Search")%>
+  <%=submit_tag("Update Director Search", :class => "form_submit3")%>
   <%end%>
+  <p><h2 id="searchHeader">By<span class="symbol">#</span>director</h2>
+
 </div>
 
 <div id="searchPopular">
   <%=form_tag(searches_path, method: "get") do |f|%>
   <%=hidden_field_tag(:genresP)%>
   <%=hidden_field_tag(:ratingP)%>
-  <%=submit_tag("Update Popluar Movies")%>
+  <%=submit_tag("Update Popluar Movies", :class => "form_submit4")%>
   <%end%>
+  <p><h2 id="searchHeader">Popular<span class="symbol">#</span>movies</h2>
 </div>
 
 
@@ -119,23 +132,27 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
   <%=form_tag(searches_path, method: "get") do |f|%>
   <%=hidden_field_tag(:genresT)%>
   <%=hidden_field_tag(:ratingT)%>
-  <%=submit_tag("Update Top Movies")%>
+  <%=submit_tag("Update Top Movies", :class => "form_submit5")%>
   <%end%>
+  <p><h2 id="searchHeader">Top<span class="symbol">#</span>movies</h2>
 </div>
 
 <div id="searchLatest">
   <%=form_tag(searches_path, method: "get") do |f|%>
   <%=hidden_field_tag(:genresL)%>
   <%=hidden_field_tag(:ratingL)%>
-  <%=submit_tag("Update Latest Movies")%>
+  <%=submit_tag("Update Latest Movies", :class => "form_submit6")%>
+  <p><h2 id="searchHeader">Latest<span class="symbol">#</span>movies</h2>
   <%end%>
 </div>
 <div id="searchUpcoming">
   <%=form_tag(searches_path, method: "get") do |f|%>
   <%=hidden_field_tag(:genresU)%>
   <%=hidden_field_tag(:ratingU)%>
-  <%=submit_tag("Update Upcoming Movies")%>
+  <%=submit_tag("Update Upcoming Movies", :class => "form_submit7")%>
   <%end%>
+  <p><h2 id="searchHeader">Upcoming<span class="symbol">#</span>movies</h2>
+
 </div>
 
 
@@ -145,7 +162,7 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
 
   <%=form_tag(searches_path, method: "get") do%>
   Select genre: <select id="genreDrop">
-    <option>No preference</option>
+    <option></option>
     <option value='28'>Action</option>
     <option value='12'>Adventure</option>
     <option value="16">Animation</option>
@@ -168,29 +185,62 @@ Western: <input type="checkbox" id="genreSelector18" name="feature"
   </select>
   <%= hidden_field_tag :l %>
   <%= hidden_field_tag :rating %>
-  <%=submit_tag("Update Search")%>
+  <%=submit_tag("Update Search", :class => "form_submit8")%>
+  <p><h2 id="searchHeader">By<span class="symbol">#</span>genre</h2></p>
+
   <%end%>
 
 </div>
 
-<div id="createList">
-  Testing
-</div>
-<div id="movieAbove">
-  Up
-</div>
-<div id="movieBelow">
-  Down
-</div>
-
-<p><div id="searchMovies">
-</div></p>
-</div>
-</div>
 
 
 
-<!-- checkbox selector perhaps... push to an array ... JOINED by conditional statement-->
+<div id="searchMovies">
+
+</div>
+</div>
+
+<div class="blogRight">
+  <div class="listForm">
+  <h2 id="headerSearch">Create<span class="symbol">#</span>list</h2>
+  <p>
+    <div id="listHolder">
+
+
+    <%if current_user%>
+    <%= form_for @list do |f|%>
+    <%= f.text_area :name, :placeholder=>"Title", :class=>"textTitleAreaL" %>
+    <p><div>
+    Pick the type of list: <select id="typeListDrop">
+      <option value='Movies'>Movies</option>
+      <option value='Actors'>Actors</option>
+      <option value='Directors'>Directors</option></div>
+    </select>
+    <p><div id="createList">
+    </div></p>
+    <%= f.text_area :description, :placeholder=>"Type description here", :class=>"textBodyAreaL" %></p>
+    <%= f.check_box :private %>  Make Private?
+    <%= hidden_field_tag :movie_ids %>
+    <%= hidden_field_tag :type %>
+    <!-- <%= hidden_field_tag :private %> -->
+    <p><%= f.submit "Create a new List" %></p>
+    <% end  %>
+    <%else%>
+    Please Login to create a list (link to login here)
+    <%end%>
+
+  </div>
+</div>
+</p>
+</div>
+</div>
+
+
+
+</div>
+
+
+
 
 <script>
 
@@ -207,6 +257,7 @@ var genres6=[]
 var genres= document.getElementById('genres')
 var moviesContainer= document.getElementById('moviesContainer')
 var genreDrop= document.getElementById('genreDrop')
+var typeListDrop= document.getElementById('typeListDrop')
 var ratingDrop= document.getElementById('ratingDrop')
 var option1= document.getElementById('option1')
 var option2= document.getElementById('option2')
@@ -222,6 +273,10 @@ var UpdateMovieSearch= document.getElementById('UpdateMovieSearch')
 var createList= document.getElementById('createList')
 var genreSelector=[genreSelector0, genreSelector1, genreSelector2, genreSelector3, genreSelector4, genreSelector5, genreSelector6, genreSelector7, genreSelector7, genreSelector8, genreSelector9, genreSelector10, genreSelector11, genreSelector12, genreSelector13, genreSelector14, genreSelector15, genreSelector16, genreSelector7, genreSelector17, genreSelector18]
 var createListChildren=createList.children
+var searchHeader=document.getElementById('searchHeader')
+var movie_ids=document.getElementById('movie_ids')
+// var listToggle=document.getElementById('listToggle')
+var private=document.getElementById('private')
 
 // var xhr= new XMLHttpRequest();
 //
@@ -229,11 +284,143 @@ var createListChildren=createList.children
 //
 // xhr.send(null)
 
+
+
 $(document).ready(function(){
 
 
-$('input[type=submit]').on('click',function(event){
-for(i=1;i<21;i++){
+
+$('.form_submit1').on('click',function(event){
+for(i=1;i<15;i++){
+$( "#searchMovies" ).empty();
+var form=$(this).parent('form');
+
+event.preventDefault()
+$.ajax({
+        type: "GET",
+        url: "<%=searches_path%>",
+        data: form.serialize()+"&page="+i,
+        dataType: "JSON",
+        success: function(data){
+          var test=data
+          var movies=data.results
+
+
+          // console.log(movies[i]);
+          for(i=0;i<movies.length;i++){
+            if(movies[i].table.poster_path != undefined){
+
+
+          $('#searchMovies').append(
+            "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
+            +movies[i].table.original_title
+            +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
+            +movies[i].table.poster_path+"' id='movieImg'><span class='movieDetails'> Rating: </span><span class='movieInfo'>"
+            +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
+            +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
+            +movies[i].table.overview+"</br> <center><button value='"
+            +movies[i].table.id+"', id='movieButton', data-value='"
+            +movies[i].table.original_title+"'>+</button></center></div><p style='clear: both;'> ")
+          }
+          console.log(data.results);
+        }
+      }
+
+    });
+  }
+  })
+
+$('.form_submit2').on('click',function(event){
+for(i=1;i<15;i++){
+
+$( "#searchMovies" ).empty();
+var form=$(this).parent('form');
+
+event.preventDefault()
+$.ajax({
+        type: "GET",
+        url: "<%=searches_path%>",
+        data: form.serialize()+"&page="+i,
+        dataType: "JSON",
+        success: function(data){
+          var test=data
+          var movies=data.results
+          console.log(data.results);
+          // console.log(movies[i]);
+          for(i=0;i<movies.length;i++){
+            if(movies[i].table.known_for.length >2){
+              if(movies[i].table.known_for[0].table.original_title != undefined && movies[i].table.known_for[1].table.original_title != undefined  && movies[i].table.known_for[2].table.original_title != undefined ){
+                if(movies[i].table.profile_path != undefined){
+
+
+          $('#searchMovies').append(
+            "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
+            +movies[i].table.name
+            +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
+            +movies[i].table.profile_path+"' id='movieImg'><span class='movieDetails'> Popularity: </span><span class='movieInfo'>"
+            +movies[i].table.popularity+"</span><br><br><span class='movieDetails'> Known for: </span><p>1: "
+            +movies[i].table.known_for[0].table.original_title+"<br>2: "
+            +movies[i].table.known_for[1].table.original_title+"<br>3: "
+            +movies[i].table.known_for[2].table.original_title+ "</p><center><button value='"
+            +movies[i].table.id+"' id='movieButton', data-value='"
+            +movies[i].table.name+"'>+</button></center></div><p style='clear: both;'> ")
+          }
+        }
+      }
+    }
+          console.log(data.results);
+        }
+
+    });
+  }
+  })
+$('.form_submit3').on('click',function(event){
+for(i=1;i<15;i++){
+$( "#searchMovies" ).empty();
+var form=$(this).parent('form');
+
+event.preventDefault()
+$.ajax({
+        type: "GET",
+        url: "<%=searches_path%>",
+        data: form.serialize()+"&page="+i,
+        dataType: "JSON",
+        success: function(data){
+          var test=data
+          var movies=data.results
+          for(i=0;i<movies.length;i++){
+            if(movies[i].table.profile_path != undefined){
+              if(movies[i].table.known_for.length >2){
+                if(movies[i].table.known_for[0].table.original_title != undefined && movies[i].table.known_for[1].table.original_title != undefined  && movies[i].table.known_for[2].table.original_title != undefined ){
+
+
+
+
+
+          $('#searchMovies').append(
+            "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
+            +movies[i].table.name
+            +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
+            +movies[i].table.profile_path+"' id='movieImg'><span class='movieDetails'> Popularity: </span><span class='movieInfo'>"
+            +movies[i].table.popularity+"</span><br><br><span class='movieDetails'> Known for: </span><p>1: "
+            +movies[i].table.known_for[0].table.original_title+"<br>2: "
+            +movies[i].table.known_for[1].table.original_title+"<br>3: "
+            +movies[i].table.known_for[2].table.original_title+ "</p><center><button value='"
+            +movies[i].table.id+"', id='movieButton', data-value='"
+            +movies[i].table.name+"'>+</button></center></div><p style='clear: both;'> ")
+          }
+        }
+      }
+    }
+
+          console.log(data.results);
+        }
+
+    });
+  }
+  })
+$('.form_submit4').on('click',function(event){
+for(i=1;i<8;i++){
 $( "#searchMovies" ).empty();
 var form=$(this).parent('form');
 
@@ -249,6 +436,7 @@ $.ajax({
 
           // console.log(movies[i]);
           for(i=0;i<movies.length;i++){
+            if(movies[i].table.poster_path != undefined){
 
           $('#searchMovies').append(
             "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
@@ -258,14 +446,173 @@ $.ajax({
             +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
             +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
             +movies[i].table.overview+"</br> <center><button value='"
-            +movies[i].table.id+"' id='movieButton'>Add to list</button></center></div><p style='clear: both;'> ")
+            +movies[i].table.id+"' id='movieButton', data-value='"
+            +movies[i].table.original_title+"'>+</button></center></div><p style='clear: both;'> ")
           }
           console.log(data.results);
         }
+      }
 
     });
   }
   })
+$('.form_submit5').on('click',function(event){
+for(i=1;i<8;i++){
+$( "#searchMovies" ).empty();
+var form=$(this).parent('form');
+
+event.preventDefault()
+$.ajax({
+        type: "GET",
+        url: "<%=searches_path%>",
+        data: form.serialize()+"&page="+i,
+        dataType: "JSON",
+        success: function(data){
+          var test=data
+          var movies=data.results
+
+          // console.log(movies[i]);
+          for(i=0;i<movies.length;i++){
+            if(movies[i].table.poster_path != undefined){
+
+          $('#searchMovies').append(
+            "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
+            +movies[i].table.original_title
+            +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
+            +movies[i].table.poster_path+"' id='movieImg'><span class='movieDetails'> Rating: </span><span class='movieInfo'>"
+            +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
+            +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
+            +movies[i].table.overview+"</br> <center><button value='"
+            +movies[i].table.id+"' id='movieButton', data-value='"
+            +movies[i].table.original_title+"'>+</button></center></div><p style='clear: both;'> ")
+          }
+          console.log(data.results);
+        }
+      }
+
+    });
+  }
+  })
+$('.form_submit6').on('click',function(event){
+for(i=1;i<8;i++){
+$( "#searchMovies" ).empty();
+var form=$(this).parent('form');
+
+event.preventDefault()
+$.ajax({
+        type: "GET",
+        url: "<%=searches_path%>",
+        data: form.serialize()+"&page="+i,
+        dataType: "JSON",
+        success: function(data){
+          var test=data
+          var movies=data.results
+
+          // console.log(movies[i]);
+          for(i=0;i<movies.length;i++){
+            if(movies[i].table.poster_path != undefined){
+
+          $('#searchMovies').append(
+            "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
+            +movies[i].table.original_title
+            +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
+            +movies[i].table.poster_path+"' id='movieImg'><span class='movieDetails'> Rating: </span><span class='movieInfo'>"
+            +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
+            +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
+            +movies[i].table.overview+"</br> <center><button value='"
+            +movies[i].table.id+"' id='movieButton', data-value='"
+            +movies[i].table.original_title+"'>+</button></center></div><p style='clear: both;'> ")
+          }
+          console.log(data.results);
+        }
+      }
+
+    });
+  }
+  })
+$('.form_submit7').on('click',function(event){
+for(i=1;i<8;i++){
+$( "#searchMovies" ).empty();
+var form=$(this).parent('form');
+
+event.preventDefault()
+$.ajax({
+        type: "GET",
+        url: "<%=searches_path%>",
+        data: form.serialize()+"&page="+i,
+        dataType: "JSON",
+        success: function(data){
+          var test=data
+          var movies=data.results
+
+          // console.log(movies[i]);
+          for(i=0;i<movies.length;i++){
+            if(movies[i].table.poster_path != undefined){
+
+
+          $('#searchMovies').append(
+            "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
+            +movies[i].table.original_title
+            +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
+            +movies[i].table.poster_path+"' id='movieImg'><span class='movieDetails'> Rating: </span><span class='movieInfo'>"
+            +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
+            +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
+            +movies[i].table.overview+"</br> <center><button value='"
+            +movies[i].table.id+"' id='movieButton', data-value='"
+            +movies[i].table.original_title+"'>+</button></center></div><p style='clear: both;'> ")
+          }
+          console.log(data.results);
+        }
+      }
+
+
+    });
+  }
+  })
+
+
+$('.form_submit8').on('click',function(event){
+for(i=1;i<8;i++){
+$( "#searchMovies" ).empty();
+var form=$(this).parent('form');
+
+event.preventDefault()
+$.ajax({
+        type: "GET",
+        url: "<%=searches_path%>",
+        data: form.serialize()+"&page="+i,
+        dataType: "JSON",
+        success: function(data){
+          var test=data
+          var movies=data.results
+
+          // console.log(movies[i]);
+          for(i=0;i<movies.length;i++){
+            if(movies[i].table.poster_path != undefined){
+
+          $('#searchMovies').append(
+            "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
+            +movies[i].table.original_title
+            +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
+            +movies[i].table.poster_path+"' id='movieImg'><span class='movieDetails'> Rating: </span><span class='movieInfo'>"
+            +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
+            +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
+            +movies[i].table.overview+"</br> <center><button value='"
+            +movies[i].table.id+"' id='movieButton', data-value='"
+            +movies[i].table.original_title+"'>+</button></center></div><p style='clear: both;'> ")
+          }
+          console.log(data.results);
+        }
+      }
+
+
+    });
+  }
+  })
+
+
+
+
 })
 
 
@@ -278,7 +625,7 @@ $.ajax({
 
 function create(){
   var list=document.createElement("li")
-  list.innerHTML=movieName[movieName.length-1]+"<span class='deleteMovie' value="+movieList[movieList.length-1]+"> Delete?</span> <input class='moveElement' value="+movieList[movieList.length-1]+">&uarr;</input> <span class='moveElement'>&darr;</span>"
+  list.innerHTML=movieName[movieName.length-1]+"<span class='deleteMovie' value="+movieList[movieList.length-1]+"> X</span> <input class='moveElements' type='hidden' value="+movieList[movieList.length-1]+"></input>&uarr; <span id='moveElement' value="+movieList[movieList.length-1]+" type='button'>&darr;</button>"
   list.value=movieList[movieList.length-1]
   createList.appendChild(list)
 
@@ -304,9 +651,13 @@ function create(){
           movieList.splice(j,1)
         }
         clicked.remove()
+        movie_ids.value=movieList
 
       }
   // moveUp button functionality
+
+
+
 
 
 
@@ -318,13 +669,9 @@ function create(){
           //     createList.innerHTML="<li>"+movieList[i]+"</li> <span class='deleteMovie' value="+movieList[movieList.length-1]+"> Delete?</span> <span class='moveUp'>+</span> <span class='moveDown'>-</span>"
           //        }
 
-
+          movie_ids.value=movieList
 
       }
-
-
-
-
 
 
 
@@ -362,7 +709,18 @@ function create(){
     // }
 
 
+// boolean check for list creation
 
+// listToggle.addEventListener('change', function(){
+//   if(listToggle.checked){
+//     private.value=true
+//   }
+//   else{
+//     private.value=false
+//
+//   }
+//
+// })
 
 
 
@@ -385,6 +743,32 @@ function addParam(v) {
 option1.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
   clearAll()
+  option1.style.fontWeight="bold"
+  option1.style.color="#cb00ff"
+
+  option2.style.fontWeight="normal"
+  option2.style.color="#919191"
+
+  option3.style.fontWeight="normal"
+  option3.style.color="#919191"
+
+  option4.style.fontWeight="normal"
+  option4.style.color="#919191"
+
+  option5.style.fontWeight="normal"
+  option5.style.color="#919191"
+
+  option6.style.fontWeight="normal"
+  option6.style.color="#919191"
+
+  option7.style.fontWeight="normal"
+  option7.style.color="#919191"
+
+  option8.style.fontWeight="normal"
+  option8.style.color="#919191"
+
+
+
   searchMovie.style.display="block"
   genreChecks.style.display="block"
   movieRatings.style.display="block"
@@ -398,6 +782,18 @@ option1.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  genres1=[]
+  genres2=[]
+  genres3=[]
+  genres4=[]
+  genres5=[]
+  genres6=[]
+  genres.value=[]
+  genresD.value=[]
+  genresP.value=[]
+  genresT.value=[]
+  genresL.value=[]
+  genresU.value=[]
   show.checked = false;
 })
 
@@ -407,8 +803,33 @@ option1.addEventListener('click', function(){
 // search by actor
 
 option2.addEventListener('click', function(){
-  // window.history.replaceState({}, document.title, "/" + "searches");
+
   clearAll()
+
+  option2.style.fontWeight="bold"
+  option2.style.color="#cb00ff"
+
+  option1.style.fontWeight="normal"
+  option1.style.color="#919191"
+
+  option3.style.fontWeight="normal"
+  option3.style.color="#919191"
+
+  option4.style.fontWeight="normal"
+  option4.style.color="#919191"
+
+  option5.style.fontWeight="normal"
+  option5.style.color="#919191"
+
+  option6.style.fontWeight="normal"
+  option6.style.color="#919191"
+
+  option7.style.fontWeight="normal"
+  option7.style.color="#919191"
+
+  option8.style.fontWeight="normal"
+  option8.style.color="#919191"
+
   searchMovie.style.display="none"
   genreChecks.style.display="none"
   searchActor.style.display="block"
@@ -422,6 +843,18 @@ option2.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  genres1=[]
+  genres2=[]
+  genres3=[]
+  genres4=[]
+  genres5=[]
+  genres6=[]
+  genres.value=[]
+  genresD.value=[]
+  genresP.value=[]
+  genresT.value=[]
+  genresL.value=[]
+  genresU.value=[]
   show.checked = false;
 })
 // Search by genre
@@ -429,6 +862,30 @@ option2.addEventListener('click', function(){
 option3.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
   clearAll()
+  option3.style.fontWeight="bold"
+  option3.style.color="#cb00ff"
+
+  option1.style.fontWeight="normal"
+  option1.style.color="#919191"
+
+  option2.style.fontWeight="normal"
+  option2.style.color="#919191"
+
+  option4.style.fontWeight="normal"
+  option4.style.color="#919191"
+
+  option5.style.fontWeight="normal"
+  option5.style.color="#919191"
+
+  option6.style.fontWeight="normal"
+  option6.style.color="#919191"
+
+  option7.style.fontWeight="normal"
+  option7.style.color="#919191"
+
+  option8.style.fontWeight="normal"
+  option8.style.color="#919191"
+
   searchMovie.style.display="none"
   genreChecks.style.display="none"
   searchActor.style.display="none"
@@ -442,6 +899,18 @@ option3.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  genres1=[]
+  genres2=[]
+  genres3=[]
+  genres4=[]
+  genres5=[]
+  genres6=[]
+  genres.value=[]
+  genresD.value=[]
+  genresP.value=[]
+  genresT.value=[]
+  genresL.value=[]
+  genresU.value=[]
   show.checked = false;
 })
 
@@ -450,11 +919,35 @@ option3.addEventListener('click', function(){
 option4.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
   clearAll()
+  option4.style.fontWeight="bold"
+  option4.style.color="#cb00ff"
+
+  option1.style.fontWeight="normal"
+  option1.style.color="#919191"
+
+  option3.style.fontWeight="normal"
+  option3.style.color="#919191"
+
+  option1.style.fontWeight="normal"
+  option1.style.color="#919191"
+
+  option5.style.fontWeight="normal"
+  option5.style.color="#919191"
+
+  option6.style.fontWeight="normal"
+  option6.style.color="#919191"
+
+  option7.style.fontWeight="normal"
+  option7.style.color="#919191"
+
+  option8.style.fontWeight="normal"
+  option8.style.color="#919191"
+
   searchMovie.style.display="none"
-  genreChecks.style.display="block"
+  genreChecks.style.display="none"
   searchActor.style.display="none"
   genreLinks.style.display="none"
-  movieRatings.style.display="block"
+  movieRatings.style.display="none"
   searchDirector.style.display="block"
   searchPopular.style.display="none"
   // moviesContainer.style.display="grid"
@@ -462,6 +955,18 @@ option4.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  genres1=[]
+  genres2=[]
+  genres3=[]
+  genres4=[]
+  genres5=[]
+  genres6=[]
+  genres.value=[]
+  genresD.value=[]
+  genresP.value=[]
+  genresT.value=[]
+  genresL.value=[]
+  genresU.value=[]
   show.checked = false;
   // directorsContainer.style.display="none"
 })
@@ -471,6 +976,30 @@ option4.addEventListener('click', function(){
 option5.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
   clearAll()
+  option5.style.fontWeight="bold"
+  option5.style.color="#cb00ff"
+
+  option1.style.fontWeight="normal"
+  option1.style.color="#919191"
+
+  option3.style.fontWeight="normal"
+  option3.style.color="#919191"
+
+  option4.style.fontWeight="normal"
+  option4.style.color="#919191"
+
+  option2.style.fontWeight="normal"
+  option2.style.color="#919191"
+
+  option6.style.fontWeight="normal"
+  option6.style.color="#919191"
+
+  option7.style.fontWeight="normal"
+  option7.style.color="#919191"
+
+  option8.style.fontWeight="normal"
+  option8.style.color="#919191"
+
   searchMovie.style.display="none"
   genreChecks.style.display="block"
   searchActor.style.display="none"
@@ -483,6 +1012,18 @@ option5.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  genres1=[]
+  genres2=[]
+  genres3=[]
+  genres4=[]
+  genres5=[]
+  genres6=[]
+  genres.value=[]
+  genresD.value=[]
+  genresP.value=[]
+  genresT.value=[]
+  genresL.value=[]
+  genresU.value=[]
   show.checked = false;
   // directorsContainer.style.display="none"
 })
@@ -491,6 +1032,30 @@ option5.addEventListener('click', function(){
 option6.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
   clearAll()
+  option6.style.fontWeight="bold"
+  option6.style.color="#cb00ff"
+
+  option2.style.fontWeight="normal"
+  option2.style.color="#919191"
+
+  option3.style.fontWeight="normal"
+  option3.style.color="#919191"
+
+  option4.style.fontWeight="normal"
+  option4.style.color="#919191"
+
+  option5.style.fontWeight="normal"
+  option5.style.color="#919191"
+
+  option1.style.fontWeight="normal"
+  option1.style.color="#919191"
+
+  option7.style.fontWeight="normal"
+  option7.style.color="#919191"
+
+  option8.style.fontWeight="normal"
+  option8.style.color="#919191"
+
   searchMovie.style.display="none"
   genreChecks.style.display="block"
   searchActor.style.display="none"
@@ -503,6 +1068,18 @@ option6.addEventListener('click', function(){
   searchTop.style.display="block"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  genres1=[]
+  genres2=[]
+  genres3=[]
+  genres4=[]
+  genres5=[]
+  genres6=[]
+  genres.value=[]
+  genresD.value=[]
+  genresP.value=[]
+  genresT.value=[]
+  genresL.value=[]
+  genresU.value=[]
   show.checked = false;
   // directorsContainer.style.display="none"
 })
@@ -511,6 +1088,30 @@ option6.addEventListener('click', function(){
 option7.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
   clearAll()
+  option7.style.fontWeight="bold"
+  option7.style.color="#cb00ff"
+
+  option2.style.fontWeight="normal"
+  option2.style.color="#919191"
+
+  option3.style.fontWeight="normal"
+  option3.style.color="#919191"
+
+  option4.style.fontWeight="normal"
+  option4.style.color="#919191"
+
+  option5.style.fontWeight="normal"
+  option5.style.color="#919191"
+
+  option6.style.fontWeight="normal"
+  option6.style.color="#919191"
+
+  option1.style.fontWeight="normal"
+  option1.style.color="#919191"
+
+  option8.style.fontWeight="normal"
+  option8.style.color="#919191"
+
   searchMovie.style.display="none"
   genreChecks.style.display="block"
   searchActor.style.display="none"
@@ -523,6 +1124,18 @@ option7.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="block"
   searchUpcoming.style.display="none"
+  genres1=[]
+  genres2=[]
+  genres3=[]
+  genres4=[]
+  genres5=[]
+  genres6=[]
+  genres.value=[]
+  genresD.value=[]
+  genresP.value=[]
+  genresT.value=[]
+  genresL.value=[]
+  genresU.value=[]
   show.checked = false;
   // directorsContainer.style.display="none"
 })
@@ -532,6 +1145,30 @@ option7.addEventListener('click', function(){
 option8.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
   clearAll()
+  option8.style.fontWeight="bold"
+  option8.style.color="#cb00ff"
+
+  option2.style.fontWeight="normal"
+  option2.style.color="#919191"
+
+  option3.style.fontWeight="normal"
+  option3.style.color="#919191"
+
+  option4.style.fontWeight="normal"
+  option4.style.color="#919191"
+
+  option5.style.fontWeight="normal"
+  option5.style.color="#919191"
+
+  option6.style.fontWeight="normal"
+  option6.style.color="#919191"
+
+  option7.style.fontWeight="normal"
+  option7.style.color="#919191"
+
+  option1.style.fontWeight="normal"
+  option1.style.color="#919191"
+
   searchMovie.style.display="none"
   genreChecks.style.display="block"
   searchActor.style.display="none"
@@ -544,6 +1181,18 @@ option8.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="block"
+  genres1=[]
+  genres2=[]
+  genres3=[]
+  genres4=[]
+  genres5=[]
+  genres6=[]
+  genres.value=[]
+  genresD.value=[]
+  genresP.value=[]
+  genresT.value=[]
+  genresL.value=[]
+  genresU.value=[]
   show.checked = false;
   // directorsContainer.style.display="none"
 })
@@ -554,6 +1203,12 @@ option8.addEventListener('click', function(){
 
 genreDrop.addEventListener('input', function(){
   l.value= genreDrop.value
+
+});
+// type drop down selector for genre and rating
+
+typeListDrop.addEventListener('input', function(){
+  type.value= typeListDrop.value
 
 });
 
@@ -1379,49 +2034,6 @@ genreSelector18.addEventListener('change', function(){
 })
 
 
-
-
-
-// for(i=0;i<genreSelector.length;i++){
-//     genreSelector[i].addEventListener("click", function(event){
-//       if(genreSelector0.checked || genreSelector1.checked || genreSelector2.checked || genreSelector3.checked || genreSelector4.checked || genreSelector5.checked || genreSelector6.checked || genreSelector7.checked || genreSelector8.checked || genreSelector9.checked || genreSelector10.checked || genreSelector11.checked || genreSelector12.checked || genreSelector13.checked || genreSelector14.checked || genreSelector15.checked || genreSelector16.checked || genreSelector17.checked || genreSelector18.checked){
-//         console.log(event.target.value);
-//         genres1.push(event.target.value)
-//         genres2.push(event.target.value)
-//         genres3.push(event.target.value)
-//         genres4.push(event.target.value)
-//         genres5.push(event.target.value)
-//         genres6.push(event.target.value)
-//         genres.value=genres1
-//         genresD.value=genres2
-//         genresP.value=genres3
-//         genresT.value=genres4
-//         genresL.value=genres5
-//         genresU.value=genres6
-//         show.checked = false;
-//       }
-//         else{
-//           var a=genres1.indexOf(event.target.value)
-//           var b=genres2.indexOf(event.target.value)
-//           var c=genres3.indexOf(event.target.value)
-//           var d=genres4.indexOf(event.target.value)
-//           var e=genres5.indexOf(event.target.value)
-//           var f=genres6.indexOf(event.target.value)
-//           genres1.splice(a, 1)
-//           genres.value=genres1
-//           genres2.splice(b, 1)
-//           genresD.value=genres2
-//           genres3.splice(c, 1)
-//           genresP.value=genres3
-//           genres4.splice(d, 1)
-//           genresT.value=genres4
-//           genres5.splice(e, 1)
-//           genresL.value=genres5
-//           genres6.splice(f, 1)
-//           genresU.value=genres6
-//         }
-//     })
-//   }
 
 
 </script>

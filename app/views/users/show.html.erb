@@ -1,28 +1,66 @@
-<h1>User<span class="symbol">#</span>posts</h1>
+<div class="userWrapper">
+  <div class="userLeft">
 
-<%@user.blogs.reverse.each do |b| %>
-<p>
-<span class="blogTitle"><%=b.title%></span><br>
-<span class="postedBy">Posted By: <a href="/users/<%=b.user.id%>/" class="link"><%=b.user.email%></a></span>
-<span class="blogDateTime">
- <span class="postedBy">on</span> <%=b.created_at.strftime(
+<h1>Public<span class="symbol">#</span>lists</h1>
+
+
+<%@user.lists.each do |l|%>
+<%if l.private == false%>
+
+
+<p><div class="boxWrapper">
+
+  <div class="userListWrapper">
+<span class='movieTitle'> <a href="/lists/<%=l.id%>" class="listLink"><%=l.name%></a></span><br>
+<span class="blogDateTime"><span class="postedBy">Created </span> <%=l.created_at.strftime(
 '%a, %b %Y'
-)%> <span class="postedBy">at</span> <%=b.created_at.strftime(
+)%> <span class="postedBy">at</span> <%=l.created_at.strftime(
 '%I:%M %p'
-)%></span>
-<p><%=b.content.html_safe%></p>
-
-
-
-
-<%if current_user%>
-<%if current_user.id == b.user_id%>
- <a href="/blogs/<%=b.id%>/edit" class="link">Edit</a> | <%= link_to 'Delete', { controller: :blogs, action: :destroy, id: b.id },
+)%> ET</span>
+<span class="listCount"><%=l.movie_ids[0].count%> movies</span></div>
+<p><%=l.description%></p>  <%= link_to 'Delete?', { controller: :lists, action: :destroy, id: l.id },
   method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
+</div>
 
 
- <%end%>
- <%end%>
-<hr>
+
+
 <%end%>
-<!-- current_user.comments.update -->
+<%end%>
+</div>
+
+<div class="userRight">
+  <h1>Private<span class="symbol">#</span>lists</h1>
+
+  <%@user.lists.each do |l|%>
+  <%if l.private == true%>
+
+
+  <p><div class="boxWrapper">
+
+    <div class="userListWrapper">
+  <span class='movieTitle'> <a href="/lists/<%=l.id%>" class="listLink"><%=l.name%></a></span><br>
+  <span class="blogDateTime"><span class="postedBy">Created </span> <%=l.created_at.strftime(
+  '%a, %b %Y'
+  )%> <span class="postedBy">at</span> <%=l.created_at.strftime(
+  '%I:%M %p'
+  )%> ET</span>
+  <span class="listCount"><%=l.movie_ids[0].count%> movies</span></div>
+  <p><%=l.description%></p>
+  <%= link_to 'Delete?', { controller: :lists, action: :destroy, id: l.id },
+  method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
+  </div>
+
+
+
+
+
+
+  <%end%>
+  <%end%>
+
+
+</div></p>
+</div>
+<script>
+</script>
