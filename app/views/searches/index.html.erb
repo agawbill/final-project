@@ -210,13 +210,19 @@
     <%if current_user%>
     <%= form_for @list do |f|%>
     <%= f.text_area :name, :placeholder=>"Title", :class=>"textTitleAreaL" %>
+    <p><div>
+    Pick the type of list: <select id="typeListDrop">
+      <option value='Movies'>Movies</option>
+      <option value='Actors'>Actors</option>
+      <option value='Directors'>Directors</option></div>
+    </select>
     <p><div id="createList">
     </div></p>
     <%= f.text_area :description, :placeholder=>"Type description here", :class=>"textBodyAreaL" %></p>
-    <input type="checkbox" id="listToggle" name="feature"
-            value="true" placeholder="Adventure" />  Make Private?
+    <%= f.check_box :private %>  Make Private?
     <%= hidden_field_tag :movie_ids %>
-    <%= hidden_field_tag :private %>
+    <%= hidden_field_tag :type %>
+    <!-- <%= hidden_field_tag :private %> -->
     <p><%= f.submit "Create a new List" %></p>
     <% end  %>
     <%else%>
@@ -251,6 +257,7 @@ var genres6=[]
 var genres= document.getElementById('genres')
 var moviesContainer= document.getElementById('moviesContainer')
 var genreDrop= document.getElementById('genreDrop')
+var typeListDrop= document.getElementById('typeListDrop')
 var ratingDrop= document.getElementById('ratingDrop')
 var option1= document.getElementById('option1')
 var option2= document.getElementById('option2')
@@ -268,8 +275,8 @@ var genreSelector=[genreSelector0, genreSelector1, genreSelector2, genreSelector
 var createListChildren=createList.children
 var searchHeader=document.getElementById('searchHeader')
 var movie_ids=document.getElementById('movie_ids')
-var listToggle=document.getElementById('listToggle')
-var private1=document.getElementById('private')
+// var listToggle=document.getElementById('listToggle')
+var private=document.getElementById('private')
 
 // var xhr= new XMLHttpRequest();
 //
@@ -284,7 +291,7 @@ $(document).ready(function(){
 
 
 $('.form_submit1').on('click',function(event){
-for(i=1;i<21;i++){
+for(i=1;i<15;i++){
 $( "#searchMovies" ).empty();
 var form=$(this).parent('form');
 
@@ -324,7 +331,7 @@ $.ajax({
   })
 
 $('.form_submit2').on('click',function(event){
-for(i=1;i<21;i++){
+for(i=1;i<15;i++){
 
 $( "#searchMovies" ).empty();
 var form=$(this).parent('form');
@@ -368,7 +375,7 @@ $.ajax({
   }
   })
 $('.form_submit3').on('click',function(event){
-for(i=1;i<21;i++){
+for(i=1;i<15;i++){
 $( "#searchMovies" ).empty();
 var form=$(this).parent('form');
 
@@ -413,7 +420,7 @@ $.ajax({
   }
   })
 $('.form_submit4').on('click',function(event){
-for(i=1;i<21;i++){
+for(i=1;i<8;i++){
 $( "#searchMovies" ).empty();
 var form=$(this).parent('form');
 
@@ -450,7 +457,7 @@ $.ajax({
   }
   })
 $('.form_submit5').on('click',function(event){
-for(i=1;i<12;i++){
+for(i=1;i<8;i++){
 $( "#searchMovies" ).empty();
 var form=$(this).parent('form');
 
@@ -487,7 +494,7 @@ $.ajax({
   }
   })
 $('.form_submit6').on('click',function(event){
-for(i=1;i<12;i++){
+for(i=1;i<8;i++){
 $( "#searchMovies" ).empty();
 var form=$(this).parent('form');
 
@@ -524,7 +531,7 @@ $.ajax({
   }
   })
 $('.form_submit7').on('click',function(event){
-for(i=1;i<12;i++){
+for(i=1;i<8;i++){
 $( "#searchMovies" ).empty();
 var form=$(this).parent('form');
 
@@ -565,7 +572,7 @@ $.ajax({
 
 
 $('.form_submit8').on('click',function(event){
-for(i=1;i<12;i++){
+for(i=1;i<8;i++){
 $( "#searchMovies" ).empty();
 var form=$(this).parent('form');
 
@@ -704,16 +711,16 @@ function create(){
 
 // boolean check for list creation
 
-listToggle.addEventListener('change', function(){
-  if(listToggle.checked){
-    private1.value=true
-  }
-  else{
-    private1.value=false
-
-  }
-
-})
+// listToggle.addEventListener('change', function(){
+//   if(listToggle.checked){
+//     private.value=true
+//   }
+//   else{
+//     private.value=false
+//
+//   }
+//
+// })
 
 
 
@@ -1196,6 +1203,12 @@ option8.addEventListener('click', function(){
 
 genreDrop.addEventListener('input', function(){
   l.value= genreDrop.value
+
+});
+// type drop down selector for genre and rating
+
+typeListDrop.addEventListener('input', function(){
+  type.value= typeListDrop.value
 
 });
 

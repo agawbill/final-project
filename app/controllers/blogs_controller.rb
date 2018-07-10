@@ -3,6 +3,7 @@ class BlogsController < ApplicationController
     @users=Admin.all
     @blogs=Blog.all
     @comments=Comment.all
+    @lists=List.all.order(:cached_votes_up => :desc)
   end
 
   def show

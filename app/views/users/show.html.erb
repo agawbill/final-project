@@ -18,8 +18,10 @@
 '%I:%M %p'
 )%> ET</span>
 <span class="listCount"><%=l.movie_ids[0].count%> movies</span></div>
-<p><%=l.description%>
-</div></p>
+<p><%=l.description%></p>  <%= link_to 'Delete?', { controller: :lists, action: :destroy, id: l.id },
+  method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
+</div>
+
 
 
 
@@ -44,8 +46,13 @@
   '%I:%M %p'
   )%> ET</span>
   <span class="listCount"><%=l.movie_ids[0].count%> movies</span></div>
-  <p><%=l.description%>
-  </div></p>
+  <p><%=l.description%></p>
+  <%= link_to 'Delete?', { controller: :lists, action: :destroy, id: l.id },
+  method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
+  </div>
+
+
+
 
 
 

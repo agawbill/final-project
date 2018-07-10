@@ -1,8 +1,8 @@
 class ListsController < ApplicationController
   respond_to :html, :json, :xml, :js
-
   before_action :set_list, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   def index
+    @lists=List.all.order(:cached_votes_up => desc)
 
   end
 
@@ -15,11 +15,7 @@ class ListsController < ApplicationController
     array=params[:movie_ids].split(',').map(&:to_i)
     list.movie_ids.push(array)
     list.user_id=current_user.id
-    if params[:private]=true
-      list.private=true
-    else
-      list.private=false
-    end
+    # end
     if list.save
       redirect_to "/users/#{current_user.id}"
     else
@@ -59,6 +55,9 @@ class ListsController < ApplicationController
   end
 
   def destroy
+    @list = List.find(params[:id])
+    @list.destroy
+      redirect_to "/"
   end
 
   private
@@ -66,6 +65,6 @@ class ListsController < ApplicationController
     @list=List.find(params[:id])
   end
   def list_params
-    params.require(:list).permit(:name, :movie_ids, :user_id, :description, :private)
+    params.require(:list).permit(:name, :movie_ids, :user_id, :description, :type, :private)
   end
 end
