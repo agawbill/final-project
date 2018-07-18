@@ -22,28 +22,28 @@
 
     </div>
 
-    <%@list.movie_ids[0].each do |i| %>
+    <%@movieLists.each do |movie| %>
 
 
 
 
   <p><div class='movie'><div class='movieHeader'><span class='movieTitle'>
-  <%=Tmdb::Movie.detail(i).original_title%></span><br>
-  <i>"<%=Tmdb::Movie.detail(i).tagline%>"</i>
+  <%=movie.original_title%></span><br>
+  <i>"<%=movie.tagline%>"</i>
 
-  </div> <br><img src='https://image.tmdb.org/t/p/w500/<%=Tmdb::Movie.detail(i).poster_path%>' id='movieImg'>
+</div> <br><img src='https://image.tmdb.org/t/p/w500/<%=movie.poster_path%>' id='movieImg'>
   <span class='movieDetails'> Webpage: </span>
-  <span class='movieInfo'><a href="<%=Tmdb::Movie.detail(i).homepage%>"><%=Tmdb::Movie.detail(i).homepage%></a></span><br>
+  <span class='movieInfo'><a href="<%=movie.homepage%>"><%=movie.homepage%></a></span><br>
   <span class='movieDetails'> Rating: </span><span class='movieInfo'>
-  <%=Tmdb::Movie.detail(i).vote_average%></span><br>
+  <%=movie.vote_average%></span><br>
   <span class='movieDetails'> Popularity: </span><span class='movieInfo'>
-  <%=Tmdb::Movie.detail(i).popularity%></span><br><br>
+  <%=movie.popularity%></span><br><br>
   <span class='movieDetails'>Overview: </span><p>
-  <%=Tmdb::Movie.detail(i).overview%></p></center>
+  <%=movie.overview%></p></center>
 
   <div class="similiarMovies"><p>
     <%=form_tag("/lists", method: "get", :remote => "true") do%>
-  <%= hidden_field_tag :s, i%>
+  <%= hidden_field_tag :s, movie.id%>
   <%=submit_tag("Show similar movies", :class => "similiar_submit")%>
   <%end%></p></div>
 
@@ -62,6 +62,9 @@
     <%= social_share_button_tag(@list.name, :url => "http://myapp.com/foo/bar") %>
   </div></p>
 <h1>Similar<span class="symbol">#</span>movies</h1>
+<div id="loading">
+  <center><%=image_tag "loading.gif", :class => "loadingImg"%></center>
+</div>
   <div id="displayMovies">
     Click "show similar movies" next to each movie title to get simiar film suggestions.
   </div>
@@ -74,6 +77,13 @@
 </div>
 <script>
 
+$( document ).ajaxStart(function() {
+    $( "#loading" ).show();
+});
+
+$( document ).ajaxStop(function() {
+    $( "#loading" ).hide();
+});
 
 $(document).ready(function(){
 
@@ -90,7 +100,7 @@ $.ajax({
       dataType: "JSON",
 
       success: function(data){
-        var movies=data.results.table.results;
+        var movies=data.movies.table.results;
         for(i=0;i<movies.length;i++){
 
           $('#displayMovies').append(
@@ -102,7 +112,7 @@ $.ajax({
             +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
             +movies[i].table.overview+"</br> <center></center></div><p style='clear: both;'> ")
           }
-          console.log(data.results.table.results);
+          console.log(data.movies.table.results);
         }
 
   });
