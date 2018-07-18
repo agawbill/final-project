@@ -48,6 +48,7 @@ gem 'acts_as_votable', '~> 0.11.1'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'jquery-turbolinks'
 
 
 group :development, :test do
@@ -68,6 +69,12 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15', '< 4.0'
   gem 'selenium-webdriver'
+group :development, :test do
   gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
+end
   # Easy installation and use of chromedriver to run system tests with Chrome
 end

@@ -2,7 +2,7 @@ class ListsController < ApplicationController
   respond_to :html, :json, :xml, :js
   before_action :set_list, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   def index
-    @lists=List.all.order(:cached_votes_up => desc)
+    # @lists=List.all.order(:cached_votes_up => desc)
 
   end
 
@@ -24,18 +24,23 @@ class ListsController < ApplicationController
   end
 
   def show
+    @movieLists=[]
     @list=List.find(params[:id])
+    @movieList=@list.movie_ids[0]
+    for movie_id in @movieList do
+      @movieLists.push(Tmdb::Movie.detail(movie_id))
+    end
+
+
     @user =User.find(current_user.id)
     if params[:s].present?
     @movies=Tmdb::Movie.similar(params[:s])
-    @results=@movies
     @pages=@movies.total_pages
     @entries=@movies.total_results
-    @count=@results.count
     respond_to do |format|
     format.html # show.html.erb
     format.js
-    format.json { render :json => {:movies => @movies, :results => @results }}
+    format.json { render :json => {:movies => @movies }}
   end
   end
   end
