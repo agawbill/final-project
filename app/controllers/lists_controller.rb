@@ -24,6 +24,7 @@ class ListsController < ApplicationController
   end
 
   def show
+
     @movieLists=[]
     @list=List.find(params[:id])
     @movieList=@list.movie_ids[0]
@@ -31,8 +32,6 @@ class ListsController < ApplicationController
       @movieLists.push(Tmdb::Movie.detail(movie_id))
     end
 
-
-    @user =User.find(current_user.id)
     if params[:s].present?
     @movies=Tmdb::Movie.similar(params[:s])
     @pages=@movies.total_pages
