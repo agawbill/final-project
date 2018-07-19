@@ -10,8 +10,7 @@ respond_to :html, :json, :xml, :js
       @movies=Tmdb::Search.movie(params[:q], page: i+1).results
       array=params[:genres].split(',').map(&:to_i)
       for movie in @movies do
-        if
-        array.all? {|i| movie.genre_ids.include? i }
+        if array.all? {|i| movie.genre_ids.include? i }
         @solid.push(movie)
       end
       end
@@ -27,8 +26,7 @@ respond_to :html, :json, :xml, :js
       for i in 0...10
       @genres=Tmdb::Genre.movies(params[:l], page: i+1)
       for movie in @genres.results do
-        if
-        movie.vote_average >= params[:rating].to_i
+        if movie.vote_average >= params[:rating].to_i
         @solid.push(movie)
       end
       end
@@ -48,8 +46,7 @@ respond_to :html, :json, :xml, :js
       for i in 0...10
       @movies=Tmdb::Movie.popular(page: i+1).results
       for movie in @movies do
-        if
-        array.all? {|i| movie.genre_ids.include? i }
+        if array.all? {|i| movie.genre_ids.include? i }
         @solid.push(movie)
       end
       end
@@ -69,8 +66,7 @@ respond_to :html, :json, :xml, :js
       for i in 0...10
       @movies=Tmdb::Movie.top_rated(page: i+1).results
       for movie in @movies do
-        if
-        array.all? {|i| movie.genre_ids.include? i }
+        if array.all? {|i| movie.genre_ids.include? i }
         @solid.push(movie)
       end
       end
@@ -87,8 +83,7 @@ respond_to :html, :json, :xml, :js
       for i in 0...10
       @movies=Tmdb::Movie.upcoming(page: i+1).results
       for movie in @movies do
-        if
-        array.all? {|i| movie.genre_ids.include? i }
+        if array.all? {|i| movie.genre_ids.include? i }
         @solid.push(movie)
       end
       end
@@ -105,8 +100,7 @@ respond_to :html, :json, :xml, :js
       for i in 0...10
       @movies=Tmdb::Movie.now_playing(page: i+1).results
       for movie in @movies do
-        if
-        array.all? {|i| movie.genre_ids.include? i }
+        if array.all? {|i| movie.genre_ids.include? i }
         @solid.push(movie)
       end
       end
@@ -123,8 +117,7 @@ respond_to :html, :json, :xml, :js
       for i in 0...10
       @movies=Tmdb::Search.movie(params[:q], page: i+1)
       for movie in @movies do
-        if
-        array.all? {|i| movie.genre_ids.include? i }
+        if array.all? {|i| movie.genre_ids.include? i }
         @solid.push(movie)
       end
       end
@@ -140,19 +133,14 @@ respond_to :html, :json, :xml, :js
       for i in 0...10
       @movies=Tmdb::Search.movie(params[:q], page: i+1)
       for movie in @movies.results do
-
-        if
-          movie.vote_average >= params[:ratingQ].to_i
+        if movie.vote_average >= params[:ratingQ].to_i
           @solid.push(movie)
         end
         end
         end
       @results=@solid
-      @pages=@movies.total_pages
-      @entries=@movies.total_results
-      @count=@results.count
       respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.js
       format.json { render :json => {:results => @results }}
     end
@@ -162,18 +150,14 @@ respond_to :html, :json, :xml, :js
       for i in 0...10
       @movies=Tmdb::Movie.popular(page: i+1)
       for movie in @movies do
-        if
-        array.all? {|i| movie.genre_ids.include? i }
+        if array.all? {|i| movie.genre_ids.include? i }
         @solid.push(movie)
       end
       end
       end
       @results=@solid
-      @pages=@movies.total_pages
-      @entries=@movies.total_results
-      @count=@results.count
       respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.js
       format.json { render :json => {:results => @results }}
     end
@@ -183,17 +167,13 @@ respond_to :html, :json, :xml, :js
       for i in 0...10
       @movies=Tmdb::Movie.top_rated(page: i+1).results
       for movie in @movies do
-        if
-        array.all? {|i| movie.genre_ids.include? i }
+        if array.all? {|i| movie.genre_ids.include? i }
         @solid.push(movie)
       end
       end
       end
 
       @results=@solid
-      @pages=@movies.total_pages
-      @entries=@movies.total_results
-      @count=@results.count
       respond_to do |format|
       format.html # show.html.erb
       format.js
@@ -206,16 +186,12 @@ respond_to :html, :json, :xml, :js
       @movies=Tmdb::Movie.upcoming(page: i+1).results
 
       for movie in @movies do
-        if
-        array.all? {|i| movie.genre_ids.include? i }
+        if array.all? {|i| movie.genre_ids.include? i }
         @solid.push(movie)
       end
       end
       end
       @results=@solid
-      @pages=@movies.total_pages
-      @entries=@movies.total_results
-      @count=@results.count
       respond_to do |format|
       format.html # show.html.erb
       format.js
@@ -227,16 +203,12 @@ respond_to :html, :json, :xml, :js
       for i in 0...10
       @movies=Tmdb::Movie.now_playing(page: i+1).results
       for movie in @movies do
-        if
-        array.all? {|i| movie.genre_ids.include? i }
+        if array.all? {|i| movie.genre_ids.include? i }
         @solid.push(movie)
       end
       end
       end
       @results=@solid
-      @pages=@movies.total_pages
-      @entries=@movies.total_results
-      @count=@results.count
       respond_to do |format|
       format.html # show.html.erb
       format.js

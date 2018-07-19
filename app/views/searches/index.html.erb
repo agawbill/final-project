@@ -218,12 +218,7 @@
     <%= form_for @list do |f|%>
     <%= f.text_area :name, :placeholder=>"Title", :class=>"textTitleAreaL" %>
     <p><div>
-    Pick the type of list: <%= f.select :category, '<option value="Movies">Movies</option><option value="Actors">Actors</option><option value="Directors">Directors</option>'.html_safe %>
-     <!-- <select id="typeListDrop">
-      <option value='Movies'>Movies</option>
-      <option value='Actors'>Actors</option>
-      <option value='Directors'>Directors</option></div>
-    </select> -->
+    Pick the type of list: <%= f.select :category, '<option value="Movies">Movies</option><option value="Actors">Actors</option><option value="Directors">Directors</option>'.html_safe %></p>
     <p><div id="createList">
     </div></p>
     <%= f.text_area :description, :placeholder=>"Type description here", :class=>"textBodyAreaL" %></p>

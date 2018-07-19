@@ -3,10 +3,7 @@
 
 <h1>Public<span class="symbol">#</span>lists</h1>
 
-
-<%@user.lists.each do |l|%>
-<%if l.private == false%>
-
+<%@public.each do |l|%>
 
 <p><div class="boxWrapper">
 
@@ -26,14 +23,13 @@
 
 
 <%end%>
-<%end%>
 </div>
 
 <div class="userRight">
   <h1>Private<span class="symbol">#</span>lists</h1>
 
-  <%@user.lists.each do |l|%>
-  <%if l.private == true%>
+  <%@private.each do |l|%>
+
 
 
   <p><div class="boxWrapper">
@@ -56,7 +52,6 @@
 
 
 
-  <%end%>
   <%end%>
 
 
