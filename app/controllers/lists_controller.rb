@@ -70,6 +70,6 @@ class ListsController < ApplicationController
     @list=List.find(params[:id])
   end
   def list_params
-    params.require(:list).permit(:name, :movie_ids, :user_id, :description, :type, :private)
+    params.require(:list).permit(:name, :movie_ids, :user_id, :description, :category, :private)
   end
 end
