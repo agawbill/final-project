@@ -218,11 +218,12 @@
     <%= form_for @list do |f|%>
     <%= f.text_area :name, :placeholder=>"Title", :class=>"textTitleAreaL" %>
     <p><div>
-    Pick the type of list: <select id="typeListDrop">
+    Pick the type of list: <%= f.select :category, '<option value="Movies">Movies</option><option value="Actors">Actors</option><option value="Directors">Directors</option>'.html_safe %>
+     <!-- <select id="typeListDrop">
       <option value='Movies'>Movies</option>
       <option value='Actors'>Actors</option>
       <option value='Directors'>Directors</option></div>
-    </select>
+    </select> -->
     <p><div id="createList">
     </div></p>
     <%= f.text_area :description, :placeholder=>"Type description here", :class=>"textBodyAreaL" %></p>
@@ -261,7 +262,7 @@ var genres6=[]
 var genres= document.getElementById('genres')
 var moviesContainer= document.getElementById('moviesContainer')
 var genreDrop= document.getElementById('genreDrop')
-var typeListDrop= document.getElementById('typeListDrop')
+// var typeListDrop= document.getElementById('typeListDrop')
 var ratingDrop= document.getElementById('ratingDrop')
 var option1= document.getElementById('option1')
 var option2= document.getElementById('option2')
@@ -279,13 +280,11 @@ var genreSelector=[genreSelector0, genreSelector1, genreSelector2, genreSelector
 var createListChildren=createList.children
 var searchHeader=document.getElementById('searchHeader')
 var movie_ids=document.getElementById('movie_ids')
-// var listToggle=document.getElementById('listToggle')
 var private=document.getElementById('private')
-// var xhr= new XMLHttpRequest();
-//
-// xhr.open("GET", url, false)
-//
-// xhr.send(null)
+
+
+
+
 
 $( document ).ajaxStart(function() {
     $( "#loading" ).show();
@@ -371,42 +370,41 @@ $.ajax({
     });
   })
 $('.form_submit3').on('click',function(event){
-$( "#searchMovies" ).empty();
-var form=$(this).parent('form');
-event.preventDefault()
-$.ajax({
-        type: "GET",
-        url: "<%=searches_path%>",
-        data: form.serialize(),
-        dataType: "JSON",
-        success: function(data){
-          var test=data
-          var movies=data.results
-          for(i=0;i<movies.length;i++){
-            if(movies[i].table.profile_path != undefined){
-              if(movies[i].table.known_for.length >2){
-                if(movies[i].table.known_for[0].table.original_title != undefined && movies[i].table.known_for[1].table.original_title != undefined  && movies[i].table.known_for[2].table.original_title != undefined ){
-          $('#searchMovies').append(
-            "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
-            +movies[i].table.name
-            +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
-            +movies[i].table.profile_path+"' id='movieImg'><span class='movieDetails'> Popularity: </span><span class='movieInfo'>"
-            +movies[i].table.popularity+"</span><br><br><span class='movieDetails'> Known for: </span><p>1: "
-            +movies[i].table.known_for[0].table.original_title+"<br>2: "
-            +movies[i].table.known_for[1].table.original_title+"<br>3: "
-            +movies[i].table.known_for[2].table.original_title+ "</p><center><button value='"
-            +movies[i].table.id+"', id='movieButton', data-value='"
-            +movies[i].table.name+"'>+</button></center></div><p style='clear: both;'> ")
+  $( "#searchMovies" ).empty();
+    var form=$(this).parent('form');
+    event.preventDefault()
+    $.ajax({
+            type: "GET",
+            url: "<%=searches_path%>",
+            data: form.serialize(),
+            dataType: "JSON",
+            success: function(data){
+              var test=data
+              var movies=data.results
+              for(i=0;i<movies.length;i++){
+                if(movies[i].table.profile_path != undefined){
+                  if(movies[i].table.known_for.length >2){
+                    if(movies[i].table.known_for[0].table.original_title != undefined && movies[i].table.known_for[1].table.original_title != undefined  && movies[i].table.known_for[2].table.original_title != undefined ){
+              $('#searchMovies').append(
+                "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
+                +movies[i].table.name
+                +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
+                +movies[i].table.profile_path+"' id='movieImg'><span class='movieDetails'> Popularity: </span><span class='movieInfo'>"
+                +movies[i].table.popularity+"</span><br><br><span class='movieDetails'> Known for: </span><p>1: "
+                +movies[i].table.known_for[0].table.original_title+"<br>2: "
+                +movies[i].table.known_for[1].table.original_title+"<br>3: "
+                +movies[i].table.known_for[2].table.original_title+ "</p><center><button value='"
+                +movies[i].table.id+"', id='movieButton', data-value='"
+                +movies[i].table.name+"'>+</button></center></div><p style='clear: both;'> ")
+              }
+            }
           }
         }
+        console.log(data.results);
       }
-    }
-          console.log(data.results);
-        }
-    });
-  })
+  });
+})
 $('.form_submit4').on('click',function(event){
-// for(i=1;i<8;i++){
 $( "#searchMovies" ).empty();
 var form=$(this).parent('form');
 event.preventDefault()
@@ -437,8 +435,8 @@ $.ajax({
         console.log(data.results);
       }
     });
-  // }
   })
+
 $('.form_submit5').on('click',function(event){
 $( "#searchMovies" ).empty();
 var form=$(this).parent('form');
@@ -975,9 +973,9 @@ genreDrop.addEventListener('input', function(){
   l.value= genreDrop.value
 });
 // type drop down selector for genre and rating
-typeListDrop.addEventListener('input', function(){
-  type.value= typeListDrop.value
-});
+// typeListDrop.addEventListener('input', function(){
+//   type.value= typeListDrop.value
+// });
 ratingDrop.addEventListener('input', function(){
   rating.value= ratingDrop.value
   ratingQ.value= ratingDrop.value
