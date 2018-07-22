@@ -2,17 +2,16 @@
   <div class="blogLeft">
 
     <h2 id="headerSearch">Search<span class="symbol">#</span>movies</h2>
-    <p>
-  <div class="tmdbContainer"><%=image_tag "tmdb.png", :class=> "tmdb"%> <span class="tmdbText">This product uses the TMDb API but is not endorsed or certified by TMDb.</span></div></p>
 
 
   <p><div id="searchNav">
-<span class="movieTitle">Search:</span><p> <span id="option1" class="link">Movie name</span> | <span id="option2" class="link">Actor</span> | <span class="link" id="option3">Genre</span> | <span class="link" id="option4">Director</span></p>
+<span class="movieTitle">Search:</span><p> <span id="optionD" class="link">Discover</span> | <span id="option1" class="link">Movie name</span> | <span id="option2" class="link">Actor</span> | <span class="link" id="option3">Genre</span> | <span class="link" id="option4">Director</span></p>
 </div>
 <div id="searchNav">
-<span class="movieTitle">Discover:</span><p> <span id="option5" class="link">Popular movies</span> | <span class="link" id="option6">Top rated</span> | <span class="link" id="option7">Now playing</span> | <span class="link" id="option8">Upcoming</span></p>
+<span class="movieTitle">Browse:</span><p> <span id="option5" class="link">Popular movies</span> | <span class="link" id="option6">Top rated</span> | <span class="link" id="option7">Now playing</span> | <span class="link" id="option8">Upcoming</span></p>
 </div>
 </p>
+
 
 <div id="genreChecks">
   <span class="movieTitle">Sort movies by genre:</span><p>
@@ -60,6 +59,8 @@
       </p>
       </div>
 
+
+
       <div id="movieRatings">
         <span class="movieTitle">Sort movies by rating:</span><p>
 
@@ -81,10 +82,65 @@
 
 
 
+<!-- DISCOVER MOVIE -->
   <div id="showAll"> <input type="checkbox" id="show" name="feature" value="0" /> Show all?
   </div>
 
 
+  <p><div id="discover">
+  <span class="movieTitle">Discover:</span>
+  <p>With Discover you can find new movies that include your favorite actors, your favorite director, your favorite actors working WITH your favorite director, or during a particular year.</p>
+  <li>You can search actors by clicking "Actor" below to add actors to your discover search.</li>
+  <li>You can search for a director by clicking "Director" to add a director to your search. </li>
+  <li>You can enter a year to find all the movies your selected actors, director were involved in during that year. </li>
+  <li>You can search for an actor, director, or year individually also to get results</li>
+  <li><b><u>Example:</b></u> A search "With Actors" Brad Pitt and Ed Norton, directed by Dave Fincher will fetch you Fight Club.</li>
+  </div></p>
+  <p><div id="discoverFind">
+  <span class="movieTitle">Find & Add:</span>
+
+  <p><span id="optionActor" class="link">Actor</span> | <span class="link" id="optionDirector">Director</span></p>
+  <p> <b><u>With actors:</b></u> <span id="discoverActorDescription">Actors you are searching for will display here</span> <span id="actorList"></span></p>
+  <p> <b><u>With director:</b></u> <span id="discoverDirectorDescription">Director you are searching for will display here</span> <span id="directorList"></span></p>
+
+
+  </div></p>
+  <p><div id="discoverActor">
+  <%=form_tag(searches_path, method: "get") do |f|%>
+  <b><u>Find an actor:</b></u> <%=text_field_tag(:actorDiscover, nil, :placeholder=> "Enter an actor to find and add to your discover search")%>
+  <%=submit_tag("Find Actor", :class => "form_submitDiscA")%>
+
+  <%end%>
+  <div id="loadingAnD">
+    <center><%=image_tag "loading.gif", :class => "loadingImg"%></center>
+  </div>
+  <p>
+    <div id="discoverActorResults">
+  </div>
+
+  </div>
+</p>
+  <p><div id="discoverDirector">
+  <%=form_tag(searches_path, method: "get") do |f|%>
+  <b><u>Find a director:</b></u> <%=text_field_tag(:directorDiscover, nil, :placeholder=> "Enter a director to find and add to your discover search")%>
+  <%=submit_tag("Find Director", :class => "form_submitDiscD")%>
+  <%end%></p>
+  <div id="loadingAnD2">
+    <center><%=image_tag "loading.gif", :class => "loadingImg"%></center>
+  </div><p>
+  <div id="discoverDirectorResults">
+  </div>
+
+  </div>
+  <div id="searchDiscover">
+  <%=form_tag(searches_path, method: "get") do |f|%>
+  <b><u>Search by year:</b></u> <%=text_field_tag(:year, nil, :placeholder=> "Enter a year here")%></p>
+  <%=hidden_field_tag(:people)%>
+  <%=hidden_field_tag(:ratingDisc)%>
+  <%=submit_tag("Discover Movie", :class => "form_submitD")%>
+  <%end%>
+  <p><span class="link" id="resetDiscover">Clear all fields</span></p>
+</div></p>
 
 
 
@@ -235,6 +291,8 @@
   </div>
 </div>
 </p>
+<div class="tmdbContainer"><%=image_tag "tmdb.png", :class=> "tmdb", :align=> 'left'%> <span class="tmdbText">This product uses the TMDb API but is not endorsed or certified by TMDb.</span></div></p>
+
 </div>
 </div>
 
@@ -248,6 +306,10 @@ var movieButton=document.getElementById('movieButton')
 var movie=document.getElementsByClassName('movie')[0]
 var movieName=[]
 var movieList=[]
+var discoverActorList=[]
+var discoverActorListName=[]
+var discoverDirectorList=[]
+var discoverDirectorListName=[]
 var genres1=[]
 var genres2=[]
 var genres3=[]
@@ -259,6 +321,9 @@ var moviesContainer= document.getElementById('moviesContainer')
 var genreDrop= document.getElementById('genreDrop')
 // var typeListDrop= document.getElementById('typeListDrop')
 var ratingDrop= document.getElementById('ratingDrop')
+var optionD= document.getElementById('optionD')
+var optionActor= document.getElementById('optionActor')
+var optionDirector= document.getElementById('optionDirector')
 var option1= document.getElementById('option1')
 var option2= document.getElementById('option2')
 var option3= document.getElementById('option3')
@@ -273,26 +338,91 @@ var UpdateMovieSearch= document.getElementById('UpdateMovieSearch')
 var createList= document.getElementById('createList')
 var genreSelector=[genreSelector0, genreSelector1, genreSelector2, genreSelector3, genreSelector4, genreSelector5, genreSelector6, genreSelector7, genreSelector7, genreSelector8, genreSelector9, genreSelector10, genreSelector11, genreSelector12, genreSelector13, genreSelector14, genreSelector15, genreSelector16, genreSelector7, genreSelector17, genreSelector18]
 var createListChildren=createList.children
+var actorList=document.getElementById('actorList')
+var actorListChildren=actorList.children
+var directorList=document.getElementById('directorList')
+var directorListChildren=directorList.children
+var resetDiscover=document.getElementById('resetDiscover')
 var searchHeader=document.getElementById('searchHeader')
+var discoverActorDescription=document.getElementById('discoverActorDescription')
 var movie_ids=document.getElementById('movie_ids')
 var private=document.getElementById('private')
+var discoverDirandPeop=discoverActorList.concat(discoverDirectorList)
 
 
 
 
 
-$( document ).ajaxStart(function() {
-    $( "#loading" ).show();
-});
 
-$( document ).ajaxStop(function() {
-    $( "#loading" ).hide();
-});
+
+// $( document ).ajaxStart(function() {
+//
+//     $( "#loadingAnD" ).show();
+//
+//
+//     $( "#loading" ).show();
+//
+// });
+//
+// $( document ).ajaxStop(function() {
+//     $( "#loading" ).hide();
+//     $( "#loadingAnD" ).hide();
+// });
 
 
 $(document).ready(function(){
-$('.form_submit1').on('click',function(event){
-$( "#searchMovies" ).empty();
+  $('.form_submitDiscA').on('click',function(event){
+  $( "#discoverActorResults" ).empty();
+  $( "#loadingAnD" ).show();
+var form=$(this).parent('form');
+event.preventDefault()
+  $.ajax({
+          type: "GET",
+          url: "<%=searches_path%>",
+          data: form.serialize(),
+          dataType: "JSON",
+          success: function(data){
+            $( "#loadingAnD" ).hide();
+            var test=data
+            var movies=data.results
+            // console.log(movies[i]);
+            if(movies.length>0){
+            for(i=0;i<movies.length;i++){
+              if(movies[i].table.profile_path != undefined){
+
+
+
+            $('#discoverActorResults').append(
+              "<div id='displayHorizontal'><center><span class='actorTitle'>"
+              +movies[i].table.name
+              +"</span><br><img src='https://image.tmdb.org/t/p/w500/"
+              +movies[i].table.profile_path+"' id='movieImg2'><br><button value='"
+              +movies[i].table.id+"', id='discoverActorButton', data-value='"
+              +movies[i].table.name+"'>Add Actor</button></p></center></div> ")
+
+            }
+
+          }
+        }
+          else{
+            $('#discoverActorResults').append(
+              "<p>Sorry, your search didn't return any results. Please broaden your search specifications and try again.<p>"
+            )
+          }
+          console.log(data.results);
+        },
+        error: function(){
+          $( "#loadingAnD" ).hide();
+          $('#discoverActorResults').append(
+            "<p>Sorry, your search didn't return any results. Please broaden your search specifications and try again.</p>"
+          )
+        }
+
+    });
+  })
+$('.form_submitDiscD').on('click',function(event){
+$( "#discoverDirectorResults" ).empty();
+$( "#loadingAnD2" ).show();
 var form=$(this).parent('form');
 event.preventDefault()
 $.ajax({
@@ -301,9 +431,108 @@ $.ajax({
         data: form.serialize(),
         dataType: "JSON",
         success: function(data){
+          $( "#loadingAnD2" ).hide();
           var test=data
           var movies=data.results
           // console.log(movies[i]);
+
+          if(movies.length>0){
+          for(i=0;i<movies.length;i++){
+            if(movies[i].table.profile_path != undefined){
+
+
+
+          $('#discoverDirectorResults').append(
+            "<div id='displayHorizontal'><span class='actorTitle'>"
+            +movies[i].table.name
+            +"</span><br><img src='https://image.tmdb.org/t/p/w500/"
+            +movies[i].table.profile_path+"' id='movieImg2'><br><button value='"
+            +movies[i].table.id+"', id='discoverDirectorButton', data-value='"
+            +movies[i].table.name+"'>Add Director</button></center></div> ")
+          }
+
+        }
+      }
+      else{
+        $('#discoverDirectorResults').append(
+        "<p>Sorry, your search didn't return any results. Please broaden your search specifications and try again.</p>"
+        )
+      }
+
+        console.log(data);
+
+        // console.log(data.results);
+      },
+      error: function(){
+        $( "#loadingAnD2" ).hide();
+        $('#discoverDirectorResults').append(
+          "<p>Sorry, your search didn't return any results. Please broaden your search specifications and try again.</p>"
+        )
+      }
+    });
+  })
+$('.form_submitD').on('click',function(event){
+$( "#searchMovies" ).empty();
+$( "#loading" ).show();
+var form=$(this).parent('form');
+event.preventDefault()
+$.ajax({
+        type: "GET",
+        url: "<%=searches_path%>",
+        data: form.serialize(),
+        dataType: "JSON",
+        success: function(data){
+          $( "#loading" ).hide();
+          var test=data
+          var movies=data.results
+          // console.log(movies[i]);
+          if(movies.length>0){
+          for(i=0;i<movies.length;i++){
+            if(movies[i].table.poster_path != undefined){
+          $('#searchMovies').append(
+            "<div class='movie'><div class='movieHeader'><span class='movieTitle'>"
+            +movies[i].table.original_title
+            +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
+            +movies[i].table.poster_path+"' id='movieImg'><span class='movieDetails'> Rating: </span><span class='movieInfo'>"
+            +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
+            +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
+            +movies[i].table.overview+"</br> <center><button value='"
+            +movies[i].table.id+"' id='movieButton', data-value='"
+            +movies[i].table.original_title+"'>+</button></center></div><p style='clear: both;'> ")
+          }
+        }
+      }
+        else{
+          $('#searchMovies').append(
+            "Sorry, your search didn't return any results. Please broaden your search specifications and try again.<p>"
+          )
+        }
+        console.log(data.results);
+      },
+      error: function(){
+        $( "#loading" ).hide();
+        $('#searchMovies').append(
+          "Sorry, your search didn't return any results. Please broaden your search specifications and try again.<p>"
+        )
+      }
+    });
+  })
+$('.form_submit1').on('click',function(event){
+$( "#searchMovies" ).empty();
+$( "#loading" ).show();
+var form=$(this).parent('form');
+event.preventDefault()
+$.ajax({
+        type: "GET",
+        url: "<%=searches_path%>",
+        data: form.serialize(),
+        dataType: "JSON",
+        success: function(data){
+          $( "#loading" ).hide();
+          var test=data
+          var movies=data.results
+          // console.log(movies[i]);
+          if(movies.length>0){
           for(i=0;i<movies.length;i++){
             if(movies[i].table.poster_path != undefined){
 
@@ -321,14 +550,26 @@ $.ajax({
             +movies[i].table.original_title+"'>+</button></center></div><p style='clear: both;'> ")
 
           }
-
+        }
+      }
+        else{
+          $('#searchMovies').append(
+            "Sorry, your search didn't return any results. Please broaden your search specifications and try again.</p>"
+          )
         }
         console.log(data.results);
+      },
+      error: function(){
+        $( "#loading" ).hide();
+        $('#searchMovies').append(
+          "Sorry, your search didn't return any results. Please broaden your search specifications and try again.</p>"
+        )
       }
     });
   })
 $('.form_submit2').on('click',function(event){
 $( "#searchMovies" ).empty();
+$( "#loading" ).show();
 var form=$(this).parent('form');
 event.preventDefault()
 $.ajax({
@@ -337,10 +578,12 @@ $.ajax({
         data: form.serialize(),
         dataType: "JSON",
         success: function(data){
+          $( "#loading" ).hide();
           var test=data
           var movies=data.results
           console.log(data.results);
           // console.log(movies[i]);
+          if(movies.length>0){
           for(i=0;i<movies.length;i++){
             if(movies[i].table.known_for.length >2){
               if(movies[i].table.known_for[0].table.original_title != undefined && movies[i].table.known_for[1].table.original_title != undefined  && movies[i].table.known_for[2].table.original_title != undefined ){
@@ -360,12 +603,25 @@ $.ajax({
         }
       }
     }
+  }
+    else{
+      $('#searchMovies').append(
+        "Sorry, your search didn't return any results. Please broaden your search specifications and try again.</p>"
+      )
+    }
           console.log(data.results);
+        },
+        error: function(){
+          $( "#loading" ).hide();
+          $('#searchMovies').append(
+            "Sorry, your search didn't return any results. Please broaden your search specifications and try again.</p>"
+          )
         }
     });
   })
 $('.form_submit3').on('click',function(event){
   $( "#searchMovies" ).empty();
+  $( "#loading" ).show();
     var form=$(this).parent('form');
     event.preventDefault()
     $.ajax({
@@ -374,8 +630,10 @@ $('.form_submit3').on('click',function(event){
             data: form.serialize(),
             dataType: "JSON",
             success: function(data){
+              $( "#loading" ).hide();
               var test=data
               var movies=data.results
+              if(movies.length>0){
               for(i=0;i<movies.length;i++){
                 if(movies[i].table.profile_path != undefined){
                   if(movies[i].table.known_for.length >2){
@@ -395,12 +653,25 @@ $('.form_submit3').on('click',function(event){
             }
           }
         }
+      }
+        else{
+          $('#searchMovies').append(
+            "Sorry, your search didn't return any results. Please broaden your search specifications and try again.</p>"
+          )
+        }
         console.log(data.results);
+      },
+      error: function(){
+        $( "#loading" ).hide();
+        $('#searchMovies').append(
+          "Sorry, your search didn't return any results. Please broaden your search specifications and try again.</p>"
+        )
       }
   });
 })
 $('.form_submit4').on('click',function(event){
 $( "#searchMovies" ).empty();
+$( "#loading" ).show();
 var form=$(this).parent('form');
 event.preventDefault()
 $.ajax({
@@ -409,9 +680,11 @@ $.ajax({
         data: form.serialize(),
         dataType: "JSON",
         success: function(data){
+          $( "#loading" ).hide();
           var test=data
           var movies=data.results
           // console.log(movies[i]);
+          if(movies.length>0){
           for(i=0;i<movies.length;i++){
             if(movies[i].table.poster_path != undefined){
           $('#searchMovies').append(
@@ -427,13 +700,26 @@ $.ajax({
           }
 
         }
+      }
+        else{
+          $('#searchMovies').append(
+            "Sorry, your search didn't return any results. Please broaden your search specifications and try again.</p>"
+          )
+        }
         console.log(data.results);
+      },
+      error: function(){
+        $( "#loading" ).hide();
+        $('#searchMovies').append(
+          "Sorry, your search didn't return any results. Please broaden your search specifications and try again.</p>"
+        )
       }
     });
   })
 
 $('.form_submit5').on('click',function(event){
 $( "#searchMovies" ).empty();
+$( "#loading" ).show();
 var form=$(this).parent('form');
 event.preventDefault()
 $.ajax({
@@ -442,9 +728,11 @@ $.ajax({
         data: form.serialize(),
         dataType: "JSON",
         success: function(data){
+          $( "#loading" ).hide();
           var test=data
           var movies=data.results
           // console.log(movies[i]);
+          if(movies.length>0){
           for(i=0;i<movies.length;i++){
             if(movies[i].table.poster_path != undefined){
           $('#searchMovies').append(
@@ -460,11 +748,24 @@ $.ajax({
           }
           console.log(data.results);
         }
+      }
+        else{
+          $('#searchMovies').append(
+            "Sorry, your search didn't return any results. Please broaden your search specifications and try again.</p>"
+          )
+        }
+      },
+      error: function(){
+        $( "#loading" ).hide();
+        $('#searchMovies').append(
+          "Sorry, your search didn't return any results. Please broaden your search specifications and try again.</p>"
+        )
       }
     });
   })
 $('.form_submit6').on('click',function(event){
 $( "#searchMovies" ).empty();
+$( "#loading" ).show();
 var form=$(this).parent('form');
 event.preventDefault()
 $.ajax({
@@ -473,9 +774,11 @@ $.ajax({
         data: form.serialize(),
         dataType: "JSON",
         success: function(data){
+          $( "#loading" ).hide();
           var test=data
           var movies=data.results
           // console.log(movies[i]);
+          if(movies.length>0){
           for(i=0;i<movies.length;i++){
             if(movies[i].table.poster_path != undefined){
           $('#searchMovies').append(
@@ -489,13 +792,25 @@ $.ajax({
             +movies[i].table.id+"' id='movieButton', data-value='"
             +movies[i].table.original_title+"'>+</button></center></div><p style='clear: both;'> ")
           }
-          console.log(data.results);
         }
+      }
+        else{
+          $('#searchMovies').append(
+            "Sorry, your search didn't return any results. Please broaden your search specifications and try again.</p>"
+          )
+        }
+      },
+      error: function(){
+        $( "#loading" ).hide();
+        $('#searchMovies').append(
+          "Sorry, your search didn't return any results. Please broaden your search specifications and try again.</p>"
+        )
       }
     });
   })
 $('.form_submit7').on('click',function(event){
 $( "#searchMovies" ).empty();
+$( "#loading" ).show();
 var form=$(this).parent('form');
 event.preventDefault()
 $.ajax({
@@ -504,9 +819,12 @@ $.ajax({
         data: form.serialize(),
         dataType: "JSON",
         success: function(data){
+          $( "#loading" ).hide();
           var test=data
           var movies=data.results
+          console.log(data)
           // console.log(movies[i]);
+          if(movies.length>0){
           for(i=0;i<movies.length;i++){
             if(movies[i].table.poster_path != undefined){
           $('#searchMovies').append(
@@ -520,13 +838,25 @@ $.ajax({
             +movies[i].table.id+"' id='movieButton', data-value='"
             +movies[i].table.original_title+"'>+</button></center></div><p style='clear: both;'> ")
           }
-          console.log(data.results);
         }
+      }
+        else{
+          $('#searchMovies').append(
+            "Sorry, your search didn't return any results. Please broaden your search specifications and try again.</p>"
+          )
+        }
+      },
+      error: function(){
+        $( "#loading" ).hide();
+        $('#searchMovies').append(
+          "Sorry, your search didn't return any results. Please broaden your search specifications and try again.</p>"
+        )
       }
     });
   })
 $('.form_submit8').on('click',function(event){
 $( "#searchMovies" ).empty();
+$( "#loading" ).show();
 var form=$(this).parent('form');
 event.preventDefault()
 $.ajax({
@@ -535,9 +865,11 @@ $.ajax({
         data: form.serialize(),
         dataType: "JSON",
         success: function(data){
+          $( "#loading" ).hide();
           var test=data
           var movies=data.results
           // console.log(movies[i]);
+          if(movies.length>0){
           for(i=0;i<movies.length;i++){
             if(movies[i].table.poster_path != undefined){
           $('#searchMovies').append(
@@ -551,8 +883,19 @@ $.ajax({
             +movies[i].table.id+"' id='movieButton', data-value='"
             +movies[i].table.original_title+"'>+</button></center></div><p style='clear: both;'> ")
           }
-          console.log(data.results);
         }
+      }
+        else{
+          $('#searchMovies').append(
+            "Sorry, your search didn't return any results. Please broaden your search specifications and try again.</p>"
+          )
+        }
+      },
+      error: function(data){
+        $( "#loading" ).hide();
+        $('#searchMovies').append(
+          "Sorry, your search didn't return any results. Please broaden your search specifications and try again.</p>"
+        )
       }
     });
   })
@@ -582,18 +925,162 @@ function create(){
         movie_ids.value=movieList
       }
 
-          movie_ids.value=movieList
+        movie_ids.value=movieList
+      }
+
+
+// generates list when Add to Actor button is clicked... functionality for delete
+function create2(){
+  var list2=document.createElement("span")
+  list2.innerHTML=discoverActorListName[discoverActorListName.length-1]+"<span class='deleteMovie2' value="+discoverActorList[discoverActorList.length-1]+"> X</span> <input class='moveElements' type='hidden' value="+discoverActorList[discoverActorList.length-1]+"></input>&uarr; <span id='moveElement' value="+discoverActorList[discoverActorList.length-1]+" type='button'>&darr;</button> "
+  list2.value=discoverActorList[discoverActorList.length-1]
+  actorList.appendChild(list2)
+  var deleteMovie2=document.getElementsByClassName('deleteMovie2')
+// delete button functionality
+  for(i=0; i<actorListChildren.length; i++){
+    deleteMovie2[i].addEventListener('click', function(event){
+      clickExit2(event.path[1]);
+      })
+    }
+      function clickExit2(clicked) {
+        var k= discoverActorList.indexOf(event.path[1].value.toString())
+        console.log(event.path[2].children[event.path[2].children.length-1]);
+        if(k!= -1){
+          discoverActorList.splice(k,1)
+        }
+        clicked.remove()
+        discoverDirandPeop=discoverActorList.concat(discoverDirectorList)
+        people.value=discoverDirandPeop
+      }
+         discoverDirandPeop=discoverActorList.concat(discoverDirectorList)
+          people.value=discoverDirandPeop
+      }
+// generates list when Add Director button is clicked... functionality for delete
+function create3(){
+  var list3=document.createElement("span")
+  list3.innerHTML=discoverDirectorListName[discoverDirectorListName.length-1]+"<span class='deleteMovie3' value="+discoverDirectorList[discoverDirectorList.length-1]+"> X</span> <input class='moveElements' type='hidden' value="+discoverDirectorList[discoverDirectorList.length-1]+"></input>&uarr; <span id='moveElement' value="+discoverDirectorList[discoverDirectorList.length-1]+" type='button'>&darr;</button> "
+  list3.value=discoverDirectorList[discoverDirectorList.length-1]
+  directorList.appendChild(list3)
+  var deleteMovie3=document.getElementsByClassName('deleteMovie3')
+// delete button functionality
+  for(i=0; i<directorListChildren.length; i++){
+    deleteMovie3[i].addEventListener('click', function(event){
+      clickExit3(event.path[1]);
+      })
+    }
+      function clickExit3(clicked) {
+        var l= discoverDirectorList.indexOf(event.path[1].value.toString())
+        console.log(event.path[2].children[event.path[2].children.length-1]);
+        if(l!= -1){
+          discoverDirectorList.splice(l,1)
+        }
+        clicked.remove()
+        discoverDirandPeop=discoverDirectorList.concat(discoverActorList)
+        people.value=discoverDirandPeop
+      }
+        discoverDirandPeop=discoverDirectorList.concat(discoverActorList)
+        people.value=discoverDirandPeop
       }
 
 function addParam(v) {
       window.location.search += '&' + v;
   }
+
+// clear all discover fields
+
+resetDiscover.addEventListener("click", function(){
+  clearAll()
+})
+
+
+// search by DISCOVER
+
+optionActor.addEventListener('click', function(){
+  optionActor.style.fontWeight="bold"
+  optionActor.style.color="#cb00ff"
+  optionDirector.style.fontWeight="normal"
+  optionDirector.style.color="#919191"
+  discoverActor.style.display="block"
+  discoverDirector.style.display="none"
+})
+
+optionDirector.addEventListener('click', function(){
+  optionDirector.style.fontWeight="bold"
+  optionDirector.style.color="#cb00ff"
+  optionActor.style.fontWeight="normal"
+  optionActor.style.color="#919191"
+  discoverActor.style.display="none"
+  discoverDirector.style.display="block"
+})
+
+
+optionD.addEventListener('click', function(){
+  // window.history.replaceState({}, document.title, "/" + "searches");
+  clearAll()
+  $( "#searchMovies" ).empty();
+  optionD.style.fontWeight="bold"
+  optionD.style.color="#cb00ff"
+  optionActor.style.fontWeight="normal"
+  optionActor.style.color="#919191"
+  optionDirector.style.fontWeight="normal"
+  optionDirector.style.color="#919191"
+  option1.style.fontWeight="normal"
+  option1.style.color="#919191"
+  option2.style.fontWeight="normal"
+  option2.style.color="#919191"
+  option3.style.fontWeight="normal"
+  option3.style.color="#919191"
+  option4.style.fontWeight="normal"
+  option4.style.color="#919191"
+  option5.style.fontWeight="normal"
+  option5.style.color="#919191"
+  option6.style.fontWeight="normal"
+  option6.style.color="#919191"
+  option7.style.fontWeight="normal"
+  option7.style.color="#919191"
+  option8.style.fontWeight="normal"
+  option8.style.color="#919191"
+  searchMovie.style.display="none"
+  genreChecks.style.display="none"
+  discover.style.display="block"
+  searchDiscover.style.display="block"
+  discoverFind.style.display="block"
+  movieRatings.style.display="block"
+  searchActor.style.display="none"
+  genreLinks.style.display="none"
+  // directorsContainer.style.display="none"
+  searchDirector.style.display="none"
+  searchPopular.style.display="none"
+  // moviesContainer.style.display="grid"
+  showAll.style.display="none"
+  searchTop.style.display="none"
+  searchLatest.style.display="none"
+  searchUpcoming.style.display="none"
+  discoverActor.style.display="none"
+  discoverDirector.style.display="none"
+  genres1=[]
+  genres2=[]
+  genres3=[]
+  genres4=[]
+  genres5=[]
+  genres6=[]
+  genres.value=[]
+  genresD.value=[]
+  genresP.value=[]
+  genresT.value=[]
+  genresL.value=[]
+  genresU.value=[]
+  show.checked = false;
+})
 // search by movie
 option1.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
   clearAll()
+  $( "#searchMovies" ).empty();
   option1.style.fontWeight="bold"
   option1.style.color="#cb00ff"
+  optionD.style.fontWeight="normal"
+  optionD.style.color="#919191"
   option2.style.fontWeight="normal"
   option2.style.color="#919191"
   option3.style.fontWeight="normal"
@@ -611,6 +1098,7 @@ option1.addEventListener('click', function(){
   searchMovie.style.display="block"
   genreChecks.style.display="block"
   movieRatings.style.display="block"
+  discover.style.display="none"
   searchActor.style.display="none"
   genreLinks.style.display="none"
   // directorsContainer.style.display="none"
@@ -621,6 +1109,10 @@ option1.addEventListener('click', function(){
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  discoverActor.style.display="none"
+  discoverDirector.style.display="none"
+  searchDiscover.style.display="none"
+  discoverFind.style.display="none"
   genres1=[]
   genres2=[]
   genres3=[]
@@ -638,10 +1130,13 @@ option1.addEventListener('click', function(){
 // search by actor
 option2.addEventListener('click', function(){
   clearAll()
+  $( "#searchMovies" ).empty();
   option2.style.fontWeight="bold"
   option2.style.color="#cb00ff"
   option1.style.fontWeight="normal"
   option1.style.color="#919191"
+  optionD.style.fontWeight="normal"
+  optionD.style.color="#919191"
   option3.style.fontWeight="normal"
   option3.style.color="#919191"
   option4.style.fontWeight="normal"
@@ -658,10 +1153,15 @@ option2.addEventListener('click', function(){
   genreChecks.style.display="none"
   searchActor.style.display="block"
   genreLinks.style.display="none"
+  discover.style.display="none"
   movieRatings.style.display="none"
   // directorsContainer.style.display="none"
   searchDirector.style.display="none"
   searchPopular.style.display="none"
+  discoverActor.style.display="none"
+  discoverDirector.style.display="none"
+  searchDiscover.style.display="none"
+  discoverFind.style.display="none"
   // moviesContainer.style.display="grid"
   showAll.style.display="none"
   searchTop.style.display="none"
@@ -685,12 +1185,15 @@ option2.addEventListener('click', function(){
 option3.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
   clearAll()
+  $( "#searchMovies" ).empty();
   option3.style.fontWeight="bold"
   option3.style.color="#cb00ff"
   option1.style.fontWeight="normal"
   option1.style.color="#919191"
   option2.style.fontWeight="normal"
   option2.style.color="#919191"
+  optionD.style.fontWeight="normal"
+  optionD.style.color="#919191"
   option4.style.fontWeight="normal"
   option4.style.color="#919191"
   option5.style.fontWeight="normal"
@@ -705,15 +1208,20 @@ option3.addEventListener('click', function(){
   genreChecks.style.display="none"
   searchActor.style.display="none"
   genreLinks.style.display="block"
+  discover.style.display="none"
   movieRatings.style.display="block"
   // directorsContainer.style.display="none"
   searchDirector.style.display="none"
   searchPopular.style.display="none"
+  discoverActor.style.display="none"
+  discoverDirector.style.display="none"
   // moviesContainer.style.display="grid"
   showAll.style.display="none"
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  searchDiscover.style.display="none"
+  discoverFind.style.display="none"
   genres1=[]
   genres2=[]
   genres3=[]
@@ -732,14 +1240,17 @@ option3.addEventListener('click', function(){
 option4.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
   clearAll()
+  $( "#searchMovies" ).empty();
   option4.style.fontWeight="bold"
   option4.style.color="#cb00ff"
   option1.style.fontWeight="normal"
   option1.style.color="#919191"
   option3.style.fontWeight="normal"
   option3.style.color="#919191"
-  option1.style.fontWeight="normal"
-  option1.style.color="#919191"
+  option2.style.fontWeight="normal"
+  option2.style.color="#919191"
+  optionD.style.fontWeight="normal"
+  optionD.style.color="#919191"
   option5.style.fontWeight="normal"
   option5.style.color="#919191"
   option6.style.fontWeight="normal"
@@ -752,14 +1263,19 @@ option4.addEventListener('click', function(){
   genreChecks.style.display="none"
   searchActor.style.display="none"
   genreLinks.style.display="none"
+  discover.style.display="none"
   movieRatings.style.display="none"
   searchDirector.style.display="block"
   searchPopular.style.display="none"
+  discoverActor.style.display="none"
+  discoverDirector.style.display="none"
   // moviesContainer.style.display="grid"
   showAll.style.display="none"
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  searchDiscover.style.display="none"
+  discoverFind.style.display="none"
   genres1=[]
   genres2=[]
   genres3=[]
@@ -779,6 +1295,7 @@ option4.addEventListener('click', function(){
 option5.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
   clearAll()
+  $( "#searchMovies" ).empty();
   option5.style.fontWeight="bold"
   option5.style.color="#cb00ff"
   option1.style.fontWeight="normal"
@@ -787,6 +1304,8 @@ option5.addEventListener('click', function(){
   option3.style.color="#919191"
   option4.style.fontWeight="normal"
   option4.style.color="#919191"
+  optionD.style.fontWeight="normal"
+  optionD.style.color="#919191"
   option2.style.fontWeight="normal"
   option2.style.color="#919191"
   option6.style.fontWeight="normal"
@@ -802,11 +1321,16 @@ option5.addEventListener('click', function(){
   movieRatings.style.display="block"
   searchPopular.style.display="block"
   searchDirector.style.display="none"
+  discover.style.display="none"
   // moviesContainer.style.display="grid"
   showAll.style.display="block"
   searchTop.style.display="none"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  discoverActor.style.display="none"
+  discoverDirector.style.display="none"
+  searchDiscover.style.display="none"
+  discoverFind.style.display="none"
   genres1=[]
   genres2=[]
   genres3=[]
@@ -826,6 +1350,7 @@ option5.addEventListener('click', function(){
 option6.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
   clearAll()
+  $( "#searchMovies" ).empty();
   option6.style.fontWeight="bold"
   option6.style.color="#cb00ff"
   option2.style.fontWeight="normal"
@@ -836,6 +1361,8 @@ option6.addEventListener('click', function(){
   option4.style.color="#919191"
   option5.style.fontWeight="normal"
   option5.style.color="#919191"
+  optionD.style.fontWeight="normal"
+  optionD.style.color="#919191"
   option1.style.fontWeight="normal"
   option1.style.color="#919191"
   option7.style.fontWeight="normal"
@@ -849,11 +1376,16 @@ option6.addEventListener('click', function(){
   movieRatings.style.display="block"
   searchPopular.style.display="none"
   searchDirector.style.display="none"
+  discoverActor.style.display="none"
+  discoverDirector.style.display="none"
+  discover.style.display="none"
   // moviesContainer.style.display="grid"
   showAll.style.display="block"
   searchTop.style.display="block"
   searchLatest.style.display="none"
   searchUpcoming.style.display="none"
+  searchDiscover.style.display="none"
+  discoverFind.style.display="none"
   genres1=[]
   genres2=[]
   genres3=[]
@@ -873,6 +1405,7 @@ option6.addEventListener('click', function(){
 option7.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
   clearAll()
+  $( "#searchMovies" ).empty();
   option7.style.fontWeight="bold"
   option7.style.color="#cb00ff"
   option2.style.fontWeight="normal"
@@ -883,6 +1416,8 @@ option7.addEventListener('click', function(){
   option4.style.color="#919191"
   option5.style.fontWeight="normal"
   option5.style.color="#919191"
+  optionD.style.fontWeight="normal"
+  optionD.style.color="#919191"
   option6.style.fontWeight="normal"
   option6.style.color="#919191"
   option1.style.fontWeight="normal"
@@ -896,11 +1431,16 @@ option7.addEventListener('click', function(){
   movieRatings.style.display="block"
   searchPopular.style.display="none"
   searchDirector.style.display="none"
+  discover.style.display="none"
   // moviesContainer.style.display="grid"
   showAll.style.display="block"
   searchTop.style.display="none"
   searchLatest.style.display="block"
   searchUpcoming.style.display="none"
+  discoverActor.style.display="none"
+  discoverDirector.style.display="none"
+  searchDiscover.style.display="none"
+  discoverFind.style.display="none"
   genres1=[]
   genres2=[]
   genres3=[]
@@ -920,6 +1460,7 @@ option7.addEventListener('click', function(){
 option8.addEventListener('click', function(){
   // window.history.replaceState({}, document.title, "/" + "searches");
   clearAll()
+  $( "#searchMovies" ).empty();
   option8.style.fontWeight="bold"
   option8.style.color="#cb00ff"
   option2.style.fontWeight="normal"
@@ -932,6 +1473,8 @@ option8.addEventListener('click', function(){
   option5.style.color="#919191"
   option6.style.fontWeight="normal"
   option6.style.color="#919191"
+  optionD.style.fontWeight="normal"
+  optionD.style.color="#919191"
   option7.style.fontWeight="normal"
   option7.style.color="#919191"
   option1.style.fontWeight="normal"
@@ -943,11 +1486,16 @@ option8.addEventListener('click', function(){
   movieRatings.style.display="block"
   searchPopular.style.display="none"
   searchDirector.style.display="none"
+  discover.style.display="none"
   // moviesContainer.style.display="grid"
   showAll.style.display="block"
   searchTop.style.display="none"
   searchLatest.style.display="none"
+  discoverActor.style.display="none"
+  discoverDirector.style.display="none"
   searchUpcoming.style.display="block"
+  searchDiscover.style.display="none"
+  discoverFind.style.display="none"
   genres1=[]
   genres2=[]
   genres3=[]
@@ -979,8 +1527,10 @@ ratingDrop.addEventListener('input', function(){
   ratingT.value= ratingDrop.value
   ratingL.value= ratingDrop.value
   ratingU.value= ratingDrop.value
+  ratingDisc.value= ratingDrop.value
   show.checked = false;
 });
+
 document.addEventListener('click', function(){
   if(event.target.id=="movieButton"){
   console.log(event.target.value);
@@ -989,6 +1539,30 @@ document.addEventListener('click', function(){
   create()
 }
 })
+
+// discover actor
+
+document.addEventListener('click', function(){
+  if(event.target.id=="discoverActorButton"){
+  console.log(event.target.value);
+  discoverActorList.push(event.target.value);
+  discoverActorListName.push(event.target.dataset.value);
+  discoverActorDescription.innerHTML="";
+  create2()
+  }
+})
+
+// Discover button
+document.addEventListener('click', function(){
+  if(event.target.id=="discoverDirectorButton"){
+    console.log(event.target.value);
+    discoverDirectorList.push(event.target.value);
+    discoverDirectorListName.push(event.target.dataset.value);
+    discoverDirectorDescription.innerHTML=""
+    create3()
+
+  }
+})
 // show all discover movies
 function clearAll(){
   show.checked = false;
@@ -996,6 +1570,7 @@ function clearAll(){
   ratingT.value=show.value
   ratingU.value=show.value
   ratingL.value=show.value
+  ratingDisc.value=show.value
   genres3=[]
   genres4=[]
   genres5=[]
@@ -1006,6 +1581,11 @@ function clearAll(){
   genresT.value=[]
   genresL.value=[]
   genresU.value=[]
+  people.value=[]
+  discoverDirandPeop.value=[]
+  $('#actorList').empty();
+  $('#directorList').empty();
+  year.value=[]
   ratingDrop.selectedIndex = 0
   genreSelector0.checked = false;
   genreSelector1.checked = false;

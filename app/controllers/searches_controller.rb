@@ -21,6 +21,20 @@ respond_to :html, :json, :xml, :js
         format.js
         format.json { render :json => {:results => @results }}
       end
+    elsif params[:people].present? && params[:year].present? && params[:ratingDisc].present?
+      @solid=[]
+      for i in 0...10
+        @movies=Tmdb::Discover.movie(with_people: params[:people], primary_release_year: params[:year], page: i+1)
+        for movie in @movies.results do
+          @solid.push(movie)
+        end
+      end
+      @results=@solid.find_all{|favor| favor.vote_average >= params[:ratingDisc].to_i }
+      respond_to do |format|
+        format.html
+        format.js
+        format.json { render :json => {:results => @results }}
+      end
     elsif params[:l].present? && params[:rating].present?
       @solid=[]
       for i in 0...10
@@ -129,6 +143,52 @@ respond_to :html, :json, :xml, :js
         for movie in @movies.results do
           if movie.vote_average >= params[:ratingQ].to_i
             @solid.push(movie)
+          end
+        end
+      end
+      @results=@solid
+      respond_to do |format|
+        format.html
+        format.js
+        format.json { render :json => {:results => @results }}
+      end
+    elsif params[:people].present? && params[:year].present?
+      @solid=[]
+      for i in 0...10
+        @movies=Tmdb::Discover.movie(with_people: params[:people], primary_release_year: params[:year], page: i+1)
+        for movie in @movies.results do
+          @solid.push(movie)
+        end
+      end
+      @results=@solid
+      respond_to do |format|
+        format.html
+        format.js
+        format.json { render :json => {:results => @results }}
+      end
+    elsif params[:people].present? && params[:ratingDisc].present?
+      @solid=[]
+      for i in 0...10
+        @movies=Tmdb::Discover.movie(with_people: params[:people], page: i+1)
+          for movie in @movies.results do
+            if movie.vote_average >= params[:ratingDisc].to_i
+            @solid.push(movie)
+          end
+        end
+      end
+      @results=@solid
+      respond_to do |format|
+        format.html
+        format.js
+        format.json { render :json => {:results => @results }}
+      end
+    elsif params[:year].present? && params[:ratingDisc].present?
+      @solid=[]
+      for i in 0...10
+        @movies=Tmdb::Discover.movie(primary_release_year: params[:year], page: i+1)
+        for movie in @movies.results do
+          if movie.vote_average >= params[:ratingDisc].to_i
+          @solid.push(movie)
           end
         end
       end
@@ -317,6 +377,62 @@ respond_to :html, :json, :xml, :js
      for i in 0...10
        @genres=Tmdb::Genre.movies(params[:l], page: i+1).results
        for movie in @genres do
+         @solid.push(movie)
+       end
+     end
+     @results=@solid
+     respond_to do |format|
+       format.html
+       format.js
+       format.json { render :json => {:results => @results }}
+     end
+   elsif params[:directorDiscover].present?
+     @solid=[]
+     for i in 0...10
+       @movies=Tmdb::Search.person(params[:directorDiscover], page: i+1).results
+       for movie in @movies do
+         @solid.push(movie)
+       end
+     end
+     @results=@solid
+     respond_to do |format|
+       format.html
+       format.js
+       format.json { render :json => {:results => @results }}
+     end
+   elsif params[:actorDiscover].present?
+     @solid=[]
+     for i in 0...10
+       @movies=Tmdb::Search.person(params[:actorDiscover], page: i+1).results
+       for movie in @movies do
+         @solid.push(movie)
+       end
+     end
+     @results=@solid
+     respond_to do |format|
+       format.html
+       format.js
+       format.json { render :json => {:results => @results }}
+     end
+   elsif params[:people].present?
+     @solid=[]
+     for i in 0...10
+       @movies=Tmdb::Discover.movie(with_people: params[:people], page: i+1).results
+       for movie in @movies do
+         @solid.push(movie)
+       end
+     end
+     @results=@solid
+     respond_to do |format|
+       format.html
+       format.js
+       format.json { render :json => {:results => @results }}
+     end
+   elsif params[:year].present?
+     @solid=[]
+     for i in 0...10
+       @movies=Tmdb::Discover.movie(primary_release_year: params[:year], page: i+1).results
+       for movie in @movies do
          @solid.push(movie)
        end
      end

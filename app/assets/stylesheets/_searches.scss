@@ -67,6 +67,14 @@
   float: left;
 
 }
+#movieImg2{
+  height: 150px;
+  width: 150px;
+  margin-right: 10px;
+  // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 8px;
+
+}
 #movieButton{
   background: transparent;
   border: 0;
@@ -102,6 +110,112 @@ display: none;
 }
 #byUpcoming{
 display: none;
+}
+
+#discover{
+  font-size: 15px;
+  border: 1px solid #d0d0d0;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  display: none;
+}
+#discoverFind{
+  font-size: 15px;
+  border: 1px solid #d0d0d0;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  display: none;
+}
+#discoverDirector{
+  position: relative;
+  font-size: 15px;
+  border: 1px solid #d0d0d0;
+  padding: 12px;
+  height: 255px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  display: none;
+}
+#discoverActor{
+  position: relative;
+  font-size: 15px;
+  border: 1px solid #d0d0d0;
+  padding: 12px;
+  height: 255px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  display: none;
+  // overflow-x: scroll;
+  // white-space: nowrap;
+}
+
+
+
+
+
+#discoverActorButton{
+  background: transparent;
+  transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  border-radius: 4px;
+  border:#919191 1px solid;
+  display: block;
+
+}
+#discoverActorButton:hover{
+  background-color: #cb00ff !important;
+  background-color: #cb00ff !important;
+  border-radius: 4px !important;
+  border:#919191 1px solid !important;;
+  display: block;
+
+}
+#discoverDirectorButton{
+  background: transparent;
+  transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  border-radius: 4px;
+  border:#919191 1px solid;
+  display: block;
+}
+#discoverDirectorButton:hover{
+  background-color: #cb00ff !important;
+  background-color: #cb00ff !important;
+  border-radius: 4px !important;
+  border:#919191 1px solid !important;;
+  display: block;
+}
+#discoverActorResults{
+  position: absolute;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  height:220px;
+  width: 98%;
+  max-width: 98%;
+  min-width: 10%;
+  white-space:nowrap;
+
+}
+#discoverDirectorResults{
+  position: absolute;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  height:220px;
+  width: 98%;
+  max-width: 98%;
+  min-width: 10%;
+  white-space:nowrap;
+}
+#displayHorizontal{
+  display: inline-block;
+  margin: auto;
+  zoom: 1;
+  // *display: inline;
+  // width: 300px;
 }
 
 input[type="submit"]{
@@ -244,6 +358,10 @@ input[type="submit"]:hover{
   font-size: 15px;
   color: red;
 }
+.deleteMovie3{
+  font-size: 15px;
+  color: red;
+}
 
 input[type="checkbox"] {
   background: transparent;
@@ -316,6 +434,12 @@ input[type=text] {
   font-weight: bold;
   font-size: 23px;
 }
+.actorTitle{
+
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+}
 .movieDetails{
   font-size: 15px;
   font-weight: bold;
@@ -340,6 +464,11 @@ input[type=text] {
   display: none;
 }
 #searchDirector{
+  padding: 12px;
+  font-size: 15px;
+  display: none;
+}
+#searchDiscover{
   padding: 12px;
   font-size: 15px;
   display: none;
@@ -456,7 +585,17 @@ display: none;
 
 }
 
+#errorMessage{
+  padding: 12px;
+}
+
 #loading{
+  display: none;
+}
+#loadingAnD{
+  display: none;
+}
+#loadingAnD2{
   display: none;
 }
 
@@ -490,13 +629,16 @@ display: none;
 }
 
 .tmdbContainer{
+  position: relative;
   font-size: 15px;
   border: 1px solid #d0d0d0;
   padding: 12px;
   border-radius: 8px;
   margin-bottom: 25px;
+  overflow: hidden;
 }
 
 .tmdbText{
-  vertical-align: 22px;
+  position: absolute;
+  top: 30%;
 }
