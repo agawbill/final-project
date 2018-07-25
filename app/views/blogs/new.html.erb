@@ -1,33 +1,44 @@
-<div class="createWrapper">
-    <div class="createLeft">
-<h1>Create<span class="symbol">#</span>blog</h1>
 
+<div class="container">
+  <div class="col-md-8">
 
-<!-- <h3 class="otherHeader">Create a new blog: </h3> -->
+    <h2 id="headerSearch">Create<span class="symbol">#</span>blog</h2>
 
+    <p><div id="boxWrapper">
 
-<p><%= form_for @blog do |f| %>
-<p><%= f.text_field :title, :placeholder=>"Title", :class=>"textTitleArea" %></p>
-<div class="textBodyArea">
-<%= tinymce %>
-<%= f.text_area :content,:class => "tinymce", :rows => 26, :cols => 60 %><br>
-<%= f.submit "Create a new Blog" %></p>
-
-</div><br>
-
-<% end  %>
-</div>
-  <div class="createRight">
-    <h1>Upload<span class="symbol">#</span>image</h1>
-      <p><%= render 'form', picture: @picture %></p>
-
-      <h1>Image<span class="symbol">#</span>urls</h1>
-      <p>
-      <%@pictures.each_with_index do |f, index| %>
-      <strong><%=index +1%>: <%=f.name%></strong><br>
-      <%=f.image%><p>
+      <p><%= form_for @blog, :html => {:class => "form-horizontal"} do |f|%>
+      <p><%= f.text_field :title, :placeholder=>"Title", :class =>"textTitleAreaL"%></p></br>
+      <%= tinymce %>
+      <%= f.text_area :content,:class => "tinymce", :rows => 26, :cols => 60 %><br>
+      <%= f.submit "Create a new Blog" %></p>
       <%end%>
-      <a href="/pictures" class="link">See all pictures</a>
 
-  </div>
+</div></p>
+</div>
+
+
+
+
+<div class="col-md-4">
+
+    <h2 id="headerSearch">Upload<span class="symbol">#</span>picture</h2>
+
+    <div id="boxWrapper">
+
+  <p><%= render 'form', picture: @picture %></p>
+</div></p>
+   <h2 id="headerSearch">Uploaded<span class="symbol">#</span>pictures</h2>
+
+    <div id="boxWrapper" style="overflow-wrap: break-word;">
+
+  <p>
+  <%@pictures.each_with_index do |f, index| %>
+  <strong><%=index +1%>: <%=f.name%></strong><br>
+  <%=f.image%><p>
+  <%end%>
+  <a href="/pictures" class="nav-link">See all pictures</a>
+
+</div>
+</p>
+
 </div>

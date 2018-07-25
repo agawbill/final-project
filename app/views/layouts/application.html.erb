@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ProjectBlogger</title>
+    <title>Movies & Things </title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,50 +9,69 @@
   </head>
 
   <body>
-<div class="wrapper">
 
-    <div class="navbar">
-      <div class="navContainer"><nav>
-      <span class="pagetitle"><%=image_tag "orange-tv.png", :class => "facebook"%> movies<span class="s">&</span>shit</span>
-      <span class="navlinks">
-        <a href="/" class="link">Home</a> |
-        <%if !current_user && !current_admin%>
-          <a href="/users/sign_in"  class="link">Sign In</a> |
-          <a href="/users/sign_up"  class="link">Sign Up</a> |
-          </span>
+    <nav class="navbar navbar-default" id="navBg">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <img width="40px" height="30px"src= "/assets/logo.png" style="position:relative;top:10px; padding-right:8px"> <b><span class="brand" style="position:relative;top:15px; padding-right:20px; color: white; font-size: 20px">movies<span class="brand" style="top:15px; color: #cb00ff; font-size: 20px">&</span>things</a></b>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="<%= 'active' if current_page? '/' %>"><a href="/" class="nav-link">Home <span class="sr-only">(current)</span></a></li>
+            <%if !current_user && !current_admin%>
+              <li class="<%= 'active' if params[:controller] == 'users' %>"><a href="/users/sign_in"  class="nav-link">Sign In</a></li>
+              <li><a href="/users/sign_up"  class="nav-link">Sign Up</a></li>
             <%end%>
-      <%if user_signed_in?%>  <a href="/searches"  class="link" onClick="window.location.reload()">Make List</a> |
-        <a href="/users/<%=current_user.id%>"  class="link">My Lists</a> |
-        <%=link_to "Sign Out", destroy_user_session_path, method: :delete, :class => "link"%></span>
-        <span class="user1">user:</span><span class="userName"> <%=current_user.email%></span>
+            <%if user_signed_in?%>
+              <li class="<%= 'active' if current_page? '/searches' %>"><a href="/searches" class="nav-link" onClick="window.location.reload()">Make List</a></li>
+              <li class="<%= 'active' if current_page? (user_path(:id =>current_user.id)) %>"><a href="/admins/<%=current_user.id%>" class="nav-link">My Lists <span class="sr-only">(current)</span></a></li>
+              <li><a href="#" class="nav-link">Lists</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=current_user.email%> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Edit profile</a></li>
+                <li>  <%=link_to "Sign Out", destroy_user_session_path, method: :delete%></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <%end%>
+          <%if admin_signed_in?%>
+          <li class="<%= 'active' if current_page? '/blogs/new' %>"><a href="/blogs/new" class="nav-link">Create Blog<span class="sr-only">(current)</span></a></li>
+          <li class="<%= 'active' if current_page? (admin_path(:id =>current_admin.id)) %>"><a href="/admins/<%=current_admin.id%>" class="nav-link">My Blogs</a></li>
+          <li><a href="#" class="nav-link">Lists</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=current_admin.email%> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Edit profile</a></li>
+            <li>  <%=link_to "Sign Out", destroy_user_session_path, method: :delete%></li>
+            <li role="separator" class="divider"></li>
+            <li>Link</li>
+          </ul>
+        </li>
+      </ul>
       <%end%>
 
-      <%if admin_signed_in?%>
-        <%=link_to "Sign Out", destroy_user_session_path, method: :delete, :class => "link"%> |
-        <a href="/blogs/new" class="link"  class="link">Create Blog</a> |
-        <a href="/admins/<%=current_admin.id%>"  class="link">My Blogs</a></span>
-        <span class="user1">user:</span><span class="userName"> <%=current_admin.email%></span>
-      <%end%>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
     </nav>
-</div>
-
-    </div>
-
-<div class="content">
 
 <%= yield %>
 
-</div>
-
-
-
-<div class="footer">
-  <%=image_tag "footer/facebook.jpg", :class => "facebook"%>
-  <%=image_tag "footer/twitter.png", :class => "social"%>
-  <%=image_tag "footer/instagram.jpg", :class => "social"%>
-
-</div>
-
-</div>
   </body>
 </html>

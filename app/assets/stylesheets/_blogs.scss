@@ -1,60 +1,13 @@
-hr{
-   color: black;
-  background-color:black;
-  height: 1px;
-  border: 0px;
-}
+// hr{
+//    color: black;
+//   background-color:black;
+//   height: 1px;
+//   border: 0px;
+// }
 
 .blogDateTime{
   font-weight: bold;
   font-size: 14px;
-}
-
-.blogWrapper{
-  font-family: helvetica;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-auto-rows: auto;
-
-}
-.createWrapper{
-  font-family: helvetica;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-auto-rows: auto;
-
-}
-
-.blogRight{
-  width: 100%;
-  float: right;
-}
-
-
-.blogLeft{
-  width: 98%;
-}
-
-.createRight{
-  width: 100%;
-  float: right;
-}
-
-
-.createLeft{
-  width: 100%;
-}
-
-.boxWrapper{
-  border: 1px solid #d0d0d0;
-  padding: 12px;
-  border-radius: 8px;
-}
-
-.postTitleWrapper{
-  border-bottom: 1px solid #d0d0d0;
-  padding-bottom: 12px;
-  overflow: visible;
 
 }
 
@@ -63,11 +16,12 @@ hr{
   font-size: 23px;
 }
 
-
-.otherHeader{
+.sectionHeader{
   font-weight: bold;
-  font-size: 23px;
+font-size: 23px;
 }
+
+
 
 .userList{
   font-weight: bold;
@@ -81,49 +35,10 @@ hr{
 }
 
 
-.link2{
-  font-size: 14px;
-  text-decoration: none;
-  color: #919191;
-}
 
-a.link2:hover{
-  text-decoration: underline #cb00ff;
 
-}
 
-.pictureNameArea{
-  height: 20px;
-  border-radius: 8px;
-  // width: 92.5%;
-  border:#919191 1px solid;
-  padding: 6px 35px 6px 6px;
 
-}
-.pictureDescriptionArea{
-  height: 30px;
-  border-radius: 8px;
-  // width: 92.5%;
-  border:#919191 1px solid;
-  padding: 6px 35px 6px 6px;
-
-}
-.textTitleArea{
-  height: 20px;
-  border-radius: 8px;
-  width: 92.5%;
-  border:#919191 1px solid;
-  padding: 6px 35px 6px 6px;
-
-}
-.textTitleAreaC{
-  height: 20px;
-  border-radius: 8px;
-  width: 66.1%;
-  border:#919191 1px solid;
-  padding: 6px 35px 6px 6px;
-
-}
 
 .textBodyArea{
   margin-top: 5px;
