@@ -14,10 +14,10 @@
 //
 // })
 // = require jquery
-// = require jquery.turbolinks
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require bootstrap-sprockets
 //= require_tree .
 // = require tinymce
 // #= require social-share-button

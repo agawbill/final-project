@@ -3,21 +3,24 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #headerSearch{
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  border-radius: 8px;
+  // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 5px;
   padding: 5px;
   color: white;
-  background-color: black;
   display: inline-block;
+  margin-top: 6px;
+  // margin-bottom: 10px;
+  border: 1px solid white;
+  background-image: url('/assets/bg.jpg');
   font-size: 32px;
 }
 #searchHeader{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 8px;
-  padding: 5px;
+  padding: 0px;
   color: white;
-  background-color: black;
-  display: inline-block;
+  background-image: url('/assets/bg.jpg');
+  display: block;
   font-size: 32px;
 }
 
@@ -81,9 +84,12 @@
   color: #cb00ff;
   font-size: 35px;
   position: absolute;
-  top: 3.5%;
-  right: 1%;
+  top: 0%;
+  right: 0%;
 
+}
+.deleteMovie2{
+  color: red;
 }
 
 #byGenre{
@@ -113,39 +119,42 @@ display: none;
 }
 
 #discover{
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  padding: 10px;
   font-size: 15px;
-  border: 1px solid #d0d0d0;
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 25px;
   display: none;
 }
 #discoverFind{
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  padding: 10px;
   font-size: 15px;
-  border: 1px solid #d0d0d0;
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 25px;
+
   display: none;
 }
 #discoverDirector{
   position: relative;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  padding: 10px;
   font-size: 15px;
-  border: 1px solid #d0d0d0;
-  padding: 12px;
-  height: 255px;
-  border-radius: 8px;
-  margin-bottom: 25px;
+  height: 275px;
+
   display: none;
 }
 #discoverActor{
   position: relative;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  padding: 10px;
   font-size: 15px;
-  border: 1px solid #d0d0d0;
-  padding: 12px;
-  height: 255px;
-  border-radius: 8px;
-  margin-bottom: 25px;
+  height: 275px;
+
   display: none;
   // overflow-x: scroll;
   // white-space: nowrap;
@@ -192,7 +201,7 @@ display: none;
 
   overflow-x: auto;
   overflow-y: hidden;
-  height:220px;
+  height:222px;
   width: 98%;
   max-width: 98%;
   min-width: 10%;
@@ -204,7 +213,7 @@ display: none;
 
   overflow-x: auto;
   overflow-y: hidden;
-  height:220px;
+  height:222px;
   width: 98%;
   max-width: 98%;
   min-width: 10%;
@@ -372,25 +381,36 @@ select{
   background: transparent;
 }
 
-input[type=text] {
-  border: none;
-  width: 150px;
-  margin-right: 10px;
-  margin-left: 10px;
-  border-bottom:#919191 1px solid;
-  padding: 6px 35px 6px 6px;
-}
+// input[type=text] {
+//   border: none;
+//   width: 150px;
+//   margin-right: 10px;
+//   margin-left: 10px;
+//   border-bottom:#919191 1px solid;
+//   padding: 6px 35px 6px 6px;
+// }
 .textTitleAreaL{
   border: none;
-  width: 90%;
-  border-bottom:#919191 1px solid;
+  width: 100%;
+  border-radius: 8px;
+  height: 35px;
+  border:#919191 1px solid;
+  padding: 6px 35px 6px 6px;
+
+}
+.textTitleAreaS{
+  border: none;
+  width: 30%;
+  border-radius: 5px;
+  height: 26px;
+  border:#919191 1px solid;
   padding: 6px 35px 6px 6px;
 
 }
 .textBodyAreaL{
   height: 60px;
   border-radius: 8px;
-  width: 90%;
+  width: 100%;
   border:#919191 1px solid;
   padding: 6px 35px 6px 6px;
 
@@ -453,49 +473,75 @@ input[type=text] {
 
 
 #searchMovie{
-  padding: 12px;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  padding: 10px;
   font-size: 15px;
   display: none;
 }
+#searchMovies{
+  // overflow-y: scroll;
+  height: 300px;
+}
 
 #searchActor{
-  padding: 12px;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  padding: 10px;
   font-size: 15px;
   display: none;
 }
 #searchDirector{
-  padding: 12px;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  padding: 10px;
   font-size: 15px;
   display: none;
 }
 #searchDiscover{
-  padding: 12px;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  padding: 10px;
   font-size: 15px;
   display: none;
 }
 
 #searchCategory{
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  padding: 10px;
+  font-size: 15px;
   display: none;
 }
 
 #searchPopular{
+
+  padding: 10px;
   font-size: 15px;
-  padding: 12px;
   display: none;
 }
 
 #searchTop{
-  padding: 12px;
+
+  padding: 10px;
+  font-size: 15px;
   display: none;
 }
 #searchLatest{
+
+  padding: 10px;
   font-size: 15px;
-  padding: 12px;
   display: none;
 }
 #searchUpcoming{
+
+  padding: 10px;
   font-size: 15px;
-  padding: 12px;
   display: none;
 }
 
@@ -508,11 +554,11 @@ input[type=text] {
 
 
 #genreChecks{
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  padding: 10px;
   font-size: 15px;
-  border: 1px solid #d0d0d0;
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 25px;
 
   display: none;
 
@@ -529,11 +575,12 @@ input[type=text] {
 }
 
 #listHolder{
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  padding: 10px;
   font-size: 15px;
-  border: 1px solid #d0d0d0;
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 25px;
+
 
 }
 #genreGrid{
@@ -546,9 +593,12 @@ input[type=text] {
 }
 
 #genreLinks{
-font-size: 15px;
-padding: 12px;
-display: none;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  padding: 10px;
+  font-size: 15px;
+  display: none;
 }
 
 #genreDrop{
@@ -559,17 +609,17 @@ display: none;
 
 }
 #movieRatings{
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  padding: 10px;
   font-size: 15px;
-  border: 1px solid #d0d0d0;
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 25px;
   display: none;
 }
 
 
 .listForm{
-  position: fixed;
+
   width: 25%;
   margin: 0 auto;
 
@@ -630,15 +680,15 @@ display: none;
 
 .tmdbContainer{
   position: relative;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  padding: 10px;
   font-size: 15px;
-  border: 1px solid #d0d0d0;
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 25px;
   overflow: hidden;
 }
 
 .tmdbText{
   position: absolute;
-  top: 30%;
+  top: 26%;
 }
