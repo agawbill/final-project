@@ -4,6 +4,7 @@
     <title>Movies & Things </title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -21,7 +22,9 @@
             <span class="icon-bar"></span>
           </button>
 
-          <img width="40px" height="30px"src= "/assets/logo.png" style="position:relative;top:10px; padding-right:8px"> <b><span class="brand" style="position:relative;top:15px; padding-right:20px; color: white; font-size: 20px">movies<span class="brand" style="top:15px; color: #cb00ff; font-size: 20px">&</span>things</a></b>
+          <%=image_tag "logo.png", :class=> "logo1"%>
+          <!-- <img width="40px" height="30px" src= "/assets/logo.png" style="position:relative;top:10px; padding-right:8px"> -->
+          <b><span class="brand" style="position:relative;top:15px; padding-right:20px; color: white; font-size: 20px">movies<span class="brand" style="top:15px; color: #cb00ff; font-size: 20px">&</span>things</a></b>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

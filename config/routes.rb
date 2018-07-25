@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   # devise_for :admins
   resources :users
   resources :admins
-  resources :blogs
+  resources :blogs 
   resources :comments
   resources :searches
   resources :lists do
