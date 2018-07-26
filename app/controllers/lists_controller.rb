@@ -24,17 +24,36 @@ class ListsController < ApplicationController
   end
 
   def show
-
     @movieLists=[]
+    @peopleLists=[]
     @list=List.find(params[:id])
     @movieList=@list.movie_ids[0]
 
-    for movie_id in @movieList do
+    if @list.category == "Actors"
+      for movie_id in @movieList do
+      @peopleLists.push(Tmdb::Person.detail(movie_id))
+      end
+    elsif @list.category == "Directors"
+      for movie_id in @movieList do
+      @peopleLists.push(Tmdb::Person.detail(movie_id))
+      end
+    elsif @list.category == "Movies"
+      for movie_id in @movieList do
       @movieLists.push(Tmdb::Movie.detail(movie_id))
+      end
     end
+
 
     if params[:s].present?
     @movies=Tmdb::Movie.similar(params[:s])
+      respond_to do |format|
+      format.html
+      format.js
+      format.json { render :json => {:movies => @movies }}
+      end
+    end
+    if params[:sp].present?
+    @movies=Tmdb::Person.combined_credits(params[:sp])
       respond_to do |format|
       format.html
       format.js
@@ -53,9 +72,15 @@ class ListsController < ApplicationController
         redirect_to "/"
     end
 
-    for name in @movieIds do
-      @movieNames.push(Tmdb::Movie.detail(name).original_title)
+    if @list.category=="Movies"
+      for name in @movieIds do
+        @movieNames.push(Tmdb::Movie.detail(name).original_title)
+      end
+    else
+      for name in @movieIds do
+        @movieNames.push(Tmdb::Person.detail(name).name)
     end
+  end
 
     if params[:q].present? && params[:genres].present? && params[:ratingQ].present?
       @count=Tmdb::Search.movie(params[:q]).total_pages
