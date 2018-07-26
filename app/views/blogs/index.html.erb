@@ -1,7 +1,7 @@
 
 <div class="container">
   <div class="col-md-8">
-    <h2 id="headerSearch">New<span class="symbol">#</span>blogs</h2>
+    <h2>New<span class="symbol">#</span>blogs</h2>
 
   <%@blogs.reverse.each do |b|%>
     <p><div id="boxWrapper">
@@ -24,26 +24,27 @@
 
 
 <div class="col-md-4">
-  <h2 id="headerSearch">Site<span class="symbol">#</span>users</h2>
+  <h2>Recent<span class="symbol">#</span>lists</h2>
     <p><div id="boxWrapper">
 
-  <%@users.each_with_index do |u, index|%>
-  <p><span class="userList"><span class="symbol"><%=index+1%>:</span> <a href="/admins/<%=u.id%>/" class="nav-link"><%=u.email%></a></span>
+  <%@lists.last(5).each_with_index do |u, index|%>
+  <p><b><span class="popularList"><%=index+1%>:<b></span> <b><a href="/admins/<%=u.id%>/" class="nav-link2"><%=u.name%></a></b>
   <%end%>
 </div>
 </p>
-  <p>    <h2 id="headerSearch">Popular<span class="symbol">#</span>lists</h2></p>
+  <p>    <h2 >Popular<span class="symbol">#</span>lists</h2></p>
     <div id="boxWrapper">
-      <%@lists.last(5).each_with_index do |x, index|%>
+      <%@popular.each_with_index do |x, index|%>
+       <%break if index == 5%>
 
-      <span class="userList"><span class="symbol"><%=index +1%>:</span> <a href="/lists/<%=x.id%>/" class="nav-link"><%=x.name%></a></span></p>
+      <b><span class="popularList"><%=index +1%>:</span></b> <b><a href="/lists/<%=x.id%>/" class="nav-link2"><%=x.name%></a></b></p>
 
 
       <%end%>
 </div>
 </p>
   <p>
-    <h2 id="headerSearch">Social<span class="symbol">#</span>media</h2></p>
+    <h2 >Social<span class="symbol">#</span>media</h2></p>
     <div id="boxWrapper">
     <p><a class="twitter-timeline" data-width="700" data-height="600" href="https://twitter.com/gawthegovernor/lists/james?ref_src=twsrc%5Etfw">A Twitter List by gawthegovernor</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
 </div>

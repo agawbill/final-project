@@ -4,6 +4,7 @@ class BlogsController < ApplicationController
     @blogs=Blog.all
     @comments=Comment.all
     @lists=List.all.order(:cached_votes_up => :desc)
+    @popular=List.order(:cached_weighted_average => :desc)
   end
 
   def show

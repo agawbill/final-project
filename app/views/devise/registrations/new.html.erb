@@ -1,29 +1,36 @@
-<h1>SIgn<span class="symbol">#</span>up</h1>
+<div class="container">
 
+
+  <div class="col-md-12">
+    <h2>Sign<span class="symbol">#</span>up</h2>
+    <div id="boxWrapper">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
+  <p><div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "textTitleAreaL", style: "text-align:center"  %>
+  </div></p>
 
-  <div class="field">
+  <p><div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+    <%= f.password_field :password, autocomplete: "off",  class: "textTitleAreaL", style: "text-align:center"  %>
+  </div></p>
 
-  <div class="field">
+  <p><div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+    <%= f.password_field :password_confirmation, autocomplete: "off",  class: "textTitleAreaL", style: "text-align:center"  %>
+  </div></p>
 
-  <div class="actions">
+  <p><div class="actions">
     <%= f.submit "Sign up" %>
-  </div>
+  </div></p>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<p><%= render "devise/shared/links" %></p>
+</div>
+</div>
+</div>

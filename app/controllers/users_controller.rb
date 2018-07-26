@@ -13,5 +13,8 @@ class UsersController < ApplicationController
       @public.push(movie)
       end
     end
+    
+
+
   end
 end
