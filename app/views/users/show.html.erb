@@ -61,21 +61,20 @@
 
 
 
-      <p><div id="boxWrapperList">
-
-        <span class='movieTitle'> <a href="/lists/<%=l.id%>" class="listLink"><%=l.name%></a></span>
-      </p><span class="blogDateTime"><span class="postedBy">Created </span> <%=l.created_at.strftime(
-        '%a, %b %Y'
-        )%> <span class="postedBy">at</span> <%=l.created_at.strftime(
-        '%I:%M %p'
-        )%> ET</span><hr><span class="listCount"><%=l.movie_ids[0].count%> movies</span>
-        <p><b><u>Description:</b></u> <%=l.description%></p>
-        <hr padding-top="0px">
-        <a href="/lists/<%=l.id%>/edit" class="nav-link" onClick="window.location.reload()">Edit list or add Movies</a> | <%= link_to 'Delete?', { controller: :lists, action: :destroy, id: l.id },
-        method: :delete, data: { confirm: 'Are you sure?' }, class: "nav-link" %>
-      </div>
+      <p><div class="col-md-12" id="boxWrapperList">
 
 
+      <span class='movieTitle'> <a href="/lists/<%=l.id%>" class="listLink"><%=l.name%></a></span>
+    </p><span class="blogDateTime"><span class="postedBy">Created </span> <%=l.created_at.strftime(
+      '%a, %b %Y'
+      )%> <span class="postedBy">at</span> <%=l.created_at.strftime(
+      '%I:%M %p'
+      )%> ET</span><hr><span class="listCount"><%=l.movie_ids[0].count%> movies</span>
+      <p><b><u>Description:</b></u> <%=l.description%></p>
+      <hr padding-top="0px">
+      <a href="/lists/<%=l.id%>/edit" class="nav-link" onClick="window.location.reload()">Edit list or add Movies</a> | <%= link_to 'Delete?', { controller: :lists, action: :destroy, id: l.id },
+      method: :delete, data: { confirm: 'Are you sure?' }, class: "nav-link" %>
+    </div>
 
 
 
