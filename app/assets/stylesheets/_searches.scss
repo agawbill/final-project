@@ -23,6 +23,9 @@
   display: block;
   font-size: 32px;
 }
+.errorMessage{
+  color: red;
+}
 
 #backToTop{
   position: fixed;
@@ -648,6 +651,7 @@ select{
 }
 
 .link:hover{
+  cursor: pointer;
   text-decoration: underline #cb00ff;
 
 }
