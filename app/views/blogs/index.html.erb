@@ -13,7 +13,8 @@
   )%> <span class="postedBy">at</span> <%=b.created_at.strftime(
 '%I:%M %p'
 )%> ET</span>
-<p> <%= b.content.html_safe %></p>
+<hr>
+<%= b.content.html_safe %></p>
 <a href="/blogs/<%=b.id%>" class="nav-link">Comments (<%=b.comments.count%>) </a></p>
 
 </div></p>
