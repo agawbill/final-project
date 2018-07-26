@@ -19,7 +19,7 @@
   border-radius: 8px;
   padding: 0px;
   color: white;
-  background-image: url('/assets/bg.jpg');
+  background-image: image_url('bg.jpg');
   display: block;
   font-size: 32px;
 }
@@ -482,7 +482,6 @@ select{
 }
 #searchMovies{
   // overflow-y: scroll;
-  height: 300px;
 }
 
 #searchActor{
@@ -585,8 +584,8 @@ select{
 }
 #genreGrid{
   display: grid;
-  width: 80%;
-  grid-template-columns: 1fr 1fr 1fr ;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-row-gap:1em;
   height: 20%;
   grid-column-gap: 1em;

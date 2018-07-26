@@ -1,26 +1,33 @@
-<h1>Log<span class="symbol">#</span>in</h1>
+<div class="container">
 
+
+  <div class="col-md-12">
+    <h2>Log<span class="symbol">#</span>in</h2>
+    <div id="boxWrapper">
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
+  <p><div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "textTitleAreaL", style: "text-align:center" %>
+  </div></p>
 
-  <div class="field">
+  <p><div class="field">
     <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+    <%= f.password_field :password, autocomplete: "off", class: "textTitleAreaL", style: "text-align:center" %>
+  </div></p>
 
-  <% if devise_mapping.rememberable? -%>
+  <p><% if devise_mapping.rememberable? -%>
     <div class="field">
       <%= f.check_box :remember_me %>
       <%= f.label :remember_me %>
     </div>
-  <% end -%>
-
+  <% end -%></p>
+<p>
   <div class="actions">
     <%= f.submit "Log in" %>
   </div>
-<% end %>
+<% end %></p>
 
 <%= render "devise/shared/links" %>
+</div>
+</div>
+</div>

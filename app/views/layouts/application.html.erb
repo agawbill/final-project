@@ -37,17 +37,16 @@
             <%end%>
             <%if user_signed_in?%>
               <li class="<%= 'active' if current_page? '/searches' %>"><a href="/searches" class="nav-link" onClick="window.location.reload()">Make List</a></li>
-              <li class="<%= 'active' if current_page? (user_path(:id =>current_user.id)) %>"><a href="/admins/<%=current_user.id%>" class="nav-link">My Lists <span class="sr-only">(current)</span></a></li>
+              <li class="<%= 'active' if current_page? (user_path(:id =>current_user.id)) %>"><a href="/users/<%=current_user.id%>" class="nav-link">My Lists <span class="sr-only">(current)</span></a></li>
               <li><a href="#" class="nav-link">Lists</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=current_user.email%> <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Edit profile</a></li>
+                <li><a href="/users/edit">Edit profile</a></li>
                 <li>  <%=link_to "Sign Out", destroy_user_session_path, method: :delete%></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
+
               </ul>
             </li>
           </ul>
@@ -63,8 +62,6 @@
           <ul class="dropdown-menu">
             <li><a href="#">Edit profile</a></li>
             <li>  <%=link_to "Sign Out", destroy_user_session_path, method: :delete%></li>
-            <li role="separator" class="divider"></li>
-            <li>Link</li>
           </ul>
         </li>
       </ul>
