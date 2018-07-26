@@ -20,7 +20,7 @@
       <%= f.check_box :private %>  Make Private?</p>
       <%= hidden_field_tag :movie_ids %>
       <%= hidden_field_tag :type %>
-      <p><%= f.submit "Create a new List" %></p>
+      <p><%= f.submit "Update List" %></p>
       <% end  %>
       <%else%>
       Please <a href="/users/sign_in"  class="nav-link">Sign In</a> to create a list
@@ -290,6 +290,10 @@ Select genre: <select id="genreDrop">
 
 </div>
 
+<div id="backToTop">
+<span class="nav-link3",  onclick=window.location='#listTop'><span class="glyphicon glyphicon-hand-up"></span> Back to Top</a>
+</div>
+
 </div>
 
 
@@ -353,6 +357,19 @@ var discoverDirandPeop=discoverActorList.concat(discoverDirectorList)
 window.onload = function() {
   populateExisting();
 };
+
+
+
+$(document).scroll(function() {
+ //Show element after user scrolls 800px
+ var y = $(this).scrollTop();
+ if (y > 800) {
+   $('#backToTop').fadeIn();
+ } else {
+   $('#backToTop').fadeOut();
+ }
+})
+
 
 
 function populateExisting(){
@@ -1557,6 +1574,10 @@ function clearAll(){
   genres4=[]
   genres5=[]
   genres6=[]
+  discoverActorList=[]
+  discoverActorListName=[]
+  discoverDirectorList=[]
+  discoverDirectorListName=[]
   genres.value=[]
   genresD.value=[]
   genresP.value=[]
@@ -1564,7 +1585,6 @@ function clearAll(){
   genresL.value=[]
   genresU.value=[]
   people.value=[]
-  discoverDirandPeop.value=[]
   $('#actorList').empty();
   $('#directorList').empty();
   year.value=[]

@@ -45,6 +45,9 @@ $size: 24px;
       grid-template-columns: 1fr 1fr 1fr 1fr;
 
   }
+  #backToTop{
+    right:20%;
+  }
  }
 
 // Extra large devices (large desktops, 1200px and up)
@@ -52,5 +55,8 @@ $size: 24px;
   #genreGrid{
 
       grid-template-columns: 1fr 1fr 1fr 1fr;
+ }
+ #backToTop{
+   right:20%;
  }
  }

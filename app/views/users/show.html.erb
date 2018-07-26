@@ -33,7 +33,7 @@
       '%a, %b %Y'
       )%> <span class="postedBy">at</span> <%=l.created_at.strftime(
       '%I:%M %p'
-      )%> ET</span><hr><span class="listCount"><%=l.movie_ids[0].count%> movies</span>
+      )%> ET</span><hr><span class="listCount"><%=l.movie_ids[0].count%> <%=l.category%></span>
       <p><b><u>Description:</b></u> <%=l.description%></p>
       <hr padding-top="0px">
       <a href="/lists/<%=l.id%>/edit" class="nav-link" onClick="window.location.reload()">Edit list or add Movies</a> | <%= link_to 'Delete?', { controller: :lists, action: :destroy, id: l.id },
@@ -69,7 +69,7 @@
       '%a, %b %Y'
       )%> <span class="postedBy">at</span> <%=l.created_at.strftime(
       '%I:%M %p'
-      )%> ET</span><hr><span class="listCount"><%=l.movie_ids[0].count%> movies</span>
+      )%> ET</span><hr><span class="listCount"><%=l.movie_ids[0].count%> <%=l.category%></span>
       <p><b><u>Description:</b></u> <%=l.description%></p>
       <hr padding-top="0px">
       <a href="/lists/<%=l.id%>/edit" class="nav-link" onClick="window.location.reload()">Edit list or add Movies</a> | <%= link_to 'Delete?', { controller: :lists, action: :destroy, id: l.id },

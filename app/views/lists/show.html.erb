@@ -2,7 +2,7 @@
 <div class="container">
   <div class="col-md-8">
 
-    <h2>List<span class="symbol"> #</span> <%=@list.name%></h2>
+    <h2>List<span class="symbol" id="listTop"> #</span> <%=@list.name%></h2>
     <p>
       <div id="boxWrapper">
       <span class="movieTitle">Description:</span></p>
@@ -20,17 +20,18 @@
 
     </div>
 
+    <%if @list.category=="Movies"%>
     <%@movieLists.each do |movie| %>
 
 
 
 
   <p>
-    <div id="boxWrapper"><span class='movieTitle'>
+    <div class="boxWrapper2"><span class='movieTitle'>
   <%=movie.original_title%></span>
   <span class="quote">  <%=form_tag("/lists", method: "get", :remote => "true") do%>
   <%= hidden_field_tag :s, movie.id%>
-  <%=submit_tag("Similar movies", :class => "similiar_submit")%>
+  <%=submit_tag("Similar", :class => "similiar_submit")%>
   <%end%></span><br>
   <i><%=movie.tagline%></i>
   <hr>
@@ -48,6 +49,36 @@
   </p>
 </div>
 <%end%>
+
+    <%else%>
+    <%@peopleLists.each do |movie| %>
+
+
+
+
+  <p>
+    <div class="boxWrapper2"><span class='movieTitle'>
+  <%=movie.name%></span>
+  <span class="quote">  <%=form_tag("/lists", method: "get", :remote => "true") do%>
+  <%= hidden_field_tag :sp, movie.id%>
+  <%=submit_tag("Credits", :class => "credits_submit")%>
+  <%end%></span>
+  <hr>
+
+  <img src='https://image.tmdb.org/t/p/w500/<%=movie.profile_path%>' id='movieImg'>
+  <span class='movieDetails'> Popularity: </span><span class='movieInfo'>
+  <%=movie.popularity%></span><br>
+  <span class='movieDetails'> Known for: </span><span class='movieInfo'>
+  <%=movie.known_for_department%></span><br><br>
+  <span class='movieDetails'>Biography: </span><p>
+  <%=movie.biography%></p></center>
+
+  </p>
+</div>
+<%end%>
+<%end%>
+
+
 </div>
 
 
@@ -58,7 +89,12 @@
     <span class="movieTitle">Like it? Share it!</span><p>
     <%= social_share_button_tag(@list.name, :url => "http://myapp.com/foo/bar") %>
   </div></p>
+<%if @list.category=="Movies"%>
 <h2>Similar<span class="symbol">#</span>movies</h2>
+<%else%>
+<h2>Full<span class="symbol">#</span>credits</h2>
+<%end%>
+
   <p>
 
     <div id="loading">
@@ -68,21 +104,26 @@
         Click "show similar movies" next to each movie title to get simiar film suggestions.
       </div>
   </div></p>
-</div>
-</div>
+  <div id="backToTop">
+  <span class="nav-link3",  onclick=window.location='#listTop'><span class="glyphicon glyphicon-hand-up"></span> Back to Top</a>
+  </div>
+
+  </div>
+
+
+  <script>
 
 
 
-
-
-
-
-
-
-
-
-
-<script>
+  $(document).scroll(function() {
+   //Show element after user scrolls 800px
+   var y = $(this).scrollTop();
+   if (y > 800) {
+     $('#backToTop').fadeIn();
+   } else {
+     $('#backToTop').fadeOut();
+   }
+  })
 
 $( document ).ajaxStart(function() {
     $( "#loading" ).show();
@@ -118,10 +159,63 @@ $.ajax({
             +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
             +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
             +movies[i].table.overview+"</br> <center></center></div><p style='clear: both;'> ")
-            
+
           }
           console.log(data.movies.table.results);
         }
+
+  });
+
+  });
+$('.credits_submit').on('click',function(event){
+$( "#displayMovies" ).empty();
+var form=$(this).parent('form');
+
+
+$.ajax({
+      type: "GET",
+      url: "<%=list_path%>",
+      data: form.serialize(),
+      dataType: "JSON",
+
+      success: function(data){
+        console.log(data);
+        var movies=data.movies.table.cast;
+        if(movies.length<21){
+        for(i=0;i<movies.length;i++){
+          if(movies[i].poster_path != undefined){
+
+          $('#displayMovies').append(
+            "<p><div class='boxWrapper2'><div class='movieHeader'><span class='movieTitle'>"
+            +movies[i].table.original_title
+            +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
+            +movies[i].table.poster_path+"' id='movieImg'><span class='movieDetails'> Rating: </span><span class='movieInfo'>"
+            +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
+            +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
+            +movies[i].table.overview+"</br> <center></center></div><p style='clear: both;'> ")
+
+          }
+          console.log(data.movies.table.results);
+        }
+      }
+        else{
+          for(i=0;i<21;i++){
+
+
+            $('#displayMovies').append(
+              "<p><div class='boxWrapper2'><div class='movieHeader'><span class='movieTitle'>"
+              +movies[i].table.original_title
+              +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
+              +movies[i].table.poster_path+"' id='movieImg'><span class='movieDetails'> Rating: </span><span class='movieInfo'>"
+              +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
+              +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
+              +movies[i].table.overview+"</br> <center></center></div><p style='clear: both;'> ")
+
+            }
+            console.log(data.movies.table.results);
+          }
+        }
+
 
   });
 
