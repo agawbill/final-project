@@ -2,8 +2,10 @@
   <div class="col-md-8">
 
 
+    <h2 >Blog<span class="symbol">#</span>post</h2>
 
       <p><div id="boxWrapper">
+
 
 
       <span class="blogTitle"><%=@blog.title%></span><br>
@@ -17,7 +19,8 @@
 <a href="/blogs/<%=@blog.id%>" class="nav-link">Comments (<%=@blog.comments.count%>) </a></p>
 
 </div></p>
-<p><span class="sectionHeader">Comments:</span></p>
+<h2 >User<span class="symbol">#</span>comments</h2>
+
 <%@blogs.comments.reverse.each do |c|%>
 
 
@@ -47,8 +50,10 @@
 
 <div class="col-md-4">
   <p>
+    <h2 >Comment<span class="symbol">#</span>form</h2>
+
     <div id="boxWrapper">
-  <span class="sectionHeader">Comment Form:</span></p>
+
   <%if current_user%>
   <%= form_for @comment do |f|%>
   <%= f.text_area :title, :placeholder=>"Title", :class=>"textTitleAreaC" %><br>

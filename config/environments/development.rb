@@ -51,6 +51,8 @@ Rails.application.configure do
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
+  config.serve_static_files = true
+config.assets.compile = true
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
@@ -60,5 +62,5 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
 
-  
+
 end
