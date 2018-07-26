@@ -1,9 +1,7 @@
 <div class="container">
   <div class="col-md-8">
 
-
     <h2 >Blog<span class="symbol">#</span>post</h2>
-
       <p><div id="boxWrapper">
 
 
@@ -44,17 +42,18 @@
       </p>
 
 </div></p>
-</div><%end%>
+<%end%>
+</div>
 
 
 
 <div class="col-md-4">
   <p>
     <h2 >Comment<span class="symbol">#</span>form</h2>
-<%if current_user%>
+
     <div id="boxWrapper">
 
-
+  <%if current_user%>
   <%= form_for @comment do |f|%>
   <%= f.text_area :title, :placeholder=>"Title", :class=>"textTitleAreaL" %><br>
   <%= f.text_area :content, :placeholder=>"Content", :class=>"textBodyAreaL" %><br>
@@ -62,8 +61,10 @@
   <%= f.submit "Create a new Comment" %></p>
   <% end  %>
 
+  <%else%>
+  Login to post a comment
+  <%end%>
 </div>
-<%end%>
 </p>
 </div>
 </div>
