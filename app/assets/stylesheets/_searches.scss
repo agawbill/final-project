@@ -24,6 +24,23 @@
   font-size: 32px;
 }
 
+#backToTop{
+  position: fixed;
+  display: none;
+  right: 1%;
+  bottom: 0%;
+  color: white;
+  padding: 4px;
+  border-radius: 5px;
+  background-image: image_url('bg.jpg');
+}
+
+#listTop{
+
+}
+
+
+
 #directorsContainer{
   font-family: helvetica;
   display: none;
@@ -74,6 +91,7 @@
   height: 150px;
   width: 150px;
   margin-right: 10px;
+  margin-bottom: 3px;
   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 8px;
 
@@ -142,7 +160,7 @@ display: none;
   border-radius: 3px;
   padding: 10px;
   font-size: 15px;
-  height: 275px;
+  height: 278px;
 
   display: none;
 }
@@ -153,7 +171,7 @@ display: none;
   border-radius: 3px;
   padding: 10px;
   font-size: 15px;
-  height: 275px;
+  height: 278px;
 
   display: none;
   // overflow-x: scroll;
@@ -201,7 +219,7 @@ display: none;
 
   overflow-x: auto;
   overflow-y: hidden;
-  height:222px;
+  height:224px;
   width: 98%;
   max-width: 98%;
   min-width: 10%;
@@ -213,7 +231,7 @@ display: none;
 
   overflow-x: auto;
   overflow-y: hidden;
-  height:222px;
+  height:224px;
   width: 98%;
   max-width: 98%;
   min-width: 10%;

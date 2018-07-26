@@ -1,5 +1,30 @@
 <div class="container">
-  <div class="col-md-8">
+
+    <div class="col-md-4 col-md-push-8" id="listTop">
+        <p>
+          <h2 >Comment<span class="symbol">#</span>form</h2>
+
+          <div id="boxWrapper">
+
+        <%if current_user%>
+        <%= form_for @comment do |f|%>
+        <%= f.text_area :title, :placeholder=>"Title", :class=>"textTitleAreaL" %><br>
+        <%= f.text_area :content, :placeholder=>"Content", :class=>"textBodyAreaL" %><br>
+        <%= hidden_field_tag :blog_id, @blog.id %>
+        <%= f.submit "Create a new Comment" %></p>
+        <% end  %>
+
+        <%else%>
+        Login to post a comment
+        <%end%>
+      </div>
+      </p>
+      </div>
+
+
+
+
+  <div class="col-md-8 col-md-pull-4">
 
     <h2 >Blog<span class="symbol">#</span>post</h2>
       <p><div id="boxWrapper">
@@ -47,24 +72,24 @@
 
 
 
-<div class="col-md-4">
-  <p>
-    <h2 >Comment<span class="symbol">#</span>form</h2>
-
-    <div id="boxWrapper">
-
-  <%if current_user%>
-  <%= form_for @comment do |f|%>
-  <%= f.text_area :title, :placeholder=>"Title", :class=>"textTitleAreaL" %><br>
-  <%= f.text_area :content, :placeholder=>"Content", :class=>"textBodyAreaL" %><br>
-  <%= hidden_field_tag :blog_id, @blog.id %>
-  <%= f.submit "Create a new Comment" %></p>
-  <% end  %>
-
-  <%else%>
-  Login to post a comment
-  <%end%>
+<div id="backToTop">
+<span class="nav-link3",  onclick=window.location='#listTop'><span class="glyphicon glyphicon-hand-up"></span> Back to Top</a>
 </div>
-</p>
+
 </div>
-</div>
+
+
+<script>
+
+
+
+$(document).scroll(function() {
+ //Show element after user scrolls 800px
+ var y = $(this).scrollTop();
+ if (y > 800) {
+   $('#backToTop').fadeIn();
+ } else {
+   $('#backToTop').fadeOut();
+ }
+})
+</script>

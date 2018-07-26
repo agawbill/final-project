@@ -4,7 +4,7 @@
 
 
 
-  <div class="col-md-4 col-md-push-8">
+  <div class="col-md-4 col-md-push-8" id="listTop">
   <h2 >Create<span class="symbol">#</span>list</h2>
   <p>
     <div id="listHolder">
@@ -286,13 +286,17 @@ Select genre: <select id="genreDrop">
 
 
 <div id="loading">
-<center><%=image_tag "loading.gif", :class => "loadingImg"%></center>
+  <center><%=image_tag "loading.gif", :class => "loadingImg"%></center>
 </div>
 
 <div id="searchMovies">
 
 </div>
 
+</div>
+
+<div id="backToTop">
+<span class="nav-link3",  onclick=window.location='#listTop'><span class="glyphicon glyphicon-hand-up"></span> Back to Top</a>
 </div>
 
 </div>
@@ -348,7 +352,15 @@ var discoverDirandPeop=discoverActorList.concat(discoverDirectorList)
 
 
 
-
+$(document).scroll(function() {
+ //Show element after user scrolls 800px
+ var y = $(this).scrollTop();
+ if (y > 800) {
+   $('#backToTop').fadeIn();
+ } else {
+   $('#backToTop').fadeOut();
+ }
+})
 
 
 
@@ -895,7 +907,7 @@ function create(){
 // generates list when Add to Actor button is clicked... functionality for delete
 function create2(){
   var list2=document.createElement("span")
-  list2.innerHTML=discoverActorListName[discoverActorListName.length-1]+"<span class='deleteMovie2' value="+discoverActorList[discoverActorList.length-1]+"> X</span> <input class='moveElements' type='hidden' value="+discoverActorList[discoverActorList.length-1]+"></input>&uarr; <span id='moveElement' value="+discoverActorList[discoverActorList.length-1]+" type='button'>&darr;</button> "
+  list2.innerHTML=discoverActorListName[discoverActorListName.length-1]+"<span class='deleteMovie2' value="+discoverActorList[discoverActorList.length-1]+"> X</span> "
   list2.value=discoverActorList[discoverActorList.length-1]
   actorList.appendChild(list2)
   var deleteMovie2=document.getElementsByClassName('deleteMovie2')
@@ -921,7 +933,7 @@ function create2(){
 // generates list when Add Director button is clicked... functionality for delete
 function create3(){
   var list3=document.createElement("span")
-  list3.innerHTML=discoverDirectorListName[discoverDirectorListName.length-1]+"<span class='deleteMovie3' value="+discoverDirectorList[discoverDirectorList.length-1]+"> X</span> <input class='moveElements' type='hidden' value="+discoverDirectorList[discoverDirectorList.length-1]+"></input>&uarr; <span id='moveElement' value="+discoverDirectorList[discoverDirectorList.length-1]+" type='button'>&darr;</button> "
+  list3.innerHTML=discoverDirectorListName[discoverDirectorListName.length-1]+"<span class='deleteMovie3' value="+discoverDirectorList[discoverDirectorList.length-1]+"> X</span>"
   list3.value=discoverDirectorList[discoverDirectorList.length-1]
   directorList.appendChild(list3)
   var deleteMovie3=document.getElementsByClassName('deleteMovie3')
@@ -1538,6 +1550,10 @@ function clearAll(){
   genres4=[]
   genres5=[]
   genres6=[]
+  discoverActorList=[]
+  discoverActorListName=[]
+  discoverDirectorList=[]
+  discoverDirectorListName=[]
   genres.value=[]
   genresD.value=[]
   genresP.value=[]
@@ -1545,7 +1561,8 @@ function clearAll(){
   genresL.value=[]
   genresU.value=[]
   people.value=[]
-  discoverDirandPeop.value=[]
+
+
   $('#actorList').empty();
   $('#directorList').empty();
   year.value=[]
