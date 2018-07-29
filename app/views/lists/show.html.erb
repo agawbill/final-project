@@ -113,8 +113,6 @@
 
   <script>
 
-
-
   $(document).scroll(function() {
    //Show element after user scrolls 800px
    var y = $(this).scrollTop();
@@ -149,20 +147,26 @@ $.ajax({
 
       success: function(data){
         var movies=data.movies.table.results;
+        if(movies.length>0){
         for(i=0;i<movies.length;i++){
+            $('#displayMovies').append(
+              "<p><div class='boxWrapper2'><div class='movieHeader'><span class='movieTitle'>"
+              +movies[i].table.original_title
+              +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
+              +movies[i].table.poster_path+"' id='movieImg'><span class='movieDetails'> Rating: </span><span class='movieInfo'>"
+              +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
+              +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
+              +movies[i].table.overview+"</br> <center></center></div><p style='clear: both;'> ")
 
-          $('#displayMovies').append(
-            "<p><div class='boxWrapper2'><div class='movieHeader'><span class='movieTitle'>"
-            +movies[i].table.original_title
-            +"</span></div> <br><img src='https://image.tmdb.org/t/p/w500/"
-            +movies[i].table.poster_path+"' id='movieImg'><span class='movieDetails'> Rating: </span><span class='movieInfo'>"
-            +movies[i].table.vote_average+"</span><br><span class='movieDetails'> Release date: </span><span class='movieInfo'>"
-            +movies[i].table.release_date+"</span><br><br><span class='movieDetails'> Overview: </span>"
-            +movies[i].table.overview+"</br> <center></center></div><p style='clear: both;'> ")
+            }
+            }
+          else{
+            $('#displayMovies').append(
+              "<p>Sorry. It doesn't look like there are any similar movies in the database."
+            )
 
-          }
-          console.log(data.movies.table.results);
-        }
+              }
+            }
 
   });
 
@@ -181,7 +185,14 @@ $.ajax({
       success: function(data){
         console.log(data);
         var movies=data.movies.table.cast;
-        if(movies.length<21){
+        if(movies.length==0){
+          $('#displayMovies').append(
+            "<p>Sorry. Your query returned no results.</p>"
+          )
+
+
+          }
+        else if(movies.length<21){
         for(i=0;i<movies.length;i++){
           if(movies[i].poster_path != undefined){
 
@@ -215,6 +226,7 @@ $.ajax({
             console.log(data.movies.table.results);
           }
         }
+        
 
 
   });

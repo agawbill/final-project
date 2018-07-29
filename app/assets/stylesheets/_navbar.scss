@@ -1,8 +1,16 @@
 
 body{
-  background-color: #f2f2f2!important;
+  background: linear-gradient(
+   rgba(242, 242, 242, .9),
+   rgba(242, 242, 242, .9)
+ ),
+  image_url("newbg.jpg"),;
+
+  // background-color: #f2f2f2!important;s
   margin:0;
+
 }
+
 h2 {
  overflow: hidden;
  text-align: center;
@@ -26,11 +34,20 @@ h2:after {
  margin-right: -50%;
 }
 
+.latestImage{
+  color: white;
+  padding: 4px;
+  background:rgb(0,0,0);
+      background:rgba(0,0,0,.70);
+      // *background:transparent;
+}
+
 #navBg{
-  background-image: image_url('bg.jpg');
+  background-image: image_url('navbg3.jpg');
   // border-bottom: 2px solid #f2f2f2;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
-
+  position: sticky;
+  z-index: 100;
 }
 
 #logo{
@@ -44,9 +61,20 @@ h2:after {
 .nav-link{
   color: #919191!important;
 }
+
 .nav-link:hover{
+  text-outline: 1px gray;
 color: #cb00ff!important;
 }
+
+.nav-link4{
+  color: #FFFF!important;
+}
+.nav-link4:hover{
+  text-decoration-style: underline;
+  text-decoration-color:#cb00ff!important;
+}
+
 .nav-link2{
   font-size: 20px;
   color: #919191!important;
@@ -69,14 +97,14 @@ color: #cb00ff!important;
 #boxWrapper{
   background-color: white;
   border: 1px solid #ced4da;
-  border-radius: 3px;
+  border-radius: 5px;
   padding: 10px;
 
 }
 #boxWrapperShow{
   background-color: white;
   border: 1px solid #ced4da;
-  border-radius: 3px;
+  border-radius: 5px;
   padding: 10px;
   position: relative;
 
@@ -84,7 +112,7 @@ color: #cb00ff!important;
 .boxWrapper1{
   background-color: white;
   border: 1px solid #ced4da;
-  border-radius: 3px;
+  border-radius: 5px;
   padding: 10px;
 
 }
@@ -92,7 +120,7 @@ color: #cb00ff!important;
   position: relative;
   background-color: white;
   border: 1px solid #ced4da;
-  border-radius: 3px;
+  border-radius: 5px;
   padding: 15px;
   overflow: hidden;
 
