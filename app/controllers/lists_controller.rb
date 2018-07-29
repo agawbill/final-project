@@ -609,6 +609,9 @@ class ListsController < ApplicationController
   end
 
   def downvote
+    movie=params[:id]
+    @list.downvote_from current_user
+    redirect_to "/lists/#{movie}"
   end
 
   def destroy

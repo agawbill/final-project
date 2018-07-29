@@ -2,9 +2,33 @@ class BlogsController < ApplicationController
   def index
     @users=Admin.all
     @blogs=Blog.all
+    @imagesLatest=[]
+    @imagesPopular=[]
     @comments=Comment.all
-    @lists=List.all.order(:cached_votes_up => :desc)
-    @popular=List.order(:cached_weighted_average => :desc)
+    @popular=List.order(:cached_votes_up=> :desc)
+    @lists=List.last(5)
+    for movie in @lists do
+      if movie.category=="Movies"
+          @imagesLatest.push(Tmdb::Movie.detail(movie.movie_ids[0][0]).poster_path)
+      else
+          @imagesLatest.push(Tmdb::Person.detail(movie.movie_ids[0][0]).profile_path)
+      end
+    end
+    for movie in @popular do
+      if movie.category=="Movies"
+          @imagesPopular.push(Tmdb::Movie.detail(movie.movie_ids[0][0]).poster_path)
+      elsif movie.category=="Actors"
+          @imagesPopular.push(Tmdb::Person.detail(movie.movie_ids[0][0]).profile_path)
+      elsif movie.category=="Directors"
+          @imagesPopular.push(Tmdb::Person.detail(movie.movie_ids[0][0]).profile_path)
+      end
+    end
+
+
+
+
+
+    # @lists=List.order(:cached_weighted_average => :desc)
   end
 
   def show
