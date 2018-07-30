@@ -15,7 +15,7 @@ class BlogsController < ApplicationController
           @imagesLatest.push(Tmdb::Person.detail(movie.movie_ids[0][0]).profile_path)
       end
     end
-    for movie in @popular do
+    for movie in @popular.take(5) do
       if movie.category=="Movies"
           @imagesPopular.push(Tmdb::Movie.detail(movie.movie_ids[0][0]).poster_path)
       elsif movie.category=="Directors"
