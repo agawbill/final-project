@@ -7,6 +7,7 @@ class BlogsController < ApplicationController
     @comments=Comment.all
     @popular=List.order(:cached_votes_up=> :desc)
     @lists=List.last(5)
+
     for movie in @lists do
       if movie.category=="Movies"
           @imagesLatest.push(Tmdb::Movie.detail(movie.movie_ids[0][0]).poster_path)
@@ -17,8 +18,6 @@ class BlogsController < ApplicationController
     for movie in @popular do
       if movie.category=="Movies"
           @imagesPopular.push(Tmdb::Movie.detail(movie.movie_ids[0][0]).poster_path)
-      elsif movie.category=="Actors"
-          @imagesPopular.push(Tmdb::Person.detail(movie.movie_ids[0][0]).profile_path)
       elsif movie.category=="Directors"
           @imagesPopular.push(Tmdb::Person.detail(movie.movie_ids[0][0]).profile_path)
       end

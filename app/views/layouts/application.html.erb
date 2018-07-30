@@ -5,6 +5,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -23,7 +24,6 @@
           </button>
 
           <%=image_tag "logo.png", :class=> "logo1"%>
-          <!-- <img width="40px" height="30px" src= "/assets/logo.png" style="position:relative;top:10px; padding-right:8px"> -->
           <b><span class="brand" style="position:relative;top:15px; padding-right:20px; color: white; font-size: 20px">movies<span class="brand" style="top:15px; color: #cb00ff; font-size: 20px">&</span>things</a></b>
         </div>
 
@@ -32,13 +32,13 @@
           <ul class="nav navbar-nav">
             <li class="<%= 'active' if current_page? '/' %>"><a href="/" class="nav-link">Home <span class="sr-only">(current)</span></a></li>
             <%if !current_user && !current_admin%>
-              <li class="<%= 'active' if params[:controller] == 'users' %>"><a href="/users/sign_in"  class="nav-link">Sign In</a></li>
-              <li><a href="/users/sign_up"  class="nav-link">Sign Up</a></li>
+              <li class="<%= 'active' if current_page? '/users/sign_in' %>"><a href="/users/sign_in"  class="nav-link">Sign In</a></li>
+              <li class="<%= 'active' if current_page? '/users/sign_up' %>"><a href="/users/sign_up"  class="nav-link">Sign Up</a></li>
             <%end%>
             <%if user_signed_in?%>
               <li class="<%= 'active' if current_page? '/searches' %>"><a href="/searches" class="nav-link" onClick="window.location.reload()">Make List</a></li>
               <li class="<%= 'active' if current_page? (user_path(:id =>current_user.id)) %>"><a href="/users/<%=current_user.id%>" class="nav-link">My Lists <span class="sr-only">(current)</span></a></li>
-              <li><a href="#" class="nav-link">Lists</a></li>
+              <!-- <li><a href="#" class="nav-link">Lists</a></li> -->
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">

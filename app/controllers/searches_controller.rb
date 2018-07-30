@@ -503,10 +503,10 @@ respond_to :html, :json, :xml, :js
    else
      @movies=[]
      @results=[]
-     @popularMovies=Tmdb::Movie.popular.results
-     @topRatedMovies=Tmdb::Movie.top_rated.results
-     @nowPlayingMovies=Tmdb::Movie.now_playing.results
-     @upcomingMovies=Tmdb::Movie.upcoming.results
+     # @popularMovies=Tmdb::Movie.popular.results
+     # @topRatedMovies=Tmdb::Movie.top_rated.results
+     # @nowPlayingMovies=Tmdb::Movie.now_playing.results
+     # @upcomingMovies=Tmdb::Movie.upcoming.results
    end
   end
 
