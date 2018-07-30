@@ -375,7 +375,7 @@ $(document).scroll(function() {
 function populateExisting(){
   for(i=0;i<movieList.length;i++){
   var list4=document.createElement("li")
-  list4.innerHTML=movieName[i]+"<span class='deleteMovie4' value="+movieList[i]+"> X</span> <input class='moveElements' type='hidden' value="+movieList[i]+"></input>&uarr; <span id='moveElement' value="+movieList[i]+" type='button'>&darr;</button>"
+  list4.innerHTML=movieName[i]+"<span class='deleteMovie4' value="+movieList[i]+"> X</span> <input class='moveElements' type='hidden' value="+movieList[i]+"></input><span id='moveElement' value="+movieList[i]+" type='button'></button>"
   list4.value=movieList[i]
   existingMovies.appendChild(list4)
 }
