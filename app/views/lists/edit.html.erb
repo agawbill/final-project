@@ -1,8 +1,8 @@
 
-<div class="container">
+<div class="container" id="ListNewTop">
 
-  <div class="col-md-4 col-md-push-8">
-  <h2 id="listTop">Create<span class="symbol">#</span>list</h2>
+  <div class="col-md-4 col-md-push-8" id="listTop">
+  <h2>Create<span class="symbol">#</span>list</h2>
   <p>
     <div id="listHolder">
 
@@ -12,9 +12,9 @@
       <%= f.text_area :name, :placeholder=>"Title", :class=>"textTitleAreaL" %>
       <p><div>
       <!-- Pick the type of list: <%= f.select :category, '<option value="Movies">Movies</option><option value="Actors">Actors</option><option value="Directors">Directors</option>'.html_safe %></p> -->
-      <p>Existing Movies:<br><div id="existingMovies">
+      <p>Existing <%=@list.category%>:<br><div id="existingMovies">
       </div></p>
-      <p>Add New Movies:<br><div id="createList">
+      <p>Add New <%=@list.category%>:<br><div id="createList">
       </div></p>
       <%= f.text_area :description, :placeholder=>"Type description here", :class=>"textBodyAreaL" %></p>
       <%= f.check_box :private %>  Make Private?</p>
@@ -39,13 +39,21 @@
   <h2 >Search<span class="symbol">#</span>movies</h2>
 
 
-<p><div id="boxWrapper">
-<span class="movieTitle">Search:</span><p> <span id="optionD" class="link">Discover</span> | <span id="option1" class="link">Movie name</span> | <span id="option2" class="link">Actor</span> | <span class="link" id="option3">Genre</span> | <span class="link" id="option4">Director</span></p>
-</div></p>
-<p><div id="boxWrapper">
-<span class="movieTitle">Browse:</span><p> <span id="option5" class="link">Popular movies</span> | <span class="link" id="option6">Top rated</span> | <span class="link" id="option7">Now playing</span> | <span class="link" id="option8">Upcoming</span></p>
-</div>
-</p>
+
+  <p>
+    <div id="boxWrapper" class="searchM">
+      <span class="movieTitle">Search:</span><p> <span id="optionD" class="link">Discover</span> | <span id="option1" class="link">Movie name</span> | <span class="link" id="option3">Genre</span> </p>
+    </div>
+  </p>
+    <div id="boxWrapper" class="searchA">
+      <span class="movieTitle">Search:</span><p> <span id="option2" class="link">Discover</span> | <span id="option1" class="link">Movie name</span> | <span class="link" id="option4">Genre</span> </p>
+    </div>
+  </p>
+
+  <p><div id="boxWrapper" class="browse">
+  <span class="movieTitle">Browse:</span><p> <span id="option5" class="link">Popular movies</span> | <span class="link" id="option6">Top rated</span> | <span class="link" id="option7">Now playing</span> | <span class="link" id="option8">Upcoming</span></p>
+  </div>
+  </p>
 
 
 <p><div id="genreChecks">
@@ -291,7 +299,7 @@ Select genre: <select id="genreDrop">
 </div>
 
 <div id="backToTop">
-<span class="nav-link3",  onclick=window.location='#listTop'><span class="glyphicon glyphicon-hand-up"></span> Back to Top</a>
+<span class="nav-link3",  onclick=window.location='#ListNewTop'><span class="glyphicon glyphicon-hand-up"></span> Back to Top</a>
 </div>
 
 </div>
@@ -346,6 +354,10 @@ var discoverActorDescription=document.getElementById('discoverActorDescription')
 var movie_ids=document.getElementById('movie_ids')
 var private=document.getElementById('private')
 var discoverDirandPeop=discoverActorList.concat(discoverDirectorList)
+var browse=document.getElementsByClassName('browse')[0]
+var searchM=document.getElementsByClassName('searchM')[0]
+var searchA=document.getElementsByClassName('searchA')[0]
+var categoryValue="<%=@list.category%>"
 
 
 
@@ -359,6 +371,62 @@ window.onload = function() {
 };
 
 
+if(categoryValue=="Movies"){
+  searchA.style.display="none";
+  searchM.style.display="block";
+  browse.style.display="block"
+  searchActor.style.display="none";
+  searchDirector.style.display="none";
+}
+else if(categoryValue=="Directors"){
+  browse.style.display="none";
+  searchM.style.display="none";
+
+
+  searchDirector.style.display="block";
+  searchActor.style.display="none";
+  searchMovie.style.display="none"
+  genreChecks.style.display="none"
+  genreLinks.style.display="none"
+  discover.style.display="none"
+  movieRatings.style.display="none"
+  // directorsContainer.style.display="none"
+  searchPopular.style.display="none"
+  discoverDirector.style.display="none"
+  searchDiscover.style.display="none"
+  discoverFind.style.display="none"
+  // moviesContainer.style.display="grid"
+  showAll.style.display="none"
+  searchTop.style.display="none"
+  searchLatest.style.display="none"
+  searchUpcoming.style.display="none"
+}
+else{
+  browse.style.display="none";
+  searchM.style.display="none";
+
+
+  searchDirector.style.display="none";
+  searchActor.style.display="block";
+  searchMovie.style.display="none"
+  genreChecks.style.display="none"
+  genreLinks.style.display="none"
+  discover.style.display="none"
+  movieRatings.style.display="none"
+  // directorsContainer.style.display="none"
+  searchPopular.style.display="none"
+  discoverDirector.style.display="none"
+  searchDiscover.style.display="none"
+  discoverFind.style.display="none"
+  // moviesContainer.style.display="grid"
+  showAll.style.display="none"
+  searchTop.style.display="none"
+  searchLatest.style.display="none"
+  searchUpcoming.style.display="none"
+
+}
+
+
 
 $(document).scroll(function() {
  //Show element after user scrolls 800px
@@ -368,8 +436,14 @@ $(document).scroll(function() {
  } else {
    $('#backToTop').fadeOut();
  }
-})
 
+ var z = $(this).scrollTop();
+ if (z > 100) {
+   $('.tmdbContainer').fadeOut();
+ } else {
+   $('.tmdbContainer').fadeIn();
+ }
+})
 
 
 function populateExisting(){

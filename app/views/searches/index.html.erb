@@ -1,18 +1,19 @@
 
-<div class="container">
+<div class="container" id="ListNewTop">
 
 
 
 
   <div class="col-md-4 col-md-push-8" id="listTop">
-  <h2 >Create<span class="symbol">#</span>list</h2>
+
+  <h2>Create<span class="symbol">#</span>list</h2>
   <p>
     <div id="listHolder">
 
 
     <%if current_user%>
-    <%= form_for @list do |f|%>
-  <span class="errorMessage"><strong><%=flash[:error]%></strong></span>
+    <%= form_for @list, :remote => true  do |f| %>
+    <span class="errorMessage"><strong><%=flash[:error]%></strong></span>
     <%= f.text_area :name, :placeholder=>"Title", :class=>"textTitleAreaL" %>
     <p><div>
     Pick the type of list: <%= f.select :category, '<option value="Movies">Movies</option><option value="Actors">Actors</option><option value="Directors">Directors</option>'.html_safe %></p>
@@ -45,10 +46,16 @@
   <h2 >Search<span class="symbol">#</span>movies</h2>
 
 
-<p><div id="boxWrapper">
-<span class="movieTitle">Search:</span><p> <span id="optionD" class="link">Discover</span> | <span id="option1" class="link">Movie name</span> | <span id="option2" class="link">Actor</span> | <span class="link" id="option3">Genre</span> | <span class="link" id="option4">Director</span></p>
-</div></p>
-<p><div id="boxWrapper">
+<p>
+  <div id="boxWrapper" class="searchM">
+    <span class="movieTitle">Search:</span><p> <span id="optionD" class="link">Discover</span> | <span id="option1" class="link">Movie name</span> | <span class="link" id="option3">Genre</span> </p>
+  </div>
+  <div id="actorWrapper" class="searchA">
+    <span class="movieTitle">Search:</span><p><span id="option2" class="link">Actor</span> | <span class="link" id="option4">Director</span></p>
+  </div>
+</p>
+
+<p><div id="boxWrapper" class="browse">
 <span class="movieTitle">Browse:</span><p> <span id="option5" class="link">Popular movies</span> | <span class="link" id="option6">Top rated</span> | <span class="link" id="option7">Now playing</span> | <span class="link" id="option8">Upcoming</span></p>
 </div>
 </p>
@@ -297,7 +304,7 @@ Select genre: <select id="genreDrop">
 </div>
 
 <div id="backToTop">
-<span class="nav-link3",  onclick=window.location='#listTop'><span class="glyphicon glyphicon-hand-up"></span> Back to Top</a>
+<span class="nav-link3",  onclick=window.location='#ListNewTop'><span class="glyphicon glyphicon-hand-up"></span> Back to Top</a>
 </div>
 
 </div>
@@ -350,6 +357,58 @@ var discoverActorDescription=document.getElementById('discoverActorDescription')
 var movie_ids=document.getElementById('movie_ids')
 var private=document.getElementById('private')
 var discoverDirandPeop=discoverActorList.concat(discoverDirectorList)
+var listCategory=document.getElementById('list_category')
+var browse=document.getElementsByClassName('browse')[0]
+var searchM=document.getElementsByClassName('searchM')[0]
+var searchA=document.getElementsByClassName('searchA')[0]
+
+
+
+// category input changer
+var current=listCategory.value
+
+
+
+listCategory.addEventListener("change", function(){
+
+    if(confirm("If you change categories, all your present movies/people will be wiped, and you'll be forced to start from scratch, do you want to continue?")){
+      current=listCategory.value
+      clearAllCategory()
+      if(listCategory.value=="Actors" || listCategory.value=="Directors"){
+        browse.style.display="none";
+        searchM.style.display="none";
+        searchA.style.display="block";
+
+
+        searchMovie.style.display="none"
+        genreChecks.style.display="none"
+        genreLinks.style.display="none"
+        discover.style.display="none"
+        movieRatings.style.display="none"
+        // directorsContainer.style.display="none"
+        searchPopular.style.display="none"
+        discoverDirector.style.display="none"
+        searchDiscover.style.display="none"
+        discoverFind.style.display="none"
+        // moviesContainer.style.display="grid"
+        showAll.style.display="none"
+        searchTop.style.display="none"
+        searchLatest.style.display="none"
+        searchUpcoming.style.display="none"
+      }
+      else{
+        searchA.style.display="none";
+        searchM.style.display="block";
+        browse.style.display="block"
+        searchActor.style.display="none";
+        searchDirector.style.display="none";
+
+      }
+    }
+    else{
+      listCategory.value=current
+    }
+})
 
 
 
@@ -360,6 +419,13 @@ $(document).scroll(function() {
    $('#backToTop').fadeIn();
  } else {
    $('#backToTop').fadeOut();
+ }
+
+ var z = $(this).scrollTop();
+ if (z > 100) {
+   $('.tmdbContainer').fadeOut();
+ } else {
+   $('.tmdbContainer').fadeIn();
  }
 })
 
@@ -1540,6 +1606,63 @@ document.addEventListener('click', function(){
   }
 })
 // show all discover movies
+
+function clearAllCategory(){
+    $( "#searchMovies" ).empty();
+    show.checked = false;
+    ratingP.value=show.value
+    ratingT.value=show.value
+    ratingU.value=show.value
+    ratingL.value=show.value
+    ratingDisc.value=show.value
+    genres3=[]
+    genres4=[]
+    genres5=[]
+    genres6=[]
+    discoverActorList=[]
+    discoverActorListName=[]
+    discoverDirectorList=[]
+    discoverDirectorListName=[]
+    genres.value=[]
+    genresD.value=[]
+    genresP.value=[]
+    genresT.value=[]
+    genresL.value=[]
+    genresU.value=[]
+    people.value=[]
+
+
+    $('#createList').empty();
+
+    movieList=[]
+    movie_ids.value=[]
+    movieName=[]
+    year.value=[]
+    ratingDrop.selectedIndex = 0
+    genreSelector0.checked = false;
+    genreSelector1.checked = false;
+    genreSelector2.checked = false;
+    genreSelector3.checked = false;
+    genreSelector4.checked = false;
+    genreSelector5.checked = false;
+    genreSelector6.checked = false;
+    genreSelector7.checked = false;
+    genreSelector8.checked = false;
+    genreSelector9.checked = false;
+    genreSelector10.checked = false;
+    genreSelector11.checked = false;
+    genreSelector12.checked = false;
+    genreSelector13.checked = false;
+    genreSelector14.checked = false;
+    genreSelector15.checked = false;
+    genreSelector16.checked = false;
+    genreSelector17.checked = false;
+    genreSelector18.checked = false;
+
+
+}
+
+
 function clearAll(){
   show.checked = false;
   ratingP.value=show.value
@@ -1566,6 +1689,7 @@ function clearAll(){
 
   $('#actorList').empty();
   $('#directorList').empty();
+
   year.value=[]
   ratingDrop.selectedIndex = 0
   genreSelector0.checked = false;
