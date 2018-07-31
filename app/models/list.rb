@@ -3,8 +3,8 @@ class List < ApplicationRecord
   scope :not_private, -> { where(private: false) }
   serialize :movie_ids
   belongs_to :user
-  validates :name, length: { minimum: 5 }
-  validates :description, length: { minimum: 7 }
+  validates :name, length: { minimum: 3 }
+  validates :description, length: { minimum: 3 }
   validate :validate_movie_ids
 
   def validate_movie_ids

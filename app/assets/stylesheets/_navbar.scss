@@ -44,7 +44,7 @@ h2:after {
 
 .carouselImage{
   width:100%;
-  
+
 }
 
 #navBg{
@@ -100,6 +100,13 @@ color: #cb00ff!important;
 
 
 #boxWrapper{
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  padding: 10px;
+
+}
+#actorWrapper{
   background-color: white;
   border: 1px solid #ced4da;
   border-radius: 5px;

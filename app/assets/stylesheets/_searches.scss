@@ -39,6 +39,10 @@
 }
 
 #listTop{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
 
 }
 
@@ -602,6 +606,19 @@ select{
   font-size: 15px;
 
 
+
+
+}
+
+
+.searchA{
+  display: none;
+}
+
+#stickyDiv{
+  position: sticky;
+  top: 0;
+
 }
 #genreGrid{
   display: grid;
@@ -674,6 +691,10 @@ select{
   border: 0;
 }
 
+#optionD{
+  display: inline-block;
+
+}
 #option1{
 
 }
