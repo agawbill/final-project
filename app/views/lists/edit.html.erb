@@ -2,32 +2,55 @@
 <div class="container" id="ListNewTop">
 
   <div class="col-md-4 col-md-push-8" id="listTop">
+
+
   <h2>Create<span class="symbol">#</span>list</h2>
-  <p>
-    <div id="listHolder">
+
+    <div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+
+    <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel-body">
 
 
-      <%if current_user%>
-      <%= form_for @list do |f|%>
-      <%= f.text_area :name, :placeholder=>"Title", :class=>"textTitleAreaL" %>
-      <p><div>
-      <!-- Pick the type of list: <%= f.select :category, '<option value="Movies">Movies</option><option value="Actors">Actors</option><option value="Directors">Directors</option>'.html_safe %></p> -->
-      <p>Existing <%=@list.category%>:<br><div id="existingMovies">
-      </div></p>
-      <p>Add New <%=@list.category%>:<br><div id="createList">
-      </div></p>
-      <%= f.text_area :description, :placeholder=>"Type description here", :class=>"textBodyAreaL" %></p>
-      <%= f.check_box :private %>  Make Private?</p>
-      <%= hidden_field_tag :movie_ids %>
-      <%= hidden_field_tag :type %>
-      <p><%= f.submit "Update List" %></p>
-      <% end  %>
-      <%else%>
-      Please <a href="/users/sign_in"  class="nav-link">Sign In</a> to create a list
-      <%end%>
 
+              <%if current_user%>
+              <%= form_for @list do |f|%>
+              <%= f.text_area :name, :placeholder=>"Title", :class=>"textTitleAreaL" %>
+              <p><div>
+              <!-- Pick the type of list: <%= f.select :category, '<option value="Movies">Movies</option><option value="Actors">Actors</option><option value="Directors">Directors</option>'.html_safe %></p> -->
+              <p>Existing <%=@list.category%>:<br><div id="existingMovies">
+              </div></p>
+              <p>Add New <%=@list.category%>:<br><div id="createList">
+              </div></p>
+              <%= f.text_area :description, :placeholder=>"Type description here", :class=>"textBodyAreaL" %></p>
+              <%= f.check_box :private %>  Make Private?</p>
+              <%= hidden_field_tag :movie_ids %>
+              <%= hidden_field_tag :type %>
+              <p><%= f.submit "Update List" %></p>
+              <% end  %>
+              <%else%>
+              Please <a href="/users/sign_in"  class="nav-link">Sign In</a> to create a list
+              <%end%>
+
+    </div>
+
+
+      </div>
+
+    </div>
+    <div class="panel-heading" id="hideList">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          Show/hide
+        </a>
+      </h4>
+    </div>
   </div>
   </div>
+
+
+
   </p>
   <div class="tmdbContainer"><%=image_tag "tmdb.png", :class=> "tmdb", :align=> 'left'%> <span class="tmdbText">This product uses the TMDb API but is not endorsed or certified by TMDb.</span></div></p>
 
@@ -438,7 +461,7 @@ $(document).scroll(function() {
  }
 
  var z = $(this).scrollTop();
- if (z > 100) {
+ if (z > 40) {
    $('.tmdbContainer').fadeOut();
  } else {
    $('.tmdbContainer').fadeIn();
