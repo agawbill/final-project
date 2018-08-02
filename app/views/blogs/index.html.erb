@@ -19,8 +19,9 @@
   <li style="color: #cb00ff; font-weight: bold;"><span style="color: black; font-weight: normal;">Sign in</span></li>
   <li style="color: #cb00ff; font-weight: bold;"><span style="color: black; font-weight: normal;">Click "Make List" in the navbar</span></li>
   <li style="color: #cb00ff; font-weight: bold;"><span style="color: black; font-weight: normal;">Search, sort, and explore movies, actors, directors in TMDb API</span></li>
-  <li style="color: #cb00ff; font-weight: bold;"><span style="color: black; font-weight: normal;">Select "Discover" to search dynamically in a number of cool ways! (by actor, director, year, etc.)</span></li>
+  <li style="color: #cb00ff; font-weight: bold;"><span style="color: black; font-weight: normal;"> Select "Discover" to search dynamically in a number of cool ways! (by actor, director, year, etc.)</span></li>
   <li style="color: #cb00ff; font-weight: bold;"><span style="color: black; font-weight: normal;">Add movies to your list as you search, and then save the list to share publically, or reference privately</span></li>
+  <li style="color: #cb00ff; font-weight: bold;"><span style="color: black; font-weight: normal;"> You can edit saved lists and add more movies to it by clicking "edit" under the list in the "My Lists" section </span></li>
   </ol>
 
 
@@ -34,16 +35,16 @@
     <span class="blogTitle"><%=b.title%><br></span>
     <span class="postedBy">Posted By: <a href="/admin/<%=b.admin_id%>" class="nav-link"><%=b.admin.email%></a></span><span class="blogDateTime">
      <span class="postedBy">on</span> <%=b.created_at.strftime(
-'%a, %b %Y'
-  )%> <span class="postedBy">at</span> <%=b.created_at.strftime(
-'%I:%M %p'
-)%> ET</span>
-<hr>
-<%= b.content.html_safe %></p>
-<a href="/blogs/<%=b.id%>" class="nav-link">Comments (<%=b.comments.count%>) </a></p>
+    '%a, %b %Y'
+      )%> <span class="postedBy">at</span> <%=b.created_at.strftime(
+    '%I:%M %p'
+    )%> ET</span>
+    <hr>
+    <%= b.content.html_safe %></p>
+    <a href="/blogs/<%=b.id%>" class="nav-link">Comments (<%=b.comments.count%>) </a></p>
 
-</div></p>
-<%end%>
+  </div></p>
+  <%end%>
 </div>
 
 

@@ -94,7 +94,7 @@
 
   <p><div id="boxWrapper">
     <span class="movieTitle">Like it? Share it!</span><p>
-    <%= social_share_button_tag(@list.name, :url => "http://myapp.com/foo/bar") %>
+    <%= social_share_button_tag(@list.name, :url => "https://thawing-headland-46887.herokuapp.com/lists/" + @list.id.to_s) %>
   </div></p>
 <%if @list.category=="Movies"%>
 <h2>Similar<span class="symbol">#</span>movies</h2>
