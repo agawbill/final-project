@@ -2,6 +2,35 @@ class ListsController < ApplicationController
   respond_to :html, :json, :xml, :js
   before_action :set_list, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   def index
+    @random=[]
+    listing=List.all
+    @rando=listing.sample
+
+    if @rando.category=="Movies"
+      for movie in @rando.movie_ids[0]
+        @random.push(Tmdb::Movie.detail(movie))
+      end
+    else
+      for movie in @rando.movie_ids[0]
+        @random.push(Tmdb::Person.detail(movie))
+      end
+    end
+
+
+    lists=List.all
+    @movies=[]
+    @actors=[]
+    @directors=[]
+
+    for movie in lists
+      if movie.private != true && movie.category=="Movies"
+        @movies.push(movie)
+      elsif  movie.private != true && movie.category=="Actors"
+        @actors.push(movie)
+      elsif  movie.private != true && movie.category=="Directors"
+        @directors.push(movie)
+      end
+    end
     # @lists=List.all.order(:cached_votes_up => desc)
 
   end

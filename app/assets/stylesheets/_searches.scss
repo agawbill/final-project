@@ -617,6 +617,11 @@ select{
 
 }
 
+.red{
+  color: red;
+
+}
+
 #hideList{
   display: block;
 }
@@ -624,6 +629,13 @@ select{
 
 .searchA{
   display: none;
+}
+
+#rando{
+  display: flex;
+     justify-content: center;
+     align-items: center;
+     overflow: hidden;
 }
 
 #stickyDiv{
