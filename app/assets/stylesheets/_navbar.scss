@@ -46,6 +46,12 @@ h2:after {
   width:100%;
 
 }
+.carouselImage2{
+  flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%
+
+}
 
 #navBg{
   background-image: image_url('navbg3.jpg');

@@ -999,7 +999,7 @@ function populateExisting(){
 // generates list when Add to List button is clicked... functionality for delete, moveUp on list and moveDown
 function create(){
   var list=document.createElement("li")
-  list.innerHTML=movieName[movieName.length-1]+"<span class='deleteMovie' value="+movieList[movieList.length-1]+"> X</span> <input class='moveElements' type='hidden' value="+movieList[movieList.length-1]+"></input>&uarr; <span id='moveElement' value="+movieList[movieList.length-1]+" type='button'>&darr;</button>"
+  list.innerHTML=movieName[movieName.length-1]+"<span class='deleteMovie' value="+movieList[movieList.length-1]+"> X</span> <input class='moveElements' type='hidden' value="+movieList[movieList.length-1]+"></input><span id='moveElement' value="+movieList[movieList.length-1]+" type='button'></button>"
   list.value=movieList[movieList.length-1]
   createList.appendChild(list)
   var deleteMovie=document.getElementsByClassName('deleteMovie')
@@ -1054,7 +1054,7 @@ function create2(){
 // generates list when Add Director button is clicked... functionality for delete
 function create3(){
   var list3=document.createElement("span")
-  list3.innerHTML=discoverDirectorListName[discoverDirectorListName.length-1]+"<span class='deleteMovie3' value="+discoverDirectorList[discoverDirectorList.length-1]+"> X</span> <input class='moveElements' type='hidden' value="+discoverDirectorList[discoverDirectorList.length-1]+"></input>&uarr; <span id='moveElement' value="+discoverDirectorList[discoverDirectorList.length-1]+" type='button'>&darr;</button> "
+  list3.innerHTML=discoverDirectorListName[discoverDirectorListName.length-1]+"<span class='deleteMovie3' value="+discoverDirectorList[discoverDirectorList.length-1]+"> X</span> <input class='moveElements' type='hidden' value="+discoverDirectorList[discoverDirectorList.length-1]+"></input><span id='moveElement' value="+discoverDirectorList[discoverDirectorList.length-1]+" type='button'></button> "
   list3.value=discoverDirectorList[discoverDirectorList.length-1]
   directorList.appendChild(list3)
   var deleteMovie3=document.getElementsByClassName('deleteMovie3')
