@@ -80,15 +80,30 @@ class ListsController < ApplicationController
       format.js
       format.json { render :json => {:movies => @movies }}
       end
-    end
-    if params[:sp].present?
+
+    elsif params[:sp].present?
     @movies=Tmdb::Person.combined_credits(params[:sp])
       respond_to do |format|
       format.html
       format.js
       format.json { render :json => {:movies => @movies }}
       end
-    end
+
+    elsif params[:dir].present?
+      @solid=[]
+        @movies=Tmdb::Discover.movie(with_people: params[:dir]).results
+        for movie in @movies do
+          if movie.poster_path != nil
+            @solid.push(movie)
+          end
+        end
+      @results=@solid
+      respond_to do |format|
+        format.html
+        format.js
+        format.json { render :json => {:results => @results }}
+      end
+  end
   end
 
   def edit

@@ -1,7 +1,135 @@
 <div class="container">
 
 
-<div class="col-md-12">
+
+
+
+
+
+
+
+
+  <div class="col-md-4">
+    <h2>Latest<span class="symbol">#</span>list</h2>
+
+
+
+
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <center><h3 class="panel-title"><a href="/lists/<%=@recent.id%>" class="link"><%=@recent.name%></a></h3></center>
+      </div>
+      <div class="panel-body">
+
+
+
+
+
+
+            <%if @recent.category=="Movies"%>
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+
+            <ol class="carousel-indicators">
+              <%@latest.each_with_index do |movie, index|%>
+              <li data-target="#carousel-example-generic" data-slide-to="<%=index%>" class="active"></li>
+              <%end%>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+              <div class="item active">
+                <img src="https://image.tmdb.org/t/p/w500/<%=@latest[0].poster_path%>" alt="..."  class="carouselImage2">
+                <div class="carousel-caption">
+                  <h3 class="latestImage"><%=@latest[0].original_title%></h3>
+                </div>
+              </div>
+              <%@latest[1..-1].each do |movie|%>
+              <div class="item">
+                <img src="https://image.tmdb.org/t/p/w500/<%=movie.poster_path%>" alt="..."  class="carouselImage2">
+                <div class="carousel-caption">
+                  <h3 class="latestImage"><%=movie.original_title%></h3>
+                </div>
+              </div>
+              <%end%>
+            </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+            </div>
+            <%else%>
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+
+            <ol class="carousel-indicators">
+              <%@latest.each_with_index do |movie, index|%>
+              <li data-target="#carousel-example-generic" data-slide-to="<%=index%>" class="active"></li>
+              <%end%>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+              <div class="item active">
+                <img src="https://image.tmdb.org/t/p/w500/<%=@latest[0].profile_path%>" alt="..."  class="carouselImage">
+                <div class="carousel-caption">
+                  <h3 class="latestImage"><%=@latest[0].name%></h3>
+                </div>
+              </div>
+              <%@latest[1..-1].each do |movie|%>
+              <div class="item">
+                <img src="https://image.tmdb.org/t/p/w500/<%=movie.profile_path%>" alt="..."  class="carouselImage">
+                <div class="carousel-caption">
+                  <h3 class="latestImage"><%=movie.name%></h3>
+                </div>
+              </div>
+              <%end%>
+            </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+            </div>
+            <%end%>
+
+
+
+
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+  </p>
+
+
+  </div>
+
+
+
+  <div class="col-md-8">
+
+
+
+
+
+
+
 <h2>My<span class="symbol">#</span>lists</h2>
 
 
@@ -30,11 +158,11 @@
 
       <span class='movieTitle'> <a href="/lists/<%=l.id%>" class="listLink"><%=l.name%></a></span>
     </p><span class="blogDateTime"><span class="postedBy">Created </span> <%=l.created_at.strftime(
-      '%a, %b %Y'
+      '%b %d, %Y'
       )%> <span class="postedBy">at</span> <%=l.created_at.strftime(
       '%I:%M %p'
       )%> ET</span><hr><span class="listCount"><%=l.movie_ids[0].count%> <%=l.category%></span>
-      <p><b><u>Description:</b></u> <%=l.description%></p>
+      <p><i><%=l.description%></i></p>
       <hr padding-top="0px">
       <a href="/lists/<%=l.id%>/edit" class="nav-link" onClick="window.location.reload()">Edit list or add Movies</a> | <%= link_to 'Delete?', { controller: :lists, action: :destroy, id: l.id },
       method: :delete, data: { confirm: 'Are you sure?' }, class: "nav-link" %>
@@ -64,17 +192,18 @@
       <p><div class="col-md-12" id="boxWrapperList">
 
 
-      <span class='movieTitle'> <a href="/lists/<%=l.id%>" class="listLink"><%=l.name%></a></span>
-    </p><span class="blogDateTime"><span class="postedBy">Created </span> <%=l.created_at.strftime(
-      '%a, %b %Y'
-      )%> <span class="postedBy">at</span> <%=l.created_at.strftime(
-      '%I:%M %p'
-      )%> ET</span><hr><span class="listCount"><%=l.movie_ids[0].count%> <%=l.category%></span>
-      <p><b><u>Description:</b></u> <%=l.description%></p>
-      <hr padding-top="0px">
-      <a href="/lists/<%=l.id%>/edit" class="nav-link" onClick="window.location.reload()">Edit list or add Movies</a> | <%= link_to 'Delete?', { controller: :lists, action: :destroy, id: l.id },
-      method: :delete, data: { confirm: 'Are you sure?' }, class: "nav-link" %>
-    </div>
+        <span class='movieTitle'> <a href="/lists/<%=l.id%>" class="listLink"><%=l.name%></a></span>
+      </p><span class="blogDateTime"><span class="postedBy">Created </span> <%=l.created_at.strftime(
+          '%b %d, %Y'
+        )%> <span class="postedBy">at</span> <%=l.created_at.strftime(
+        '%I:%M %p'
+        )%> ET</span><hr><span class="listCount"><%=l.movie_ids[0].count%> <%=l.category%></span>
+        <p><i><%=l.description%></i></p>
+        <hr padding-top="0px">
+        <a href="/lists/<%=l.id%>/edit" class="nav-link" onClick="window.location.reload()">Edit list or add Movies</a> | <%= link_to 'Delete?', { controller: :lists, action: :destroy, id: l.id },
+        method: :delete, data: { confirm: 'Are you sure?' }, class: "nav-link" %>
+      </div>
+
 
 
 
