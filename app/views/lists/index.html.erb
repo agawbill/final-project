@@ -86,7 +86,7 @@
             </div>
             <%end%>
           </div>
-          
+
           <!-- Controls -->
           <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left"></span>
@@ -145,16 +145,17 @@
       <p><div class="col-md-12" id="boxWrapperList">
 
 
-      <span class='movieTitle'> <a href="/lists/<%=l.id%>" class="listLink"><%=l.name%></a></span>
-    </p><span class="blogDateTime"><span class="postedBy">Created </span> <%=l.created_at.strftime(
-      '%a, %b %Y'
-      )%> <span class="postedBy">at</span> <%=l.created_at.strftime(
-      '%I:%M %p'
-      )%> ET</span><hr><span class="listCount"><%=l.movie_ids[0].count%> <%=l.category%></span>
-      <p><b><u>Description:</b></u> <%=l.description%></p>
+      <span class='movieTitle'> <a href="/lists/<%=l.id%>" class="listLink"><%=l.name%></a></span><br>
+    </p><span class="listCount"><%=l.movie_ids[0].count%> <%=l.category%></span>
+      <i><%=l.description%></i>
       <hr padding-top="0px">
-      <span class="postedBy">Created by: <span class="link"><%=User.find(l.user_id).email%></span></span>
+      <span class="postedBy">By: <span class="link"><%=User.find(l.user_id).email%></span></span> <span class="blogDateTime"><span class="postedBy">on </span> <%=l.created_at.strftime(
+        '%a, %b %d, %Y'
+        )%> <span class="postedBy">at</span> <%=l.created_at.strftime(
+        '%I:%M %p'
+        )%> ET</span>
     </div>
+
 
 
 
@@ -180,15 +181,15 @@
       <p><div class="col-md-12" id="boxWrapperList">
 
 
-      <span class='movieTitle'> <a href="/lists/<%=l.id%>" class="listLink"><%=l.name%></a></span>
-    </p><span class="blogDateTime"><span class="postedBy">Created </span> <%=l.created_at.strftime(
-      '%a, %b %Y'
-      )%> <span class="postedBy">at</span> <%=l.created_at.strftime(
-      '%I:%M %p'
-      )%> ET</span><hr><span class="listCount"><%=l.movie_ids[0].count%> <%=l.category%></span>
-      <p><b><u>Description:</b></u> <%=l.description%></p>
+      <span class='movieTitle'> <a href="/lists/<%=l.id%>" class="listLink"><%=l.name%></a></span><br>
+    </p><span class="listCount"><%=l.movie_ids[0].count%> <%=l.category%></span>
+      <i><%=l.description%></i></p>
       <hr padding-top="0px">
-    <span class="postedBy">Created by: <span class="link"><%=User.find(l.user_id).email%></span></span>
+      <span class="postedBy">By: <span class="link"><%=User.find(l.user_id).email%></span></span> <span class="blogDateTime"><span class="postedBy">on </span> <%=l.created_at.strftime(
+        '%a, %b %d, %Y'
+        )%> <span class="postedBy">at</span> <%=l.created_at.strftime(
+        '%I:%M %p'
+        )%> ET</span>
     </div>
 
 
@@ -207,15 +208,15 @@
       <p><div class="col-md-12" id="boxWrapperList">
 
 
-      <span class='movieTitle'> <a href="/lists/<%=l.id%>" class="listLink"><%=l.name%></a></span>
-    </p><span class="blogDateTime"><span class="postedBy">Created </span> <%=l.created_at.strftime(
-      '%a, %b %Y'
-      )%> <span class="postedBy">at</span> <%=l.created_at.strftime(
-      '%I:%M %p'
-      )%> ET</span><hr><span class="listCount"><%=l.movie_ids[0].count%> <%=l.category%></span>
-      <p><b><u>Description:</b></u> <%=l.description%></p>
+      <span class='movieTitle'> <a href="/lists/<%=l.id%>" class="listLink"><%=l.name%></a></span><br>
+    </p><span class="listCount"><%=l.movie_ids[0].count%> <%=l.category%></span>
+      <i><%=l.description%></i></p>
       <hr padding-top="0px">
-      <span class="postedBy">Created by: <span class="link"><%=User.find(l.user_id).email%></span></span>
+      <span class="postedBy">By: <span class="link"><%=User.find(l.user_id).email%></span></span> <span class="blogDateTime"><span class="postedBy">on </span> <%=l.created_at.strftime(
+        '%a, %b %d, %Y'
+        )%> <span class="postedBy">at</span> <%=l.created_at.strftime(
+        '%I:%M %p'
+        )%> ET</span>
     </div>
 
 
