@@ -21,3 +21,6 @@
 //= require_tree .
 // = require tinymce
 // #= require social-share-button
+
+<script>
+</script>
