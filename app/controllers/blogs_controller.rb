@@ -22,12 +22,6 @@ class BlogsController < ApplicationController
           @imagesPopular.push(Tmdb::Person.detail(movie.movie_ids[0][0]).profile_path)
       end
     end
-
-
-
-
-
-    # @lists=List.order(:cached_weighted_average => :desc)
   end
 
   def show
@@ -66,11 +60,11 @@ end
   def new
     if !current_admin
       redirect_to "/"
-      end
+    end
     @blog=Blog.new
     @picture = Picture.new
     @pictures=Picture.last(5).reverse
-end
+  end
 
   def create
     blog=Blog.new(blog_params)
@@ -79,8 +73,8 @@ end
       redirect_to "/"
     else
       render "blogs/new"
+    end
   end
-end
 
   private
 	def blog_params

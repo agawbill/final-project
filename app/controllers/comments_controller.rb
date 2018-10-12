@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
 
   def new
     @blog = Blog.find(params[:id])
-    comments=Comment.find(params[:id])
+    # comments=Comment.find(params[:id])
     @comment=Comment.new
 
   end
@@ -22,8 +22,8 @@ class CommentsController < ApplicationController
       redirect_back(fallback_location: root_path)
     else
       redirect_to "/"
+    end
   end
-end
 
   def edit
     user=current_user
@@ -35,7 +35,7 @@ end
     else
     redirect_to "/"
     end
-end
+  end
 
   def update
     @comment=Comment.find(params[:id])
