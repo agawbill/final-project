@@ -5,7 +5,8 @@
 
 
 
-    <p><div id="boxWrapper">
+    <p>
+      <div id="boxWrapper">
 
       <p><%= form_for @blog, :html => {:class => "form-horizontal"} do |f|%>
       <p><%= f.text_field :title, :placeholder=>"Title", :class =>"textTitleAreaL"%></p></br>
@@ -14,5 +15,6 @@
       <%= f.submit "Create a new Blog" %></p>
       <%end%>
 
-</div></p>
+    </div>
+  </p>
 </div>

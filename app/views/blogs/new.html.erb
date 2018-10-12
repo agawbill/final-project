@@ -4,7 +4,8 @@
 
     <h2 >Create<span class="symbol">#</span>blog</h2>
 
-    <p><div id="boxWrapper">
+    <p>
+      <div id="boxWrapper">
 
       <p><%= form_for @blog, :html => {:class => "form-horizontal"} do |f|%>
       <p><%= f.text_field :title, :placeholder=>"Title", :class =>"textTitleAreaL"%></p></br>
@@ -13,32 +14,29 @@
       <%= f.submit "Create a new Blog" %></p>
       <%end%>
 
-</div></p>
-</div>
+    </div>
+  </p>
+  </div>
 
 
 
 
 <div class="col-md-4">
-
     <h2 >Upload<span class="symbol">#</span>picture</h2>
-
     <div id="boxWrapper">
+      <p><%= render 'form', picture: @picture %></p>
+    </div>
 
-  <p><%= render 'form', picture: @picture %></p>
-</div></p>
-   <h2 >Uploaded<span class="symbol">#</span>pictures</h2>
-
-    <div id="boxWrapper" style="overflow-wrap: break-word;">
-
-  <p>
-  <%@pictures.each_with_index do |f, index| %>
-  <strong><%=index +1%>: <%=f.name%></strong><br>
-  <%=f.image%><p>
-  <%end%>
-  <a href="/pictures" class="nav-link">See all pictures</a>
-
-</div>
 </p>
+   <h2 >Uploaded<span class="symbol">#</span>pictures</h2>
+    <div id="boxWrapper" style="overflow-wrap: break-word;">
+    <p>
+      <%@pictures.each_with_index do |f, index| %>
+      <strong><%=index +1%>: <%=f.name%></strong><br>
+      <%=f.image%><p>
+      <%end%>
+      <a href="/pictures" class="nav-link">See all pictures</a>
+    </div>
+  </p>
 
 </div>

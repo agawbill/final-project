@@ -25,63 +25,61 @@
 
 
   <div class="col-md-8 col-md-pull-4">
-
     <h2 >Blog<span class="symbol">#</span>post</h2>
-      <p><div id="boxWrapper">
-
-
-
-      <span class="blogTitle"><%=@blog.title%></span><br>
-      <span class="postedBy">Posted By: <a href="/users/<%=@blog.admin_id%>/" class="nav-link"><%=User.find(@blog.admin_id).email%></a></span>
-     <span class="postedBy">on</span> <%=@blog.created_at.strftime(
-'%a, %b %Y'
-  )%> <span class="postedBy">at</span> <%=@blog.created_at.strftime(
-'%I:%M %p'
-)%> ET</span>
-<p> <%= @blog.content.html_safe %></p>
-<a href="/blogs/<%=@blog.id%>" class="nav-link">Comments (<%=@blog.comments.count%>) </a></p>
-
-</div></p>
+      <p>
+        <div id="boxWrapper">
+          <span class="blogTitle"><%=@blog.title%></span><br>
+          <span class="postedBy">Posted By: <a href="/users/<%=@blog.admin_id%>/" class="nav-link"><%=User.find(@blog.admin_id).email%></a></span>
+          <span class="postedBy">on</span> <%=@blog.created_at.strftime(
+            '%a, %b %Y'
+            )%> <span class="postedBy">at</span> <%=@blog.created_at.strftime(
+              '%I:%M %p'
+              )%> ET</span>
+              <p>
+                <%= @blog.content.html_safe %>
+              </p>
+              <a href="/blogs/<%=@blog.id%>" class="nav-link">Comments (<%=@blog.comments.count%>) </a>
+            </p>
+      </div>
+</p>
 <h2 >User<span class="symbol">#</span>comments</h2>
 
 <%@blogs.comments.reverse.each do |c|%>
 
+    <p>
+      <div id="boxWrapper">
+        <span class="blogTitle"><%=c.title%></span><br>
+        <span class="postedBy">Posted By: <a href="/users/<%=c.user.id%>/" class="link"><%=c.user.email%></a></span>
+        <span class="blogDateTime">
+         <span class="postedBy">on</span> <%=c.created_at.strftime(
+        '%a, %b %Y'
+        )%> <span class="postedBy">at</span> <%=c.created_at.strftime(
+        '%I:%M %p'
+        )%></span></p>
 
-    <p><div id="boxWrapper">
-    <span class="blogTitle"><%=c.title%></span><br>
-    <span class="postedBy">Posted By: <a href="/users/<%=c.user.id%>/" class="link"><%=c.user.email%></a></span>
-    <span class="blogDateTime">
-     <span class="postedBy">on</span> <%=c.created_at.strftime(
-    '%a, %b %Y'
-    )%> <span class="postedBy">at</span> <%=c.created_at.strftime(
-    '%I:%M %p'
-    )%></span></p>
-
-      <p><%=c.content%></p>
-      <%if current_user%>
-      <%if current_user.id == c.user_id%>
-      <a href="/comments/<%=c.id%>/edit" class="link">Edit</a> |  <%= link_to 'Delete', { controller: :comments, action: :destroy, id: c.id },
-       method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
-      <% end  %>
-      <% end  %>
+          <p><%=c.content%></p>
+          <%if current_user%>
+          <%if current_user.id == c.user_id%>
+          <a href="/comments/<%=c.id%>/edit" class="link">Edit</a> |  <%= link_to 'Delete', { controller: :comments, action: :destroy, id: c.id },
+           method: :delete, data: { confirm: 'Are you sure?' }, class: "link" %>
+          <% end  %>
+          <% end  %>
+          </p>
+      </div>
       </p>
-
-</div></p>
-<%end%>
-</div>
+        <%end%>
+  </div>
 
 
 
-<div id="backToTop">
-<span class="nav-link3",  onclick=window.location='#listTop'><span class="glyphicon glyphicon-hand-up"></span> Back to Top</a>
-</div>
+  <div id="backToTop">
+    <span class="nav-link3",  onclick=window.location='#listTop'><span class="glyphicon glyphicon-hand-up"></span> Back to Top</a>
+  </div>
 
 </div>
 
 
 <script>
-
-
 
 $(document).scroll(function() {
  //Show element after user scrolls 800px

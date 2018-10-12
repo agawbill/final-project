@@ -5,23 +5,24 @@
 
 
 
-    <p><div id="boxWrapper">
-  <p>
-  <span class="blogTitle"><%=@comment.title%></span><br>
-  <span class="postedBy">Posted By: <a href="/users/<%=@comment.user.id%>/" class="link"><%=@comment.user.email%></a></span><br>
-  <p><%=@comment.content%></p>
-  <hr>
+    <p>
+      <div id="boxWrapper">
+        <p>
+          <span class="blogTitle"><%=@comment.title%></span><br>
+          <span class="postedBy">Posted By: <a href="/users/<%=@comment.user.id%>/" class="link"><%=@comment.user.email%></a></span><br>
+          <p><%=@comment.content%></p>
+          <hr>
 
-<%= form_for @comment do |c| %>
-<%= c.text_area :title, :placeholder=>"Title", :class=>"textTitleAreaL" %><br>
-<%= c.text_area :content, :placeholder=>"Content", :class=>"textBodyAreaL" %><br>
-<%= c.submit "Update Comment" %>
-<%= link_to "Delete Comment?", comment_path, method: :delete,
-                                        data: {confirm: "are you super sure??"},
-                                        :class=>"link"
-%>
-</p>
-<% end  %>
-</div>
-</div>
-</div>
+            <%= form_for @comment do |c| %>
+            <%= c.text_area :title, :placeholder=>"Title", :class=>"textTitleAreaL" %><br>
+            <%= c.text_area :content, :placeholder=>"Content", :class=>"textBodyAreaL" %><br>
+            <%= c.submit "Update Comment" %>
+            <%= link_to "Delete Comment?", comment_path, method: :delete,
+                                                    data: {confirm: "are you super sure??"},
+                                                    :class=>"link"
+            %>
+        </p>
+        <% end  %>
+      </div>
+    </div>
+  </div>

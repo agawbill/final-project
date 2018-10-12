@@ -103,7 +103,7 @@ class ListsController < ApplicationController
         format.js
         format.json { render :json => {:results => @results }}
       end
-  end
+    end
   end
 
   def edit
@@ -123,8 +123,8 @@ class ListsController < ApplicationController
     else
       for name in @movieIds do
         @movieNames.push(Tmdb::Person.detail(name).name)
+      end
     end
-  end
 
     if params[:q].present? && params[:genres].present? && params[:ratingQ].present?
       @count=Tmdb::Search.movie(params[:q]).total_pages
@@ -139,7 +139,7 @@ class ListsController < ApplicationController
               end
             end
           end
-        end
+      end
       @results=@solid.find_all{|favor| favor.vote_average >= params[:ratingQ].to_i }
       respond_to do |format|
         format.html
@@ -265,8 +265,8 @@ class ListsController < ApplicationController
             if array.all? {|i| movie.genre_ids.include? i }
               if movie.poster_path != nil
               @solid.push(movie)
+              end
             end
-          end
         end
       end
       @results=@solid
@@ -318,8 +318,8 @@ class ListsController < ApplicationController
               if movie.vote_average >= params[:ratingDisc].to_i
                 @solid.push(movie)
               end
+            end
           end
-        end
       end
       @results=@solid
       respond_to do |format|
@@ -534,7 +534,7 @@ class ListsController < ApplicationController
            @solid.push(person)
          end
        end
-     end
+      end
      @results=@solid
      respond_to do |format|
        format.html
@@ -628,7 +628,7 @@ class ListsController < ApplicationController
      @topRatedMovies=Tmdb::Movie.top_rated.results
      @nowPlayingMovies=Tmdb::Movie.now_playing.results
      @upcomingMovies=Tmdb::Movie.upcoming.results
-   end
+    end
   end
 
 
