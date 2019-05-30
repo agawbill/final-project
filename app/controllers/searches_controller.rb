@@ -144,8 +144,8 @@ respond_to :html, :json, :xml, :js
             if array.all? {|i| movie.genre_ids.include? i }
               if movie.poster_path != nil
               @solid.push(movie)
+              end
             end
-          end
         end
       end
       @results=@solid
@@ -197,8 +197,8 @@ respond_to :html, :json, :xml, :js
               if movie.vote_average >= params[:ratingDisc].to_i
                 @solid.push(movie)
               end
+            end
           end
-        end
       end
       @results=@solid
       respond_to do |format|
