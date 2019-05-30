@@ -35,7 +35,7 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem "httparty"
 gem 'social-share-button', '~> 0.1.6'
 gem 'acts_as_votable', '~> 0.11.1'
-gem 'bootstrap-sass', '~> 3.2.0'
+gem 'bootstrap-sass', '~> 3.4.1'
 gem 'autoprefixer-rails'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
@@ -75,8 +75,6 @@ group :development, :test do
   gem 'sqlite3'
 end
 
-group :production do
-  gem 'pg'
-end
+
   # Easy installation and use of chromedriver to run system tests with Chrome
 end

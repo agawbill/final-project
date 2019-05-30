@@ -36,7 +36,9 @@
               <li class="<%= 'active' if current_page? '/users/sign_up' %>"><a href="/users/sign_up"  class="nav-link">Sign Up</a></li>
             <%end%>
             <%if user_signed_in?%>
-              <li class="<%= 'active' if current_page? '/searches' %>"><a href="/searches" class="nav-link" onClick="window.location.reload()">Make List</a></li>
+              <li class="<%= 'active' if current_page? '/searches' %>">
+
+                <a href="/searches" class="nav-link">Make List</a></li>
               <li class="<%= 'active' if current_page? (user_path(:id =>current_user.id)) %>"><a href="/users/<%=current_user.id%>" class="nav-link">My Lists <span class="sr-only">(current)</span></a></li>
 
               <!-- <li><a href="#" class="nav-link">Lists</a></li> -->
