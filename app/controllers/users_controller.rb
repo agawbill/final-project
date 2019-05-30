@@ -3,12 +3,6 @@ class UsersController < ApplicationController
 
   def show
 
-
-
-
-
-
-
   @user= User.find(params[:id])
   @public=[]
   @private=[]
@@ -22,6 +16,7 @@ class UsersController < ApplicationController
       end
     end
 
+  if @recent != nil
     if @recent.category=="Movies"
       for movie in @recent.movie_ids[0]
         @latest.push(Tmdb::Movie.detail(movie))
@@ -33,5 +28,6 @@ class UsersController < ApplicationController
     end
 
 
+  end
   end
 end

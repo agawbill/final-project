@@ -8,6 +8,10 @@
 
 
 
+  <%if @recent == nil%>
+  You have no lists, create some lists!
+  <%else%>
+
 
   <div class="col-md-4">
     <h2>Latest<span class="symbol">#</span>list</h2>
@@ -20,6 +24,7 @@
       <div class="panel-heading">
         <center><h3 class="panel-title"><a href="/lists/<%=@recent.id%>" class="link"><%=@recent.name%></a></h3></center>
       </div>
+
       <div class="panel-body">
 
 
@@ -100,6 +105,7 @@
             </a>
             </div>
             <%end%>
+            <%end%>
 
 
 
@@ -129,7 +135,9 @@
 
 
 
-
+    <%if @recent == nil%>
+    
+    <%else%>
 <h2>My<span class="symbol">#</span>lists</h2>
 
 
@@ -210,6 +218,7 @@
 
 
 
+      <%end%>
       <%end%>
 
     </div>
